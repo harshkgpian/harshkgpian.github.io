@@ -82,7 +82,6 @@ select#girlfriendPersonality {
     flex-direction: column;
     font-size: small;
     justify-content: flex-end; /* Align content to the bottom */
-    direction: rtl; /* Right-to-left layout */
     margin-bottom: 10px;
     border-radius: 10px; /* Add border radius */
 }
