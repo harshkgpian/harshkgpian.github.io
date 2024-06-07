@@ -1,6 +1,6 @@
 const Groq = require("groq-sdk");
 
-const apiKey = "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";
+const apiKey = process.env.GROQ_API;
 const groq = new Groq({ apiKey: apiKey });
 
 async function actLikeGirlfriend(userName, girlfriendName, girlfriendPersonality, girlfriendInterests, messages) {
