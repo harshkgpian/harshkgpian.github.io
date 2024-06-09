@@ -46,7 +46,7 @@ async function createVirtualGirlfriend(userName, girlfriendName, girlfriendPerso
 
     // Focus back to the input box after a short delay
  // Delay of 1 second before refocusing
-
+     document.getElementById('message').focus()
     // Delay before showing typing animation
     await new Promise(resolve => setTimeout(resolve, 500)); // 500ms delay before showing typing animation
     displayTypingAnimation();
