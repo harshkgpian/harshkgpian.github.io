@@ -10,7 +10,7 @@ async function actLikeGirlfriend(userName, girlfriendName, girlfriendPersonality
    let model = ""
    if (girlfriendLanguage=="Hindi"){
       model = "llama3-70b-8192"
-      console.log("Hindi")
+      // console.log("Hindi")
 
       systemContent = `Please act like my girlfriend in our conversation. Here are the details:
 
@@ -41,7 +41,7 @@ async function actLikeGirlfriend(userName, girlfriendName, girlfriendPersonality
    } else{
       model = "llama3-8b-8192"
 
-         console.log("English")
+         // console.log("English")
       switch (girlfriendPersonality) {
          case "Sassy and Playful":
  
