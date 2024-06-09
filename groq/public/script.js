@@ -31,7 +31,7 @@ async function createVirtualGirlfriend(userName, girlfriendName, girlfriendPerso
     }
 
     if (conversationHistory.length >= 20) {
-        displayConversation([{ role: 'girlfriend', content: "Sorry, this is it for today. It costs a little to have more conversation. Contact the creator." }], userName, girlfriendName);
+        displayConversation([{ role: 'girlfriend', content: "Sorry, I cant have more conversation. (Usage Limits) Details. (https://openai.com/api/pricing/)" }], userName, girlfriendName);
         return;
     }
 
