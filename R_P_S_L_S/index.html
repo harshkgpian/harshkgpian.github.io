@@ -1,0 +1,88 @@
+
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>
+	    <script src="webcam.js"></script>
+	    <script src="rps-dataset.js"></script>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Syne">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <style>
+      
+      body {
+      font-family: 'Syne', sans-serif; 
+          }
+      
+      #wc{
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+      }
+
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+      }
+      
+      
+      .links-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+      }
+            
+      .buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+      }
+      
+      </style>
+    </head>
+  
+  
+    <body class="w3-white">
+<div>
+		<div>
+			<video autoplay playsinline muted id="wc" width="100%" height="300"></video>
+		</div>
+	</div>
+  <div class="buttons">
+	<button type="button" id="0" onclick="handleButton(this)" >Rock</button>
+	<button type="button" id="1" onclick="handleButton(this)" >Paper</button>
+	<button type="button" id="2" onclick="handleButton(this)" >Scissors</button>
+	<button type="button" id="3" onclick="handleButton(this)" >Spock</button>
+	<button type="button" id="4" onclick="handleButton(this)" >Lizard</button>
+  </div><br>
+  <img class="center" src="https://w7.pngwing.com/pngs/799/252/png-transparent-rock-paper-scissors-rock-paper-scissors-lizard-spock-logo-scissors-game-white-text.png" alt="Image">
+  <br>
+	<div class="links-container">
+	<div id="rocksamples">Rock Samples:</div>
+	<div id="papersamples">Paper Samples:</div>
+	<div id="scissorssamples">Scissors Samples:</div>
+	<div id="spocksamples">Spock Samples:</div>
+	<div id="lizardsamples">Lizard Samples:</div>
+	<button type="button" id="train" onclick="doTraining()" >Train Network</button>
+	<div id="dummy">Wait for Training to End.</div>
+	<div clsss="buttons">
+  <button type="button" id="startPredicting" onclick="startPredicting()" >Start Predicting</button>
+	<button type="button" id="stopPredicting" onclick="stopPredicting()" >Stop Predicting</button>
+  <button type="button" id="saveModel" onclick="saveModel()" >Download Model</button>
+	</div>
+  <div id="prediction"></div>
+</div>
+  
+    </body>
+    <script src="C1_W4.js"></script>  
+  </html>
+  
