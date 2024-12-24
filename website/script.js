@@ -1,5 +1,5 @@
 const SERVER_URL = "http://localhost:3110/api";
-
+import { fetchData } from './fetchData.js';
 // Utility function to check server connection
 async function checkServerConnection() {
   try {
@@ -261,6 +261,7 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
 });
 // Load saved data when page loads   
 document.addEventListener('DOMContentLoaded', async () => {
+    
     try {
         // Fetch saved data directly using fetch (Replace ipcRenderer with fetch)
         const response = await fetch(`${SERVER_URL}/load-saved-data`); // Assuming this API exists on your backend
@@ -333,7 +334,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             const userEmail = document.getElementById('email').value;
 
             if (userEmail) {
-                const {fetchData} = require('./fetchData');
                 const response = await fetchData(userEmail);
                 const stats = await response.json();
 
