@@ -333,7 +333,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             const userEmail = document.getElementById('email').value;
 
             if (userEmail) {
-                const response = await fetch(`/api/get-job-stats?email=${userEmail}`);
+                const {fetchData} = require('./fetchData');
+                const response = await fetchData(userEmail);
                 const stats = await response.json();
 
                 if (stats.success) {
