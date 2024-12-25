@@ -36,19 +36,29 @@ async function fetchData(userEmail) {
 
 // Utility function to check server connection
 async function checkServerConnection() {
-  try {
-    const response = await fetch(`${SERVER_URL}/ping`);
-    const data = await response.json();
+    const statusDot = document.querySelector('.status-dot');
+    const statusText = document.querySelector('.status-text');
 
-    if (data.status === "ok") {
-      console.log("Server is connected.");
-      return true;
+    try {
+        const response = await fetch(`${SERVER_URL}/ping`);
+        const data = await response.json();
+
+        if (data.status === "ok") {
+            console.log("Server is connected.");
+            statusDot.classList.remove('disconnected');
+            statusDot.classList.add('connected');
+            statusText.textContent = "Server Connected";
+            return true;
+        }
+        throw new Error('Server status not ok');
+    } catch (error) {
+        console.error("Server connection error:", error);
+        statusDot.classList.remove('connected');
+        statusDot.classList.add('disconnected');
+        statusText.textContent = "Server Disconnected";
+        showCustomAlert("Server is not running. Please start the server.");
+        return false;
     }
-    return false;
-  } catch (error) {
-    console.error("Server connection error:", error);
-    return false;
-  }
 }
 
 
@@ -263,9 +273,9 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
         
         if (credentialsData.success) {
             console.log('Credentials Updated/Saved Successfully');
-            const loginButton = document.getElementById('setProfileButton');
-            loginButton.innerHTML = '<i class="fas fa-check-circle"></i> You are Logged In';
-            loginButton.classList.add('logged-in');
+            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
+            appContainer.style.display = 'block';
+            requestKeyModal.style.display = 'none';
 
             // Now save the form data
             const formResponse = await fetch(`${SERVER_URL}/save-data`, {
@@ -320,10 +330,10 @@ document.addEventListener('DOMContentLoaded', async () => {
                 document.getElementById('datePosted').value = searchParams.filters.datePosted || 'Past Month';
                 document.getElementById('easyApply').checked = searchParams.filters.easyApply !== undefined ? searchParams.filters.easyApply : true;
             }
+            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
+            appContainer.style.display = 'block';
+            requestKeyModal.style.display = 'none';
 
-            const loginButton = document.getElementById('setProfileButton');
-            loginButton.innerHTML = '<i class="fas fa-check-circle"></i> You are Logged In';
-            loginButton.classList.add('logged-in');
         }
     } catch (error) {
         console.error('Error loading saved data:', error);
@@ -431,29 +441,33 @@ document.querySelector('.help-btn').addEventListener('click', () => {
     document.querySelector('a[href="#cookie-guide"]').click();
 });
 
-const setProfileButton = document.getElementById('setProfileButton'); 
-    
-
-// Show the modal when the GET KEY button is clicked  
-setProfileButton.addEventListener('click', () => {  
-    loginModal.style.display = 'block';  
-});  
-
 // Close the modal when clicking outside the modal content  
-window.addEventListener('click', (event) => {  
-    if (event.target === loginModal) {  
-        loginModal.style.display = 'none';  
-    }  
-});   
+// window.addEventListener('click', (event) => {  
+//     if (event.target === loginModal) {  
+//         loginModal.style.display = 'none';  
+//     }  
+// });   
 
-// Handle modal form submission  
-document.getElementById('getKeyForm').addEventListener('submit', async (event) => {  
-    event.preventDefault();  
+// Show the login modal initially
+document.addEventListener('DOMContentLoaded', () => {
+    const loginModal = document.getElementById('requestKeyModal');  
+    const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
 
-    // Get all form values  
-    const email = document.getElementById('email').value;  
-    const password = document.getElementById('password').value;  
-    const keyPath = document.getElementById('keyPath').value;  
+    // Ensure the main app is hidden initially
+    appContainer.style.display = 'none';
+
+    // Display the login modal
+    loginModal.style.display = 'block';
+});
+
+// Handle modal form submission
+document.getElementById('getKeyForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    // Get all form values
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const keyPath = document.getElementById('keyPath').value;
 
     // Validate inputs
     if (!email || !password || !keyPath) {
@@ -461,7 +475,7 @@ document.getElementById('getKeyForm').addEventListener('submit', async (event) =
         return;
     }
 
-    try {  
+    try {
         const response = await fetch(`${SERVER_URL}/save-credentials`, {
             method: 'POST',
             headers: {
@@ -471,45 +485,51 @@ document.getElementById('getKeyForm').addEventListener('submit', async (event) =
         });
 
         const data = await response.json();
-        
-        if (data.success) {  
-            console.log('Data Updated/Saved Successfully');  
-            const loginButton = document.getElementById('setProfileButton');
-            loginButton.innerHTML = '<i class="fas fa-check-circle"></i> You are Logged In';
-            loginButton.classList.add('logged-in');
-        } else {  
-            showCustomAlert(`Error: ${data.message}`);  
-        }  
-    } catch (error) {  
-        console.error('Error saving credentials:', error);  
-        showCustomAlert('An error occurred while saving credentials.');  
-    }  
 
-    // Close the modal  
-    document.getElementById('loginModal').style.display = 'none';  
+        if (data.success) {
+            console.log('Data Updated/Saved Successfully');
+
+            // Hide the login modal
+            document.getElementById('loginModal').style.display = 'none';
+
+            // Show the main app
+            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
+            appContainer.style.display = 'block';
+            requestKeyModal.style.display = 'none';
+
+
+            // Update login status button
+        } else {
+            showCustomAlert(`Error: ${data.message}`);
+        }
+    } catch (error) {
+        console.error('Error saving credentials:', error);
+        showCustomAlert('An error occurred while saving credentials.');
+    }
 });
+
 
     // Add this to your existing script.js
 
 const requestKeyModal = document.getElementById('requestKeyModal');  
 const passwordMismatch = document.getElementById('passwordMismatch');  
+
       
     // Show the modal when the Request Key button is clicked  
 getKeyButton.addEventListener('click', () => {  
     requestKeyModal.style.display = 'block';  
 });  
-    
-    // Close the modal when clicking outside the modal content  
-window.addEventListener('click', (event) => {  
-    if (event.target === requestKeyModal) {  
-        requestKeyModal.style.display = 'none';  
-        // Clear form and error message when closing  
-        document.getElementById('requestKeyForm').reset();  
-        passwordMismatch.style.display = 'none';  
-    }  
-});  
-      
-    // Real-time password validation  
+document.getElementById('getKeyButton').addEventListener('click', function() {
+    document.getElementById('loginModal').style.display = 'none';
+    document.getElementById('requestKeyModal').style.display = 'block';
+});
+document.getElementById("toLoginButton").addEventListener("click", function () {
+    // Hide the sign-up modal
+    document.getElementById("requestKeyModal").style.display = "none";
+    // Show the login modal
+    document.getElementById("loginModal").style.display = "block";
+});
+
 document.getElementById('confirmPassword').addEventListener('input', function() {  
     const password = document.getElementById('requestPassword').value;  
     const confirmPass = this.value;  
@@ -519,7 +539,9 @@ document.getElementById('confirmPassword').addEventListener('input', function() 
     } else {  
         passwordMismatch.style.display = 'none';  
     }  
-});  
+}); 
+
+
       
 document.getElementById('requestKeyForm').addEventListener('submit', async (event) => {
     event.preventDefault();
