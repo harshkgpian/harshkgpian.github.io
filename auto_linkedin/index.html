@@ -17,9 +17,8 @@
         <div class="nav-links">
             <a href="#home" class="nav-item active">Home</a>
             <a href="#features" class="nav-item">Features</a>
-            <a href="#why-us" class="nav-item">Why Us</a>
             <a href="#pricing" class="nav-item">Pricing</a>
-            <a href="#download" class="nav-item">Download</a>
+            <a href="try-now.html" class="nav-item">Try Now</a>
         </div>
     </nav>
 
@@ -36,11 +35,10 @@
                 <div class="benefit">
                     <i class="fas fa-piggy-bank"></i>
                     <p>25x More Affordable Than Alternatives</p>
-                    <p class="pricing">Just ₹3 ($0.036) per application</p>
                 </div>
             </div>
             
-            <a href="#download" class="cta-button">Start Applying Now</a>
+            <a href="try-now.html" class="cta-button">Try Now</a>
             <p class="trust-text">Join thousands of job seekers who've automated their way to success</p>
         </div>
     </section>
@@ -48,69 +46,56 @@
     <section id="features" class="features">
         <h2>Key Features</h2>
         <div class="feature-grid">
+            <!-- Feature Card 1 -->
             <div class="feature-card">
                 <i class="fas fa-shield-alt"></i>
                 <h3>100% Local & Secure</h3>
                 <p>Runs entirely on your computer. No data sent to external servers.</p>
             </div>
+    
+            <!-- Feature Card 2 -->
             <div class="feature-card">
                 <i class="fas fa-bolt"></i>
                 <h3>Lightning Fast</h3>
                 <p>Apply to 40 jobs daily with just a few clicks.</p>
             </div>
+    
+            <!-- Feature Card 3 -->
             <div class="feature-card">
                 <i class="fas fa-cookie-bite"></i>
                 <h3>Simple Setup</h3>
                 <p>Just add your LinkedIn cookie and resume PDF - no account needed.</p>
             </div>
+    
+            <!-- Feature Card 4 -->
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>AI-Powered Responses</h3>
+                <p>AI analyzes your resume and job descriptions to generate personalized, optimized responses.</p>
+            </div>
+    
+            <!-- Feature Card 5 -->
             <div class="feature-card">
                 <i class="fas fa-indian-rupee-sign"></i>
                 <h3>Affordable</h3>
                 <p>Only ₹2 per application - 20x cheaper than competitors!</p>
             </div>
-        </div>
-    </section>
-
-    <section id="why-us" class="why-us">
-        <h2>Why We're Different</h2>
-        <div class="comparison">
-            <div class="us">
-                <h3>Our Solution</h3>
-                <ul>
-                    <li> As low as ₹2 per application</li>
-                    <li> Smart job matching with your resume</li>
-                    <li> AI-powered application answers</li>
-                    <li> Secure account dashboard</li>
-                    <li> Higher success rate with personalized responses</li>
-                    <li> Your data stays on your PC</li>
-                </ul>
-            </div>
-            <div class="competitors">
-                <h3>Competitors</h3>
-                <ul>
-                    <li> ₹60-70 per application</li>
-                    <li> Generic one-size-fits-all approach</li>
-                    <li> Standard template responses</li>
-                    <li> Basic tracking features</li>
-                    <li> Lower success rate with generic answers</li>
-                    <li> Data stored on their servers</li>
-                </ul>
+    
+            <!-- Feature Card 6 -->
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Trusted by Many</h3>
+                <p>Join thousands of users who have already streamlined their job applications.</p>
             </div>
         </div>
-        <div class="smart-features">
-            <h3>Smart Application Technology</h3>
-            <p>Our software analyzes your resume and the job description to:</p>
-            <ul>
-                <li><i class="fas fa-check-circle"></i> Generate relevant answers to screening questions</li>
-                <li><i class="fas fa-check-circle"></i> Match your skills with job requirements</li>
-                <li><i class="fas fa-check-circle"></i> Increase your chances of getting shortlisted</li>
-            </ul>
-        </div>
     </section>
+    
+    
+    
     <section id="pricing" class="pricing">
         <h2>Choose Your Package</h2>
         <div class="pricing-cards">
-            <div class="pricing-card">
+            <!-- <div class="pricing-card">
                 <h3>Basic Plan</h3>
                 <div class="price">
                     <span class="amount">₹3/job</span>
@@ -123,7 +108,7 @@
                     <li><i class="fas fa-check"></i> 100% Local & Secure</li>
                 </ul>
                 <button class="payment-button" data-package="basic">Pay ₹1,500</button>
-            </div>
+            </div> -->
             
             <div class="pricing-card popular">
                 <div class="popular-badge">Best Value</div>
@@ -142,82 +127,7 @@
                 <button class="payment-button" data-package="premium">Pay ₹2,000</button>
             </div>
         </div>
-        <div class="pricing-note">
-            <p><i class="fas fa-info-circle"></i> All plans include the full software functionality with no feature restrictions</p>
-            <p><i class="fas fa-shield-alt"></i> Your data stays completely private on your local machine</p>
-        </div>
     </section>
-
-<!-- Payment Modal -->
-<div id="paymentModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Complete Payment</h2>
-        <div class="payment-form">
-            <div class="payment-methods">
-                <button class="payment-method upi active">
-                    <i class="fas fa-mobile-alt"></i> UPI
-                </button>
-                <button class="payment-method card">
-                    <i class="fas fa-credit-card"></i> Card
-                </button>
-            </div>
-            <div class="upi-section">
-                <p>Scan QR code or pay using UPI ID</p>
-                <div class="qr-code">
-                    <!-- Add your QR code image here -->
-                    <img src="./assets/path-to-your-qr-code.png" alt="Payment QR Code">
-                </div>
-                <div class="upi-id">
-                    <p>UPI ID: harshrjto@okhdfcbank</p>
-                    <button class="copy-upi"><i class="fas fa-copy"></i> Copy</button>
-                </div>
-            </div>
-            <div class="card-section" style="display: none;">
-                <!-- Add card payment form here -->
-                <form id="cardPaymentForm">
-                    <input type="text" placeholder="Card Number" required>
-                    <div class="card-details">
-                        <input type="text" placeholder="MM/YY" required>
-                        <input type="text" placeholder="CVV" required>
-                    </div>
-                    <input type="text" placeholder="Card Holder Name" required>
-                    <button type="submit" class="pay-button">Pay Now</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Replace the existing download section with this -->
-<section id="download" class="download">
-    <h2>Download Now</h2>
-    <div class="download-options">
-        <div class="download-card">
-            <h3>Windows</h3>
-            <i class="fab fa-windows"></i>
-            <a href="https://drive.google.com/file/d/1asn6CXIp1hwu9mNq4HkdkwG-edDk7jhO/view?usp=sharing" 
-               class="download-button" 
-               target="_blank">
-                <i class="fas fa-download"></i> Download for Windows
-            </a>
-            <small>Version 1.0.0 | 64-bit</small>
-            <div class="download-info">
-                <p><i class="fas fa-info-circle"></i> Direct download from Google Drive</p>
-                <p><i class="fas fa-shield-alt"></i> Verified & Safe</p>
-            </div>
-        </div>
-    </div>
-    <div class="download-instructions">
-        <h3>Installation Instructions</h3>
-        <ol>
-            <li>Click the download button above</li>
-            <li>Download the setup file from Google Drive</li>
-            <li>Run the setup file (LinkedInAssistant-Setup.exe)</li>
-            <li>Follow the installation wizard</li>
-            <li>Launch the application and start automating your job search!</li>
-        </ol>
-    </div>
-</section>
 
     <footer>
         <div class="footer-content">
