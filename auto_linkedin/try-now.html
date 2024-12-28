@@ -207,7 +207,7 @@
                     </div>
                 </div>
                 <button id="downloadBtn" class="button">
-                    <i class="fas fa-download"></i> Step 1: Download Helper
+                    <i class="fas fa-download"></i> Step 1: Download Assistant - Lightweight Server
                 </button>
                 <p style="margin-top: 1rem; color: #000000;">88 MB download - Windows only</p>
                 <div class="arrow">↓</div>
@@ -215,15 +215,15 @@
                     <i class="fas fa-arrow-right"></i> Next
                 </button>
             </div>
-
             <div class="step" id="step2">
-                <h1>Almost there!</h1>
-                <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #000000;">Follow these simple steps:</p>
+                <h1>Almost There!</h1>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #000000;">Follow these simple steps to get started:</p>
                 <div style="text-align: left; max-width: 500px; margin: 0 auto; font-size: 1.1rem;">
-                    <p>1. Open the downloaded file (LinkedInAssistant-Setup.exe)</p>
-                    <p>2. Click "Yes" if Windows asks for permission</p>
-                    <p>3. Follow the simple setup steps</p>
-                    <p>4. Click Launch when finished!</p>
+                    <p>1. Ensure Google Chrome is installed on your system (this is required).</p>
+                    <p>2. Open the downloaded file (<strong>LinkedIn Auto Apply.exe</strong>).</p>
+                    <p>3. Click "Yes" if Windows requests permission.</p>
+                    <p>4. A desktop shortcut will be created automatically.</p>
+                    <p>5. Click "Launch" once the setup is complete!</p>
                 </div>
                 <button onclick="showStep1()" class="button" style="margin-top: 2rem">
                     <i class="fas fa-arrow-left"></i> Back to Download
@@ -232,6 +232,7 @@
                     <i class="fas fa-play"></i> Launch Assistant
                 </button>
             </div>
+            
 
             <div class="progress-dots">
                 <div class="dot active" id="dot1"></div>
@@ -241,23 +242,24 @@
 
         <div class="side-graphic">
             <div class="server-purpose">
-                <h3>✨ What does the helper do?</h3>
+                <h3>✨ What Does the Server Do?</h3>
                 <div class="purpose-item">
                     <i class="fas fa-robot"></i>
-                    <span>Automates job applications for you</span>
+                    <span>Executes automation scripts seamlessly, eliminating the need for complex programming setups.</span>
                 </div>
                 <div class="purpose-item">
                     <i class="fas fa-brain"></i>
-                    <span>Creates smart application responses</span>
+                    <span>Reduces costs by leveraging a secure, local environment for all operations.</span>
                 </div>
                 <div class="purpose-item">
                     <i class="fas fa-shield-alt"></i>
-                    <span>Keeps everything private on your PC</span>
+                    <span>Ensures complete privacy by keeping all data and processes confined to your personal system.</span>
                 </div>
                 <div class="purpose-item">
                     <i class="fas fa-clock"></i>
-                    <span>Works 24/7 while you focus elsewhere</span>
+                    <span>Operates continuously, enabling you to focus on other priorities while it handles tasks.</span>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -295,9 +297,21 @@
         }
 
         document.getElementById('downloadBtn').addEventListener('click', function() {
-            // Only open in new tab
-            window.open('https://drive.google.com/file/d/19wW2aygjY_2JUjoiHIzg_5xu51XTzWlt/view?usp=sharing', '_blank');
-        });
+    const downloadUrl = 'https://www.dropbox.com/scl/fi/suq964gtl3knl5o70bs66/LinkedIn-Job-Search-Automation-Setup-1.0.0.exe?rlkey=w3yr485x4q9f4rn6fpewh9u3e&st=2fkuvaf1&dl=1';
+
+    // Create a temporary anchor element
+    const anchor = document.createElement('a');
+    anchor.href = downloadUrl;
+
+    // Set download attribute (optional, may not work for all links)
+    anchor.download = '';
+
+    // Append to the document temporarily, trigger the click, and remove it
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+});
+
     </script>
 
 </body>
