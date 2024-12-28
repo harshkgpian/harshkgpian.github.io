@@ -1,362 +1,482 @@
-<html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <title>LinkedIn Job Search Assistant</title>  
-    <link rel="stylesheet" href="style.css">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-</head>  
-<body> 
-    
-    <div id="mainApp" style="display: none;">
-        <div class="landing-page">
-            <div class="logo">
-                <i class="fab fa-linkedin"></i>
-                <h1 class="landing-title">Streamline Your Job Search</h1>
-            </div>
-            <p class="landing-description">Automate your LinkedIn job applications with our intelligent assistant.</p>
-            <div class="landing-buttons">
-                <button class="landing-btn" id="getStartedBtn">
-                    <i class="fas fa-rocket"></i> Launch Assistant
-                </button>
+    <html lang="en">  
+    <head>  
+        <meta charset="UTF-8">  
+        <title>LinkedIn Job Search Assistant</title>  
+        <link rel="stylesheet" href="style.css">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    </head>  
+    <body> 
+        <nav class="top-nav">
+        <div class="nav-brand">
+            <i class="fab fa-linkedin"></i>
+            <span>Job Search Assistant</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn active" data-view="mainApp">
+                <i class="fas fa-home"></i> Main App
+            </button>
+            <button class="nav-btn" data-view="helpSection">
+                <i class="fas fa-question-circle"></i> Help
+            </button>
+        </div>
+        <div class="nav-account">
+            <button class="nav-btn">
+                <i class="fas fa-user-circle"></i>
+            </button>
+        </div>
+    </nav>
+        <div id="mainApp" style="display: none;">
+            <div class="landing-page">
+                <div class="logo">
+                    <i class="fab fa-linkedin"></i>
+                    <h1 class="landing-title">Streamline Your Job Search</h1>
+                </div>
+                <p class="landing-description">Automate your LinkedIn job applications with our intelligent assistant.</p>
+                <div class="landing-buttons">
+                    <button class="landing-btn" id="getStartedBtn">
+                        <i class="fas fa-rocket"></i> Launch Assistant
+                    </button>
 
-            </div>  
-            <!-- Add this to your landing page section -->  
-            <div class="stats-container">  
-                <div class="stat-card">  
-                    <div class="stat-header">  
-                        <i class="fas fa-briefcase-clock"></i>  
-                        <h3>Today's Applications</h3>  
-                    </div>  
-                    <div class="stat-content">  
-                        <span id="dailyJobCount">0</span>  
-                        <span class="stat-divider">/</span>  
-                        <span class="stat-limit">40</span>  
-                    </div>  
-                    <div class="progress-bar">  
-                        <div id="dailyProgress" class="progress-fill"></div>  
-                    </div>  
-                    <small class="stat-subtitle">Daily Limit: 40 applications</small>  
                 </div>  
-        
-                <div class="stat-card">  
-                    <div class="stat-header">  
-                        <i class="fas fa-calendar-check"></i>  
-                        <h3>Monthly Applications</h3>  
+                <!-- Add this to your landing page section -->  
+                <div class="stats-container">  
+                    <div class="stat-card">  
+                        <div class="stat-header">  
+                            <i class="fas fa-briefcase-clock"></i>  
+                            <h3>Today's Applications</h3>  
+                        </div>  
+                        <div class="stat-content">  
+                            <span id="dailyJobCount">0</span>  
+                            <span class="stat-divider">/</span>  
+                            <span class="stat-limit">40</span>  
+                        </div>  
+                        <div class="progress-bar">  
+                            <div id="dailyProgress" class="progress-fill"></div>  
+                        </div>  
+                        <small class="stat-subtitle">Daily Limit: 40 applications</small>  
                     </div>  
-                    <div class="stat-content">  
-                        <span id="monthlyJobCount">0</span>  
-                        <span class="stat-divider">/</span>  
-                        <span class="stat-limit">1000</span>  
+            
+                    <div class="stat-card">  
+                        <div class="stat-header">  
+                            <i class="fas fa-calendar-check"></i>  
+                            <h3>Monthly Applications</h3>  
+                        </div>  
+                        <div class="stat-content">  
+                            <span id="monthlyJobCount">0</span>  
+                            <span class="stat-divider">/</span>  
+                            <span class="stat-limit">1000</span>  
+                        </div>  
+                        <div class="progress-bar">  
+                            <div id="monthlyProgress" class="progress-fill"></div>  
+                        </div>  
+                        <small class="stat-subtitle">Monthly Limit: 1000 applications</small>  
                     </div>  
-                    <div class="progress-bar">  
-                        <div id="monthlyProgress" class="progress-fill"></div>  
+                </div>  
+            </div>   
+            
+            <!-- Getting Started Container -->  
+            <div class="getting-started-container">  
+                <div class="header-container">  
+                    <h1><i class="fas fa-search"></i> Job Search Setup</h1>  
+                    <div class="header-nav">  
+                        <button class="landing-btn" id="profileBtnTop">  
+                            <i class="fas fa-user"></i> Profile  
+                        </button>  
+                        <button id="homeBtn1" class="landing-btn">  
+                            <i class="fas fa-home"></i> Home  
+                        </button> 
                     </div>  
-                    <small class="stat-subtitle">Monthly Limit: 1000 applications</small>  
                 </div>  
-            </div>  
-        </div>   
-        
-        <!-- Getting Started Container -->  
-        <div class="getting-started-container">  
-            <div class="header-container">  
-                <h1><i class="fas fa-search"></i> Job Search Setup</h1>  
-                <div class="header-nav">  
-                    <button class="landing-btn" id="profileBtnTop">  
-                        <i class="fas fa-user"></i> Profile  
-                    </button>  
-                    <button id="homeBtn1" class="landing-btn">  
-                        <i class="fas fa-home"></i> Home  
-                    </button> 
-                </div>  
-            </div>  
-        
-            <form id="userForm">  
-                <div class="form-group">  
-                    <label for="jobTitle">  
-                        <i class="fas fa-briefcase"></i> Job Title:  
-                    </label>  
-                    <input type="text" id="jobTitle" value="Data Science" required>  
-                </div>  
-        
-                <div class="form-group">    
-                    <i class="fas fa-map-marker-alt"></i> Location: 
-                </label>    
-                    <input type="text" id="location" value="India" required>    
-                </div>    
-        
-                <div class="form-group">    
-                    <label for="experienceLevel">
-                        <i class="fas fa-level-up-alt"></i> Experience Level:  
+            
+                <form id="userForm">  
+                    <div class="form-group">  
+                        <label for="jobTitle">  
+                            <i class="fas fa-briefcase"></i> Job Title:  
+                        </label>  
+                        <input type="text" id="jobTitle" value="Data Science" required>  
+                    </div>  
+            
+                    <div class="form-group">    
+                        <i class="fas fa-map-marker-alt"></i> Location: 
                     </label>    
-                    <select id="experienceLevel">    
-                        <option value="">Any</option>    
-                        <option value="Entry level">Entry level</option>    
-                        <option value="Associate">Associate</option>    
-                        <option value="Mid-Senior level">Mid-Senior level</option>    
-                        <option value="Director">Director</option>    
-                    </select>    
-                </div>    
-                <div class="form-group">    
-                    <label for="datePosted">  
-                        <i class="far fa-calendar-alt"></i> Date Posted:  
-                    </label>                
-                    <select id="datePosted">    
-                        <option value="">Any</option>    
-                        <option value="Past 24 hours">Past 24 hours</option>    
-                        <option value="Past Week">Past Week</option>    
-                        <option value="Past Month" selected>Past Month</option>    
-                    </select>    
-                </div>   
+                        <input type="text" id="location" value="India" required>    
+                    </div>    
+            
+                    <div class="form-group">    
+                        <label for="experienceLevel">
+                            <i class="fas fa-level-up-alt"></i> Experience Level:  
+                        </label>    
+                        <select id="experienceLevel">    
+                            <option value="">Any</option>    
+                            <option value="Entry level">Entry level</option>    
+                            <option value="Associate">Associate</option>    
+                            <option value="Mid-Senior level">Mid-Senior level</option>    
+                            <option value="Director">Director</option>    
+                        </select>    
+                    </div>    
+                    <div class="form-group">    
+                        <label for="datePosted">  
+                            <i class="far fa-calendar-alt"></i> Date Posted:  
+                        </label>                
+                        <select id="datePosted">    
+                            <option value="">Any</option>    
+                            <option value="Past 24 hours">Past 24 hours</option>    
+                            <option value="Past Week">Past Week</option>    
+                            <option value="Past Month" selected>Past Month</option>    
+                        </select>    
+                    </div>   
+                    
+            
+                    <div class="form-group">    
+                        <label for="workType">  
+                            <i class="fas fa-building"></i> Work Type:  
+                        </label>                
+                        <select id="workType">    
+                            <option value="">Any</option>    
+                            <option value="Remote">Remote</option>    
+                            <option value="On-site">On-site</option>    
+                            <option value="Hybrid">Hybrid</option>    
+                        </select>    
+                    </div>    
+            
+                    <div class="form-group checkbox-group">    
+                        <label class="checkbox-label">    
+                            <input type="checkbox" id="easyApply" checked>    
+                            <span class="checkbox-text">  
+                                <i class="fas fa-check-circle"></i> Easy Apply Only  
+                            </span>                 </label>    
+                    </div>  
+                    <button type="submit" class="submit-btn", id="autoApplyBtn">  
+                        <i class="fas fa-search"></i> Auto Apply 
+                    </button>  
+                </form>  
+            </div>  
+            
+            <!-- Profile Container -->  
+            <div class="profile-container">  
+                <div class="header-container">  
+                    <h1><i class="fas fa-user-circle"></i> Profile Setup</h1>  
+                    <div class="header-nav">  
+                        <button class="landing-btn" id="getStartedBtnTop">  
+                            <i class="fas fa-search"></i> Job Search  
+                        </button>  
+                        <button id="homeBtn2" class="landing-btn">  
+                            <i class="fas fa-home"></i> Home  
+                        </button>  
+                    </div>  
+                </div>  
+            
+                <form id="profileForm">  
+                    <div class="form-group">    
+                        <label for="pdfPath">  
+                            <i class="fas fa-file-pdf"></i> Resume PDF Path:  
+                        </label>                 
+                        <div class="file-input">    
+                            <input type="text" id="pdfPath" placeholder="Click 'Browse' to select your resume" readonly required>    
+                            <button type="button" id="browsePdf" class="browse-btn">  
+                                <i class="fas fa-folder-open"></i> Browse  
+                            </button>                 
+                        </div>     
+                    </div>  
+                    <div class="form-group">
+                        <label for="currentCTC">
+                            <i class="fas fa-money-bill-wave"></i> Current CTC (Annual):
+                        </label>
+                        <input type="number" id="currentCTC" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedCTC">
+                            <i class="fas fa-money-bill-alt"></i> Expected CTC (Annual):
+                        </label>
+                        <input type="number" id="expectedCTC" required>
+                    </div>
+                </form>  
+            </div>  
+        </div>
+
+        <div class="info-section">
+            <h2 class="info-title">Help & Documentation</h2>
+            
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn" data-tab="usage">
+                        <i class="fas fa-book"></i>
+                        How to Use
+                    </button>
+                    <button class="tab-btn" data-tab="practices">
+                        <i class="fas fa-shield-alt"></i>
+                        Best Practices
+                    </button>
+                    <button class="tab-btn" data-tab="faq">
+                        <i class="fas fa-question-circle"></i>
+                        FAQ
+                    </button>
+                    <button class="tab-btn" data-tab="support">
+                        <i class="fas fa-headset"></i>
+                        Support
+                    </button>
+                </div>
+        
                 
         
-                <div class="form-group">    
-                    <label for="workType">  
-                        <i class="fas fa-building"></i> Work Type:  
-                    </label>                
-                    <select id="workType">    
-                        <option value="">Any</option>    
-                        <option value="Remote">Remote</option>    
-                        <option value="On-site">On-site</option>    
-                        <option value="Hybrid">Hybrid</option>    
-                    </select>    
-                </div>    
-        
-                <div class="form-group checkbox-group">    
-                    <label class="checkbox-label">    
-                        <input type="checkbox" id="easyApply" checked>    
-                        <span class="checkbox-text">  
-                            <i class="fas fa-check-circle"></i> Easy Apply Only  
-                        </span>                 </label>    
-                </div>  
-                <button type="submit" class="submit-btn">  
-                    <i class="fas fa-search"></i> Auto Apply 
-                </button>  
-            </form>  
-        </div>  
-        
-        <!-- Profile Container -->  
-        <div class="profile-container">  
-            <div class="header-container">  
-                <h1><i class="fas fa-user-circle"></i> Profile Setup</h1>  
-                <div class="header-nav">  
-                    <button class="landing-btn" id="getStartedBtnTop">  
-                        <i class="fas fa-search"></i> Job Search  
-                    </button>  
-                    <button id="homeBtn2" class="landing-btn">  
-                        <i class="fas fa-home"></i> Home  
-                    </button>  
-                </div>  
-            </div>  
-        
-            <form id="profileForm">  
-                <div class="form-group">
-                    <label for="liAtCookie">
-                        <i class="fas fa-cookie"></i> LinkedIn `Li_at` Cookie:
-                        <button type="button" class="help-btn">?</button>
-                    </label>
-                    <input type="text" id="liAtCookie" required>
-                    <small class="help-text">Find this in your browser's cookies after logging into LinkedIn</small>
+                <div class="tab-content" id="usage">
+                    <h3>How to Use the Application</h3>
+                    <div class="content-wrapper">
+                        <div class="feature-grid">
+                            <div class="feature">
+                                <i class="fas fa-user-circle"></i>
+                                <h4>Profile Setup</h4>
+                                <p>Configure your profile and upload your resume</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-search"></i>
+                                <h4>Job Search</h4>
+                                <p>Set your preferences including location, experience level, and work type</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-rocket"></i>
+                                <h4>Auto Apply</h4>
+                                <p>Start the automated application process with one click</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Monitor Progress</h4>
+                                <p>Track your daily and monthly application limits</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
         
-                <div class="form-group">    
-                    <label for="pdfPath">  
-                        <i class="fas fa-file-pdf"></i> Resume PDF Path:  
-                    </label>                 
-                    <div class="file-input">    
-                        <input type="text" id="pdfPath" placeholder="Click 'Browse' to select your resume" readonly required>    
-                        <button type="button" id="browsePdf" class="browse-btn">  
-                            <i class="fas fa-folder-open"></i> Browse  
-                        </button>                 
-                    </div>     
-                </div>  
-                <div class="form-group">
-                    <label for="currentCTC">
-                        <i class="fas fa-money-bill-wave"></i> Current CTC (Annual):
-                    </label>
-                    <input type="number" id="currentCTC" required>
+                <div class="tab-content" id="practices">
+                    <h3>Best Practices</h3>
+                    <div class="content-wrapper">
+                        <div class="practices-grid">
+                            <div class="practice-item">
+                                <i class="fas fa-file-pdf"></i>
+                                <div class="practice-content">
+                                    <h4>Resume Management</h4>
+                                    <p>Keep your resume up-to-date and in PDF format for optimal compatibility</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <i class="fas fa-bullseye"></i>
+                                <div class="practice-content">
+                                    <h4>Job Targeting</h4>
+                                    <p>Use specific job titles and keywords that match your skills</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div class="practice-content">
+                                    <h4>CTC Expectations</h4>
+                                    <p>Set reasonable compensation expectations based on market research</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <i class="fas fa-sync"></i>
+                                <div class="practice-content">
+                                    <h4>Regular Updates</h4>
+                                    <p>Keep your LinkedIn profile and application preferences current</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="expectedCTC">
-                        <i class="fas fa-money-bill-alt"></i> Expected CTC (Annual):
-                    </label>
-                    <input type="number" id="expectedCTC" required>
-                </div>
-            </form>  
-        </div>  
-    </div>
-
-    <div class="info-section">
-        <h2 class="info-title">Help & Documentation</h2>
         
-        <div class="info-cards">
-            <div class="info-card">
-                <h3><i class="fas fa-cookie"></i> How to Get LinkedIn Cookie</h3>
-                <ol>
-                    <li>Log in to LinkedIn in Chrome/Firefox</li>
-                    <li>Right-click anywhere and select "Inspect" (or press F12)</li>
-                    <li>Go to the "Application" tab in Chrome or "Storage" in Firefox</li>
-                    <li>Under "Cookies", find "www.linkedin.com"</li>
-                    <li>Look for the "li_at" cookie and copy its value</li>
-                </ol>
-                <div class="info-warning">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>Never share your LinkedIn cookie with untrusted applications or websites.</span>
+                <div class="tab-content" id="faq">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="content-wrapper">
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <i class="fas fa-question-circle"></i>
+                                    <h4>Is this tool safe to use with my LinkedIn account?</h4>
+                                </div>
+                                <p>Yes, the tool respects LinkedIn's rate limits and guidelines. However, always use automation tools responsibly.</p>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <i class="fas fa-question-circle"></i>
+                                    <h4>How many applications can I submit per day?</h4>
+                                </div>
+                                <p>The tool limits you to 40 applications per day to comply with LinkedIn's guidelines.</p>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <i class="fas fa-question-circle"></i>
+                                    <h4>Can I customize my application responses?</h4>
+                                </div>
+                                <p>Yes, you can set up custom responses for common application questions in your profile.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="tab-content" id="support">
+                    <h3>Support & Contact</h3>
+                    <div class="content-wrapper">
+                        <div class="support-grid">
+                            <div class="support-item">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email Support</h4>
+                                <p>support@jobsearchassistant.com</p>
+                                <a href="mailto:support@jobsearchassistant.com" class="support-btn">Send Email</a>
+                            </div>
+                            <div class="support-item">
+                                <i class="fas fa-comment-dots"></i>
+                                <h4>Live Chat</h4>
+                                <p>Available Monday-Friday</p>
+                                <button class="support-btn">Start Chat</button>
+                            </div>
+                            <div class="support-item">
+                                <i class="fas fa-book"></i>
+                                <h4>Documentation</h4>
+                                <p>Access detailed guides</p>
+                                <button class="support-btn">View Docs</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        
 
-            <div class="info-card">
-                <h3><i class="fas fa-book"></i> How to Use</h3>
-                <ol>
-                    <li>Set up your profile with LinkedIn cookie and resume</li>
-                    <li>Configure your job search preferences</li>
-                    <li>Click "Auto Apply" to start the automated application process</li>
-                    <li>Monitor your daily and monthly application limits</li>
-                    <li>Check the application status in your LinkedIn account</li>
-                </ol>
+    <!-- Sign-Up Section -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> Sign Up </h2>
             </div>
+            <form id="requestKeyForm">
+                <div class="form-group">
+                    <label for="requestEmail">
+                        <i class="fas fa-envelope"></i> Email:
+                    </label>
+                    <input type="email" id="requestEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="requestPassword">
+                        <i class="fas fa-lock"></i> Password:
+                    </label>
+                    <input type="password" id="requestPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-lock"></i> Confirm Password:
+                    </label>
+                    <input type="password" id="confirmPassword" required>
+                    <small class="password-mismatch" id="passwordMismatch" style="display: none; color: red;">
+                        Passwords do not match
+                    </small>
+                </div>
+                <!-- Back to Login Button -->
+                <button type="button" class="submit-btn" id="toLoginButton">
+                    <i class="fas fa-paper-plane"></i> Back to Login
+                </button>
 
-            <div class="info-card">
-                <h3><i class="fas fa-shield-alt"></i> Best Practices</h3>
-                <ul>
-                    <li>Keep your resume up-to-date and in PDF format</li>
-                    <li>Use specific job titles for better matching</li>
-                    <li>Set reasonable CTC expectations</li>
-                    <li>Monitor application status regularly</li>
-                    <li>Update your LinkedIn profile frequently</li>
-                </ul>
-            </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-key"></i> Sign Up
+                </button>
+            </form>
         </div>
     </div>
 
-    <!-- Get Key Modal -->  
-    <div id="loginModal" class="modal">  
-        <div class="modal-content">  
-            <div class="modal-header">  
-                <h2> Login</h2>  
-            </div>  
-            <form id="getKeyForm">  
-                <div class="form-group">    
-                    <label for="keyPath">  
-                        <i class="fas fa-key"></i> Key File:  
-                    </label>                 
-                    <div class="file-input">    
-                        <input type="text" id="keyPath" placeholder="Click 'Browse' to select your key file" readonly required>    
-                        <button type="button" id="browsekey" class="browse-btn">  
-                            <i class="fas fa-folder-open"></i> Browse  
-                        </button>           
-                    </div>    
-                </div>   
-    
-                <div class="form-group">  
-                    <label for="email">  
-                        <i class="fas fa-envelope"></i> Email:  
-                    </label>  
-                    <input type="email" id="email" required>  
-                </div>  
-                <div class="form-group">  
-                    <label for="password">  
-                        <i class="fas fa-lock"></i> Password:  
-                    </label>  
-                    <input type="password" id="password" required>  
-                </div>  
-                
-                <button type="submit" class="submit-btn" id="getLoginButton">  
-                    <i class="fas fa-paper-plane"></i> Login  
-                </button>  
-                <button type="button" class="submit-btn" id="getKeyButton">  
-                    <i class="fas fa-key"></i> Sign Up 
-                </button> 
-            </form>  
-        </div>  
-    </div>   
-    
-    <!-- Request Key Modal (Sign-up) -->  
-    <div id="requestKeyModal" class="modal">  
-        <div class="modal-content">  
-            <div class="modal-header">  
-                <h2> Sign Up</h2>  
-            </div>  
-            <form id="requestKeyForm">  
-                <div class="form-group">  
-                    <label for="requestEmail">  
-                        <i class="fas fa-envelope"></i> Email:  
-                    </label>  
-                    <input type="email" id="requestEmail" required>  
-                </div>  
-                <div class="form-group">  
-                    <label for="requestPassword">  
-                        <i class="fas fa-lock"></i> Password:  
-                    </label>  
-                    <input type="password" id="requestPassword" required>  
-                </div>  
-                <div class="form-group">  
-                    <label for="confirmPassword">  
-                        <i class="fas fa-lock"></i> Confirm Password:  
-                    </label>  
-                    <input type="password" id="confirmPassword" required>  
-                    <small class="password-mismatch" id="passwordMismatch" style="display: none; color: red;">  
-                        Passwords do not match  
-                    </small>  
-                </div>  
-                <!-- Back Button -->
-                <button type="button" class="submit-btn" id="toLoginButton" >
+    <!-- Login Section -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> Login </h2>
+            </div>
+            <form id="getKeyForm">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email:
+                    </label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password:
+                    </label>
+                    <input type="password" id="password" required>
+                </div>
+
+                <button type="submit" class="submit-btn" id="getLoginButton">
                     <i class="fas fa-paper-plane"></i> Login
                 </button>
-                
-                <button type="submit" class="submit-btn">  
-                    <i class="fas fa-key"></i> Sign Up 
-                </button>  
-            </div>  
-            </form>  
-        </div>  
-    </div> 
+                <button type="button" class="submit-btn" id="getKeyButton">
+                    <i class="fas fa-key"></i> Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Verification Section (if needed in future) -->
+    <div id="verificationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> Verification </h2>
+            </div>
+            <form id="verificationForm">
+                <div class="form-group">
+                    <label for="verificationCode">
+                        <i class="fas fa-key"></i> Enter Verification Code:
+                    </label>
+                    <input type="text" id="verificationCode" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Verify
+                </button>
+            </form>
+        </div>
+    </div>
     
-    <footer class="site-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>About</h4>
-                <p>LinkedIn Job Search Assistant helps automate your job application process while respecting LinkedIn's guidelines and limits.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#" id="privacyLink">Privacy Policy</a></li>
-                    <li><a href="#" id="termsLink">Terms of Use</a></li>
-                    <li><a href="#" id="supportLink">Support</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Contact</h4>
-                <p><i class="fas fa-envelope"></i> support@jobsearchassistant.com</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <p>LinkedIn Job Search Assistant helps automate your job application process while respecting LinkedIn's guidelines and limits.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#" id="privacyLink">Privacy Policy</a></li>
+                        <li><a href="#" id="termsLink">Terms of Use</a></li>
+                        <li><a href="#" id="supportLink">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> support@jobsearchassistant.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
                 </div>
             </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LinkedIn Job Search Assistant. All rights reserved.</p>
+            </div>
+        </footer>
+        
+    <div id="customAlert" class="custom-alert">
+        <div class="custom-alert-content">
+        <span id="customAlertMessage"></span>
+        <button id="customAlertButton">OK</button>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 LinkedIn Job Search Assistant. All rights reserved.</p>
+    </div>
+    <div class="server-status">
+        <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span class="status-text">Checking server status...</span>
         </div>
-    </footer>
-    
-<div id="customAlert" class="custom-alert">
-    <div class="custom-alert-content">
-      <span id="customAlertMessage"></span>
-      <button id="customAlertButton">OK</button>
     </div>
-</div>
-<div class="server-status">
-    <div class="status-indicator">
-        <span class="status-dot"></span>
-        <span class="status-text">Checking server status...</span>
-    </div>
-</div>
 
 
 
 
-<script src="script.js"></script>
-</body>
-</html>
+    <script src="script.js"></script>
+    </body>
+    </html>
