@@ -268,13 +268,14 @@ let tempEmail = ''; // Temporary storage for email
 let tempPassword = ''; // Temporary storage for password
 let tempCode = ''; // Temporary storage for verification code
 
-document.getElementById('userForm').addEventListener('submit', async (e) => {      
-    e.preventDefault(); 
-    console.log("Form Submitted");     
+document.querySelectorAll('.autoApplyBtn').forEach((button) => {
+    button.addEventListener('click', async (e) => {
+        e.preventDefault();
+        console.log("Form Submitted");
 
-    // Get the submit button  
-    const submitButton = e.target.querySelector('.submit-btn');  
-    const originalButtonText = submitButton.innerHTML;  
+        // Get the submit button
+        const submitButton = e.target;
+        const originalButtonText = submitButton.innerHTML;
 
     // Disable button and show loading state  
     submitButton.disabled = true;  
@@ -284,6 +285,7 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
         credentials: {      
             path: document.getElementById('pdfPath').value,
             curCTC: document.getElementById('currentCTC').value,
+            noticePeriod: document.getElementById('noticePeriod').value,
             expCTC: document.getElementById('expectedCTC').value,
         },      
         searchParams: {      
@@ -345,6 +347,7 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
         submitButton.innerHTML = originalButtonText;
     }
 });
+});
 async function loadSavedData() {
     try {
         // Fetch saved data directly using fetch
@@ -355,6 +358,7 @@ async function loadSavedData() {
 
         if (data.success && data.data) {
             const { credentials, searchParams, key } = data.data;
+            console.log("searchParams", searchParams);
 
             // Load values with fallback to default if data is missing
             document.getElementById('pdfPath').value = credentials?.path || '';
@@ -362,14 +366,16 @@ async function loadSavedData() {
             document.getElementById('location').value = searchParams?.location || 'India';
             document.getElementById('email').value = key?.email || '';
             document.getElementById('password').value = key?.password || '';
-            // document.getElementById('validationCode').value = key?.validationCode || '';
+            document.getElementById('noticePeriod').value = credentials?.noticePeriod || '30';
+
             document.getElementById('currentCTC').value = credentials?.curCTC || '800000';
             document.getElementById('expectedCTC').value = credentials?.expCTC || '1200000';
+            
 
             if (searchParams?.filters) {
-                document.getElementById('experienceLevel').value = searchParams.filters?.experienceLevel || 'Entry level';
-                document.getElementById('workType').value = searchParams.filters?.workType || 'Remote';
-                document.getElementById('datePosted').value = searchParams.filters?.datePosted || 'Past Month';
+                document.getElementById('experienceLevel').value = searchParams.filters?.experienceLevel;
+                document.getElementById('workType').value = searchParams.filters?.workType ;
+                document.getElementById('datePosted').value = searchParams.filters?.datePosted;
                 document.getElementById('easyApply').checked = searchParams.filters?.easyApply !== undefined ? searchParams.filters.easyApply : true;
             }
 
@@ -744,3 +750,136 @@ document.getElementById('toLoginButton').addEventListener('click', function () {
     document.getElementById("loginModal").style.display = "block";
 });
 
+//     event.preventDefault();
+
+//     // Get all form values
+//     const email = document.getElementById('email').value;
+//     const password = document.getElementById('password').value;
+//     const validationCode = document.getElementById('validationCode').value;
+
+//     // Validate inputs
+//     if (!email || !password || !validationCode) {
+//         showCustomAlert('Please fill in all fields and select a key file.');
+//         return;
+//     }
+
+//     try {
+//         const response = await fetch(`${SERVER_URL}/save-credentials`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ email, password, validationCode })
+//         });
+
+//         const data = await response.json();
+
+//         if (data.success) {
+//             console.log('Data Updated/Saved Successfully');
+
+//             // Hide the login modal
+//             document.getElementById('loginModal').style.display = 'none';
+
+//             // Show the main app
+//             const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
+//             appContainer.style.display = 'block';
+//             signUpModal.style.display = 'none';
+
+
+//             // Update login status button
+//         } else {
+//             showCustomAlert(`Error: ${data.message}`);
+//         }
+//     } catch (error) {
+//         console.error('Error saving credentials:', error);
+//         showCustomAlert('An error occurred while saving credentials.');
+//     }
+// });
+
+
+//     // Add this to your existing script.js
+
+// const signUpModal = document.getElementById('signUpModal');  
+// const passwordMismatch = document.getElementById('passwordMismatch');  
+
+      
+//     // Show the modal when the Request Key button is clicked  
+// getKeyButton.addEventListener('click', () => {  
+//     signUpModal.style.display = 'block';  
+// });  
+// document.getElementById('getKeyButton').addEventListener('click', function() {
+//     document.getElementById('loginModal').style.display = 'none';
+//     document.getElementById('signUpModal').style.display = 'block';
+// });
+// document.getElementById("toLoginButton").addEventListener("click", function () {
+//     // Hide the sign-up modal
+//     document.getElementById("signUpModal").style.display = "none";
+//     // Show the login modal
+//     document.getElementById("loginModal").style.display = "block";
+// });
+
+// document.getElementById('confirmPassword').addEventListener('input', function() {  
+//     const password = document.getElementById('requestPassword').value;  
+//     const confirmPass = this.value;  
+        
+//     if (password !== confirmPass) {  
+//         passwordMismatch.style.display = 'block';  
+//     } else {  
+//         passwordMismatch.style.display = 'none';  
+//     }  
+// }); 
+
+
+      
+// document.getElementById('requestKeyForm').addEventListener('submit', async (event) => {
+//     event.preventDefault();
+
+//     const submitButton = event.target.querySelector('button[type="submit"]');
+//     const originalButtonText = submitButton.innerHTML;
+
+//     // Disable button and show loading state
+//     submitButton.disabled = true;
+//     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+//     const email = document.getElementById('requestEmail').value;
+//     const password = document.getElementById('requestPassword').value;
+//     const confirmPass = document.getElementById('confirmPassword').value;
+
+//     // Check if passwords match
+//     if (password !== confirmPass) {
+//         passwordMismatch.style.display = 'block';
+//         submitButton.disabled = false;
+//         submitButton.innerHTML = originalButtonText;
+//         return;
+//     }
+
+//     try {
+//         const response = await fetch(`${SERVER_URL}/request-api-key`, {
+//             method: 'POST',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ email, password })
+//         });
+
+//         const data = await response.json();
+
+//         if (data.success) {
+//             showCustomAlert('Account created successfully! You will receive your API key via email.');
+//         } else {
+//             showCustomAlert(`Error: ${data.message}`);
+//         }
+//     } catch (error) {
+//         console.error('Error requesting API key:', error);
+//         showCustomAlert('An error occurred while creating the account.');
+//     } finally {
+//         // Reset button state
+//         submitButton.disabled = false;
+//         submitButton.innerHTML = originalButtonText;
+
+//         // Clear form and close modal
+//         document.getElementById('requestKeyForm').reset();
+//         signUpModal.style.display = 'none';
+//         passwordMismatch.style.display = 'none';
+//     }
+// });
