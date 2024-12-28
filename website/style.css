@@ -470,7 +470,7 @@ select:focus {
 /* Adjust other container margins */
 .landing-page, .getting-started-container, .profile-container {
     max-width: 800px;
-    margin: calc(8px + 32px) auto 3rem auto; /* Add titlebar height to top margin */
+    margin: calc(50px + 32px) auto 3rem auto; /* Add titlebar height to top margin */
     padding: 2rem;
     background: rgb(255, 255, 255);
     border-radius: 8px;
@@ -533,7 +533,9 @@ select:focus {
   
   .server-status {
     position: fixed;
-    top: 1rem;
+    top: 70px;
+
+    /* top: 1rem; */
     right: 1rem;
     z-index: 1000;
     background-color: white;
@@ -584,6 +586,108 @@ select:focus {
     }
 }
 
+
+.top-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    padding: 0 1.5rem;
+    z-index: 1000;
+    gap: 2rem; /* Add space between elements */
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #0a66c2;
+    min-width: max-content; /* Prevent brand from shrinking */
+}
+
+.nav-brand i {
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    flex-grow: 1; /* Allow links section to grow */
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: #666;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #f0f2f5;
+    color: #0a66c2;
+}
+
+.nav-btn.active {
+    background-color: #e8f0fe;
+    color: #0a66c2;
+}
+
+.nav-account {
+    margin-left: auto; /* Push account to the right */
+}
+
+.nav-account .nav-btn {
+    font-size: 1.25rem;
+}
+
+.view-section {
+    display: none;
+    padding: 1rem;
+}
+
+.view-section.active {
+    display: block;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .nav-brand span {
+        display: none;
+    }
+
+    .nav-links {
+        gap: 0.5rem;
+    }
+
+    .nav-btn {
+        padding: 0.5rem;
+    }
+
+    .nav-btn span {
+        display: none;
+    }
+
+    .nav-btn i {
+        font-size: 1.25rem;
+    }
+}
+/* Update server status position to account for nav bar */
+
+
 .info-section {
     padding: 2rem;
     background-color: #f8f9fa;
@@ -596,52 +700,218 @@ select:focus {
     margin-bottom: 2rem;
 }
 
-.info-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 1rem;
-}
-
-.info-card {
+.tabs-container {
+    max-width: 1200px;
+    margin: 0 auto;
     background: white;
-    padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.info-card h3 {
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    padding: 1rem 1.5rem;
+    border: none;
+    background: none;
+    color: #666;
+    cursor: pointer;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #0a66c2;
+    background-color: #f8f9fa;
+}
+
+.tab-btn.active {
+    color: #0a66c2;
+    border-bottom: 2px solid #0a66c2;
+}
+
+.tab-content {
+    display: none;
+    padding: 2rem;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.content-wrapper {
+    margin-top: 1.5rem;
+}
+
+/* Steps styling */
+.steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.step-number {
+    background: #0a66c2;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    margin: 0;
+    color: #333;
+}
+
+.step-content p {
+    margin: 0.5rem 0 0;
+    color: #666;
+}
+
+/* Feature grid styling */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.feature i {
+    font-size: 2rem;
     color: #0a66c2;
     margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
 }
 
-.info-card ol, .info-card ul {
-    padding-left: 1.5rem;
+/* Practices grid styling */
+.practices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.practice-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.practice-item i {
+    color: #0a66c2;
+    font-size: 1.5rem;
+}
+
+/* FAQ styling */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.faq-item {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.faq-question {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.faq-question i {
+    color: #0a66c2;
+}
+
+/* Support grid styling */
+.support-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.support-item {
+    text-align: center;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.support-item i {
+    font-size: 2rem;
+    color: #0a66c2;
     margin-bottom: 1rem;
 }
 
-.info-card li {
-    margin-bottom: 0.5rem;
-    line-height: 1.5;
-}
-
-.info-warning {
-    background-color: #fff3cd;
-    padding: 1rem;
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+.support-btn {
+    display: inline-block;
     margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #0a66c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
 }
 
-.info-warning i {
-    color: #856404;
+.support-btn:hover {
+    background: #084482;
 }
 
+@media (max-width: 768px) {
+    .tabs {
+        flex-wrap: nowrap;
+    }
+    
+    .tab-btn {
+        padding: 0.8rem 1rem;
+    }
+    
+    .tab-content {
+        padding: 1rem;
+    }
+    
+    .feature-grid, .practices-grid, .support-grid {
+        grid-template-columns: 1fr;
+    }
+}
 .site-footer {
     background-color: #283e4a;
     color: white;
