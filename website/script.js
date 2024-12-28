@@ -62,11 +62,7 @@ async function checkServerConnection() {
 }
 
 
-checkServerConnection().then((connected) => {
-    if (!connected) {
-      showCustomAlert("Server is not running. Please start the server.");
-    }
-  });
+
 
   function showCustomAlert(message) {
     const customAlert = document.getElementById('customAlert');
@@ -83,10 +79,13 @@ checkServerConnection().then((connected) => {
   
   
 document.addEventListener("DOMContentLoaded", () => {
+checkServerConnection().then((connected) => {
+    if (!connected) {
+        showCustomAlert("Server is not running. Please start the server.");
+    }
+    });
   const pdfBrowseButton = document.getElementById("browsePdf");
-  const keyBrowseButton = document.getElementById("browsekey");
   const pdfPathInput = document.getElementById("pdfPath");
-  const keyPathInput = document.getElementById("keyPath");
 
   const handleBrowse = (browseButton, pathInput, fileType, uploadEndpoint) => {
     browseButton.addEventListener("click", () => {
@@ -131,8 +130,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Add event listeners for both buttons
   handleBrowse(pdfBrowseButton, pdfPathInput, ".pdf", "upload-pdf");
-  handleBrowse(keyBrowseButton, keyPathInput, ".key", "upload-key"); // Add other key file extensions if needed
+//   handleBrowse(keyBrowseButton, validationCodeInput, ".key", "upload-key"); // Add other key file extensions if needed
 });
+document.addEventListener("DOMContentLoaded", () => {
+    // Get references to all sections and nav buttons
+    const sections = {
+        mainApp: document.getElementById("mainApp"),
+        helpSection: document.querySelector(".info-section")
+    };
+    
+    const navButtons = document.querySelectorAll(".nav-btn");
+
+    // Function to show a specific section
+    function showSection(sectionId) {
+        Object.keys(sections).forEach((key) => {
+            sections[key].style.display = key === sectionId ? "block" : "none";
+        });
+
+        // Update active button
+        navButtons.forEach((btn) => {
+            btn.classList.toggle("active", btn.getAttribute("data-view") === sectionId);
+        });
+    }
+
+    // Attach click events to nav buttons
+    navButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const sectionId = btn.getAttribute("data-view");
+            showSection(sectionId);
+        });
+    });
+
+    // Show mainApp section initially
+    showSection("mainApp");
+});
+
 
 document.addEventListener('DOMContentLoaded', function() {
     // Get all container elements
@@ -146,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     gettingStartedContainer.style.display = 'none';
     profileContainer.style.display = 'none';
     landingPage.style.display = 'block';
+    
 
     // Navigation handling
     const navLinks = document.querySelectorAll('.nav-item');
@@ -212,8 +245,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Rest of your existing event listeners...
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.tab-btn');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            contents.forEach(c => c.classList.remove('active'));
+
+            // Add active class to clicked tab
+            tab.classList.add('active');
+
+            // Show corresponding content
+            const contentId = tab.getAttribute('data-tab');
+            document.getElementById(contentId).classList.add('active');
+        });
+    });
+});
+let tempEmail = ''; // Temporary storage for email
+let tempPassword = ''; // Temporary storage for password
+let tempCode = ''; // Temporary storage for verification code
+
 document.getElementById('userForm').addEventListener('submit', async (e) => {      
-    e.preventDefault();      
+    e.preventDefault(); 
+    console.log("Form Submitted");     
 
     // Get the submit button  
     const submitButton = e.target.querySelector('.submit-btn');  
@@ -225,7 +282,6 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
 
     const formData = {      
         credentials: {      
-            cookie: document.getElementById('liAtCookie').value,      
             path: document.getElementById('pdfPath').value,
             curCTC: document.getElementById('currentCTC').value,
             expCTC: document.getElementById('expectedCTC').value,
@@ -243,12 +299,13 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
         key: {  
             email: document.getElementById('email').value,   
             password: document.getElementById('password').value,  
-            keyFilePath: document.getElementById('keyPath').value      
+            // validationCode: tempCode     
         }      
     };      
+    console.log(formData);
 
     // Validate form data
-    if (!formData.credentials.cookie || !formData.credentials.path || !formData.key.keyFilePath) {      
+    if (!formData.credentials.path) {      
         showCustomAlert('Please fill in all required fields');  
         submitButton.disabled = false;  
         submitButton.innerHTML = originalButtonText;  
@@ -256,26 +313,11 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
     }  
 
     try {
-        // First validate and save credentials
-        const credentialsResponse = await fetch(`${SERVER_URL}/save-credentials`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: formData.key.email,
-                password: formData.key.password,
-                keyPath: formData.key.keyFilePath
-            })
-        });
-
-        const credentialsData = await credentialsResponse.json();
-        
-        if (credentialsData.success) {
+        // if (credentialsData.success) {
             console.log('Credentials Updated/Saved Successfully');
             const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
             appContainer.style.display = 'block';
-            requestKeyModal.style.display = 'none';
+            signUpModal.style.display = 'none';
 
             // Now save the form data
             const formResponse = await fetch(`${SERVER_URL}/save-data`, {
@@ -291,9 +333,9 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
             if (!data.success) {
                 showCustomAlert(`Error: ${data.message}`);
             }
-        } else {
-            showCustomAlert(`Error: ${credentialsData.message}`);
-        }
+        // } else {
+        //     showCustomAlert(`Error: ${credentialsData.message}`);
+        // }
 
     } catch (error) {
         console.error('Error:', error);
@@ -303,41 +345,83 @@ document.getElementById('userForm').addEventListener('submit', async (e) => {
         submitButton.innerHTML = originalButtonText;
     }
 });
-// Load saved data when page loads   
-document.addEventListener('DOMContentLoaded', async () => {
-    
+async function loadSavedData() {
     try {
-        // Fetch saved data directly using fetch (Replace ipcRenderer with fetch)
+        // Fetch saved data directly using fetch
         const response = await fetch(`${SERVER_URL}/load-saved-data`); // Assuming this API exists on your backend
         const data = await response.json();
+        console.log(data);
+        console.log("Data", data.data);
 
         if (data.success && data.data) {
             const { credentials, searchParams, key } = data.data;
 
-            document.getElementById('liAtCookie').value = credentials.cookie || '';
-            document.getElementById('pdfPath').value = credentials.path || '';
-            document.getElementById('jobTitle').value = searchParams.jobTitle || 'Data Science';
-            document.getElementById('location').value = searchParams.location || 'India';
-            document.getElementById('email').value = key.email || '';
-            document.getElementById('password').value = key.password || '';
-            document.getElementById('keyPath').value = key.keyFilePath || '';
-            document.getElementById('currentCTC').value = credentials.curCTC || '800000';
-            document.getElementById('expectedCTC').value = credentials.expCTC || '1200000';
+            // Load values with fallback to default if data is missing
+            document.getElementById('pdfPath').value = credentials?.path || '';
+            document.getElementById('jobTitle').value = searchParams?.jobTitle || 'Data Science';
+            document.getElementById('location').value = searchParams?.location || 'India';
+            document.getElementById('email').value = key?.email || '';
+            document.getElementById('password').value = key?.password || '';
+            // document.getElementById('validationCode').value = key?.validationCode || '';
+            document.getElementById('currentCTC').value = credentials?.curCTC || '800000';
+            document.getElementById('expectedCTC').value = credentials?.expCTC || '1200000';
 
-            if (searchParams.filters) {
-                document.getElementById('experienceLevel').value = searchParams.filters.experienceLevel || 'Entry level';
-                document.getElementById('workType').value = searchParams.filters.workType || 'Remote';
-                document.getElementById('datePosted').value = searchParams.filters.datePosted || 'Past Month';
-                document.getElementById('easyApply').checked = searchParams.filters.easyApply !== undefined ? searchParams.filters.easyApply : true;
+            if (searchParams?.filters) {
+                document.getElementById('experienceLevel').value = searchParams.filters?.experienceLevel || 'Entry level';
+                document.getElementById('workType').value = searchParams.filters?.workType || 'Remote';
+                document.getElementById('datePosted').value = searchParams.filters?.datePosted || 'Past Month';
+                document.getElementById('easyApply').checked = searchParams.filters?.easyApply !== undefined ? searchParams.filters.easyApply : true;
             }
-            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-            appContainer.style.display = 'block';
-            requestKeyModal.style.display = 'none';
 
+            // Only proceed with saving credentials if the necessary data exists
+            if (key?.email && key?.password && key?.validationCode) {
+                console.log('Found saved credentials, attempting to save...');
+                const saveResponse = await fetch(`${SERVER_URL}/save-credentials`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: key.email,
+                        password: key.password,
+                        verificationCode: key.validationCode // Use empty string if verificationCode is missing
+                    })
+                });
+
+                const saveData = await saveResponse.json();
+
+                if (saveData.success) {
+                    console.log('Credentials saved successfully!');
+                    // On success, show the main app and hide the sign-up modal
+                    const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
+                    appContainer.style.display = 'block';
+                    const signUpModal = document.getElementById('signUpModal'); // Replace with actual modal ID
+                    signUpModal.style.display = 'none';
+                } else {
+                    console.error('Error saving credentials:', saveData.message);
+                    showCustomAlert('Error saving credentials.');
+                }
+            } else {
+                console.log('Missing email or password, skipping save credentials step.');
+            }
         }
     } catch (error) {
         console.error('Error loading saved data:', error);
+        showCustomAlert('Error loading saved data.');
     }
+}
+
+
+
+
+// Load saved data when page loads   
+document.addEventListener('DOMContentLoaded', async () => {
+    checkServerConnection().then((connected) => {
+        if (!connected) {
+          showCustomAlert("Server is not running. Please start the server.");
+        }
+      });
+    await loadSavedData();
 
     function updateJobStats(dailyCount, monthlyCount) {
         // Update daily stats
@@ -437,9 +521,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-document.querySelector('.help-btn').addEventListener('click', () => {
-    document.querySelector('a[href="#cookie-guide"]').click();
-});
+
 
 // Close the modal when clicking outside the modal content  
 // window.addEventListener('click', (event) => {  
@@ -450,7 +532,7 @@ document.querySelector('.help-btn').addEventListener('click', () => {
 
 // Show the login modal initially
 document.addEventListener('DOMContentLoaded', () => {
-    const loginModal = document.getElementById('requestKeyModal');  
+    const loginModal = document.getElementById('signUpModal');  
     const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
 
     // Ensure the main app is hidden initially
@@ -459,90 +541,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display the login modal
     loginModal.style.display = 'block';
 });
+// Step 1: Sign Up - Request API Key
+ // Temporary storage for verification code
 
-// Handle modal form submission
-document.getElementById('getKeyForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    // Get all form values
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    const keyPath = document.getElementById('keyPath').value;
-
-    // Validate inputs
-    if (!email || !password || !keyPath) {
-        showCustomAlert('Please fill in all fields and select a key file.');
-        return;
-    }
-
-    try {
-        const response = await fetch(`${SERVER_URL}/save-credentials`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password, keyPath })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            console.log('Data Updated/Saved Successfully');
-
-            // Hide the login modal
-            document.getElementById('loginModal').style.display = 'none';
-
-            // Show the main app
-            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-            appContainer.style.display = 'block';
-            requestKeyModal.style.display = 'none';
-
-
-            // Update login status button
-        } else {
-            showCustomAlert(`Error: ${data.message}`);
-        }
-    } catch (error) {
-        console.error('Error saving credentials:', error);
-        showCustomAlert('An error occurred while saving credentials.');
-    }
-});
-
-
-    // Add this to your existing script.js
-
-const requestKeyModal = document.getElementById('requestKeyModal');  
-const passwordMismatch = document.getElementById('passwordMismatch');  
-
-      
-    // Show the modal when the Request Key button is clicked  
-getKeyButton.addEventListener('click', () => {  
-    requestKeyModal.style.display = 'block';  
-});  
-document.getElementById('getKeyButton').addEventListener('click', function() {
-    document.getElementById('loginModal').style.display = 'none';
-    document.getElementById('requestKeyModal').style.display = 'block';
-});
-document.getElementById("toLoginButton").addEventListener("click", function () {
-    // Hide the sign-up modal
-    document.getElementById("requestKeyModal").style.display = "none";
-    // Show the login modal
-    document.getElementById("loginModal").style.display = "block";
-});
-
-document.getElementById('confirmPassword').addEventListener('input', function() {  
-    const password = document.getElementById('requestPassword').value;  
-    const confirmPass = this.value;  
-        
-    if (password !== confirmPass) {  
-        passwordMismatch.style.display = 'block';  
-    } else {  
-        passwordMismatch.style.display = 'none';  
-    }  
-}); 
-
-
-      
+// Step 1: Sign Up - Request API Key
 document.getElementById('requestKeyForm').addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -577,7 +579,14 @@ document.getElementById('requestKeyForm').addEventListener('submit', async (even
         const data = await response.json();
 
         if (data.success) {
-            showCustomAlert('Account created successfully! You will receive your API key via email.');
+            // Store email and password for the next step
+            tempEmail = email;
+            tempPassword = password;
+
+            // Success, show verification code modal
+            showCustomAlert('Account created successfully! Please enter the verification code.');
+            document.getElementById('signUpModal').style.display = 'none'; // Hide Sign-Up modal
+            document.getElementById('verificationModal').style.display = 'block'; // Show Verification modal
         } else {
             showCustomAlert(`Error: ${data.message}`);
         }
@@ -589,9 +598,149 @@ document.getElementById('requestKeyForm').addEventListener('submit', async (even
         submitButton.disabled = false;
         submitButton.innerHTML = originalButtonText;
 
-        // Clear form and close modal
+        // Clear form
         document.getElementById('requestKeyForm').reset();
-        requestKeyModal.style.display = 'none';
+    }
+});
+
+// Step 2: Verification - Save Credentials (with verification code)
+document.getElementById('verificationForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const verificationCode = document.getElementById('verificationCode').value;
+
+    if (!verificationCode) {
+        showCustomAlert('Please enter the verification code.');
+        return;
+    }
+
+    const submitButton = event.target.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.innerHTML;
+    console.log(tempEmail, tempPassword, verificationCode);
+    // Disable button and show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
+
+    try {
+        const response = await fetch(`${SERVER_URL}/save-credentials`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            
+            body: JSON.stringify({ email: tempEmail, password: tempPassword, verificationCode })
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data.success) {
+            tempCode = verificationCode;
+
+            // Success, show login button
+            showCustomAlert('Account verified successfully! You can now log in.');
+
+            // Hide the verification modal and show the login modal
+            document.getElementById('verificationModal').style.display = 'none';
+            document.getElementById('loginModal').style.display = 'block';
+        } else {
+            showCustomAlert(`Error: ${data.message}`);
+        }
+    } catch (error) {
+        console.error('Error verifying account:', error);
+        showCustomAlert('An error occurred while verifying your account.');
+    } finally {
+        // Reset button state
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
+
+        // Clear form
+        document.getElementById('verificationForm').reset();
+    }
+});
+
+
+// Step 3: Login form submission
+document.getElementById('getKeyForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+
+    if (!email || !password) {
+        showCustomAlert('Please fill in all fields.');
+        return;
+    }
+
+    try {
+        // Get saved data if available, otherwise use the temporary verification code
+        const response = await fetch(`${SERVER_URL}/load-saved-data`);
+        const data = await response.json();
+
+        let codeToUse = tempCode; // Default to verificationCode from form
+
+        if (data.success && data.data) {
+            const { key } = data.data;
+            if (key && key.validationCode) {
+                codeToUse = key.validationCode; // Use saved code if available
+            }
+        }
+
+        const saveResponse = await fetch(`${SERVER_URL}/save-credentials`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                password,
+                verificationCode: codeToUse
+            })
+        });
+
+
+        const dataVeri = await saveResponse.json();
+
+        if (dataVeri.success) {
+            // Hide the login modal
+            document.getElementById('loginModal').style.display = 'none';
+
+            // Show the main app
+            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
+            appContainer.style.display = 'block';
+        } else {
+            showCustomAlert(`Error: ${data.message}`);
+        }
+    } catch (error) {
+        console.error('Error saving credentials:', error);
+        showCustomAlert('An error occurred while saving credentials.');
+    }
+});
+
+// Password mismatch validation on sign-up
+document.getElementById('confirmPassword').addEventListener('input', function () {
+    const password = document.getElementById('requestPassword').value;
+    const confirmPass = this.value;
+
+    if (password !== confirmPass) {
+        passwordMismatch.style.display = 'block';
+    } else {
         passwordMismatch.style.display = 'none';
     }
 });
+
+// Show the modal when the Request Key button is clicked
+document.getElementById('getKeyButton').addEventListener('click', () => {
+    document.getElementById('loginModal').style.display = 'none';
+    document.getElementById('signUpModal').style.display = 'block';
+});
+
+// Switch to the login modal from verification modal
+document.getElementById('toLoginButton').addEventListener('click', function () {
+    document.getElementById("signUpModal").style.display = "none";
+    document.getElementById("loginModal").style.display = "block";
+});
+
