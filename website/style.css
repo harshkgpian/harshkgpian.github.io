@@ -973,3 +973,39 @@ select:focus {
     }
 }
 
+.trial-status-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 16px;
+    padding-left: 16px;
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
+.buy-btn-nav {
+    background: #ffd700;
+    color: #2c3e50;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buy-btn-nav:hover {
+    background: #ffed4a;
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .buy-btn-nav {
+        padding: 4px 12px;
+        font-size: 0.8rem;
+    }
+}
