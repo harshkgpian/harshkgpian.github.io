@@ -110,24 +110,6 @@ select:focus {
     flex: 1;  
 }  
 
-/* Terminal Output Styles */  
-.terminal-container {  
-    max-width: 800px;  
-    margin: 2rem auto;  
-    padding: 1rem;  
-    background: #1e1e1e;  
-    border-radius: 8px;  
-    color: #fff; 
-    display: none; 
-}  
-
-.terminal-output {  
-    padding: 1rem;  
-    font-family: 'Courier New', Courier, monospace;  
-    white-space: pre-wrap;  
-    height: 200px;  
-    overflow-y: auto;  
-}  
 
 .modal {
     display: none;
@@ -477,6 +459,26 @@ select:focus {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: none;
 }
+/* Terminal Output Styles */  
+.terminal-container {  
+    max-width: 800px;  
+    margin: calc(50px + 32px) auto 3rem auto; /* Add titlebar height to top margin */
+    padding: 1rem;  
+    background: #1e1e1e;  
+    border-radius: 8px;  
+    color: #fff; 
+    display: none; 
+    height: 80vh;
+}  
+
+.terminal-output {  
+    padding: 1rem;  
+    font-family: 'Courier New', Courier, monospace;  
+    white-space: pre-wrap;  
+    height: 70vh; 
+    overflow-y: auto;  
+}  
+
 
 
 /* Alert Modal Container */
@@ -646,13 +648,6 @@ select:focus {
     color: #0a66c2;
 }
 
-.nav-account {
-    margin-left: auto; /* Push account to the right */
-}
-
-.nav-account .nav-btn {
-    font-size: 1.25rem;
-}
 
 .view-section {
     display: none;
@@ -977,3 +972,4 @@ select:focus {
         grid-template-columns: 1fr;
     }
 }
+
