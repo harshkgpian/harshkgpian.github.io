@@ -984,7 +984,7 @@ select:focus {
 
 
 .buy-btn-nav {
-    background: #ffd700;
+    background: hsl(71, 76%, 68%);
     color: #2c3e50;
     border: none;
     padding: 6px 16px;
