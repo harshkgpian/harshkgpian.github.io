@@ -1,792 +1,504 @@
-const SERVER_URL = "http://localhost:3110/api";
+    <html lang="en">  
+    <head>  
+        <meta charset="UTF-8">  
+        <title>LinkedIn Job Search Assistant</title>  
+        <link rel="stylesheet" href="style.css">  
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    </head>  
+    <body> 
+        <nav class="top-nav">
+            <div class="nav-brand">
+                <i class="fab fa-linkedin"></i>
+                <span>Job Assistant</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn active" data-view="mainApp">
+                    <i class="fas fa-home"></i> Main App
+                </button>
+                <button class="nav-btn" data-view="helpSection">
+                    <i class="fas fa-question-circle"></i> Help
+                </button>
+                <button class="nav-btn" data-view="terminalContainer">
+                    <i class="fas fa-user-circle"></i> Terminal
+                </button>
+                <div class="trial-status-nav">
+                    <button class="buy-btn-nav" id="buyButton">
+                        <i class="fas fa-crown"></i> Upgrade
+                    </button>
+                </div>
+            </div>
+        </nav>
+        
 
+    <div class="terminal-container" style="display: none;">  
+        <h2><i class="fas fa-terminal"></i> Console Logs</h2>  
+        <div id="terminalOutput" class="terminal-output">  
+            <p>System ready...</p>  
+        </div>  
+    </div>   
+        <div id="mainApp" style="display: none;">
+            <div class="landing-page">
+                <div class="logo">
+                    <i class="fab fa-linkedin"></i>
+                    <h1 class="landing-title">Streamline Your Job Search</h1>
+                </div>
+                <p class="landing-description">Automate your LinkedIn job applications with our intelligent assistant.</p>
+                <div class="landing-buttons">
+                    <button class="landing-btn" id="getStartedBtn">
+                        <i class="fas fa-rocket"></i> Launch Assistant
+                    </button>
 
-async function fetchData(userEmail) {
-    console.log(userEmail);
-    const apiUrl = "https://script.googleusercontent.com/macros/echo?user_content_key=AiT1p2nQ0ZV9rUBLI52HHHG5XJ7kVEJlP1d-lTbyAqqSXlGY08wCPqVKL-BtDNjorxGwdJMSo9cdg1ZukQOy2LGcz1eqxd_km5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnKsYlWJMwu0w5zbXRJ-rxYqNQuLYzF_Is_LNu88l3d5PV_9QDiPLTNuCV3SvLnlCh-yhADb7bFOnGoNDd_1e4w-AjxSldXHqdg&lib=M-rHMzv28XkGpAlJt7kY9N7BL8y2cZgtr";
-  
-    try {
-      const response = await fetch(apiUrl);
-  
-      if (response.ok) {
-        const data = await response.json();
-  
-        // Find the user by email
-        const user = data.find(item => item.user === userEmail);
-  
-        if (user) {
-          const { jobsAppliedDaily, jobsAppliedMonthly } = user;
-  
-          console.log(`User: ${userEmail}`);
-          console.log(`Jobs Applied Daily: ${jobsAppliedDaily}`);
-          console.log(`Jobs Applied Monthly: ${jobsAppliedMonthly}`);
-  
-          return { jobsAppliedDaily, jobsAppliedMonthly };
-        } else {
-          console.error("User not found.");
-        }
-      } else {
-        console.error("Error fetching data: ", response.status);
-      }
-    } catch (error) {
-      console.error("Error: ", error);
-    }
-    
-}
-
-// Utility function to check server connection
-async function checkServerConnection() {
-    const statusDot = document.querySelector('.status-dot');
-    const statusText = document.querySelector('.status-text');
-
-    try {
-        const response = await fetch(`${SERVER_URL}/ping`);
-        const data = await response.json();
-
-        if (data.status === "ok") {
-            console.log("Server is connected.");
-            statusDot.classList.remove('disconnected');
-            statusDot.classList.add('connected');
-            statusText.textContent = "Server Connected";
-            return true;
-        }
-        throw new Error('Server status not ok');
-    } catch (error) {
-        console.error("Server connection error:", error);
-        statusDot.classList.remove('connected');
-        statusDot.classList.add('disconnected');
-        statusText.textContent = "Server Disconnected";
-        showCustomAlert("Server is not running. Please start the server.");
-        return false;
-    }
-}
-
-
-
-
-  function showCustomAlert(message) {
-    const customAlert = document.getElementById('customAlert');
-    const customAlertMessage = document.getElementById('customAlertMessage');
-    const customAlertButton = document.getElementById('customAlertButton');
-  
-    customAlertMessage.textContent = message;
-    customAlert.style.display = 'block';
-  
-    customAlertButton.onclick = () => {
-      customAlert.style.display = 'none';
-    };
-  }
-  
-  
-document.addEventListener("DOMContentLoaded", () => {
-checkServerConnection().then((connected) => {
-    if (!connected) {
-        showCustomAlert("Server is not running. Please start the server.");
-    }
-    });
-  const pdfBrowseButton = document.getElementById("browsePdf");
-  const pdfPathInput = document.getElementById("pdfPath");
-
-  const handleBrowse = (browseButton, pathInput, fileType, uploadEndpoint) => {
-    browseButton.addEventListener("click", () => {
-      const input = document.createElement("input");
-      input.type = "file";
-      if (fileType) input.accept = fileType;
-
-      input.onchange = async (event) => {
-        const file = event.target.files[0];
-        if (file) {
-          pathInput.value = file.name;
-
-          const formData = new FormData();
-          formData.append("file", file);
-
-          try {
-            const response = await fetch(`${SERVER_URL}/${uploadEndpoint}`, {
-              method: "POST",
-              body: formData,
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-              console.log(`${fileType || "File"} Uploaded Successfully:`, data.message);
-              showCustomAlert(`File uploaded successfully!`);
-            } else {
-              console.error("Error uploading file:", data.error);
-              showCustomAlert(`Error: ${data.error}`);
-            }
-          } catch (error) {
-            console.error("Error sending file to server:", error);
-            showCustomAlert(`Failed to upload the file.`);
-          }
-        } else {
-          showCustomAlert("No file selected!");
-        }
-      };
-
-      input.click();
-    });
-  };
-
-  // Add event listeners for both buttons
-  handleBrowse(pdfBrowseButton, pdfPathInput, ".pdf", "upload-pdf");
-//   handleBrowse(keyBrowseButton, validationCodeInput, ".key", "upload-key"); // Add other key file extensions if needed
-});
-document.addEventListener("DOMContentLoaded", () => {
-    // Get references to all sections and nav buttons
-    const sections = {
-        mainApp: document.getElementById("mainApp"),
-        helpSection: document.querySelector(".info-section"),
-        terminalContainer: document.querySelector(".terminal-container"),
-    };
-    
-    const navButtons = document.querySelectorAll(".nav-btn");
-
-    // Function to show a specific section
-    function showSection(sectionId) {
-        Object.keys(sections).forEach((key) => {
-            sections[key].style.display = key === sectionId ? "block" : "none";
-        });
-
-        // Update active button
-        navButtons.forEach((btn) => {
-            btn.classList.toggle("active", btn.getAttribute("data-view") === sectionId);
-        });
-    }
-
-    // Attach click events to nav buttons
-    navButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            const sectionId = btn.getAttribute("data-view");
-            showSection(sectionId);
-        });
-    });
-
-    // Show mainApp section initially
-    showSection("mainApp");
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all container elements
-    const landingPage = document.querySelector('.landing-page');
-    const gettingStartedContainer = document.querySelector('.getting-started-container');
-    const profileContainer = document.querySelector('.profile-container');
-    const contentSections = document.querySelectorAll('.content-section');
-
-    // Hide all sections initially except landing page
-    contentSections.forEach(section => section.style.display = 'none');
-    gettingStartedContainer.style.display = 'none';
-    profileContainer.style.display = 'none';
-    landingPage.style.display = 'block';
-    
-
-    // Navigation handling
-    const navLinks = document.querySelectorAll('.nav-item');
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            // Remove active class from all links
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            // Add active class to clicked link
-            e.target.classList.add('active');
-
-            // Hide ALL possible sections
-            landingPage.style.display = 'none';
-            gettingStartedContainer.style.display = 'none';
-            profileContainer.style.display = 'none';
-            contentSections.forEach(section => section.style.display = 'none');
-
-            // Show selected section
-            const sectionId = e.target.getAttribute('href').substring(1);
-            if (sectionId === 'home') {
-                landingPage.style.display = 'block';
-            } else {
-                document.getElementById(sectionId).style.display = 'block';
-            }
-        });
-    });
-
-    // Handle internal navigation buttons
-    const getStartedBtns = document.querySelectorAll('#getStartedBtn, #getStartedBtnTop');
-    const profileBtns = document.querySelectorAll('#profileBtn, #profileBtnTop');
-    const homeBtns = document.querySelectorAll('#homeBtn1, #homeBtn2');
-
-    function showContainer(containerToShow) {
-        // Hide all containers and content sections
-        landingPage.style.display = 'none';
-        gettingStartedContainer.style.display = 'none';
-        profileContainer.style.display = 'none';
-        contentSections.forEach(section => section.style.display = 'none');
-
-        // Show the selected container
-        containerToShow.style.display = 'block';
-
-        // Update nav active state
-        navLinks.forEach(link => link.classList.remove('active'));
-        if (containerToShow === landingPage) {
-            document.querySelector('a[href="#home"]').classList.add('active');
-        }
-    }
-
-    getStartedBtns.forEach(btn => {
-        btn.addEventListener('click', () => showContainer(gettingStartedContainer));
-    });
-
-    profileBtns.forEach(btn => {
-        btn.addEventListener('click', () => showContainer(profileContainer));
-    });
-
-    homeBtns.forEach(btn => {
-        btn.addEventListener('click', () => showContainer(landingPage));
-    });
-
-    // Rest of your existing event listeners...
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".tab-btn");
-    const tabContents = document.querySelectorAll(".tab-content");
-
-    // Function to activate a specific tab
-    function activateTab(tabId) {
-        tabs.forEach((tab) => {
-            tab.classList.toggle("active", tab.getAttribute("data-tab") === tabId);
-        });
-
-        tabContents.forEach((content) => {
-            content.style.display = content.id === tabId ? "block" : "none";
-        });
-    }
-
-    // Add event listeners to tabs
-    tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-            const tabId = tab.getAttribute("data-tab");
-            activateTab(tabId);
-        });
-    });
-
-    // Open the "How to Use" tab by default
-    activateTab("usage");
-});
-
-
-let tempEmail = ''; // Temporary storage for email
-let tempPassword = ''; // Temporary storage for password
-let tempCode = ''; // Temporary storage for verification code
-
-document.querySelectorAll('.autoApplyBtn').forEach((button) => {
-    button.addEventListener('click', async (e) => {
-        e.preventDefault();
-        console.log("Form Submitted");
-
-        // Get the submit button
-        const submitButton = e.target;
-        const originalButtonText = submitButton.innerHTML;
-
-    // Disable button and show loading state  
-    submitButton.disabled = true;  
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';  
-
-    const formData = {      
-        credentials: {      
-            path: document.getElementById('pdfPath').value,
-            curCTC: document.getElementById('currentCTC').value,
-            noticePeriod: document.getElementById('noticePeriod').value,
-            expCTC: document.getElementById('expectedCTC').value,
-        },      
-        searchParams: {      
-            jobTitle: document.getElementById('jobTitle').value,      
-            location: document.getElementById('location').value,      
-            filters: {      
-                easyApply: document.getElementById('easyApply').checked,      
-                experienceLevel: document.getElementById('experienceLevel').value,      
-                workType: document.getElementById('workType').value,  
-                datePosted: document.getElementById('datePosted').value      
-            }      
-        },  
-        key: {  
-            email: document.getElementById('email').value,   
-            password: document.getElementById('password').value,  
-            // validationCode: tempCode     
-        }      
-    };      
-    console.log(formData);
-
-    // Validate form data
-    if (!formData.credentials.path) {      
-        showCustomAlert('Please fill in all required fields');  
-        submitButton.disabled = false;  
-        submitButton.innerHTML = originalButtonText;  
-        return;      
-    }  
-
-    try {
-        // if (credentialsData.success) {
-            console.log('Credentials Updated/Saved Successfully');
-            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-            appContainer.style.display = 'block';
-            signUpModal.style.display = 'none';
-
-            // Now save the form data
-            const formResponse = await fetch(`${SERVER_URL}/save-data`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(formData)
-            });
-
-            const data = await formResponse.json();
+                </div>  
+                <!-- Add this to your landing page section -->  
+                <div class="stats-container">  
+                    <div class="stat-card">  
+                        <div class="stat-header">  
+                            <i class="fas fa-briefcase-clock"></i>  
+                            <h3>Today's Applications</h3>  
+                        </div>  
+                        <div class="stat-content">  
+                            <span id="dailyJobCount">0</span>  
+                            <span class="stat-divider">/</span>  
+                            <span class="stat-limit">40</span>  
+                        </div>  
+                        <div class="progress-bar">  
+                            <div id="dailyProgress" class="progress-fill"></div>  
+                        </div>  
+                        <small class="stat-subtitle">Daily Limit: 40 applications</small>  
+                    </div>  
             
-            if (!data.success) {
-                showCustomAlert(`Error: ${data.message}`);
-            }
-        // } else {
-        //     showCustomAlert(`Error: ${credentialsData.message}`);
-        // }
-
-    } catch (error) {
-        console.error('Error:', error);
-        showCustomAlert('An error occurred while processing your request.');
-    } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-    }
-});
-});
-async function loadSavedData() {
-    try {
-        // Fetch saved data directly using fetch
-        const response = await fetch(`${SERVER_URL}/load-saved-data`); // Assuming this API exists on your backend
-        const data = await response.json();
-        console.log(data);
-        console.log("Data", data.data);
-
-        if (data.success && data.data) {
-            const { credentials, searchParams, key } = data.data;
-            console.log("searchParams", searchParams);
-
-            // Load values with fallback to default if data is missing
-            document.getElementById('pdfPath').value = credentials?.path || '';
-            document.getElementById('jobTitle').value = searchParams?.jobTitle || 'Data Science';
-            document.getElementById('location').value = searchParams?.location || 'India';
-            document.getElementById('email').value = key?.email || '';
-            document.getElementById('password').value = key?.password || '';
-            document.getElementById('noticePeriod').value = credentials?.noticePeriod || '30';
-
-            document.getElementById('currentCTC').value = credentials?.curCTC || '800000';
-            document.getElementById('expectedCTC').value = credentials?.expCTC || '1200000';
+                    <div class="stat-card">  
+                        <div class="stat-header">  
+                            <i class="fas fa-calendar-check"></i>  
+                            <h3>Monthly Applications</h3>  
+                        </div>  
+                        <div class="stat-content">  
+                            <span id="monthlyJobCount">0</span>  
+                            <span class="stat-divider">/</span>  
+                            <span class="stat-limit">1000</span>  
+                        </div>  
+                        <div class="progress-bar">  
+                            <div id="monthlyProgress" class="progress-fill"></div>  
+                        </div>  
+                        <small class="stat-subtitle">Monthly Limit: 1000 applications</small>  
+                    </div>  
+                </div>  
+            </div>   
             
-
-            if (searchParams?.filters) {
-                document.getElementById('experienceLevel').value = searchParams.filters?.experienceLevel;
-                document.getElementById('workType').value = searchParams.filters?.workType ;
-                document.getElementById('datePosted').value = searchParams.filters?.datePosted;
-                document.getElementById('easyApply').checked = searchParams.filters?.easyApply !== undefined ? searchParams.filters.easyApply : true;
-            }
-
-            // Only proceed with saving credentials if the necessary data exists
-            if (key?.email && key?.password && key?.validationCode) {
-                console.log('Found saved credentials, attempting to save...');
-                const saveResponse = await fetch(`${SERVER_URL}/save-credentials`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: key.email,
-                        password: key.password,
-                        verificationCode: key.validationCode // Use empty string if verificationCode is missing
-                    })
-                });
-
-                const saveData = await saveResponse.json();
-
-                if (saveData.success) {
-                    console.log('Credentials saved successfully!');
-                    // On success, show the main app and hide the sign-up modal
-                    const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-                    appContainer.style.display = 'block';
-                    const signUpModal = document.getElementById('signUpModal'); // Replace with actual modal ID
-                    signUpModal.style.display = 'none';
-                } else {
-                    console.error('Error saving credentials:', saveData.message);
-                    showCustomAlert('Error saving credentials.');
-                }
-            } else {
-                console.log('Missing email or password, skipping save credentials step.');
-            }
-        }
-    } catch (error) {
-        console.error('Error loading saved data:', error);
-        showCustomAlert('Error loading saved data.');
-    }
-}
-
-
-
-
-// Load saved data when page loads   
-document.addEventListener('DOMContentLoaded', async () => {
-    checkServerConnection().then((connected) => {
-        if (!connected) {
-          showCustomAlert("Server is not running. Please start the server.");
-        }
-      });
-    await loadSavedData();
-
-    function updateJobStats(dailyCount, monthlyCount) {
-        // Update daily stats
-        const dailyJobCount = document.getElementById('dailyJobCount');
-        const dailyProgress = document.getElementById('dailyProgress');
-        const dailyPercentage = (dailyCount / 40) * 100;
-
-        dailyJobCount.textContent = dailyCount || '0';
-        dailyProgress.style.width = `${Math.min(dailyPercentage, 100)}%`;
-
-        // Update color based on progress
-        if (dailyPercentage >= 90) {
-            dailyProgress.style.backgroundColor = '#ff4444';
-        } else if (dailyPercentage >= 70) {
-            dailyProgress.style.backgroundColor = '#ffa700';
-        }
-
-        // Update monthly stats
-        const monthlyJobCount = document.getElementById('monthlyJobCount');
-        const monthlyProgress = document.getElementById('monthlyProgress');
-        const monthlyPercentage = (monthlyCount / 1000) * 100;
-
-        monthlyJobCount.textContent = monthlyCount || '0';
-        monthlyProgress.style.width = `${Math.min(monthlyPercentage, 100)}%`;
-
-        // Update color based on progress
-        if (monthlyPercentage >= 90) {
-            monthlyProgress.style.backgroundColor = '#ff4444';
-        } else if (monthlyPercentage >= 70) {
-            monthlyProgress.style.backgroundColor = '#ffa700';
-        }
-    }
-
-    // Enhanced loadAndUpdateStats with loading states
-    async function loadAndUpdateStats() {
-        showLoadingStats();
-        try {
-            const userEmail = document.getElementById('email').value;
-    
-            if (userEmail) {
-                const stats = await fetchData(userEmail); 
-                console.log(stats);
-    
-                if (stats) {
-
-                    updateJobStats(stats.jobsAppliedDaily, stats.jobsAppliedMonthly);
-                } else {
-                    showStatsError();
-                }
-            } else {
-                updateJobStats(0, 0);
-            }
-        } catch (error) {
-            console.error('Error loading stats:', error);
-            showStatsError();
-        }
-    }
-    
-
-    // Load stats when page loads
-    loadAndUpdateStats();
-
-    // Refresh stats every 5 minutes
-    setInterval(loadAndUpdateStats, 5 * 60 * 1000);
-
-    // Add listener for email changes
-    document.getElementById('email').addEventListener('change', loadAndUpdateStats);
-
-    // Add refresh button to stats
-    const refreshButton = document.createElement('button');
-    refreshButton.className = 'refresh-stats-btn';
-    refreshButton.innerHTML = '<i class="fas fa-sync-alt"></i>';
-    refreshButton.title = 'Refresh Stats';
-    document.querySelector('.stats-container').appendChild(refreshButton);
-
-    refreshButton.addEventListener('click', () => {
-        loadAndUpdateStats();
-    });
-
-    // Add loading indicator
-    function showLoadingStats() {
-        const dailyJobCount = document.getElementById('dailyJobCount');
-        const monthlyJobCount = document.getElementById('monthlyJobCount');
-
-        dailyJobCount.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-        monthlyJobCount.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-    }
-
-    // Add error handling UI
-    function showStatsError() {
-        const dailyJobCount = document.getElementById('dailyJobCount');
-        const monthlyJobCount = document.getElementById('monthlyJobCount');
-
-        dailyJobCount.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
-        monthlyJobCount.innerHTML = '<i class="fas fa-exclamation-circle"></i>';
-    }
-});
-
-
-// Show the login modal initially
-document.addEventListener('DOMContentLoaded', () => {
-    const loginModal = document.getElementById('signUpModal');  
-    const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-
-    // Ensure the main app is hidden initially
-    appContainer.style.display = 'none';
-
-    // Display the login modal
-    loginModal.style.display = 'block';
-});
-
-// Step 1: Sign Up - Request API Key
-document.getElementById('requestKeyForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const submitButton = event.target.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerHTML;
-
-    // Disable button and show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-
-    const email = document.getElementById('requestEmail').value;
-    const password = document.getElementById('requestPassword').value;
-    const confirmPass = document.getElementById('confirmPassword').value;
-
-    // Check if passwords match
-    if (password !== confirmPass) {
-        passwordMismatch.style.display = 'block';
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-        return;
-    }
-
-    try {
-        const response = await fetch(`${SERVER_URL}/request-api-key`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ email, password })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            // Store email and password for the next step
-            tempEmail = email;
-            tempPassword = password;
-
-            // Success, show verification code modal
-            showCustomAlert('Account created successfully! Please enter the verification code.');
-            document.getElementById('signUpModal').style.display = 'none'; // Hide Sign-Up modal
-            document.getElementById('verificationModal').style.display = 'block'; // Show Verification modal
-        } else {
-            showCustomAlert(`Error: ${data.message}`);
-        }
-    } catch (error) {
-        console.error('Error requesting API key:', error);
-        showCustomAlert('An error occurred while creating the account.');
-    } finally {
-        // Reset button state
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-
-        // Clear form
-        document.getElementById('requestKeyForm').reset();
-    }
-});
-
-// Step 2: Verification - Save Credentials (with verification code)
-document.getElementById('verificationForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const verificationCode = document.getElementById('verificationCode').value;
-
-    if (!verificationCode) {
-        showCustomAlert('Please enter the verification code.');
-        return;
-    }
-
-    const submitButton = event.target.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton.innerHTML;
-    console.log(tempEmail, tempPassword, verificationCode);
-    // Disable button and show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Verifying...';
-
-    try {
-        const response = await fetch(`${SERVER_URL}/save-credentials`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            <!-- Getting Started Container -->  
+            <div class="getting-started-container">  
+                <div class="header-container">  
+                    <h1><i class="fas fa-search"></i> Job Search Setup</h1>  
+                    <div class="header-nav">  
+                        <button class="landing-btn" id="profileBtnTop">  
+                            <i class="fas fa-user"></i> Profile  
+                        </button>  
+                        <button id="homeBtn1" class="landing-btn">  
+                            <i class="fas fa-home"></i> Home  
+                        </button> 
+                    </div>  
+                </div>  
             
-            body: JSON.stringify({ email: tempEmail, password: tempPassword, verificationCode })
-        });
+                <form id="userForm">  
+                    <div class="form-group">  
+                        <label for="jobTitle">  
+                            <i class="fas fa-briefcase"></i> Job Title:  
+                        </label>  
+                        <input type="text" id="jobTitle" value="Data Science" required>  
+                    </div>  
+            
+                    <div class="form-group">    
+                        <i class="fas fa-map-marker-alt"></i> Location: 
+                    </label>    
+                        <input type="text" id="location" value="India" required>    
+                    </div>    
+            
+                    <div class="form-group">    
+                        <label for="experienceLevel">
+                            <i class="fas fa-level-up-alt"></i> Experience Level:  
+                        </label>    
+                        <select id="experienceLevel">    
+                            <option value="">Any</option>    
+                            <option value="Entry level">Entry level</option>    
+                            <option value="Associate">Associate</option>    
+                            <option value="Mid-Senior level">Mid-Senior level</option>    
+                            <option value="Director">Director</option>    
+                        </select>    
+                    </div>    
+                    <div class="form-group">    
+                        <label for="datePosted">  
+                            <i class="far fa-calendar-alt"></i> Date Posted:  
+                        </label>                
+                        <select id="datePosted">    
+                            <option value="">Any</option>    
+                            <option value="Past 24 hours">Past 24 hours</option>    
+                            <option value="Past Week">Past Week</option>    
+                            <option value="Past Month" selected>Past Month</option>    
+                        </select>    
+                    </div>   
+                    
+            
+                    <div class="form-group">    
+                        <label for="workType">  
+                            <i class="fas fa-building"></i> Work Type:  
+                        </label>                
+                        <select id="workType">    
+                            <option value="">Any</option>    
+                            <option value="Remote">Remote</option>    
+                            <option value="On-site">On-site</option>    
+                            <option value="Hybrid">Hybrid</option>    
+                        </select>    
+                    </div>    
+            
+                    <div class="form-group checkbox-group">    
+                        <label class="checkbox-label">    
+                            <input type="checkbox" id="easyApply" checked>    
+                            <span class="checkbox-text">  
+                                <i class="fas fa-check-circle"></i> Easy Apply Only  
+                            </span>                 </label>    
+                    </div>  
+                    <button type="submit" class="submit-btn autoApplyBtn">
+                        <i class="fas fa-search"></i> Auto Apply 
+                    </button>
+                </form>  
+            </div>  
+            
+            <!-- Profile Container -->  
+            <div class="profile-container">  
+                <div class="header-container">  
+                    <h1><i class="fas fa-user-circle"></i> Profile Setup</h1>  
+                    <div class="header-nav">  
+                        <button class="landing-btn" id="getStartedBtnTop">  
+                            <i class="fas fa-search"></i> Job Search  
+                        </button>  
+                        <button id="homeBtn2" class="landing-btn">  
+                            <i class="fas fa-home"></i> Home  
+                        </button>  
+                    </div>  
+                </div>  
+            
+                <form id="profileForm">  
+                    <div class="form-group">    
+                        <label for="pdfPath">  
+                            <i class="fas fa-file-pdf"></i> Resume PDF Path:  
+                        </label>                 
+                        <div class="file-input">    
+                            <input type="text" id="pdfPath" placeholder="Click 'Browse' to select your resume" readonly required>    
+                            <button type="button" id="browsePdf" class="browse-btn">  
+                                <i class="fas fa-folder-open"></i> Browse  
+                            </button>                 
+                        </div>     
+                    </div>  
+                    <div class="form-group">
+                        <label for="noticePeriod">
+                            <i class="fas fa-bullseye"></i> Notice Period (Days):
+                        </label>
+                        <input type="number" id="noticePeriod" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="currentCTC">
+                            <i class="fas fa-money-bill-wave"></i> Current CTC (Annual):
+                        </label>
+                        <input type="number" id="currentCTC" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expectedCTC">
+                            <i class="fas fa-money-bill-alt"></i> Expected CTC (Annual):
+                        </label>
+                        <input type="number" id="expectedCTC" required>
+                    </div>
+                    <button type="submit" class="submit-btn autoApplyBtn">
+                        <i class="fas fa-search"></i> Auto Apply 
+                    </button>
+                </form>  
+            </div>  
+        </div>
 
-        const data = await response.json();
-        console.log(data);
+        <div class="info-section">
+            <h2 class="info-title">Help & Documentation</h2>
+            
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="usage">
+                        <i class="fas fa-book"></i>
+                        How to Use
+                    </button>
+                    <button class="tab-btn" data-tab="practices">
+                        <i class="fas fa-shield-alt"></i>
+                        Best Practices
+                    </button>
+                    <button class="tab-btn" data-tab="faq">
+                        <i class="fas fa-question-circle"></i>
+                        FAQ
+                    </button>
+                    <button class="tab-btn" data-tab="support">
+                        <i class="fas fa-headset"></i>
+                        Support
+                    </button>
+                </div>
+        
+                
+        
+                <div class="tab-content" id="usage">
+                    <h3>How to Use the Application</h3>
+                    <div class="content-wrapper">
+                        <div class="feature-grid">
+                            <div class="feature">
+                                <i class="fas fa-user-circle"></i>
+                                <h4>Profile Setup</h4>
+                                <p>Configure your profile and upload your resume</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-search"></i>
+                                <h4>Job Search</h4>
+                                <p>Set your preferences including location, experience level, and work type</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-rocket"></i>
+                                <h4>Auto Apply</h4>
+                                <p>Start the automated application process with one click</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Monitor Progress</h4>
+                                <p>Track your daily and monthly application limits</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="tab-content" id="practices">
+                    <h3>Best Practices</h3>
+                    <div class="content-wrapper">
+                        <div class="practices-grid">
+                            <div class="practice-item">
+                                <i class="fas fa-file-pdf"></i>
+                                <div class="practice-content">
+                                    <h4>Resume Management</h4>
+                                    <p>Keep your resume up-to-date and in PDF format for optimal compatibility</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <i class="fas fa-bullseye"></i>
+                                <div class="practice-content">
+                                    <h4>Job Targeting</h4>
+                                    <p>Use specific job titles and keywords that match your skills</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div class="practice-content">
+                                    <h4>CTC Expectations</h4>
+                                    <p>Set reasonable compensation expectations based on market research</p>
+                                </div>
+                            </div>
+                            <div class="practice-item">
+                                <i class="fas fa-sync"></i>
+                                <div class="practice-content">
+                                    <h4>Regular Updates</h4>
+                                    <p>Keep your LinkedIn profile and application preferences current</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="tab-content" id="faq">
+                    <h3>Frequently Asked Questions</h3>
+                    <div class="content-wrapper">
+                        <div class="faq-list">
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <i class="fas fa-question-circle"></i>
+                                    <h4>Is this tool safe to use with my LinkedIn account?</h4>
+                                </div>
+                                <p>Yes, the tool respects LinkedIn's rate limits and guidelines. However, always use automation tools responsibly.</p>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <i class="fas fa-question-circle"></i>
+                                    <h4>How many applications can I submit per day?</h4>
+                                </div>
+                                <p>The tool limits you to 40 applications per day to comply with LinkedIn's guidelines.</p>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-question">
+                                    <i class="fas fa-question-circle"></i>
+                                    <h4>Can I customize my application responses?</h4>
+                                </div>
+                                <p>Yes, you can set up custom responses for common application questions in your profile.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="tab-content" id="support">
+                    <h3>Support & Contact</h3>
+                    <div class="content-wrapper">
+                        <div class="support-grid">
+                            <div class="support-item">
+                                <i class="fas fa-envelope"></i>
+                                <h4>Email Support</h4>
+                                <p>support@jobsearchassistant.com</p>
+                                <a href="mailto:support@jobsearchassistant.com" class="support-btn">Send Email</a>
+                            </div>
+                            <div class="support-item">
+                                <i class="fas fa-comment-dots"></i>
+                                <h4>Live Chat</h4>
+                                <p>Available Monday-Friday</p>
+                                <button class="support-btn">Start Chat</button>
+                            </div>
+                            <div class="support-item">
+                                <i class="fas fa-book"></i>
+                                <h4>Documentation</h4>
+                                <p>Access detailed guides</p>
+                                <button class="support-btn">View Docs</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
 
-        if (data.success) {
-            tempCode = verificationCode;
+    <!-- Sign-Up Section -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> Sign Up for Trial </h2>
+            </div>
+            <form id="requestKeyForm">
+                <div class="form-group">
+                    <label for="requestEmail">
+                        <i class="fas fa-envelope"></i> Email:
+                    </label>
+                    <input type="email" id="requestEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="requestPassword">
+                        <i class="fas fa-lock"></i> Password:
+                    </label>
+                    <input type="password" id="requestPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-lock"></i> Confirm Password:
+                    </label>
+                    <input type="password" id="confirmPassword" required>
+                    <small class="password-mismatch" id="passwordMismatch" style="display: none; color: red;">
+                        Passwords do not match
+                    </small>
+                </div>
+                <!-- Back to Login Button -->
+                <button type="button" class="submit-btn" id="toLoginButton">
+                    <i class="fas fa-paper-plane"></i> Back to Login
+                </button>
 
-            // Success, show login button
-            showCustomAlert('Account verified successfully! You can now log in.');
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-key"></i> Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
 
-            // Hide the verification modal and show the login modal
-            document.getElementById('verificationModal').style.display = 'none';
-            document.getElementById('loginModal').style.display = 'block';
-        } else {
-            showCustomAlert(`Error: ${data.message}`);
-        }
-    } catch (error) {
-        console.error('Error verifying account:', error);
-        showCustomAlert('An error occurred while verifying your account.');
-    } finally {
-        // Reset button state
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-
-        // Clear form
-        document.getElementById('verificationForm').reset();
-    }
-});
-
-
-// Step 3: Login form submission
-document.getElementById('getKeyForm').addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-
-
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-
-    if (!email || !password) {
-        showCustomAlert('Please fill in all fields.');
-        return;
-    }
-
-    try {
-        // Get saved data if available, otherwise use the temporary verification code
-        const response = await fetch(`${SERVER_URL}/load-saved-data`);
-        const data = await response.json();
-
-        let codeToUse = tempCode; // Default to verificationCode from form
-
-        if (data.success && data.data) {
-            const { key } = data.data;
-            if (key && key.validationCode) {
-                codeToUse = key.validationCode; // Use saved code if available
-            }
-        }
-
-        const saveResponse = await fetch(`${SERVER_URL}/save-credentials`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                password,
-                verificationCode: codeToUse
-            })
-        });
-
-
-        const dataVeri = await saveResponse.json();
-
-        if (dataVeri.success) {
-            // Hide the login modal
-            document.getElementById('loginModal').style.display = 'none';
-
-            // Show the main app
-            const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-            appContainer.style.display = 'block';
-        } else {
-            showCustomAlert(`Error: ${data.message}`);
-        }
-    } catch (error) {
-        console.error('Error saving credentials:', error);
-        showCustomAlert('An error occurred while saving credentials.');
-    }
-});
-
-// Password mismatch validation on sign-up
-document.getElementById('confirmPassword').addEventListener('input', function () {
-    const password = document.getElementById('requestPassword').value;
-    const confirmPass = this.value;
-
-    if (password !== confirmPass) {
-        passwordMismatch.style.display = 'block';
-    } else {
-        passwordMismatch.style.display = 'none';
-    }
-});
-
-// Show the modal when the Request Key button is clicked
-document.getElementById('getKeyButton').addEventListener('click', () => {
-    document.getElementById('loginModal').style.display = 'none';
-    document.getElementById('signUpModal').style.display = 'block';
-});
-
-// Switch to the login modal from verification modal
-document.getElementById('toLoginButton').addEventListener('click', function () {
-    document.getElementById("signUpModal").style.display = "none";
-    document.getElementById("loginModal").style.display = "block";
-});
-
-// Add this script at the end of your body tag
-// document.addEventListener('DOMContentLoaded', function() {
-//     const accountBtn = document.querySelector('.nav-account .nav-btn');
-//     const terminalContainer = document.querySelector('.terminal-container');
     
-//     accountBtn.addEventListener('click', function() {
-//         // Toggle the display of terminal container
-//         if (terminalContainer.style.display === 'none' || !terminalContainer.style.display) {
-//             terminalContainer.style.display = 'block';
-//             mainApp.style.display = 'none';
-//         } else {
-//             terminalContainer.style.display = 'none';
-//         }
-//     });
-// });
-//     // Get all form values
 
-document.addEventListener("DOMContentLoaded", () => {
-    const terminalOutput = document.getElementById("terminalOutput");
+    <!-- Login Section -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> Login </h2>
+            </div>
+            <form id="getKeyForm">
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email:
+                    </label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">
+                        <i class="fas fa-lock"></i> Password:
+                    </label>
+                    <input type="password" id="password" required>
+                </div>
 
-    // Function to fetch logs
-    async function fetchLogs() {
-        try {
-            const response = await fetch(`${SERVER_URL}/logs`); // Ensure SERVER_URL matches your backend
-            const data = await response.json();
-            if (data.success) {
-                terminalOutput.innerHTML = data.logs.map(log => `<p>${log}</p>`).join('');
-                terminalOutput.scrollTop = terminalOutput.scrollHeight; // Auto-scroll to the bottom
-            } else {
-                console.error("Error fetching logs:", data.message);
-            }
-        } catch (error) {
-            console.error("Error fetching logs:", error);
-        }
-    }
+                <button type="submit" class="submit-btn" id="getLoginButton">
+                    <i class="fas fa-paper-plane"></i> Login
+                </button>
+                <button type="button" class="submit-btn" id="getKeyButton">
+                    <i class="fas fa-key"></i> Sign Up
+                </button>
+            </form>
+        </div>
+    </div>
 
-    // Fetch logs periodically
-    setInterval(fetchLogs, 2000); // Adjust interval as needed
-});
+    <!-- Verification Section (if needed in future) -->
+    <div id="verificationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2> Verification </h2>
+            </div>
+            <form id="verificationForm">
+                <div class="form-group">
+                    <label for="verificationCode">
+                        <i class="fas fa-key"></i> Enter Verification Code:
+                    </label>
+                    <input type="text" id="verificationCode" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Verify
+                </button>
+            </form>
+        </div>
+    </div>
+    
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <p>LinkedIn Job Search Assistant helps automate your job application process while respecting LinkedIn's guidelines and limits.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="privacy.html" id="privacyLink">Privacy Policy</a></li>
+                        <li><a href="terms.html" id="termsLink">Terms of Use</a></li>
+                        <li><a href="#" id="supportLink">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> harshrjto@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LinkedIn Job Search Assistant. All rights reserved.</p>
+            </div>
+        </footer>
+        
+    <div id="customAlert" class="custom-alert">
+        <div class="custom-alert-content">
+        <span id="customAlertMessage"></span>
+        <button id="customAlertButton">OK</button>
+        </div>
+    </div>
+    <div class="server-status">
+        <div class="status-indicator">
+            <span class="status-dot"></span>
+            <span class="status-text">Checking server status...</span>
+        </div>
+    </div>
+
+    <!-- Terminal Output   -->
 
 
+
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script src="script.js"></script>
+    </body>
+    </html>
