@@ -136,7 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Get references to all sections and nav buttons
     const sections = {
         mainApp: document.getElementById("mainApp"),
-        helpSection: document.querySelector(".info-section")
+        helpSection: document.querySelector(".info-section"),
+        terminalContainer: document.querySelector(".terminal-container"),
     };
     
     const navButtons = document.querySelectorAll(".nav-btn");
@@ -245,25 +246,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Rest of your existing event listeners...
 });
 
-document.addEventListener('DOMContentLoaded', function() {
-    const tabs = document.querySelectorAll('.tab-btn');
-    const contents = document.querySelectorAll('.tab-content');
+document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
 
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active class from all tabs and contents
-            tabs.forEach(t => t.classList.remove('active'));
-            contents.forEach(c => c.classList.remove('active'));
+    // Function to activate a specific tab
+    function activateTab(tabId) {
+        tabs.forEach((tab) => {
+            tab.classList.toggle("active", tab.getAttribute("data-tab") === tabId);
+        });
 
-            // Add active class to clicked tab
-            tab.classList.add('active');
+        tabContents.forEach((content) => {
+            content.style.display = content.id === tabId ? "block" : "none";
+        });
+    }
 
-            // Show corresponding content
-            const contentId = tab.getAttribute('data-tab');
-            document.getElementById(contentId).classList.add('active');
+    // Add event listeners to tabs
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+            const tabId = tab.getAttribute("data-tab");
+            activateTab(tabId);
         });
     });
+
+    // Open the "How to Use" tab by default
+    activateTab("usage");
 });
+
+
 let tempEmail = ''; // Temporary storage for email
 let tempPassword = ''; // Temporary storage for password
 let tempCode = ''; // Temporary storage for verification code
@@ -527,15 +537,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-
-
-// Close the modal when clicking outside the modal content  
-// window.addEventListener('click', (event) => {  
-//     if (event.target === loginModal) {  
-//         loginModal.style.display = 'none';  
-//     }  
-// });   
-
 // Show the login modal initially
 document.addEventListener('DOMContentLoaded', () => {
     const loginModal = document.getElementById('signUpModal');  
@@ -547,8 +548,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Display the login modal
     loginModal.style.display = 'block';
 });
-// Step 1: Sign Up - Request API Key
- // Temporary storage for verification code
 
 // Step 1: Sign Up - Request API Key
 document.getElementById('requestKeyForm').addEventListener('submit', async (event) => {
@@ -750,136 +749,44 @@ document.getElementById('toLoginButton').addEventListener('click', function () {
     document.getElementById("loginModal").style.display = "block";
 });
 
-//     event.preventDefault();
-
+// Add this script at the end of your body tag
+// document.addEventListener('DOMContentLoaded', function() {
+//     const accountBtn = document.querySelector('.nav-account .nav-btn');
+//     const terminalContainer = document.querySelector('.terminal-container');
+    
+//     accountBtn.addEventListener('click', function() {
+//         // Toggle the display of terminal container
+//         if (terminalContainer.style.display === 'none' || !terminalContainer.style.display) {
+//             terminalContainer.style.display = 'block';
+//             mainApp.style.display = 'none';
+//         } else {
+//             terminalContainer.style.display = 'none';
+//         }
+//     });
+// });
 //     // Get all form values
-//     const email = document.getElementById('email').value;
-//     const password = document.getElementById('password').value;
-//     const validationCode = document.getElementById('validationCode').value;
 
-//     // Validate inputs
-//     if (!email || !password || !validationCode) {
-//         showCustomAlert('Please fill in all fields and select a key file.');
-//         return;
-//     }
+document.addEventListener("DOMContentLoaded", () => {
+    const terminalOutput = document.getElementById("terminalOutput");
 
-//     try {
-//         const response = await fetch(`${SERVER_URL}/save-credentials`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ email, password, validationCode })
-//         });
+    // Function to fetch logs
+    async function fetchLogs() {
+        try {
+            const response = await fetch(`${SERVER_URL}/logs`); // Ensure SERVER_URL matches your backend
+            const data = await response.json();
+            if (data.success) {
+                terminalOutput.innerHTML = data.logs.map(log => `<p>${log}</p>`).join('');
+                terminalOutput.scrollTop = terminalOutput.scrollHeight; // Auto-scroll to the bottom
+            } else {
+                console.error("Error fetching logs:", data.message);
+            }
+        } catch (error) {
+            console.error("Error fetching logs:", error);
+        }
+    }
 
-//         const data = await response.json();
-
-//         if (data.success) {
-//             console.log('Data Updated/Saved Successfully');
-
-//             // Hide the login modal
-//             document.getElementById('loginModal').style.display = 'none';
-
-//             // Show the main app
-//             const appContainer = document.getElementById('mainApp'); // Replace 'mainApp' with your main app container's ID
-//             appContainer.style.display = 'block';
-//             signUpModal.style.display = 'none';
+    // Fetch logs periodically
+    setInterval(fetchLogs, 2000); // Adjust interval as needed
+});
 
 
-//             // Update login status button
-//         } else {
-//             showCustomAlert(`Error: ${data.message}`);
-//         }
-//     } catch (error) {
-//         console.error('Error saving credentials:', error);
-//         showCustomAlert('An error occurred while saving credentials.');
-//     }
-// });
-
-
-//     // Add this to your existing script.js
-
-// const signUpModal = document.getElementById('signUpModal');  
-// const passwordMismatch = document.getElementById('passwordMismatch');  
-
-      
-//     // Show the modal when the Request Key button is clicked  
-// getKeyButton.addEventListener('click', () => {  
-//     signUpModal.style.display = 'block';  
-// });  
-// document.getElementById('getKeyButton').addEventListener('click', function() {
-//     document.getElementById('loginModal').style.display = 'none';
-//     document.getElementById('signUpModal').style.display = 'block';
-// });
-// document.getElementById("toLoginButton").addEventListener("click", function () {
-//     // Hide the sign-up modal
-//     document.getElementById("signUpModal").style.display = "none";
-//     // Show the login modal
-//     document.getElementById("loginModal").style.display = "block";
-// });
-
-// document.getElementById('confirmPassword').addEventListener('input', function() {  
-//     const password = document.getElementById('requestPassword').value;  
-//     const confirmPass = this.value;  
-        
-//     if (password !== confirmPass) {  
-//         passwordMismatch.style.display = 'block';  
-//     } else {  
-//         passwordMismatch.style.display = 'none';  
-//     }  
-// }); 
-
-
-      
-// document.getElementById('requestKeyForm').addEventListener('submit', async (event) => {
-//     event.preventDefault();
-
-//     const submitButton = event.target.querySelector('button[type="submit"]');
-//     const originalButtonText = submitButton.innerHTML;
-
-//     // Disable button and show loading state
-//     submitButton.disabled = true;
-//     submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-
-//     const email = document.getElementById('requestEmail').value;
-//     const password = document.getElementById('requestPassword').value;
-//     const confirmPass = document.getElementById('confirmPassword').value;
-
-//     // Check if passwords match
-//     if (password !== confirmPass) {
-//         passwordMismatch.style.display = 'block';
-//         submitButton.disabled = false;
-//         submitButton.innerHTML = originalButtonText;
-//         return;
-//     }
-
-//     try {
-//         const response = await fetch(`${SERVER_URL}/request-api-key`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify({ email, password })
-//         });
-
-//         const data = await response.json();
-
-//         if (data.success) {
-//             showCustomAlert('Account created successfully! You will receive your API key via email.');
-//         } else {
-//             showCustomAlert(`Error: ${data.message}`);
-//         }
-//     } catch (error) {
-//         console.error('Error requesting API key:', error);
-//         showCustomAlert('An error occurred while creating the account.');
-//     } finally {
-//         // Reset button state
-//         submitButton.disabled = false;
-//         submitButton.innerHTML = originalButtonText;
-
-//         // Clear form and close modal
-//         document.getElementById('requestKeyForm').reset();
-//         signUpModal.style.display = 'none';
-//         passwordMismatch.style.display = 'none';
-//     }
-// });
