@@ -19,13 +19,20 @@
             <button class="nav-btn" data-view="helpSection">
                 <i class="fas fa-question-circle"></i> Help
             </button>
-        </div>
-        <div class="nav-account">
-            <button class="nav-btn">
-                <i class="fas fa-user-circle"></i>
+            <button class="nav-btn" data-view="terminalContainer">
+                <i class="fas fa-user-circle"></i> Terminal
+
             </button>
+        </button>
         </div>
+
     </nav>
+    <div class="terminal-container" style="display: none;">  
+        <h2><i class="fas fa-terminal"></i> Console Logs</h2>  
+        <div id="terminalOutput" class="terminal-output">  
+            <p>System ready...</p>  
+        </div>  
+    </div>   
         <div id="mainApp" style="display: none;">
             <div class="landing-page">
                 <div class="logo">
@@ -209,7 +216,7 @@
             
             <div class="tabs-container">
                 <div class="tabs">
-                    <button class="tab-btn" data-tab="usage">
+                    <button class="tab-btn active" data-tab="usage">
                         <i class="fas fa-book"></i>
                         How to Use
                     </button>
@@ -355,7 +362,7 @@
     <div id="signUpModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2> Sign Up </h2>
+                <h2> Sign Up for Trial </h2>
             </div>
             <form id="requestKeyForm">
                 <div class="form-group">
@@ -390,6 +397,8 @@
             </form>
         </div>
     </div>
+
+    
 
     <!-- Login Section -->
     <div id="loginModal" class="modal">
@@ -441,6 +450,7 @@
         </div>
     </div>
     
+
         <footer class="site-footer">
             <div class="footer-content">
                 <div class="footer-section">
@@ -482,6 +492,9 @@
             <span class="status-text">Checking server status...</span>
         </div>
     </div>
+
+    <!-- Terminal Output   -->
+
 
 
 
