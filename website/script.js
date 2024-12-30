@@ -18,7 +18,7 @@ async function fetchData(userEmail) {
         if (user) {
           const { jobsAppliedDaily, jobsAppliedMonthly } = user;
   
-          console.log(`User: ${userEmail}`);
+          console.log(`User fuck: ${userEmail}`);
           console.log(`Jobs Applied Daily: ${jobsAppliedDaily}`);
           console.log(`Jobs Applied Monthly: ${jobsAppliedMonthly}`);
   
