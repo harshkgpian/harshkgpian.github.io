@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,125 +6,8 @@
     <title>LinkedIn Job Search Assistant - Automated Job Applications</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="nav-logo">
-            <i class="fab fa-linkedin"></i>
-            <span>Job Assistant</span>
-        </div>
-        <div class="nav-links">
-            <a href="#home" class="nav-item active">Home</a>
-            <a href="#features" class="nav-item">Features</a>
-            <a href="#pricing" class="nav-item">Pricing</a>
-            <a href="try-now.html" class="nav-item">Try Now</a>
-        </div>
-    </nav>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Automate Your LinkedIn Job Search</h1>
-            <p>Apply to hundreds of jobs automatically while you focus on what matters</p>
-            
-            <div class="key-benefits">
-                <div class="benefit">
-                    <i class="fas fa-shield-alt"></i>
-                    <p>100% Private & Secure - Everything Runs Locally On Your Device</p>
-                </div>
-                <div class="benefit">
-                    <i class="fas fa-piggy-bank"></i>
-                    <p>25x More Affordable Than Alternatives</p>
-                </div>
-            </div>
-            
-            <a href="try-now.html" class="cta-button">Try Now</a>
-            <p class="trust-text">Join thousands of job seekers who've automated their way to success</p>
-        </div>
-    </section>
-
-    <section id="features" class="features">
-        <h2>Key Features</h2>
-        <div class="feature-grid">
-            <!-- Feature Card 1 -->
-            <div class="feature-card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>100% Local & Secure</h3>
-                <p>Runs entirely on your computer. No data sent to external servers.</p>
-            </div>
-    
-            <!-- Feature Card 2 -->
-            <div class="feature-card">
-                <i class="fas fa-bolt"></i>
-                <h3>Lightning Fast</h3>
-                <p>Apply to 40 jobs daily with just a few clicks.</p>
-            </div>
-    
-            <!-- Feature Card 3 -->
-            <div class="feature-card">
-                <i class="fas fa-clock"></i>
-                <h3>Simple Setup</h3>
-                <p>Just add your resume PDF - no account needed.</p>
-            </div>
-    
-            <!-- Feature Card 4 -->
-            <div class="feature-card">
-                <i class="fas fa-brain"></i>
-                <h3>AI-Powered Responses</h3>
-                <p>AI analyzes your resume and job descriptions to generate personalized, optimized responses.</p>
-            </div>
-    
-            <!-- Feature Card 5 -->
-            <div class="feature-card">
-                <i class="fas fa-indian-rupee-sign"></i>
-                <h3>Affordable</h3>
-                <p>Only ₹2 per application - 20x cheaper than competitors!</p>
-            </div>
-    
-            <!-- Feature Card 6 -->
-            <div class="feature-card">
-                <i class="fas fa-users"></i>
-                <h3>Trusted by Many</h3>
-                <p>Join thousands of users who have already streamlined their job applications.</p>
-            </div>
-        </div>
-    </section>
-    
-    
-    
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing Sections</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #0a66c2;
-            --secondary-color: #004182;
-            --background-color: #f3f2ef;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-            --gradient-start: #1e3a8a;
-            --gradient-middle: #2563eb;
-            --gradient-end: #3b82f6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
-            color: var(--text-color);
-            line-height: 1.6;
-            min-height: 100vh;
-            padding: 2rem;
-        }
-
+        /* Add the pricing-specific styles */
         .pricing {
             max-width: 1200px;
             margin: 0 auto;
@@ -231,34 +113,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
         }
 
         .payment-button:hover {
             background: var(--secondary-color);
-        }
-
-        .guarantee {
-            text-align: center;
-            padding: 2rem;
-            background: white;
-            border-radius: 16px;
-            margin-top: 40px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .guarantee i {
-            font-size: 2em;
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .guarantee h3 {
-            color: var(--text-color);
-            margin-bottom: 10px;
-        }
-
-        .guarantee p {
-            color: #4b5563;
         }
 
         @media (max-width: 768px) {
@@ -278,64 +139,134 @@
     </style>
 </head>
 <body>
-<section id="pricing" class="pricing">
-    <h2>Choose Your Package</h2>
-    <div class="pricing-cards">
-        <!-- Basic Package -->
-        <div class="pricing-card">
-            <div class="plan-name">Basic Package</div>
-            <div class="price">₹600 <small>/one-time</small></div>
-            <div class="feature-header">Package Includes:</div>
-            <ul class="features-list">
-                <li><i class="fas fa-check"></i>200 Job Applications</li>
-                <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
-                <li><i class="fas fa-check"></i>Custom Answer Templates</li>
-                <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
-                <li><i class="fas fa-check"></i>100% Local & Secure</li>
-            </ul>
-            <a href="https://jobassistant-ai-main.onrender.com/buy.html" class="payment-button">Pay ₹600</a>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fab fa-linkedin"></i>
+            <span>Job Assistant</span>
         </div>
-
-        <!-- Standard Package -->
-        <div class="pricing-card popular">
-            <div class="popular-badge">BEST VALUE</div>
-            <div class="plan-name">Standard Package</div>
-            <div class="price">₹1250 <small>/one-time</small></div>
-            <div class="feature-header">Package Includes:</div>
-            <ul class="features-list">
-                <li><i class="fas fa-check"></i>500 Job Applications</li>
-                <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
-                <li><i class="fas fa-check"></i>Custom Answer Templates</li>
-                <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
-                <li><i class="fas fa-check"></i>Priority Support</li>
-            </ul>
-            <a href="https://jobassistant-ai-main.onrender.com/buy.html" class="payment-button">Pay ₹1250</a>
+        <div class="nav-links">
+            <a href="#home" class="nav-item active">Home</a>
+            <a href="#features" class="nav-item">Features</a>
+            <a href="#pricing" class="nav-item">Pricing</a>
+            <a href="try-now.html" class="nav-item">Try Now</a>
         </div>
+    </nav>
 
-        <!-- Premium Package -->
-        <div class="pricing-card">
-            <div class="plan-name">Premium Package</div>
-            <div class="price">₹2000 <small>/one-time</small></div>
-            <div class="feature-header">Package Includes:</div>
-            <ul class="features-list">
-                <li><i class="fas fa-check"></i>1000 Job Applications</li>
-                <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
-                <li><i class="fas fa-check"></i>Custom Answer Templates</li>
-                <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
-                <li><i class="fas fa-check"></i>Premium Priority Support</li>
-            </ul>
-            <a href="https://jobassistant-ai-main.onrender.com/buy.html" class="payment-button">Pay ₹2000</a>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Automate Your LinkedIn Job Search</h1>
+            <p>Apply to hundreds of jobs automatically while you focus on what matters</p>
+            
+            <div class="key-benefits">
+                <div class="benefit">
+                    <i class="fas fa-shield-alt"></i>
+                    <p>100% Private & Secure - Everything Runs Locally On Your Device</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-piggy-bank"></i>
+                    <p>25x More Affordable Than Alternatives</p>
+                </div>
+            </div>
+            
+            <a href="try-now.html" class="cta-button">Try Now</a>
+            <p class="trust-text">Join thousands of job seekers who've automated their way to success</p>
         </div>
-    </div>
+    </section>
 
-</section>
-</body>
-</html>
+    <section id="features" class="features">
+        <h2>Key Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>100% Local & Secure</h3>
+                <p>Runs entirely on your computer. No data sent to external servers.</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Lightning Fast</h3>
+                <p>Apply to 40 jobs daily with just a few clicks.</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fas fa-clock"></i>
+                <h3>Simple Setup</h3>
+                <p>Just add your resume PDF - no account needed.</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fas fa-brain"></i>
+                <h3>AI-Powered Responses</h3>
+                <p>AI analyzes your resume and job descriptions to generate personalized, optimized responses.</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fas fa-indian-rupee-sign"></i>
+                <h3>Affordable</h3>
+                <p>Only ₹2 per application - 20x cheaper than competitors!</p>
+            </div>
+    
+            <div class="feature-card">
+                <i class="fas fa-users"></i>
+                <h3>Trusted by Many</h3>
+                <p>Join thousands of users who have already streamlined their job applications.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="pricing" class="pricing">
+        <h2>Choose Your Package</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card">
+                <div class="plan-name">Basic Package</div>
+                <div class="price">₹600 <small>/one-time</small></div>
+                <div class="feature-header">Package Includes:</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i>200 Job Applications</li>
+                    <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
+                    <li><i class="fas fa-check"></i>Custom Answer Templates</li>
+                    <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
+                    <li><i class="fas fa-check"></i>100% Local & Secure</li>
+                </ul>
+                <a href="https://jobassistant-ai-main.onrender.com/buy.html" class="payment-button">Pay ₹600</a>
+            </div>
+
+            <div class="pricing-card popular">
+                <div class="popular-badge">BEST VALUE</div>
+                <div class="plan-name">Standard Package</div>
+                <div class="price">₹1250 <small>/one-time</small></div>
+                <div class="feature-header">Package Includes:</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i>500 Job Applications</li>
+                    <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
+                    <li><i class="fas fa-check"></i>Custom Answer Templates</li>
+                    <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
+                    <li><i class="fas fa-check"></i>Priority Support</li>
+                </ul>
+                <a href="https://jobassistant-ai-main.onrender.com/buy.html" class="payment-button">Pay ₹1250</a>
+            </div>
+
+            <div class="pricing-card">
+                <div class="plan-name">Premium Package</div>
+                <div class="price">₹2000 <small>/one-time</small></div>
+                <div class="feature-header">Package Includes:</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i>1000 Job Applications</li>
+                    <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
+                    <li><i class="fas fa-check"></i>Custom Answer Templates</li>
+                    <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
+                    <li><i class="fas fa-check"></i>Premium Priority Support</li>
+                </ul>
+                <a href="https://jobassistant-ai-main.onrender.com/buy.html" class="payment-button">Pay ₹2000</a>
+            </div>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-content">
             <div class="footer-section">
                 <h4>Contact</h4>
-                <p>Email: harshrjto@gmail.com</p>
+                <p>Email: help.jobassistant@gmail.com</p>
             </div>
             <div class="footer-section">
                 <h4>Legal</h4>
