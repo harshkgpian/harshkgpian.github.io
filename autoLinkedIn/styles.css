@@ -1,58 +1,50 @@
-/* Reset and Base Styles */
+:root {
+    --primary-color: #0a66c2;
+    --secondary-color: #004182;
+    --background-color: #f3f2ef;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --gradient-start: #1e3a8a;
+    --gradient-middle: #2563eb;
+    --gradient-end: #3b82f6;
+}
+
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-}
-
-:root {
-    --primary-color: #2563eb;
-    --secondary-color: #3b82f6;
-    --accent-color: #004182;
-    --text-color: #333;
-    --light-gray: #f3f2ef;
-    --success-green: #057642;
-    --white: #ffffff;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-html {
-    scroll-behavior: smooth;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 body {
-    line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--light-gray);
+    line-height: 1.6;
+    padding-top: 70px; /* Added to prevent navbar overlap */
 }
 
 /* Navbar Styles */
 .navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: var(--white);
+    background: white;
     padding: 1rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: var(--shadow);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
     z-index: 1000;
-    height: 4rem; /* Define navbar height */
+    height: 70px; /* Fixed height for navbar */
 }
 
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 10px;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: bold;
     color: var(--primary-color);
-}
-
-.nav-logo i {
-    font-size: 1.8rem;
 }
 
 .nav-links {
@@ -65,102 +57,155 @@ body {
     color: var(--text-color);
     font-weight: 500;
     padding: 0.5rem 1rem;
-    border-radius: 4px;
+    border-radius: 8px;
     transition: all 0.3s ease;
 }
 
 .nav-item:hover, .nav-item.active {
     color: var(--primary-color);
-    background-color: rgba(0, 119, 181, 0.1);
+    background: rgba(10, 102, 194, 0.1);
 }
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
+    min-height: calc(100vh - 70px);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding-top: calc(5rem + 4rem); /* Account for navbar height + existing top padding */
+    padding: 80px 5%;
+    color: white;
 }
 
 .hero-content {
-    color: var(--white);
     max-width: 800px;
-    animation: fadeIn 1s ease-out;
 }
 
-.hero-content h1 {
+.hero h1 {
     font-size: 3.5rem;
     margin-bottom: 1.5rem;
+    color: white;
     line-height: 1.2;
 }
 
-.hero-content p {
+.hero p {
     font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
-    opacity: 0.9;
 }
 
 .key-benefits {
     display: flex;
     justify-content: center;
     gap: 2rem;
-    margin: 2.5rem 0;
-    flex-wrap: wrap;
+    margin: 2rem 0;
 }
 
 .benefit {
-    flex: 1;
-    min-width: 250px;
-    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
     border-radius: 12px;
-    backdrop-filter: blur(5px);
-    transition: transform 0.3s ease;
-}
-
-.benefit:hover {
-    transform: translateY(-5px);
+    width: 300px; /* Fixed width for both cards */
+    min-height: 80px; /* Fixed minimum height */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .benefit i {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+    color: white;
+    font-size: 1.5rem;
 }
 
-.pricing {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--accent-color, #FFD700);
-    margin-top: 0.5rem;
+.benefit p {
+    color: white;
+    margin: 0;
+    font-size: 1rem;
 }
 
+/* CTA Button */
 .cta-button {
     display: inline-block;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    background: var(--accent-color, #FFD700);
-    color: var(--dark-color, #ffffff);
-    border-radius: 50px;
+    padding: 1rem 2.5rem;
+    background: white;
+    color: var(--gradient-middle);
     text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin: 1rem 0;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    margin: 2rem 0;
 }
 
 .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.trust-text {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-top: 1rem;
+/* Features Section */
+.features {
+    padding: 80px 5%;
+    background: white;
 }
 
+.features h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-middle));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card i {
+    font-size: 2rem;
+    color: var(--gradient-middle);
+    margin-bottom: 1rem;
+}
+
+/* Rest of your existing CSS remains the same */
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+
+    .key-benefits {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .benefit {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -172,186 +217,14 @@ body {
     }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-
-    .key-benefits {
-        gap: 1rem;
-    }
-
-    .benefit {
-        min-width: 200px;
-        padding: 1rem;
-    }
-}
-/* Features Section */
-
-.features {
-    /* padding: 5rem 5% 5rem 5%; Add padding on all sides */
-    /* padding-top: calc(5rem + 2rem); Account for navbar height + existing top padding */
-    background: var(--white);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 100vh; /* Ensure it takes up the full screen height */
+.hero-content, .feature-card {
+    animation: fadeIn 0.8s ease-out forwards;
 }
 
-
-.features h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-    color: var(--accent-color);
-}
-
-
-.feature-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.feature-card {
-    padding: 2rem;
-    text-align: center;
-    background: var(--white);
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.feature-card i {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    margin-bottom: 1rem;
-    color: var(--accent-color);
-}
-
-
-
-
-
-/* Pricing Section Styles */
-.pricing {
-    padding: 4rem 2rem;
-    background-color: #f8f9fa;
-    min-height: 100vh; /* Ensure it takes up the full screen height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Vertically centers the content */
-    align-items: center; /* Horizontally centers the content */
-}
-
-.pricing-cards {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    margin-top: 2rem;
-}
-
-.pricing-card {
-    background: white;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    position: relative;
-    transition: transform 0.3s ease;
-    max-height: 450px; /* Ensures the card doesn't stretch too much */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Evenly space content */
-
-}
-
-.pricing-card:hover {
-    transform: translateY(-5px);
-}
-
-.pricing-card.popular {
-    border: 2px solid #004182;
-}
-
-.popular-badge {
-    position: absolute;
-    top: -12px;
-    right: 20px;
-    background: #004182;
-    color: white;
-    padding: 5px 15px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-}
-
-.price {
-    text-align: center;
-    margin: 1rem 0;
-}
-
-.amount {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #004182;
-}
-
-.applications {
-    display: block;
-    color: #666;
-    font-size: 0.85rem;
-}
-
-.features-list {
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-.features-list li {
-    margin: 0.6rem 0;
-    color: #444;
-}
-
-.features-list i {
-    color: #0077b5;
-    margin-right: 8px;
-}
-
-.payment-button {
-    width: 100%;
-    padding: 0.8rem;
-    background: #004182;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: background 0.3s ease;
-    padding: 2rem;
-}
-
-.payment-button:hover {
-    background: #3b82f6;
-}
-
-
-/* Footer */
+/* Footer Styles */
 footer {
-    background: #1e6deb;
-    color: var(--white);
+    background: #2d2d2d;
+    color: white;
     padding: 3rem 5% 1rem;
 }
 
@@ -365,147 +238,52 @@ footer {
 
 .footer-section h4 {
     margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .footer-section a {
-    color: var(--white);
+    color: #ffffff80;
     text-decoration: none;
     display: block;
     margin-bottom: 0.5rem;
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 .footer-section a:hover {
-    opacity: 1;
+    color: white;
 }
 
 .footer-bottom {
     margin-top: 2rem;
     padding-top: 1rem;
+    border-top: 1px solid #ffffff20;
     text-align: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff80;
 }
-
-/* Modal Styles */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-.modal-content {
-    background: white;
-    width: 90%;
-    max-width: 500px;
-    margin: 50px auto;
-    padding: 2rem;
-    border-radius: 10px;
-    position: relative;
-}
-
-.close {
-    position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.payment-methods {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.payment-method {
-    flex: 1;
-    padding: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background: white;
-    cursor: pointer;
-}
-
-.payment-method.active {
-    background: #0077b5;
-    color: white;
-    border-color: #0077b5;
-}
-
-.upi-section, .card-section {
-    text-align: center;
-}
-
-.qr-code img {
-    max-width: 200px;
-    margin: 1rem auto;
-}
-
-.upi-id {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-
-.copy-upi {
-    padding: 0.5rem 1rem;
-    background: #f0f0f0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-#cardPaymentForm {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-#cardPaymentForm input {
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.card-details {
-    display: flex;
-    gap: 1rem;
-}
-
-.pay-button {
-    padding: 1rem;
-    background: #3b82f6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-}
-
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 1rem;
+    }
+
     .nav-links {
         display: none;
     }
-    
+
     .hero h1 {
         font-size: 2.5rem;
     }
-    
-    .feature-grid {
-        grid-template-columns: 1fr;
+
+    .key-benefits {
+        flex-direction: column;
     }
-    
-    .comparison {
+
+    .benefit {
+        width: 100%;
+    }
+
+    .feature-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -522,6 +300,68 @@ footer {
     }
 }
 
-.feature-card, .us, .competitors, .download-card {
-    animation: fadeIn 0.5s ease-out forwards;
+.hero-content, .feature-card {
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Login Button Style */
+.login-button {
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle));
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-button i {
+    font-size: 1rem;
+}
+
+.login-button:hover {
+    background: linear-gradient(135deg, var(--gradient-middle), var(--gradient-start));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Update the existing media query for responsive design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: flex;
+        gap: 1rem;
+        overflow-x: auto;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+    }
+
+    .login-button {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 480px) {
+    .nav-links {
+        gap: 0.5rem;
+    }
+    
+    .nav-item {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .login-button {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .login-button i {
+        margin-right: 4px;
+    }
 }
