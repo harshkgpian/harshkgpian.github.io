@@ -92,43 +92,251 @@
     
     
     
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Sections</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a66c2;
+            --secondary-color: #004182;
+            --background-color: #f3f2ef;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --gradient-start: #1e3a8a;
+            --gradient-middle: #2563eb;
+            --gradient-end: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle), var(--gradient-end));
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .pricing {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            width: 320px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .plan-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .price {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .price small {
+            font-size: 0.5em;
+            color: #666;
+        }
+
+        .feature-header {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+
+        .features-list li {
+            margin-bottom: 10px;
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-list i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        .payment-button {
+            width: 100%;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .payment-button:hover {
+            background: var(--secondary-color);
+        }
+
+        .guarantee {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            margin-top: 40px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .guarantee i {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .guarantee h3 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+        }
+
+        .guarantee p {
+            color: #4b5563;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-card {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            .pricing {
+                padding: 20px 15px;
+            }
+
+            .pricing h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
     <section id="pricing" class="pricing">
         <h2>Choose Your Package</h2>
         <div class="pricing-cards">
-            <!-- <div class="pricing-card">
-                <h3>Basic Plan</h3>
-                <div class="price">
-                    <span class="amount">₹3/job</span>
-                    <span class="applications">Up to 500 jobs/month</span>
-                </div>
+            <!-- Basic Package -->
+            <div class="pricing-card">
+                <div class="plan-name">Basic Package</div>
+                <div class="price">₹600 <small>/one-time</small></div>
+                <div class="feature-header">Package Includes:</div>
                 <ul class="features-list">
-                    <li><i class="fas fa-check"></i> Apply to 500 jobs monthly</li>
-                    <li><i class="fas fa-check"></i> Total cost: ₹1,500/month</li>
-                    <li><i class="fas fa-check"></i> Email support</li>
-                    <li><i class="fas fa-check"></i> 100% Local & Secure</li>
+                    <li><i class="fas fa-check"></i>200 Job Applications</li>
+                    <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
+                    <li><i class="fas fa-check"></i>Custom Answer Templates</li>
+                    <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
+                    <li><i class="fas fa-check"></i>100% Local & Secure</li>
                 </ul>
-                <button class="payment-button" data-package="basic">Pay ₹1,500</button>
-            </div> -->
-            
+                <button class="payment-button" onclick="window.location.href='https://jobassistant-ai-main.onrender.com/buy.html'">Pay ₹600</button>
+            </div>
+
+            <!-- Standard Package -->
             <div class="pricing-card popular">
-                <div class="popular-badge">Best Value</div>
-                <h3>Premium Plan</h3>
-                <div class="price">
-                    <span class="amount">₹2/job</span>
-                    <span class="applications">Up to 1000 jobs/month</span>
-                </div>
+                <div class="popular-badge">BEST VALUE</div>
+                <div class="plan-name">Standard Package</div>
+                <div class="price">₹1250 <small>/one-time</small></div>
+                <div class="feature-header">Package Includes:</div>
                 <ul class="features-list">
-                    <li><i class="fas fa-check"></i> Apply to 1000 jobs monthly</li>
-                    <li><i class="fas fa-check"></i> Total cost: ₹2,000/month</li>
-                    <li><i class="fas fa-check"></i> Priority support</li>
-                    <li><i class="fas fa-check"></i> 100% Local & Secure</li>
-                    <li><i class="fas fa-check"></i> 33% cost savings per job</li>
+                    <li><i class="fas fa-check"></i>500 Job Applications</li>
+                    <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
+                    <li><i class="fas fa-check"></i>Custom Answer Templates</li>
+                    <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
+                    <li><i class="fas fa-check"></i>Priority Support</li>
                 </ul>
-                <button class="payment-button" data-package="premium">Pay ₹2,000</button>
+                <button class="payment-button" onclick="window.location.href='https://jobassistant-ai-main.onrender.com/buy.html'">Pay ₹1250</button>
+            </div>
+
+            <!-- Premium Package -->
+            <div class="pricing-card">
+                <div class="plan-name">Premium Package</div>
+                <div class="price">₹2000 <small>/one-time</small></div>
+                <div class="feature-header">Package Includes:</div>
+                <ul class="features-list">
+                    <li><i class="fas fa-check"></i>1000 Job Applications</li>
+                    <li><i class="fas fa-check"></i>Resume-based Auto Applications</li>
+                    <li><i class="fas fa-check"></i>Custom Answer Templates</li>
+                    <li><i class="fas fa-check"></i>LinkedIn Easy Apply Support</li>
+                    <li><i class="fas fa-check"></i>Premium Priority Support</li>
+                </ul>
+                <button class="payment-button" onclick="window.location.href='https://jobassistant-ai-main.onrender.com/buy.html'">Pay ₹2000</button>
             </div>
         </div>
-    </section>
 
+        <!-- Guarantee Section -->
+        <div class="guarantee">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Secure Local Processing</h3>
+            <p>All automation runs locally on your computer. Your data never leaves your system.</p>
+        </div>
+    </section>
+</body>
+</html>
     <footer>
         <div class="footer-content">
             <div class="footer-section">
