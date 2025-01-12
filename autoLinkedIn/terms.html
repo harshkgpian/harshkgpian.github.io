@@ -3,90 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - LinkedIn Job Search Assistant</title>
+    <title>Terms of Service - Job Search Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            color: #333;
+        .terms-container {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 0 20px;
         }
-        
-        h1, h2 {
-            color: #0077b5;
+
+        .terms-header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary-color);
         }
-        
+
         .section {
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: #f9f9f9;
-            border-radius: 5px;
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
-        
+
+        .section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .section p {
+            color: #4b5563;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
         .important {
             background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 1rem;
-            margin: 1rem 0;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
         }
-        
-        .contact-info {
-            background: #0077b5;
+
+        .important h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .section ul {
+            color: #4b5563;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .section ul li {
+            margin-bottom: 10px;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-middle));
             color: white;
-            padding: 1rem;
-            border-radius: 5px;
-            margin-top: 2rem;
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 40px;
         }
-        
-        .contact-info a {
+
+        .contact-section h2 {
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        .contact-section a {
             color: white;
             text-decoration: underline;
+        }
+
+        .contact-section a:hover {
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .terms-container {
+                margin: 60px auto;
+            }
+
+            .section {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Terms of Service</h1>
-    
-    <div class="section">
-        <h2>Acceptance of Terms</h2>
-        <p>By accessing and using LinkedIn Job Search Assistant, you accept and agree to be bound by these Terms of Service.</p>
-    </div>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fab fa-linkedin"></i>
+            <span>Job Assistant</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="index.html#features" class="nav-item">Features</a>
+            <a href="index.html#pricing" class="nav-item">Pricing</a>
+            <a href="contact.html" class="nav-item">Contact</a>
+            <a href="https://jobassistant-ai-main.onrender.com/" class="login-button">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+            </a>
+        </div>
+    </nav>
 
-    <div class="section">
-        <h2>Use License</h2>
-        <p>We grant you a personal, non-transferable license to use our service in accordance with LinkedIn's terms of service and our usage guidelines.</p>
+    <div class="terms-container">
+        <h1 class="terms-header">Terms of Service</h1>
         
-        <div class="important">
-            <h3>Important Notice</h3>
-            <p>This tool is designed to assist with job applications while respecting LinkedIn's guidelines and rate limits. Any attempt to circumvent these limits or misuse the service will result in immediate account termination.</p>
+        <div class="section">
+            <h2>Acceptance of Terms</h2>
+            <p>By accessing and using LinkedIn Job Search Assistant, you accept and agree to be bound by these Terms of Service.</p>
+        </div>
+
+        <div class="section">
+            <h2>Use License</h2>
+            <p>We grant you a personal, non-transferable license to use our service in accordance with LinkedIn's terms of service and our usage guidelines.</p>
+            
+            <div class="important">
+                <h3>Important Notice</h3>
+                <p>This tool is designed to assist with job applications while respecting LinkedIn's guidelines and rate limits. Any attempt to circumvent these limits or misuse the service will result in immediate account termination.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Service Limitations</h2>
+            <ul>
+                <li>Trial accounts are limited to 5 job applications</li>
+                <li>Premium accounts are limited to 40 job applications per day as per linkedin guidelines</li>
+                <li>We reserve the right to modify or discontinue service at any time</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Account Termination</h2>
+            <p>We reserve the right to terminate accounts for:</p>
+            <ul>
+                <li>Violation of these terms</li>
+                <li>Suspicious or abusive behavior</li>
+                <li>Non-payment of premium services</li>
+            </ul>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact Us</h2>
+            <p>If you have any questions about these Terms of Service, please contact us at:</p>
+            <p><a href="mailto:help.jobassistant@gmail.com">help.jobassistant@gmail.com</a></p>
         </div>
     </div>
 
-    <div class="section">
-        <h2>Service Limitations</h2>
-        <ul>
-            <li>Trial accounts are limited to 5 job applications</li>
-            <li>Premium accounts are limited to 40 job applications per day as per linkedin guidelines</li>
-            <li>We reserve the right to modify or discontinue service at any time</li>
-        </ul>
-    </div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Customer Support</h4>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
 
-    <div class="section">
-        <h2>Account Termination</h2>
-        <p>We reserve the right to terminate accounts for:</p>
-        <ul>
-            <li>Violation of these terms</li>
-            <li>Suspicious or abusive behavior</li>
-            <li>Non-payment of premium services</li>
-        </ul>
-    </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Job Search Assistant. All rights reserved.</p>
+        </div>
+    </footer>
 
-    <div class="contact-info">
-        <h2>Contact Us</h2>
-        <p>If you have any questions about these Terms of Service, please contact us at:</p>
-        <p><a href="mailto:harshrjto@gmail.com">harshrjto@gmail.com</a></p>
-    </div>
 </body>
 </html>

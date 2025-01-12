@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - LinkedIn Job Search Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .contact-section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-method {
+            margin-bottom: 25px;
+        }
+
+        .contact-method h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-method p {
+            color: #4b5563;
+            margin: 5px 0;
+        }
+
+        .contact-method a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .contact-method a:hover {
+            text-decoration: underline;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-logo">
+            <i class="fab fa-linkedin"></i>
+            <span>Job Assistant</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-item">Home</a>
+            <a href="index.html#features" class="nav-item">Features</a>
+            <a href="index.html#pricing" class="nav-item">Pricing</a>
+            <a href="contact.html" class="nav-item active">Contact</a>
+            <a href="https://jobassistant-ai-main.onrender.com/" class="login-button">
+                <i class="fas fa-sign-in-alt"></i>
+                Login
+            </a>
+        </div>
+    </nav>
+
+    <section class="contact-section">
+        <h2 style="text-align: center; margin-bottom: 40px;">Contact Us</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-method">
+                    <h3><i class="fas fa-envelope"></i> Email Support</h3>
+                    <p>Primary Support: 
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=help.jobassistant@gmail.com&su=Support%20Request%20-%20Job%20Assistant&body=Hello%20Job%20Assistant%20Team%2C%0A%0AI%20would%20like%20to%20inquire%20about%3A%0A%0A%0ABest%20regards%2C%0A">
+                            help.jobassistant@gmail.com
+                        </a>
+                    </p>
+                    <p>Response Time: Within 24 hours</p>
+                </div>
+            
+                <div class="contact-method">
+                    <h3><i class="fas fa-clock"></i> Support Hours</h3>
+                    <p>We typically respond to all emails within 24 hours during business days.</p>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <form onsubmit="openGmail(event)">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+            
+                    <button type="submit" class="submit-button">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Customer Support</h4>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Use</a>
+
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Job Search Assistant. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function openGmail(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=help.jobassistant@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name}\nEmail: ${email}\n\n${message}`)}`;
+            
+            window.open(gmailUrl, '_blank');
+        }
+        </script>
+
+</body>
+</html>
