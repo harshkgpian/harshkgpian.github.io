@@ -1,83 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Web Payment Test</title>
-    <link rel="icon" type="image/png" href="favicon.ico">
+    <title>Job Assistant AI - Payment</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
-
 <body>
 <div class="container">
-    <h2>Web Payment Test</h2>
-    <p>This page is for testing web payment.</p>
-
+    <h2>Job Assistant AI Payment</h2>
     <div id="inputSection">
-
         <form class="form-horizontal">
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="amount">Amount:</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="number" id="amount" value="10.01">
-                </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input class="form-control" type="number" id="amount" value="10.01">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="pa">Payee VPA (pa):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="text" id="pa" value="merchant3@icici">
-                </div>
+            <div class="form-group">
+                <label for="pa">Payee VPA (pa):</label>
+                <input class="form-control" type="text" id="pa" value="harshrjto@okaxis">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="pn">Payee Name (pn):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="text" id="pn" value="test merchant">
-                </div>
+            <div class="form-group">
+                <label for="pn">Payee Name (pn):</label>
+                <input class="form-control" type="text" id="pn" value="Job Assistant AI">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="tn">Txn Note (tn):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="text" id="tn" value="test note">
-                </div>
+            <div class="form-group">
+                <label for="tn">Transaction Note:</label>
+                <input class="form-control" type="text" id="tn" value="Payment for Job Assistant AI services">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="mc">Merchant Code (mc):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="text" id="mc" value="1234">
-                </div>
+            <div class="form-group">
+                <label for="mc">Merchant Code:</label>
+                <input class="form-control" type="text" id="mc" value="7361">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="tid">Txn ID (tid):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="text" id="tid" value="">
-                </div>
+            <div class="form-group">
+                <label for="tid">Transaction ID:</label>
+                <input class="form-control" type="text" id="tid" value="BCR2DN4TX7MLD6CF">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="tr">Txn Ref ID (tr):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="text" id="tr" value="test reference id">
-                </div>
+            <div class="form-group">
+                <label for="tr">Reference ID:</label>
+                <input class="form-control" type="text" id="tr" value="JAI_PAYMENT">
             </div>
 
-            <div class="form-group row">
-                <label class="control-label col-xs-3" for="url">Ref URL (url):</label>
-                <div class="col-xs-9">
-                    <input class="form-control" type="url" id="url" value="https://teztytreats.com/demo">
-                </div>
+            <div class="form-group">
+                <label for="url">Reference URL:</label>
+                <input class="form-control" type="url" id="url" value="https://jobassistant-ai.onrender.com/">
             </div>
+
+            <button type="button" class="btn btn-primary btn-block" onclick="onBuyClicked()">Pay Now</button>
         </form>
-
-        <div class="form-group row clearfix">
-            <div class="col-xs-12">
-                <button class="btn btn-info pull-right" onclick="onBuyClicked()">Buy</button>
-            </div>
-        </div>
     </div>
 
     <div id="outputSection" style="display:none">
