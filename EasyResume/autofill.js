@@ -31,7 +31,6 @@ experience: [
             subtitle: "Senior Software Engineer", // Changed from position
             duration: "2022-Present",
             location: "Mountain View, CA",
-            description: "Leading cloud infrastructure development and team mentorship",
             bullets: [
                 "Led development of cloud-based machine learning infrastructure serving 1M+ users",
                 "Reduced system latency by 40% through innovative caching mechanisms",
@@ -45,7 +44,6 @@ experience: [
             subtitle: "Software Engineer",
             duration: "2020-2022",
             location: "Seattle, WA",
-            description: "Full-stack development for Azure cloud services",
             bullets: [
                 "Developed microservices architecture for Azure cloud services",
                 "Optimized database queries resulting in 30% performance improvement",
@@ -94,10 +92,6 @@ experience: [
                 "Implemented voice recognition with 98% accuracy using NLP",
                 "Reduced energy consumption by 30% through smart scheduling JavaScript"
             ],
-            links: [
-                "github.com/johndoe/smart-home",
-                "smart-home-demo.herokuapp.com"
-            ],
             tags: ["JavaScript", "Node.js", "MongoDB", "Raspberry Pi", "AWS IoT"]
         }
     ],
@@ -107,7 +101,6 @@ experience: [
             subtitle: "First Place Winner",
             duration: "March 2022",
             location: "Virtual Event",
-            description: "48-hour global hackathon focused on sustainability",
             bullets: [
                 "Led team of 4 developers to create an AI-powered waste sorting system",
                 "Presented solution to panel of industry experts",
@@ -138,8 +131,8 @@ function populateFromDemoJSON() {
         personal: 0,
         education: 0,
         experience: 0,
-        skills: 0,
         projects: 0,
+        skills: 0,
         competitions: 0
     };
 
@@ -195,36 +188,7 @@ function populateFromDemoJSON() {
         updateFormData(sectionId);
     });
 
-    // Populate Skills
-    demoJSON.skills.forEach(skillCategory => {
-        addSection('skills');
-        const sectionId = `skills-${sectionCounter.skills - 1}`;
-        const section = document.getElementById(sectionId);
-        
-        // Set category
-        const categoryInput = section.querySelector('input[name="category"]');
-        if (categoryInput) {
-            categoryInput.value = skillCategory.category;
-        }
 
-        // Add skills
-        const skillsContainer = section.querySelector('.skills-container');
-        skillCategory.skills.forEach((skill, index) => {
-            if (index === 0) {
-                // Use existing first skill input
-                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
-                if (firstSkillInput) {
-                    firstSkillInput.value = skill;
-                }
-            } else {
-                // Add new skill input for remaining skills
-                addSkillField(sectionId);
-                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
-                inputs[inputs.length - 1].value = skill;
-            }
-        });
-        updateFormData(sectionId);
-    });
     // Populate Projects
     demoJSON.projects.forEach(project => {
         addSection('projects');
@@ -234,11 +198,6 @@ function populateFromDemoJSON() {
         Object.entries(project).forEach(([key, value]) => {
             if (key === 'bullets') {
                 const textarea = section.querySelector('textarea[name="bullets"]');
-                if (textarea) {
-                    textarea.value = value.join('\n');
-                }
-            } else if (key === 'links') {
-                const textarea = section.querySelector('textarea[name="links"]');
                 if (textarea) {
                     textarea.value = value.join('\n');
                 }
@@ -284,9 +243,41 @@ function populateFromDemoJSON() {
         });
         updateFormData(sectionId);
     });
+    
+    // Populate Skills
+    demoJSON.skills.forEach(skillCategory => {
+        addSection('skills');
+        const sectionId = `skills-${sectionCounter.skills - 1}`;
+        const section = document.getElementById(sectionId);
+        
+        // Set category
+        const categoryInput = section.querySelector('input[name="category"]');
+        if (categoryInput) {
+            categoryInput.value = skillCategory.category;
+        }
+
+        // Add skills
+        const skillsContainer = section.querySelector('.skills-container');
+        skillCategory.skills.forEach((skill, index) => {
+            if (index === 0) {
+                // Use existing first skill input
+                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
+                if (firstSkillInput) {
+                    firstSkillInput.value = skill;
+                }
+            } else {
+                // Add new skill input for remaining skills
+                addSkillField(sectionId);
+                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
+                inputs[inputs.length - 1].value = skill;
+            }
+        });
+        updateFormData(sectionId);
+    });
 
     // Generate resume preview
-    generateResume();
+    console.log('Demo data loaded', sectionOrder);
+    generateResume(sectionOrder);
 }
 
 // Function to load demo data
@@ -294,4 +285,7 @@ function loadDemoData() {
     populateFromDemoJSON();
 }
 
-window.onload = loadDemoData;
+window.onload = function() {
+    loadDemoData();
+    generateResume(sectionOrder);
+};

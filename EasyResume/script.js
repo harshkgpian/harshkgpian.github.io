@@ -3,19 +3,19 @@ let sectionCounter = {
     personal: 0,
     education: 0,
     experience: 0,
-    skills: 0,
     projects: 0,
     competitions: 0,
-    general: 0  // For any other custom sections
+    skills: 0,
+    general: 0,  // For any other custom sections
 };
 
 const formData = {
     personal: [],
     education: [],
     experience: [],
-    skills: [],
     projects: [],
     competitions: [],
+    skills: [],
     general: []  // For any other custom sections
 };
 
@@ -43,24 +43,24 @@ const RESUME_CONFIG = {
         sectionHeader: {
             style: 'times',
             weight: 'bold',
-            size: 12,
+            size: 13,
             color: '#000000'
         },
         normal: {
             style: 'times',
             weight: 'normal',
-            size: 11,
+            size: 12,
             color: '#000000'
         },
         small: {
             style: 'times',
             weight: 'normal',
-            size: 9,
+            size: 10,
             color: '#666666'
         }
     },
     spacing: {
-        sectionGap: 2,
+        sectionGap: 3,
         headerGap: 2,
         lineGap: 5,
         paragraphGap: 2,
@@ -73,7 +73,7 @@ const RESUME_CONFIG = {
         },
         maxLineWidth: 180,
         dateAlignment: 'right',
-        bulletStyle: '•'
+        bulletStyle: ''
     },
     divider: {
         style: 'line',
@@ -197,7 +197,7 @@ function handleDrop(e) {
             formData[srcType][srcIndex] = formData[srcType][destIndex];
             formData[srcType][destIndex] = temp;
 
-            generateResume();
+            generateResume(sectionOrder);
         }
     }
     return false;
@@ -292,50 +292,6 @@ function updateSectionOrder() {
     generateResume(sectionOrder);
 }
 
-function addSection(type) {
-    const formContainer = document.getElementById('formContainer');
-    const sectionId = `${type}-${sectionCounter[type]++}`;
-    
-    // Find or create the group container
-    let groupContainer = document.querySelector(`.${type}-group`);
-    if (!groupContainer) {
-        groupContainer = document.createElement('div');
-        groupContainer.className = `section-group ${type}-group`;
-        groupContainer.innerHTML = `
-            <div class="group-header" onclick="toggleGroup('${type}')">
-                <h3>${type.charAt(0).toUpperCase() + type.slice(1)}</h3>
-                <span class="group-toggle-icon">▼</span>
-            </div>
-            <div class="group-content" id="group-content-${type}">
-            </div>
-        `;
-        formContainer.appendChild(groupContainer);
-    }
-    
-    const groupContent = groupContainer.querySelector('.group-content');
-    const form = document.createElement('div');
-    form.className = 'section-form';
-    form.id = sectionId;
-    
-    let formContent = getFormContent(type, sectionId);
-    
-    form.innerHTML = `
-        <div class="section-header" onclick="toggleSection('${sectionId}')">
-            <span class="drag-handle">⋮⋮</span>
-            <span>${type.charAt(0).toUpperCase() + type.slice(1)} ${sectionCounter[type]}</span>
-            <span class="toggle-icon">▼</span>
-        </div>
-        <div class="section-content" id="content-${sectionId}">
-            ${formContent}
-            <button class="remove-btn" onclick="removeSection('${sectionId}')">Remove Section</button>
-        </div>
-    `;
-    
-    groupContent.appendChild(form);
-    makeGroupsDraggable();
-    makeDraggable();
-    generateResume(sectionOrder);
-}
 
 function toggleGroup(type) {
     const groupContent = document.getElementById(`group-content-${type}`);
@@ -416,10 +372,6 @@ function getFormContent(type, sectionId) {
                 <div class="form-group">
                     <label>Location</label>
                     <input type="text" name="location" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" rows="2" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
                 </div>
                 <div class="form-group">
                     <label>Bullet Points (one per line)</label>
@@ -551,6 +503,104 @@ function removeSection(sectionId) {
     generateResume();
 }
 
+// Modify updateSectionTitle function to include skills and personal sections
+function updateSectionTitle(sectionId, type, value, additionalValue = '') {
+    const section = document.getElementById(sectionId);
+    const titleElement = section.querySelector('.section-title');
+    
+    if (value && value.trim() !== '') {
+        switch(type) {
+            case 'experience':
+                titleElement.textContent = `Experience - ${value}`;
+                break;
+            case 'projects':
+                titleElement.textContent = `Project - ${value}`;
+                break;
+            case 'education':
+                titleElement.textContent = `Education - ${value}`;
+                break;
+            case 'competitions':
+                titleElement.textContent = `Competition - ${value}`;
+                break;
+            case 'skills':
+                titleElement.textContent = `Skills - ${value}`;
+                break;
+            case 'personal':
+                titleElement.textContent = `Personal - ${value}`;
+                break;
+            default:
+                titleElement.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} - ${value}`;
+        }
+    } else {
+        titleElement.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} ${sectionId.split('-')[1]}`;
+    }
+}
+
+// Modify addSection function to include listeners for skills and personal sections
+function addSection(type) {
+    const formContainer = document.getElementById('formContainer');
+    const sectionId = `${type}-${sectionCounter[type]++}`;
+    
+    let groupContainer = document.querySelector(`.${type}-group`);
+    if (!groupContainer) {
+        groupContainer = document.createElement('div');
+        groupContainer.className = `section-group ${type}-group`;
+        groupContainer.innerHTML = `
+            <div class="group-header" onclick="toggleGroup('${type}')">
+                <h3>${type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                <span class="group-toggle-icon">▼</span>
+            </div>
+            <div class="group-content" id="group-content-${type}">
+            </div>
+        `;
+        formContainer.appendChild(groupContainer);
+    }
+    
+    const groupContent = groupContainer.querySelector('.group-content');
+    const form = document.createElement('div');
+    form.className = 'section-form';
+    form.id = sectionId;
+    
+    let formContent = getFormContent(type, sectionId);
+    
+    form.innerHTML = `
+        <div class="section-header" onclick="toggleSection('${sectionId}')">
+            <span class="drag-handle">⋮⋮</span>
+            <span class="section-title">${type.charAt(0).toUpperCase() + type.slice(1)} ${sectionCounter[type]}</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="content-${sectionId}">
+            ${formContent}
+            <button class="remove-btn" onclick="removeSection('${sectionId}')">Remove Section</button>
+        </div>
+    `;
+    
+    groupContent.appendChild(form);
+    makeGroupsDraggable();
+    makeDraggable();
+    generateResume(sectionOrder);
+
+    // Add input event listeners for dynamic title updates
+    const titleInput = form.querySelector('input[name="title"]');
+    const schoolInput = form.querySelector('input[name="school"]');
+    const categoryInput = form.querySelector('input[name="category"]');
+    const nameInput = form.querySelector('input[name="name"]');
+
+    if (titleInput) {
+        titleInput.addEventListener('input', () => updateSectionTitle(sectionId, type, titleInput.value));
+    }
+    if (schoolInput) {
+        schoolInput.addEventListener('input', () => updateSectionTitle(sectionId, type, schoolInput.value));
+    }
+    if (categoryInput) {
+        categoryInput.addEventListener('input', () => updateSectionTitle(sectionId, type, categoryInput.value));
+    }
+    if (nameInput) {
+        nameInput.addEventListener('input', () => updateSectionTitle(sectionId, type, nameInput.value));
+    }
+}
+
+// Modify updateFormData to include skills category and personal name updates
 function updateFormData(sectionId) {
     const section = document.getElementById(sectionId);
     const [type] = sectionId.split('-');
@@ -569,6 +619,14 @@ function updateFormData(sectionId) {
             data.fields.bullets = input.value.split('\n').filter(bullet => bullet.trim() !== '');
         } else {
             data.fields[input.name] = input.value;
+            
+            // Update section title when relevant fields are changed
+            if ((input.name === 'title' && (type === 'experience' || type === 'projects' || type === 'competitions')) ||
+                (input.name === 'school' && type === 'education') ||
+                (input.name === 'category' && type === 'skills') ||
+                (input.name === 'name' && type === 'personal')) {
+                updateSectionTitle(sectionId, type, input.value);
+            }
         }
     });
     
@@ -724,10 +782,11 @@ function generateResume(order = sectionOrder) {
     const content = {
         header: null,
         education: [],
-        skills: {},
         experience: [],    // Add these arrays
         projects: [],      // to the content object
-        competitions: []
+        competitions: [],
+        skills: {},
+
     };
 
     // Handle header (personal) section
@@ -808,14 +867,17 @@ function generateResume(order = sectionOrder) {
     const dataUrl = builder.getDataUrl();
     document.getElementById('pdfPreview').src = dataUrl;
 }
-function downloadPDF() {
-    // Use the same logic as generateResume to ensure consistency
+function downloadPDF(order = sectionOrder) {
     const builder = new ResumeBuilder(currentConfig);
     
     const content = {
         header: null,
         education: [],
-        skills: {}
+        experience: [],    // Add these arrays
+        projects: [],      // to the content object
+        competitions: [],
+        skills: {},
+
     };
 
     // Handle header (personal) section
@@ -852,12 +914,9 @@ function downloadPDF() {
         }, {});
     }
 
-    // First render the base content
-    builder.renderContent(content, sectionOrder);
-
-    // Then add general sections
+    // Add experience to content object
     if (formData.experience.length > 0) {
-        builder.addGeneralSection('EXPERIENCE', formData.experience.map(exp => ({
+        content.experience = formData.experience.map(exp => ({
             title: exp.fields.title || '',
             subtitle: exp.fields.subtitle || '',
             duration: exp.fields.duration || '',
@@ -865,11 +924,12 @@ function downloadPDF() {
             description: exp.fields.description || '',
             bullets: exp.fields.bullets || [],
             tags: exp.fields.tags ? exp.fields.tags.split(',').map(tag => tag.trim()) : []
-        })));
+        }));
     }
 
+    // Add projects to content object
     if (formData.projects.length > 0) {
-        builder.addGeneralSection('PROJECTS', formData.projects.map(proj => ({
+        content.projects = formData.projects.map(proj => ({
             title: proj.fields.title || '',
             subtitle: proj.fields.subtitle || '',
             duration: proj.fields.duration || '',
@@ -877,20 +937,23 @@ function downloadPDF() {
             description: proj.fields.description || '',
             bullets: proj.fields.bullets || [],
             tags: proj.fields.tags ? proj.fields.tags.split(',').map(tag => tag.trim()) : []
-        })));
+        }));
     }
 
+    // Add competitions to content object
     if (formData.competitions.length > 0) {
-        builder.addGeneralSection('COMPETITIONS', formData.competitions.map(comp => ({
+        content.competitions = formData.competitions.map(comp => ({
             title: comp.fields.title || '',
             subtitle: comp.fields.subtitle || '',
             duration: comp.fields.duration || '',
             location: comp.fields.location || '',
             description: comp.fields.description || '',
             bullets: comp.fields.bullets || []
-        })));
+        }));
     }
 
+    // Render all content at once
+    builder.renderContent(content, order);
     builder.save('resume.pdf');
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -912,4 +975,5 @@ window.onload = function() {
     addSection('personal');
     addSection('education');
     addGeneralSection('EXPERIENCE');
+    generateResume(sectionOrder);
 };

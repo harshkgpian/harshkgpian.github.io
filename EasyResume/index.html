@@ -15,9 +15,9 @@
                     <h3>Add Sections</h3>
                     <button onclick="addSection('personal')" class="add-btn">
                         Add Personal Info
-                    </button>
+                    </button>   
                     <button onclick="addSection('education')" class="add-btn">
-                        AddEducation
+                        Add Education
                     </button>
                     <button onclick="addSection('experience')" class="add-btn">
                         Add Experience
@@ -44,7 +44,7 @@
                         Download PDF
                     </button>
                     <button onclick="loadDemoData()" class="btn-btn">
-                        Load Demo Resume
+                        Demo Resume
                     </button>
                 </div>
             </div>
@@ -57,7 +57,14 @@
 
             <div class="preview-container">
                 <div class="preview-frame">
-                    <iframe id="pdfPreview"></iframe>
+                    <iframe 
+                        id="pdfPreview"
+                        type="application/pdf"
+                        width="100%"
+                        height="100%"
+                        frameborder="0"
+                        scrolling="auto"
+                    ></iframe>
                 </div>
             </div>
         </div>

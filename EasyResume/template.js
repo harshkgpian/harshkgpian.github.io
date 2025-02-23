@@ -87,6 +87,7 @@ class ResumeBuilder {
             this.currentY = this.config.page.margins.top;
         }
     }
+    
 
     addHeader(name, contacts) {
         const headerConfig = this.config.sections.header;
@@ -267,7 +268,7 @@ class ResumeBuilder {
             }
     
             // Add more space between skill categories
-            this.currentY += this.config.spacing.lineGap * 1.5;
+            this.currentY += this.config.spacing.lineGap ;
         });
     
         // Add final spacing after skills section
@@ -410,7 +411,7 @@ class ResumeBuilder {
             this.currentY += this.config.spacing.paragraphGap;
         });
     }
-    
+
     addDivider() {
         this.checkAndAddPage();
         this.doc.setDrawColor(this.config.divider.color);
