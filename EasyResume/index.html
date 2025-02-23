@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="action-buttons">
+                    <h3>Add Sections</h3>
+                    <button onclick="addSection('personal')" class="add-btn">
+                        Add Personal Info
+                    </button>
+                    <button onclick="addSection('education')" class="add-btn">
+                        AddEducation
+                    </button>
+                    <button onclick="addSection('experience')" class="add-btn">
+                        Add Experience
+                    </button>
+                    <button onclick="addSection('skills')" class="add-btn">
+                        Add Skills
+                    </button>
+                    <button onclick="addSection('projects')"  class="add-btn">
+                        Add Project
+                    </button>
+                    <button onclick="addSection('competitions')" class="add-btn">
+                        Add Competition
+                    </button>
+                    <button onclick="openConfigModal()" class="add-btn">
+                        Configure Layout
+                    </button>
+                </div>
+                
+                <div class="generate-buttons">
+                    <button onclick="generateResume()" class="btn-btn">
+                        Preview
+                    </button>
+                    <button onclick="downloadPDF()" class="btn-btn">
+                        Download PDF
+                    </button>
+                    <button onclick="loadDemoData()" class="btn-btn">
+                        Load Demo Resume
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <div class="form-container" id="formContainer">
+                    <!-- Forms will be dynamically added here -->
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-frame">
+                    <iframe id="pdfPreview"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration Modal -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Resume Configuration</h3>
+            
+            <div class="config-section">
+                <h4>Page Settings</h4>
+                <div class="config-group">
+                    <label>Format:</label>
+                    <select id="pageFormat">
+                        <option value="a4">A4</option>
+                        <option value="letter">Letter</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h4>Font Settings</h4>
+                <div class="config-group">
+                    <label>Header Font:</label>
+                    <select id="headerFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                    </select>
+                    <input type="number" id="headerSize" placeholder="Size" value="20">
+                    <input type="color" id="headerColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Section Headers:</label>
+                    <select id="sectionHeaderFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                    </select>
+                    <input type="number" id="sectionHeaderSize" placeholder="Size" value="12">
+                    <input type="color" id="sectionHeaderColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Normal Text:</label>
+                    <select id="normalFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                    </select>
+                    <input type="number" id="normalSize" placeholder="Size" value="11">
+                    <input type="color" id="normalColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Small Text:</label>
+                    <select id="smallFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                    </select>
+                    <input type="number" id="smallSize" placeholder="Size" value="9">
+                    <input type="color" id="smallColor" value="#666666">
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h4>Spacing</h4>
+                <div class="config-group">
+                    <label>Section Gap:</label>
+                    <input type="number" id="sectionGap" value="2">
+                    <label>Header Gap:</label>
+                    <input type="number" id="headerGap" value="2">
+                </div>
+                <div class="config-group">
+                    <label>Line Gap:</label>
+                    <input type="number" id="lineGap" value="4">
+                    <label>Paragraph Gap:</label>
+                    <input type="number" id="paragraphGap" value="2">
+                </div>
+                <div class="config-group">
+                    <label>Indentation:</label>
+                    <input type="number" id="indentation" value="3">
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h4>Formatting</h4>
+                <div class="config-group">
+                    <label>Header Alignment:</label>
+                    <select id="headerAlign">
+                        <option value="center">Center</option>
+                        <option value="left">Left</option>
+                    </select>
+                </div>
+                <div class="config-group">
+                    <label>Section Alignment:</label>
+                    <select id="sectionAlign">
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                    </select>
+                </div>
+                <div class="config-group">
+                    <label>Bullet Style:</label>
+                    <input type="text" id="bulletStyle" value="•">
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h4>Divider Settings</h4>
+                <div class="config-group">
+                    <label>Style:</label>
+                    <select id="dividerStyle">
+                        <option value="line">Line</option>
+                        <option value="none">None</option>
+                    </select>
+                    <input type="color" id="dividerColor" value="#000000">
+                    <label>Width:</label>
+                    <input type="number" id="dividerWidth" value="0.2" step="0.1">
+                </div>
+            </div>
+
+            <button onclick="saveConfig()" class="save-btn">Save Configuration</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="template.js"></script>
+    <script src="autofill.js"></script>
+</body>
+</html>
