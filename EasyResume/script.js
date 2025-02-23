@@ -64,7 +64,7 @@ const RESUME_CONFIG = {
         headerGap: 2,
         lineGap: 5,
         paragraphGap: 2,
-        indentation: 3
+        indentation: 2
     },
     formatting: {
         textAlign: {

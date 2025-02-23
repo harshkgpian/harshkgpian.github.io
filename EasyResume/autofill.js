@@ -25,17 +25,16 @@ const demoJSON = {
             gpa: "3.8"
         }
     ],
-experience: [
+    experience: [
         {
-            title: "Google",              // Changed from company
-            subtitle: "Senior Software Engineer", // Changed from position
+            title: "Google",
+            subtitle: "Senior Software Engineer",
             duration: "2022-Present",
             location: "Mountain View, CA",
             bullets: [
-                "Led development of cloud-based machine learning infrastructure serving 1M+ users",
-                "Reduced system latency by 40% through innovative caching mechanisms",
-                "Mentored 5 junior engineers and conducted technical interviews",
-                "Implemented CI/CD pipeline reducing deployment time by 60%"
+                "Architected Python-based  machine learning platform deployed via Docker containers on  clusters",
+                "Implemented robust CI/CD pipeline architecture,  efficiency across cloud-based infrastructure systems",
+                "Engineered Python algorithms for distributed computing, achieving significant improvements"
             ],
             tags: ["Python", "TensorFlow", "Kubernetes", "Docker", "CI/CD"]
         },
@@ -45,10 +44,9 @@ experience: [
             duration: "2020-2022",
             location: "Seattle, WA",
             bullets: [
-                "Developed microservices architecture for Azure cloud services",
-                "Optimized database queries resulting in 30% performance improvement",
-                "Created automated testing framework with 90% code coverage",
-                "Collaborated with cross-functional teams to deliver features on schedule"
+                "Built Microservices architecture using Java and Spring Boot for scalable cloud solutions on Azure",
+                "Optimized complex SQL queries and Java-based backend services for enhanced system performance",
+                "Developed Microservices testing framework using Spring Boot for comprehensive application coverage"
             ],
             tags: ["Java", "Spring Boot", "Azure", "SQL", "Microservices"]
         }
@@ -61,6 +59,10 @@ experience: [
         {
             category: "Frameworks & Libraries",
             skills: ["React", "Node.js", "Django", "Spring Boot", "TensorFlow"]
+        },
+        {
+            category: "Soft Skills",
+            skills: ["Teamwork", "Problem Solving", "Communication", "Leadership", "Time Management"]
         }
     ],
     projects: [
@@ -69,15 +71,10 @@ experience: [
             subtitle: "Lead Developer",
             duration: "Jan 2022 - Present",
             location: "Personal Project",
-            description: "A machine learning platform for early disease detection",
             bullets: [
-                "Developed deep learning models achieving 95% accuracy in disease prediction",
-                "Implemented real-time data processing pipeline handling 10K+ requests/second",
-                "Integrated with electronic health records systems via HL7 FHIR standard"
-            ],
-            links: [
-                "github.com/johndoe/healthcare-ai",
-                "healthcare-ai-demo.com"
+                "Engineered Python and TensorFlow models deployed through Docker on Kubernetes for healthcare",
+                "Built scalable MongoDB database architecture handling massive medical data processing requirements",
+                "Implemented Python-based API integration system for seamless healthcare records management"
             ],
             tags: ["Python", "TensorFlow", "Docker", "Kubernetes", "MongoDB"]
         },
@@ -88,9 +85,9 @@ experience: [
             location: "University Project",
             description: "IoT-based home automation system with voice control",
             bullets: [
-                "Built a scalable IoT architecture supporting 50+ connected devices",
-                "Implemented voice recognition with 98% accuracy using NLP",
-                "Reduced energy consumption by 30% through smart scheduling JavaScript"
+                "Developed JavaScript and Node.js backend controlling IoT devices through MongoDB data management",
+                "Created AWS IoT integration for JavaScript-based smart device control and monitoring",
+                "Implemented Node.js scheduling system with MongoDB for optimal device performance management"
             ],
             tags: ["JavaScript", "Node.js", "MongoDB", "Raspberry Pi", "AWS IoT"]
         }

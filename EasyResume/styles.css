@@ -19,7 +19,7 @@ body {
 
 .main-content {
     display: grid;
-    grid-template-columns: 130px minmax(0, 1fr) minmax(0, 1.2fr); /* Reduced sidebar to 150px and equal space for content/preview */
+    grid-template-columns: 135px minmax(0, 1fr) minmax(0, 1.2fr); /* Reduced sidebar to 150px and equal space for content/preview */
     gap: 20px;
     min-height: calc(100vh - 40px);
 }
@@ -58,7 +58,7 @@ body {
     padding: 8px 10px;
     border: 1px solid #e5e7eb;
     border-radius: 6px;
-    background: #eeefe9ca;
+    background: #ffffffda;
     color: #374151;
     cursor: pointer;
     font-size: 0.7em;
@@ -87,8 +87,8 @@ body {
     padding: 10px 16px;
     border: none;
     border-radius: 6px;
-    background: #ef4444;
-    color: white;
+    background: #44ef5e;
+    color: rgb(0, 0, 0);
     cursor: pointer;
     font-size: 0.7em;
     font-weight: 500;
@@ -97,7 +97,7 @@ body {
 }
 
 .btn-btn:hover {
-    background: #0284c7;
+    background: #dbdfe0bd;
     transform: translateY(-1px);
 }
 
