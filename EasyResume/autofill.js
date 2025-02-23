@@ -3,117 +3,123 @@
 const demoJSON = {
     personal: [
         {
-            name: "John Doe",
-            email: "john.doe@example.com",
-            phone: "(555) 123-4567",
-            location: "San Francisco, CA"
+            name: "Harsh Raj",
+            email: "harshrjto@gmail.com",
+            phone: "+91 8750798260",
+            links: {
+                github: "github.com/harshkgpian",
+                linkedin: "linkedin.com/in/harsh-raj"
+            }
         }
     ],
     education: [
         {
-            school: "Stanford University",
-            degree: "Master of Science in Computer Science",
-            duration: "2020-2022",
-            location: "Stanford, CA",
-            gpa: "3.9"
+            school: "Indian Institute of Technology, Kharagpur",
+            degree: "Master of Technology in Aerospace Engineering",
+            duration: "2022-2024",
+            location: "West Bengal, India",
+            gpa: "8.64/10"
         },
         {
-            school: "University of California, Berkeley",
-            degree: "Bachelor of Science in Computer Engineering",
-            duration: "2016-2020",
-            location: "Berkeley, CA",
-            gpa: "3.8"
+            school: "Bharat National Public School",
+            degree: "Class XII - Central Board of Secondary Education",
+            duration: "2019",
+            location: "Delhi, India",
+            gpa: "9/10"
         }
     ],
     experience: [
         {
-            title: "Google",
-            subtitle: "Senior Software Engineer",
-            duration: "2022-Present",
-            location: "Mountain View, CA",
+            title: "DRDO",
+            subtitle: "Propulsion Research Intern",
+            duration: "May 2023 - June 2023",
+            location: "Bengaluru",
             bullets: [
-                "Architected Python-based  machine learning platform deployed via Docker containers on  clusters",
-                "Implemented robust CI/CD pipeline architecture,  efficiency across cloud-based infrastructure systems",
-                "Engineered Python algorithms for distributed computing, achieving significant improvements"
+                "Designed engine starting system for 5th Generation AMCA Fighter Aircraft using MATLAB/SIMULINK",
+                "Evaluated pressure loss in APU, ATS, and Engine connections through statistical health monitoring models",
+                "Implemented diagnostics models for APU performance optimization and system health assessment"
             ],
-            tags: ["Python", "TensorFlow", "Kubernetes", "Docker", "CI/CD"]
+            tags: ["MATLAB", "SIMULINK", "Statistical Analysis"]
         },
         {
-            title: "Microsoft",
-            subtitle: "Software Engineer",
-            duration: "2020-2022",
-            location: "Seattle, WA",
+            title: "Aerostrovilos Pvt. Ltd",
+            subtitle: "Turbomachinery and Python Developer Intern",
+            duration: "June 2023 - July 2023",
+            location: "IIT Madras, Chennai",
             bullets: [
-                "Built Microservices architecture using Java and Spring Boot for scalable cloud solutions on Azure",
-                "Optimized complex SQL queries and Java-based backend services for enhanced system performance",
-                "Developed Microservices testing framework using Spring Boot for comprehensive application coverage"
+                "Developed Python program for Radial Inflow Turbines performance prediction using loss correlations",
+                "Performed CFD analysis in Fluent and evaluated turbine creep life using ANSYS Mechanical",
+                "Generated detailed contour plots from CSV data for comprehensive turbine analysis"
             ],
-            tags: ["Java", "Spring Boot", "Azure", "SQL", "Microservices"]
-        }
-    ],
-    skills: [
-        {
-            category: "Programming Languages",
-            skills: ["Python", "Java", "JavaScript", "C++", "TypeScript", "Go"]
+            tags: ["Python", "CFD", "ANSYS", "Fluent"]
         },
         {
-            category: "Frameworks & Libraries",
-            skills: ["React", "Node.js", "Django", "Spring Boot", "TensorFlow"]
-        },
-        {
-            category: "Soft Skills",
-            skills: ["Teamwork", "Problem Solving", "Communication", "Leadership", "Time Management"]
+            title: "Artenal Robotics",
+            subtitle: "Computer Vision Intern",
+            duration: "May 2022 - Aug 2022",
+            location: "Vancouver, Canada",
+            bullets: [
+                "Implemented TensorFlow-based object detection and orientation detection algorithms for robotics applications",
+                "Custom trained YOLO v5/v6 CNN models using advanced transfer learning techniques",
+                "Developed KTkinter-based image annotation application for streamlined workflow management"
+            ],
+            tags: ["TensorFlow", "Python", "YOLO", "CNN", "KTkinter"]
         }
     ],
     projects: [
         {
-            title: "AI-Powered Healthcare Platform",
-            subtitle: "Lead Developer",
-            duration: "Jan 2022 - Present",
-            location: "Personal Project",
+            title: "Mixed Flow Compressor with Crossover Diffuser for UAVs",
+            subtitle: "M.Tech Project",
+            duration: "July 2024 - Present",
             bullets: [
-                "Engineered Python and TensorFlow models deployed through Docker on Kubernetes for healthcare",
-                "Built scalable MongoDB database architecture handling massive medical data processing requirements",
-                "Implemented Python-based API integration system for seamless healthcare records management"
+                "Designed compressor achieving 3.8 pressure ratio and 85% efficiency using Python-based meanline methodology",
+                "Performed CFD analysis using BladeGen, Turbogrid, and CFX for comprehensive stage optimization",
+                "Optimized crossover diffuser design for optimal pressure recovery under diameter constraints"
             ],
-            tags: ["Python", "TensorFlow", "Docker", "Kubernetes", "MongoDB"]
+            tags: ["Python", "CFD", "BladeGen", "Turbogrid", "CFX"]
         },
         {
-            title: "Smart Home Automation System",
-            subtitle: "Project Owner",
-            duration: "Jun 2021 - Dec 2021",
-            location: "University Project",
-            description: "IoT-based home automation system with voice control",
+            title: "VTOL and Fixed Wing Hybrid Drone Design",
+            subtitle: "Flight Testing Lab Project",
+            duration: "Aug 2022 - Nov 2022",
             bullets: [
-                "Developed JavaScript and Node.js backend controlling IoT devices through MongoDB data management",
-                "Created AWS IoT integration for JavaScript-based smart device control and monitoring",
-                "Implemented Node.js scheduling system with MongoDB for optimal device performance management"
+                "Developed MATLAB/SIMULINK simulation with Simscape for hybrid VTOL and fixed-wing drone",
+                "Implemented PID control systems for flight mode transitions using OpenVSP",
+                "Analyzed aerodynamic performance and flight characteristics through comprehensive simulation"
             ],
-            tags: ["JavaScript", "Node.js", "MongoDB", "Raspberry Pi", "AWS IoT"]
+            tags: ["MATLAB", "SIMULINK", "Simscape", "OpenVSP", "PID Control"]
+        }
+    ],
+    skills: [
+        {
+            category: "Languages and Tools",
+            skills: ["C/C++", "Python", "OpenCV", "Matplotlib", "TensorFlow", "SimScape", "JS", "PyTorch", "CFD", "FEM"]
+        },
+        {
+            category: "Software",
+            skills: ["MATLAB/SIMULINK", "Solidworks", "ANSYS", "OpenFOAM", "GasTurb", "OpenVSP", "Vrep(CoppeliaSim)"]
         }
     ],
     competitions: [
         {
-            title: "International Hackathon 2022",
-            subtitle: "First Place Winner",
-            duration: "March 2022",
-            location: "Virtual Event",
+            title: "AIAA Jet Engine Design Competition",
+            subtitle: "Top 3 Recognition",
+            duration: "Dec 2022 - Apr 2023",
+            location: "Boston, USA",
             bullets: [
-                "Led team of 4 developers to create an AI-powered waste sorting system",
-                "Presented solution to panel of industry experts",
-                "Won $10,000 prize and incubation opportunity"
+                "Designed Hybrid-Electric Propulsion System with Fuselage Boundary Layer Ingestion",
+                "Presented at AIAA AVIATION Forum and received recognition for technical excellence",
+                "Optimized gas turbine systems for improved efficiency through advanced aerodynamics"
             ]
         },
         {
-            title: "ACM Programming Contest",
-            subtitle: "Regional Finalist",
-            duration: "November 2021",
-            location: "San Francisco, CA",
-            description: "Annual algorithmic programming competition",
+            title: "ASME GtIndia Conference",
+            subtitle: "Research Paper Presenter",
+            duration: "June 2023 - Present",
+            location: "Bengaluru, India",
             bullets: [
-                "Solved 8 out of 10 complex algorithmic problems",
-                "Ranked 3rd among 50 participating teams",
-                "Advanced to national finals"
+                "Co-authored research paper on Strategic Design for BLI Engine-Based Hybrid Propulsion",
+                "Presented findings at prestigious ASME GTIndia 2023 conference"
             ]
         }
     ]

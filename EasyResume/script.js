@@ -43,19 +43,19 @@ const RESUME_CONFIG = {
         sectionHeader: {
             style: 'times',
             weight: 'bold',
-            size: 13,
+            size: 12,
             color: '#000000'
         },
         normal: {
             style: 'times',
             weight: 'normal',
-            size: 12,
+            size: 11,
             color: '#000000'
         },
         small: {
             style: 'times',
             weight: 'normal',
-            size: 10,
+            size: 9,
             color: '#000000'
         }
     },
@@ -73,7 +73,7 @@ const RESUME_CONFIG = {
         },
         maxLineWidth: 180,
         dateAlignment: 'right',
-        bulletStyle: ''
+        bulletStyle: '-'
     },
     divider: {
         style: 'line',
