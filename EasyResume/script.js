@@ -56,7 +56,7 @@ const RESUME_CONFIG = {
             style: 'times',
             weight: 'normal',
             size: 10,
-            color: '#666666'
+            color: '#000000'
         }
     },
     spacing: {
