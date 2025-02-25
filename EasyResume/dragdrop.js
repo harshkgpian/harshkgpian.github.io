@@ -172,6 +172,7 @@ function handleGroupDragEnd(e) {
     document.querySelectorAll('.section-group').forEach(group => {
         group.classList.remove('group-drag-over');
     });
+    getSectionOrder(); // Add this line to see the order after each drag
 }
 
 function updateSectionOrder() {
@@ -194,3 +195,21 @@ function toggleGroup(type) {
     groupContent.classList.toggle('collapsed');
     icon.textContent = groupContent.classList.contains('collapsed') ? '▶' : '▼';
 }
+
+function getSectionOrder() {
+    const groups = document.querySelectorAll('.section-group');
+    const currentOrder = Array.from(groups).map(group => {
+        const type = group.className.split(' ')[1].replace('-group', '');
+        // Convert 'personal' to 'header' to maintain consistency
+        return type === 'personal' ? 'header' : type;
+    });
+    
+    console.log('Current Section Order:', currentOrder);
+    return currentOrder;
+}
+
+
+
+window.onload = () => {
+    getSectionOrder();
+};

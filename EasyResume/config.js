@@ -93,6 +93,15 @@ function openConfigModal() {
     const modal = document.getElementById('configModal');
     modal.style.display = 'block';
     loadCurrentConfig();
+    window.addEventListener('keypress', function(e) {    
+        if (e.key === 'Enter') {
+            saveConfig();
+        }
+    });
+}
+
+function closeConfigModal() {
+    document.getElementById('configModal').style.display = 'none';
 }
 
 function loadCurrentConfig() {

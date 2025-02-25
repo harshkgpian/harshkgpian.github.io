@@ -377,6 +377,8 @@ function updateFormData(sectionId) {
 
 
 function generateResume(order = sectionOrder) {
+    order = getSectionOrder();
+
     const builder = new ResumeBuilder(currentConfig);
     
     const content = {
