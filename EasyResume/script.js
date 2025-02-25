@@ -153,13 +153,13 @@ function updateBulletWidthInfo(inputElement) {
     widthInfoSpan.textContent = `${percentageUsed}%`;
     
     // Add visual indicator for width
-    if (percentageUsed > 100) {
+    if (percentageUsed > 99) {
         widthInfoSpan.style.color = 'red';
         widthInfoSpan.textContent = `${percentageUsed}% (will wrap)`;
-    } else if (percentageUsed > 85) {
-        widthInfoSpan.style.color = 'orange';
-    } else {
+    } else if (percentageUsed > 90) {
         widthInfoSpan.style.color = 'green';
+    } else {
+        widthInfoSpan.style.color = 'orange';
     }
 }
 
