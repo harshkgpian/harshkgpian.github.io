@@ -377,21 +377,42 @@ class ResumeBuilder {
             this.setFont('sectionTitle');
             
             // Fix for title hyperlink
+            // Render title with hyperlink if available
+            this.setFont('sectionTitle');
+
             if (titleLink) {
-                // First render the text
+                // Save current text color
+                const currentTextColor = this.doc.getTextColor();
+                
+                // Change text color for links (use blue or any color you prefer)
+                // this.doc.setTextColor(0, 0, 255); // RGB for blue
+                
+                // Optional: add underline
+                this.doc.setLineWidth(0.05);
+                const titleWidth = this.doc.getTextWidth(title);
+                
+                // Render text
                 this.doc.text(title, this.config.page.margins.left, this.currentY);
                 
-                // Then add a clickable link area over the text
-                const titleWidth = this.doc.getTextWidth(title);
-                // Create link with dimensions (x, y, width, height, options)
-                // Adjust y position and height to cover text properly
+                // Add underline
+                this.doc.line(
+                    this.config.page.margins.left,
+                    this.currentY + 1, // Position slightly below text
+                    this.config.page.margins.left + titleWidth,
+                    this.currentY + 1
+                );
+                
+                // Add clickable link
                 this.doc.link(
                     this.config.page.margins.left, 
-                    this.currentY - 10, // Position link slightly above text
+                    this.currentY - 10,
                     titleWidth, 
-                    15, // Make link area tall enough to be clickable
+                    15,
                     { url: titleLink }
                 );
+                
+                // Restore original text color
+                this.doc.setTextColor(currentTextColor);
             } else {
                 this.doc.text(title, this.config.page.margins.left, this.currentY);
             }

@@ -31,6 +31,7 @@ const demoJSON = {
     experience: [
         {
             title: "NASA Ames Research Center",
+            titleLink: "https://www.nasa.gov/ames",
             subtitle: "Propulsion Systems Intern",
             duration: "May 2023 - August 2023",
             location: "Mountain View, CA",
@@ -43,6 +44,7 @@ const demoJSON = {
         },
         {
             title: "General Electric Aviation",
+            titleLink: "https://www.ge.com/aviation",
             subtitle: "Turbine Design Engineering Intern",
             duration: "June 2023 - July 2023",
             location: "Cincinnati, OH",
@@ -69,6 +71,7 @@ const demoJSON = {
     projects: [
         {
             title: "Advanced Turbofan Engine Design with Variable Bypass",
+            titleLink: "https://github.com/johndoe-aero/turbofan-design",
             subtitle: "Graduate Thesis Project",
             duration: "January 2024 - Present",
             bullets: [
@@ -80,6 +83,7 @@ const demoJSON = {
         },
         {
             title: "Autonomous VTOL Aircraft Control System",
+            titleLink: "https://github.com/johndoe-aero/vtol-control",
             subtitle: "Advanced Controls Project",
             duration: "Sept 2022 - Dec 2022",
             bullets: [
@@ -99,6 +103,7 @@ const demoJSON = {
     competitions: [
         {
             title: "NASA University Student Design Challenge",
+            titleLink: "https://www.nasa.gov/stem/studentchallenge",
             subtitle: "First Place Winner",
             duration: "Jan 2023 - May 2023",
             location: "Washington, DC",

@@ -92,6 +92,7 @@ function updateConfigWithCustomSection(sectionKey, sectionTitle) {
         title: sectionTitle,
         fields: [
             { name: 'title', label: `${sectionTitle} Title`, type: 'text' },
+            {name: 'titleLink', label: 'Title URL', type: 'text'},
             { name: 'subtitle', label: 'Subtitle', type: 'text' },
             { name: 'duration', label: 'Duration', type: 'text' },
             { name: 'location', label: 'Location', type: 'text' },
@@ -496,46 +497,6 @@ function updateFormData(sectionId) {
     } else {
         formData[type].push(data);
     }
-}
-
-
-function updateConfigWithCustomSection(sectionKey, sectionTitle) {
-    if (!sectionKey || !sectionTitle) {
-        console.error("Invalid section key or title.");
-        return;
-    }
-
-    // Add the new section to formData if it doesn't exist
-    if (!formData[sectionKey]) {
-        formData[sectionKey] = [];
-    }
-
-    // Add the new section to sectionCounter if it doesn't exist
-    if (sectionCounter[sectionKey] === undefined) {
-        sectionCounter[sectionKey] = 0;
-    }
-
-    // Add the new section to sectionConfigs with default fields
-    sectionConfigs[sectionKey] = {
-        title: sectionTitle,
-        fields: [
-            { name: 'title', label: `${sectionTitle} Title`, type: 'text' },
-            { name: 'subtitle', label: 'Subtitle', type: 'text' },
-            { name: 'duration', label: 'Duration', type: 'text' },
-            { name: 'location', label: 'Location', type: 'text' },
-            { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
-            { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
-            { name: 'tags', label: 'Tags (comma-separated)', type: 'text' }
-        ]
-    };
-
-    // Update the section order to include the new section
-    if (!sectionOrder.includes(sectionKey)) {
-        sectionOrder.push(sectionKey);
-    }
-
-    console.log(`Added new section type: ${sectionKey}`);
-    console.log(sectionConfigs);
 }
 
 
