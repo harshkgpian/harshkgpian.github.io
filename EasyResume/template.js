@@ -88,9 +88,9 @@ class ResumeBuilder {
         }
     }
     
-
     addHeader(name, contacts) {
         const headerConfig = this.config.sections.header;
+        const iconConfig = headerConfig.icons;
         
         this.setFont('header');
         this.checkAndAddPage();
@@ -100,16 +100,68 @@ class ResumeBuilder {
             this.doc.text(name, this.config.page.margins.left, this.currentY);
         }
         this.currentY += headerConfig.spacing;
-
+    
         if (contacts && contacts.length > 0) {
             this.checkAndAddPage();
             this.setFont('small');
-            const contactText = contacts.join(headerConfig.contactSeparator);
-            if (this.config.formatting.textAlign.header === 'center') {
-                this.doc.text(contactText, this.pageWidth / 2, this.currentY, { align: 'center' });
-            } else {
-                this.doc.text(contactText, this.config.page.margins.left, this.currentY);
+            
+            // Find different types of contacts
+            const emailContact = contacts.find(contact => contact.includes('@'));
+            const phoneContact = contacts.find(contact => /[\d-+()]{7,}/.test(contact));
+            const linkedinContact = contacts.find(contact => contact.includes('linkedin'));
+            const githubContact = contacts.find(contact => contact.includes('github'));
+            const otherContacts = contacts.filter(contact => 
+                !contact.includes('@') && 
+                !/[\d-+()]{7,}/.test(contact) && 
+                !contact.includes('linkedin') && 
+                !contact.includes('github')
+            );
+    
+            let currentX = this.config.formatting.textAlign.header === 'center'
+                ? (this.pageWidth / 2) - (this.doc.getTextWidth(contacts.join(' ')) / 2)
+                : this.config.page.margins.left;
+    
+            try {
+                const addContactWithIcon = (contact, iconKey) => {
+                    if (contact) {
+                        this.doc.addImage(
+                            iconConfig.urls[iconKey],
+                            'PNG',
+                            currentX,
+                            this.currentY - (iconConfig.size * iconConfig.verticalOffset),
+                            iconConfig.size,
+                            iconConfig.size
+                        );
+                        currentX += iconConfig.size + iconConfig.spacing;
+                        this.doc.text(contact, currentX, this.currentY);
+                        currentX += this.doc.getTextWidth(contact) + iconConfig.contactSpacing;
+                    }
+                };
+    
+                // Add contacts with their respective icons
+                addContactWithIcon(emailContact, 'email');
+                addContactWithIcon(phoneContact, 'phone');
+                addContactWithIcon(linkedinContact, 'linkedin');
+                addContactWithIcon(githubContact, 'github');
+    
+                // Add remaining contacts if any
+                if (otherContacts.length > 0) {
+                    const otherContactsText = otherContacts.join(headerConfig.contactSeparator);
+                    this.doc.text(otherContactsText, currentX, this.currentY);
+                }
+    
+            } catch (error) {
+                console.error('Error loading icons:', error);
+                // Fallback: show all contacts without icons
+                if (this.config.formatting.textAlign.header === 'center') {
+                    this.doc.text(contacts.join(headerConfig.contactSeparator), 
+                        this.pageWidth / 2, this.currentY, { align: 'center' });
+                } else {
+                    this.doc.text(contacts.join(headerConfig.contactSeparator), 
+                        this.config.page.margins.left, this.currentY);
+                }
             }
+            
             this.currentY += this.config.spacing.sectionGap;
         }
     }

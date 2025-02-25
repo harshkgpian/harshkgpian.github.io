@@ -6,10 +6,9 @@ const demoJSON = {
             name: "Harsh Raj",
             email: "harshrjto@gmail.com",
             phone: "+91 8750798260",
-            links: {
-                github: "github.com/harshkgpian",
-                linkedin: "linkedin.com/in/harsh-raj"
-            }
+            github: "github.com/harshkgpian",
+            linkedin: "linkedin.com/in/harsh-raj"
+
         }
     ],
     education: [
