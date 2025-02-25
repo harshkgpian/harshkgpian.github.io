@@ -71,8 +71,6 @@ class ResumeBuilder {
         });
     }
 
-    // Previous code remains the same until the setFont method...
-
     setFont(type) {
         const font = this.config.fonts[type];
         this.doc.setFont(font.style, font.weight);
@@ -157,7 +155,30 @@ class ResumeBuilder {
                             iconConfig.size
                         );
                         currentX += iconConfig.size + iconConfig.spacing;
-                        this.doc.text(contact, currentX, this.currentY);
+                        
+                        // Add hyperlinks for LinkedIn and GitHub contacts
+                        if (iconKey === 'linkedin' || iconKey === 'github') {
+                            // Create a clickable link if it's a profile URL
+                            const url = contact.startsWith('http') ? contact : 
+                                        iconKey === 'linkedin' ? `https://linkedin.com/in/${contact.replace(/.*\/in\//, '')}` :
+                                        iconKey === 'github' ? `https://github.com/${contact.replace(/.*github.com\//, '')}` : null;
+                            
+                            if (url) {
+                                const linkWidth = this.doc.getTextWidth(contact);
+                                this.doc.text(contact, currentX, this.currentY);
+                                this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url });
+                            } else {
+                                this.doc.text(contact, currentX, this.currentY);
+                            }
+                        } else if (iconKey === 'email') {
+                            // Create mailto link for email
+                            const linkWidth = this.doc.getTextWidth(contact);
+                            this.doc.text(contact, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url: `mailto:${contact}` });
+                        } else {
+                            this.doc.text(contact, currentX, this.currentY);
+                        }
+                        
                         currentX += this.doc.getTextWidth(contact) + iconConfig.contactSpacing;
                     }
                 };
@@ -340,7 +361,9 @@ class ResumeBuilder {
         entries.forEach(entry => {
             const {
                 title,
+                titleLink,
                 subtitle,
+                subtitleLink,
                 duration,
                 location,
                 description,
@@ -350,9 +373,28 @@ class ResumeBuilder {
     
             this.checkAndAddPage();
     
-            // Render title
+            // Render title with hyperlink if available
             this.setFont('sectionTitle');
-            this.doc.text(title, this.config.page.margins.left, this.currentY);
+            
+            // Fix for title hyperlink
+            if (titleLink) {
+                // First render the text
+                this.doc.text(title, this.config.page.margins.left, this.currentY);
+                
+                // Then add a clickable link area over the text
+                const titleWidth = this.doc.getTextWidth(title);
+                // Create link with dimensions (x, y, width, height, options)
+                // Adjust y position and height to cover text properly
+                this.doc.link(
+                    this.config.page.margins.left, 
+                    this.currentY - 10, // Position link slightly above text
+                    titleWidth, 
+                    15, // Make link area tall enough to be clickable
+                    { url: titleLink }
+                );
+            } else {
+                this.doc.text(title, this.config.page.margins.left, this.currentY);
+            }
     
             // Render duration on the right if available
             if (duration && this.config.formatting.dateAlignment === 'right') {
@@ -369,7 +411,23 @@ class ResumeBuilder {
                 this.checkAndAddPage();
                 if (subtitle) {
                     this.setFont('small');
-                    this.doc.text(subtitle, this.config.page.margins.left, this.currentY);
+                    // Fix for subtitle hyperlink
+                    if (subtitleLink) {
+                        // First render the text
+                        this.doc.text(subtitle, this.config.page.margins.left, this.currentY);
+                        
+                        // Then add a clickable link area over the text
+                        const subtitleWidth = this.doc.getTextWidth(subtitle);
+                        this.doc.link(
+                            this.config.page.margins.left, 
+                            this.currentY - 5, // Position link slightly above text
+                            subtitleWidth, 
+                            10, // Make link area tall enough to be clickable
+                            { url: subtitleLink }
+                        );
+                    } else {
+                        this.doc.text(subtitle, this.config.page.margins.left, this.currentY);
+                    }
                 }
                 if (location) {
                     this.setFont('small');
@@ -437,7 +495,6 @@ class ResumeBuilder {
             }
     
             // Render bullet points if available
-            // Add this inside the bullet points rendering section in addGeneralSection
             if (bullets && bullets.length > 0) {
                 this.setFont('normal');
                 bullets.forEach(bullet => {
@@ -446,20 +503,8 @@ class ResumeBuilder {
                     
                     // Calculate the actual width of the bullet text with current font
                     this.setFont('normal'); // Ensure we're using the correct font for measurement
-                    const actualTextWidth = this.doc.getTextWidth(bullet.trim());
                     
-                    // Log the width information
-                    console.log({
-                        bulletText: bullet.trim().substring(0, 30) + (bullet.trim().length > 30 ? '...' : ''),
-                        fontName: this.doc.getFont().fontName,
-                        fontSize: this.doc.getFontSize(),
-                        textOccupiedWidth: actualTextWidth,
-                        availableWidth: availableWidth,
-                        exceedsWidth: actualTextWidth > availableWidth,
-                        percentageUsed: Math.round((actualTextWidth / availableWidth) * 100) + '%'
-                    });
-
-                    // Original bullet point rendering code continues...
+                    // Split bullet text to fit available width
                     const bulletText = this.doc.splitTextToSize(
                         bullet.trim(),
                         availableWidth

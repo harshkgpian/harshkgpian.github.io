@@ -39,14 +39,17 @@ let sectionConfigs = {
     ]},
     'experience': { title: 'Work Experience', fields: [ 
         { name: 'title', label: 'Company', type: 'text' },
+        { name: 'titleLink', label: 'Position Related URL', type: 'text' },
         { name: 'subtitle', label: 'Position', type: 'text' },
         { name: 'duration', label: 'Duration', type: 'text' },
         { name: 'location', label: 'Location', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
         { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
         { name: 'tags', label: 'Technologies Used (comma-separated)', type: 'text' }
     ]},
     'projects': { title: 'Project Details', fields: [ 
         { name: 'title', label: 'Project Title', type: 'text' },
+        { name: 'titleLink', label: 'Project URL', type: 'text' },
         { name: 'subtitle', label: 'Role/Position', type: 'text' },
         { name: 'duration', label: 'Duration', type: 'text' },
         { name: 'location', label: 'Location/Context', type: 'text' },
@@ -56,6 +59,7 @@ let sectionConfigs = {
     ]},
     'competitions': { title: 'Competition Details', fields: [ 
         { name: 'title', label: 'Competition Name', type: 'text' },
+        { name: 'titleLink', label: 'Competition URL', type: 'text' },
         { name: 'subtitle', label: 'Achievement/Position', type: 'text' },
         { name: 'duration', label: 'Date/Duration', type: 'text' },
         { name: 'location', label: 'Location/Platform', type: 'text' },
@@ -613,7 +617,9 @@ function generateResume(order = sectionOrder) {
         if (formData[sectionType] && formData[sectionType].length > 0 && sectionType !== 'education') {
             content[sectionType] = formData[sectionType].map(item => ({
                 title: item.fields.title || '',
+                titleLink: item.fields.titleLink || '',
                 subtitle: item.fields.subtitle || '',
+                subtitleLink: item.fields.subtitleLink || '',
                 duration: item.fields.duration || '',
                 location: item.fields.location || '',
                 description: item.fields.description || '',
