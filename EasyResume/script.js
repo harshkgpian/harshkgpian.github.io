@@ -617,6 +617,7 @@ function downloadPDF() {
     builder.save('resume.pdf');
 }
 
+
 document.querySelector('.btn-btn').addEventListener('click', preview);
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('configModal');
@@ -632,6 +633,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+
 
 window.onload = function() {
     addSection('personal');
