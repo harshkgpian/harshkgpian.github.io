@@ -113,35 +113,34 @@ function addBulletField(sectionId, container, existingText = '') {
     bulletItem.innerHTML = `
         <div class="bullet-input-container">
             <input type="text" name="bullet" class="bullet-input" value="${existingText}" 
-                   placeholder="Enter bullet point" onchange="updateFormData('${sectionId}'); generateResume(); updateBulletWidthInfo(this);">
+                   placeholder="Enter bullet point" 
+                   oninput="updateBulletWidthInfo(this); updateFormData('${sectionId}');" 
+                   onchange="generateResume();">
             <span class="bullet-width-info">0%</span>
             <button type="button" class="remove-bullet-btn" onclick="removeBullet(this)">×</button>
         </div>
     `;
     container.appendChild(bulletItem);
     
-    // Initialize width info
+    // Initialize width info if there's existing text
     if (existingText) {
         updateBulletWidthInfo(bulletItem.querySelector('.bullet-input'));
     }
 }
 
+
 function updateBulletWidthInfo(inputElement) {
     // Get the relevant elements
     const bulletItem = inputElement.closest('.bullet-item');
     const widthInfoSpan = bulletItem.querySelector('.bullet-width-info');
-    const sectionId = bulletItem.closest('.section-content').id.replace('content-', '');
     
-    // Get the section type
-    const type = sectionId.split('-')[0];
-    
-    // Create a temporary ResumeBuilder instance to calculate width
-    const tempBuilder = new ResumeBuilder(currentConfig);
+    // Create a temporary ResumeBuilder instance with the CURRENT config
+    const tempBuilder = new ResumeBuilder(currentConfig); // This is key - use the current config
     
     // Set font to normal as used for bullets
     tempBuilder.setFont('normal');
     
-    // Calculate available width for bullet text
+    // Calculate available width for bullet text using current config
     const availableWidth = tempBuilder.contentWidth - tempBuilder.config.spacing.indentation;
     
     // Calculate actual width of the text
@@ -163,6 +162,8 @@ function updateBulletWidthInfo(inputElement) {
         widthInfoSpan.style.color = 'green';
     }
 }
+
+
 // Function to remove a bullet point
 function removeBullet(button) {
     const bulletItem = button.parentElement.parentElement;
@@ -534,7 +535,13 @@ function updateConfigWithCustomSection(sectionKey, sectionTitle) {
 }
 
 
-
+// Add this at the end of the generateResume function
+function updateAllBulletWidthInfo() {
+    const bulletInputs = document.querySelectorAll('.bullet-input');
+    bulletInputs.forEach(input => {
+        updateBulletWidthInfo(input);
+    });
+}
  
 
 // Modify generateResume to handle custom sections
@@ -637,6 +644,8 @@ function generateResume(order = sectionOrder) {
         
         const dataUrl = builder.getDataUrl();
         document.getElementById('pdfPreview').src = dataUrl;
+
+        updateAllBulletWidthInfo();
     } catch (error) {
         console.error("Error generating resume:", error);
         alert("There was an error generating the resume. Please check the console for details.");
@@ -649,6 +658,8 @@ function downloadPDF() {
     const builder = generateResume();
     builder.save('resume.pdf');
 }
+
+
 
 
 document.querySelector('.btn-btn').addEventListener('click', preview);

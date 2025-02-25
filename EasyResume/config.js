@@ -252,4 +252,9 @@ function saveConfig() {
     
     // Regenerate resume with new configuration
     generateResume();
+    setTimeout(updateAllBulletWidthInfo, 100); 
 }
+
+
+
+
