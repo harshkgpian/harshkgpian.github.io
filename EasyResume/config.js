@@ -57,7 +57,7 @@ const RESUME_CONFIG = {
         },
         maxLineWidth: 180,
         dateAlignment: 'right',
-        bulletStyle: '-'
+        bulletStyle: '•'
     },
     divider: {
         style: 'line',

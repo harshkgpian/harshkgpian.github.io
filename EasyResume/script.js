@@ -9,7 +9,7 @@ let sectionCounter = {
     general: 0,  // For any other custom sections
 };
 
-const formData = {
+let formData = {
     personal: [],
     education: [],
     experience: [],

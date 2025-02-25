@@ -186,7 +186,6 @@ function updateSectionOrder() {
     generateResume(sectionOrder);
 }
 
-
 function toggleGroup(type) {
     const groupContent = document.getElementById(`group-content-${type}`);
     const groupHeader = groupContent.previousElementSibling;
@@ -208,8 +207,30 @@ function getSectionOrder() {
     return currentOrder;
 }
 
-
+// Initialize groups to be collapsed by default
+function initializeCollapsedGroups() {
+    const groupContents = document.querySelectorAll('[id^="group-content-"]');
+    groupContents.forEach(groupContent => {
+        // Add collapsed class
+        groupContent.classList.add('collapsed');
+        
+        // Update the toggle icon
+        const groupHeader = groupContent.previousElementSibling;
+        const icon = groupHeader.querySelector('.group-toggle-icon');
+        if (icon) {
+            icon.textContent = '▶';
+        }
+    });
+}
 
 window.onload = () => {
+    // Initialize all groups as collapsed
+    initializeCollapsedGroups();
+    
+    // Make elements draggable
+    makeDraggable();
+    makeGroupsDraggable();
+    
+    // Get initial section order
     getSectionOrder();
 };
