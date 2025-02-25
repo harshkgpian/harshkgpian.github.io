@@ -647,6 +647,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
 window.onload = function() {
     addSection('personal');
     addSection('education');
