@@ -140,7 +140,7 @@ function updateBulletWidthInfo(inputElement) {
     const widthInfoSpan = bulletItem.querySelector('.bullet-width-info');
     
     // Create a temporary ResumeBuilder instance with the CURRENT config
-    const tempBuilder = new ResumeBuilder(currentConfig); // This is key - use the current config
+    const tempBuilder = new ResumeBuilder(currentConfig);
     
     // Set font to normal as used for bullets
     tempBuilder.setFont('normal');
@@ -154,20 +154,40 @@ function updateBulletWidthInfo(inputElement) {
     // Calculate percentage and round to nearest integer
     const percentageUsed = Math.round((actualTextWidth / availableWidth) * 100);
     
+    // Calculate word count
+    const words = inputElement.value.trim().split(/\s+/).length;
+    
+    // Calculate average width per word
+    const avgWidthPerWord = words > 0 ? actualTextWidth / words : 0;
+    
+    // Calculate words to add/remove
+    let wordsToAdd = 0;
+    if (percentageUsed < 100) {
+        // Calculate how many words to add to reach optimal length (90-95%)
+        const targetPercentage = 99; // Aim for 95% of available width
+        const additionalWidthNeeded = (targetPercentage / 100 * availableWidth) - actualTextWidth;
+        wordsToAdd = Math.round(additionalWidthNeeded / avgWidthPerWord);
+    } else if (percentageUsed > 100) {
+        // Calculate how many words to remove to fit
+        const excessWidth = actualTextWidth - availableWidth;
+        wordsToAdd = -Math.ceil(excessWidth / avgWidthPerWord); // Negative value = words to remove
+    }
+    
     // Update the display
     widthInfoSpan.textContent = `${percentageUsed}%`;
     
-    // Add visual indicator for width
+    // Add visual indicator for width and suggestion
     if (percentageUsed > 99) {
         widthInfoSpan.style.color = 'red';
-        widthInfoSpan.textContent = `${percentageUsed}% (will wrap)`;
-    } else if (percentageUsed > 90) {
+        widthInfoSpan.textContent = `${percentageUsed}% (remove ~${Math.abs(wordsToAdd)} words)`;
+    } else if (percentageUsed > 95) {
         widthInfoSpan.style.color = 'green';
+        widthInfoSpan.textContent = `${percentageUsed}% (perfect length)`;
     } else {
         widthInfoSpan.style.color = 'orange';
+        widthInfoSpan.textContent = `${percentageUsed}% (add ~${wordsToAdd} words)`;
     }
 }
-
 
 // Function to remove a bullet point
 function removeBullet(button) {
