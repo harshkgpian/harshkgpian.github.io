@@ -49,7 +49,7 @@ class ResumeBuilder {
                                 edu.duration,
                                 edu.location,
                                 edu.gpa,
-                                edu.honors
+                                edu.scoreType
                             );
                         });
                     }
@@ -211,7 +211,8 @@ class ResumeBuilder {
     }
 
 
-    addEducation(school, degree, duration, location, gpa = null, honors = []) {
+    addEducation(school, degree, duration, location, gpa = null, scoreType) {
+        console.log('Adding education:', school, degree, duration, location, gpa, scoreType);
 
         this.checkAndAddPage();
         
@@ -232,16 +233,18 @@ class ResumeBuilder {
 
         // Render degree and GPA
         this.checkAndAddPage();
-        this.setFont('normal');
+        this.setFont('small');
         this.doc.text(degree, this.config.page.margins.left, this.currentY);
         
-        // Add GPA in bold if available
+        // Add GPA/score if available
         if (gpa !== null) {
             const degreeWidth = this.doc.getTextWidth(degree);
-            const gpaText = ` | CGPA: ${gpa}`;
+            const scoreLabel = scoreType ? `${scoreType}: ` : 'CGPA: ';
+            console.log(scoreLabel, scoreType, "Hi");
+            const gpaText = ` | ${scoreLabel}${gpa}`;
             
             // Switch to bold font for GPA
-            this.setFont('normal');
+            this.setFont('small');
             this.doc.text(
                 gpaText,
                 this.config.page.margins.left + degreeWidth,

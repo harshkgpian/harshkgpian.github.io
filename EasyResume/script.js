@@ -21,181 +21,175 @@ const formData = {
 
 let sectionOrder = ['header', 'education', 'experience', 'projects', 'competitions', 'skills'];
 
+// Define sectionConfigs as a global variable at the top with other globals
+let sectionConfigs = {
+    'personal': { title: 'Personal Information', fields: [ 
+        { name: 'name', label: 'Full Name', type: 'text' }, 
+        { name: 'email', label: 'Email', type: 'email' },
+        { name: 'phone', label: 'Phone', type: 'tel' },
+        { name: 'github', label: 'GitHub', type: 'text' },
+        { name: 'linkedin', label: 'LinkedIn', type: 'text' }
+    ]},
+    'education': { title: 'Education', fields: [ 
+        { name: 'school', label: 'School/University', type: 'text' },
+        { name: 'degree', label: 'Degree', type: 'text' },
+        { name: 'duration', label: 'Duration', type: 'text' },
+        { name: 'location', label: 'Location', type: 'text' },
+        { name: 'scoreType', label: 'Score Type', type: 'text' },
+        { name: 'gpa', label: 'Score', type: 'text' }
+    ]},
+    'experience': { title: 'Work Experience', fields: [ 
+        { name: 'title', label: 'Company', type: 'text' },
+        { name: 'subtitle', label: 'Position', type: 'text' },
+        { name: 'duration', label: 'Duration', type: 'text' },
+        { name: 'location', label: 'Location', type: 'text' },
+        { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+        { name: 'tags', label: 'Technologies Used (comma-separated)', type: 'text' }
+    ]},
+    'projects': { title: 'Project Details', fields: [ 
+        { name: 'title', label: 'Project Title', type: 'text' },
+        { name: 'subtitle', label: 'Role/Position', type: 'text' },
+        { name: 'duration', label: 'Duration', type: 'text' },
+        { name: 'location', label: 'Location/Context', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+        { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+        { name: 'tags', label: 'Technologies Used (comma-separated)', type: 'text' }
+    ]},
+    'competitions': { title: 'Competition Details', fields: [ 
+        { name: 'title', label: 'Competition Name', type: 'text' },
+        { name: 'subtitle', label: 'Achievement/Position', type: 'text' },
+        { name: 'duration', label: 'Date/Duration', type: 'text' },
+        { name: 'location', label: 'Location/Platform', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+        { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+        { name: 'tags', label: 'Technologies/Skills Used (comma-separated)', type: 'text' }
+    ]},
+    'skills': { title: 'Skills', custom: true }
+};
 
-// Add currentConfig at the top with other global variables
-
-function getFormContent(type, sectionId) {
-    let formContent = '';
-    
-    switch(type) {
-        case 'personal':
-            formContent = `
-                <h3>Personal Information</h3>
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" name="name" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Phone</label>
-                    <input type="tel" name="phone" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>GitHub</label>
-                    <input type="text" name="github" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>LinkedIn</label>
-                    <input type="text" name="linkedin" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            `;
-            break;
-            
-        case 'education':
-            formContent = `
-                <h3>Education</h3>
-                <div class="form-group">
-                    <label>School/University</label>
-                    <input type="text" name="school" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Degree</label>
-                    <input type="text" name="degree" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Duration</label>
-                    <input type="text" name="duration" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" name="location" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>GPA</label>
-                    <input type="text" name="gpa" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            `;
-            break;
-            
-        case 'experience':
-            formContent = `
-                <h3>Work Experience</h3>
-                <div class="form-group">
-                    <label>Company</label>
-                    <input type="text" name="title" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Position</label>
-                    <input type="text" name="subtitle" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Duration</label>
-                    <input type="text" name="duration" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" name="location" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Bullet Points (one per line)</label>
-                    <textarea name="bullets" rows="4" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Technologies Used (comma-separated)</label>
-                    <input type="text" name="tags" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            `;
-            break;
-        
-        case 'projects':
-            formContent = `
-                <h3>Project Details</h3>
-                <div class="form-group">
-                    <label>Project Title</label>
-                    <input type="text" name="title" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Role/Position</label>
-                    <input type="text" name="subtitle" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Duration</label>
-                    <input type="text" name="duration" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Location/Context</label>
-                    <input type="text" name="location" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" rows="2" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Bullet Points (one per line)</label>
-                    <textarea name="bullets" rows="4" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Technologies Used (comma-separated)</label>
-                    <input type="text" name="tags" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            `;
-            break;
-
-        case 'competitions':
-            formContent = `
-                <h3>Competition Details</h3>
-                <div class="form-group">
-                    <label>Competition Name</label>
-                    <input type="text" name="title" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Position/Achievement</label>
-                    <input type="text" name="subtitle" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Date/Duration</label>
-                    <input type="text" name="duration" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" name="location" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <textarea name="description" rows="2" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Achievements (one per line)</label>
-                    <textarea name="bullets" rows="4" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
-                </div>
-                <div class="form-group">
-                    <label>Technologies Used (comma-separated)</label>
-                    <input type="text" name="tags" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            `;
-            break;
-        case 'skills':
-            formContent = `
-                <h3>Skills</h3>
-                <div class="form-group">
-                    <label>Category</label>
-                    <input type="text" name="category" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="skills-container" id="skills-${sectionId}">
-                    <div class="skill-item">
-                        <input type="text" name="skill" placeholder="Enter skill" onchange="updateFormData('${sectionId}'); generateResume();">
-                    </div>
-                </div>
-                <button class="add-skill-btn" onclick="addSkillField('${sectionId}')">Add Skill</button>
-            `;
-            break;
-        }
-        
-        return formContent;
+// Function to update sectionConfigs with a new custom section
+function updateConfigWithCustomSection(sectionKey, sectionTitle) {
+    if (!sectionKey || !sectionTitle) {
+        console.error("Invalid section key or title.");
+        return;
     }
+
+    // Add the new section to formData if it doesn't exist
+    if (!formData[sectionKey]) {
+        formData[sectionKey] = [];
+    }
+
+    // Add the new section to sectionCounter if it doesn't exist
+    if (sectionCounter[sectionKey] === undefined) {
+        sectionCounter[sectionKey] = 0;
+    }
+
+    // Add the new section to sectionConfigs with default fields
+    sectionConfigs[sectionKey] = {
+        title: sectionTitle,
+        fields: [
+            { name: 'title', label: `${sectionTitle} Title`, type: 'text' },
+            { name: 'subtitle', label: 'Subtitle', type: 'text' },
+            { name: 'duration', label: 'Duration', type: 'text' },
+            { name: 'location', label: 'Location', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+            { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+            { name: 'tags', label: 'Tags (comma-separated)', type: 'text' }
+        ]
+    };
+
+    // Update the section order to include the new section
+    if (!sectionOrder.includes(sectionKey)) {
+        sectionOrder.push(sectionKey);
+    }
+
+    console.log(`Added new section type: ${sectionKey}`);
+    console.log(sectionConfigs);
+}
+
+// Modify getFormContent to use the global sectionConfigs instead of a local variable
+function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
+    // Use the global sectionConfigs
+    
+    // If the section type doesn't exist in the config, create it
+    if (!sectionConfigs[type]) {
+        updateConfigWithCustomSection(type, sectionTitle);
+    }
+
+    const config = sectionConfigs[type];
+
+    // Handle the special case for skills
+    if (config.custom) {
+        return `
+            <h3>Skills</h3>
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" name="category" onchange="updateFormData('${sectionId}'); generateResume();">
+            </div>
+            <div class="skills-container" id="skills-${sectionId}">
+                <div class="skill-item">
+                    <input type="text" name="skill" placeholder="Enter skill" onchange="updateFormData('${sectionId}'); generateResume();">
+                </div>
+            </div>
+            <button class="add-skill-btn" onclick="addSkillField('${sectionId}')">Add Skill</button>
+        `;
+    }
+
+    // Generate form for standard sections
+    let formContent = `<h3>${config.title}</h3>`;
+
+    config.fields.forEach(field => {
+        if (field.type === 'textarea') {
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <textarea name="${field.name}" rows="${field.rows}" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
+                </div>
+            `;
+        } else {
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <input type="${field.type}" name="${field.name}" onchange="updateFormData('${sectionId}'); generateResume();">
+                </div>
+            `;
+        }
+    });
+
+    return formContent;
+}
+
+// Update addCustomSection to use updateConfigWithCustomSection
+function addCustomSection() {
+    const sectionName = prompt("Enter the name of the new section:");
+    
+    if (sectionName && sectionName.trim() !== "") {
+        const formattedName = sectionName.toLowerCase().replace(/\s+/g, '_'); // Convert to lowercase and replace spaces with underscores
+        
+        // Create a new button dynamically and add it to the sidebar
+        const sidebar = document.querySelector(".action-buttons");
+        const newButton = document.createElement("button");
+        newButton.className = "add-btn";
+        newButton.textContent = `Add ${sectionName}`;
+        newButton.onclick = function() {
+            addSection(formattedName);
+        };
+        
+        sidebar.appendChild(newButton);
+
+        // Update the config with the new section
+        updateConfigWithCustomSection(formattedName, sectionName);
+    }
+}
+
+
+// Helper function to update section name in the UI
+function updateSectionName(sectionId, newName) {
+    const sectionHeader = document.querySelector(`#section-${sectionId} .section-header h2`);
+    if (sectionHeader && newName) {
+        sectionHeader.textContent = newName;
+    }
+}
 
 function toggleSection(sectionId) {
     const content = document.getElementById(`content-${sectionId}`);
@@ -376,20 +370,141 @@ function updateFormData(sectionId) {
 }
 
 
+// Function to update sectionConfigs with a new custom section
+function updateConfigWithCustomSection(sectionKey, sectionTitle) {
+    if (!sectionKey || !sectionTitle) {
+        console.error("Invalid section key or title.");
+        return;
+    }
+
+    // Add the new section to formData if it doesn't exist
+    if (!formData[sectionKey]) {
+        formData[sectionKey] = [];
+    }
+
+    // Add the new section to sectionCounter if it doesn't exist
+    if (sectionCounter[sectionKey] === undefined) {
+        sectionCounter[sectionKey] = 0;
+    }
+
+    // Add the new section to sectionConfigs with default fields
+    sectionConfigs[sectionKey] = {
+        title: sectionTitle,
+        fields: [
+            { name: 'title', label: `${sectionTitle} Title`, type: 'text' },
+            { name: 'subtitle', label: 'Subtitle', type: 'text' },
+            { name: 'duration', label: 'Duration', type: 'text' },
+            { name: 'location', label: 'Location', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+            { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+            { name: 'tags', label: 'Tags (comma-separated)', type: 'text' }
+        ]
+    };
+
+    // Update the section order to include the new section
+    if (!sectionOrder.includes(sectionKey)) {
+        sectionOrder.push(sectionKey);
+    }
+
+    console.log(`Added new section type: ${sectionKey}`);
+    console.log(sectionConfigs);
+}
+
+// Modify getFormContent to use the global sectionConfigs instead of a local variable
+function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
+    // Use the global sectionConfigs
+    
+    // If the section type doesn't exist in the config, create it
+    if (!sectionConfigs[type]) {
+        updateConfigWithCustomSection(type, sectionTitle);
+    }
+
+    const config = sectionConfigs[type];
+
+    // Handle the special case for skills
+    if (config.custom) {
+        return `
+            <h3>Skills</h3>
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" name="category" onchange="updateFormData('${sectionId}'); generateResume();">
+            </div>
+            <div class="skills-container" id="skills-${sectionId}">
+                <div class="skill-item">
+                    <input type="text" name="skill" placeholder="Enter skill" onchange="updateFormData('${sectionId}'); generateResume();">
+                </div>
+            </div>
+            <button class="add-skill-btn" onclick="addSkillField('${sectionId}')">Add Skill</button>
+        `;
+    }
+
+    // Generate form for standard sections
+    let formContent = `<h3>${config.title}</h3>`;
+
+    config.fields.forEach(field => {
+        if (field.type === 'textarea') {
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <textarea name="${field.name}" rows="${field.rows}" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
+                </div>
+            `;
+        } else {
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <input type="${field.type}" name="${field.name}" onchange="updateFormData('${sectionId}'); generateResume();">
+                </div>
+            `;
+        }
+    });
+
+    return formContent;
+}
+
+// Update addCustomSection to use updateConfigWithCustomSection
+function addCustomSection() {
+    const sectionName = prompt("Enter the name of the new section:");
+    
+    if (sectionName && sectionName.trim() !== "") {
+        const formattedName = sectionName.toLowerCase().replace(/\s+/g, '_'); // Convert to lowercase and replace spaces with underscores
+        
+        // Create a new button dynamically and add it to the sidebar
+        const sidebar = document.querySelector(".action-buttons");
+        const newButton = document.createElement("button");
+        newButton.className = "add-btn";
+        newButton.textContent = `Add ${sectionName}`;
+        newButton.onclick = function() {
+            addSection(formattedName);
+        };
+        
+        sidebar.appendChild(newButton);
+
+        // Update the config with the new section
+        updateConfigWithCustomSection(formattedName, sectionName);
+    }
+}
+
+// Modify generateResume to handle custom sections
 function generateResume(order = sectionOrder) {
     order = getSectionOrder();
 
     const builder = new ResumeBuilder(currentConfig);
     
+    // Create a dynamic content object based on the sectionOrder
     const content = {
-        header: null,
-        education: [],
-        experience: [],    // Add these arrays
-        projects: [],      // to the content object
-        competitions: [],
-        skills: {},
-
+        header: null
     };
+    
+    // Initialize section arrays based on sectionConfigs
+    Object.keys(sectionConfigs).forEach(sectionKey => {
+        if (sectionKey !== 'personal' && sectionKey !== 'skills') {
+            content[sectionKey] = [];
+        }
+    });
+    
+    // Initialize skills as an object
+    content.skills = {};
 
     // Handle header (personal) section
     if (formData.personal.length > 0) {
@@ -405,72 +520,76 @@ function generateResume(order = sectionOrder) {
         };
     }
 
-    // Handle education section
-    if (formData.education.length > 0) {
-        content.education = formData.education.map(edu => ({
-            school: edu.fields.school || '',
-            degree: edu.fields.degree || '',
-            duration: edu.fields.duration || '',
-            location: edu.fields.location || '',
-            gpa: edu.fields.gpa || ''
-        }));
-    }
-
-    // Handle skills section
-    if (formData.skills.length > 0) {
-        content.skills = formData.skills.reduce((acc, skillSection) => {
-            if (skillSection.fields.category && skillSection.fields.skills) {
-                acc[skillSection.fields.category] = skillSection.fields.skills;
+    // Process all section types including custom ones
+    Object.keys(formData).forEach(sectionType => {
+        if (sectionType === 'personal') return; // Already handled above
+        
+        if (sectionType === 'skills') {
+            if (formData.skills.length > 0) {
+                content.skills = formData.skills.reduce((acc, skillSection) => {
+                    if (skillSection.fields.category && skillSection.fields.skills) {
+                        acc[skillSection.fields.category] = skillSection.fields.skills;
+                    }
+                    return acc;
+                }, {});
             }
-            return acc;
-        }, {});
+            return;
+        }
+        
+        if (sectionType === 'education') {
+            if (formData.education.length > 0) {
+                content.education = formData.education.map(edu => ({
+                    school: edu.fields.school || '',
+                    degree: edu.fields.degree || '',
+                    duration: edu.fields.duration || '',
+                    location: edu.fields.location || '',
+                    gpa: edu.fields.gpa || '',
+                    scoreType: edu.fields.scoreType || ''
+                }));
+            }
+            return;
+        }
+        
+        // Handle all other sections (standard and custom)
+        if (formData[sectionType] && formData[sectionType].length > 0 && sectionType !== 'education') {
+            content[sectionType] = formData[sectionType].map(item => ({
+                title: item.fields.title || '',
+                subtitle: item.fields.subtitle || '',
+                duration: item.fields.duration || '',
+                location: item.fields.location || '',
+                description: item.fields.description || '',
+                bullets: Array.isArray(item.fields.bullets) ? item.fields.bullets : 
+                         (typeof item.fields.bullets === 'string' ? item.fields.bullets.split('\n').filter(b => b.trim() !== '') : []),
+                tags: item.fields.tags ? (typeof item.fields.tags === 'string' ? 
+                     item.fields.tags.split(',').map(tag => tag.trim()) : item.fields.tags) : []
+            }));
+        }
+    });
+
+    // Ensure all required properties exist in content to prevent jsPDF errors
+    if (!content.education) content.education = [];
+    if (!content.experience) content.experience = [];
+    if (!content.projects) content.projects = [];
+    if (!content.competitions) content.competitions = [];
+    
+    // Check for any custom sections in sectionOrder and ensure they exist in content
+    order.forEach(section => {
+        if (!content[section] && section !== 'header' && section !== 'skills') {
+            content[section] = [];
+        }
+    });
+
+    try {
+        // Render all content at once
+        builder.renderContent(content, order);
+        
+        const dataUrl = builder.getDataUrl();
+        document.getElementById('pdfPreview').src = dataUrl;
+    } catch (error) {
+        console.error("Error generating resume:", error);
+        alert("There was an error generating the resume. Please check the console for details.");
     }
-
-    // Add experience to content object
-    if (formData.experience.length > 0) {
-        content.experience = formData.experience.map(exp => ({
-            title: exp.fields.title || '',
-            subtitle: exp.fields.subtitle || '',
-            duration: exp.fields.duration || '',
-            location: exp.fields.location || '',
-            description: exp.fields.description || '',
-            bullets: exp.fields.bullets || [],
-            tags: exp.fields.tags ? exp.fields.tags.split(',').map(tag => tag.trim()) : []
-        }));
-    }
-
-    // Add projects to content object
-    if (formData.projects.length > 0) {
-        content.projects = formData.projects.map(proj => ({
-            title: proj.fields.title || '',
-            subtitle: proj.fields.subtitle || '',
-            duration: proj.fields.duration || '',
-            location: proj.fields.location || '',
-            description: proj.fields.description || '',
-            bullets: proj.fields.bullets || [],
-            tags: proj.fields.tags ? proj.fields.tags.split(',').map(tag => tag.trim()) : []
-        }));
-    }
-
-    // Add competitions to content object
-    if (formData.competitions.length > 0) {
-        content.competitions = formData.competitions.map(comp => ({
-            title: comp.fields.title || '',
-            subtitle: comp.fields.subtitle || '',
-            duration: comp.fields.duration || '',
-            location: comp.fields.location || '',
-            description: comp.fields.description || '',
-            bullets: comp.fields.bullets || [],
-            tags: comp.fields.tags ? comp.fields.tags.split(',').map(tag => tag.trim()) : []
-
-        }));
-    }
-
-    // Render all content at once
-    builder.renderContent(content, order);
-
-    const dataUrl = builder.getDataUrl();
-    document.getElementById('pdfPreview').src = dataUrl;
+    
     return builder;
 }
 function downloadPDF() {

@@ -16,6 +16,7 @@ const demoJSON = {
             degree: "Master of Science in Aeronautics and Astronautics",
             duration: "2022-2024",
             location: "Cambridge, MA, USA",
+            scoreType: "CGPA",
             gpa: "3.92/4.0"
         },
         {
@@ -23,6 +24,7 @@ const demoJSON = {
             degree: "High School Diploma - Advanced Placement",
             duration: "2019",
             location: "Boston, MA, USA",
+            scoreType: "Percentage",
             gpa: "4.0/4.0"
         }
     ],

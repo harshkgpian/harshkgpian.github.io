@@ -35,10 +35,15 @@
                     <button onclick="addSection('competitions')" class="add-btn">
                         Add Competition
                     </button>
+                    
 
                 </div>
                 
                 <div class="generate-buttons">
+                    <button onclick="addCustomSection()" class="btn-btn">
+                        Add Custom Section
+                    </button>
+                    
                     <button onclick="openConfigModal()" class="btn-btn">
                         Set Layout
                     </button>
@@ -88,6 +93,12 @@
                         <option value="a4">A4</option>
                         <option value="letter">Letter</option>
                     </select>
+                </div>
+                <div class="config-group">
+                    <label>Left Margin:</label>
+                    <input type="number" id="marginLeft" value="20" step="1">
+                    <label>Right Margin:</label>
+                    <input type="number" id="marginRight" value="20" step="1">
                 </div>
             </div>
             <!-- Add this inside the config-section for Header Settings -->

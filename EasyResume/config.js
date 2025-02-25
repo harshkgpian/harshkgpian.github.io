@@ -6,9 +6,9 @@ const RESUME_CONFIG = {
         orientation: 'portrait',
         margins: {
             top: 15,
-            right: 10,
+            right: 7,
             bottom: 15,
-            left: 10
+            left: 7
         }
     },
     fonts: {
@@ -105,6 +105,11 @@ function closeConfigModal() {
 }
 
 function loadCurrentConfig() {
+    document.getElementById('pageFormat').value = currentConfig.page.format;
+
+    // Margin Settings
+    document.getElementById('marginRight').value = currentConfig.page.margins.right;
+    document.getElementById('marginLeft').value = currentConfig.page.margins.left;
     // Font Settings
     document.getElementById('headerFont').value = currentConfig.fonts.header.style;
     document.getElementById('headerWeight').value = currentConfig.fonts.header.weight;
@@ -161,9 +166,9 @@ function saveConfig() {
             orientation: 'portrait',
             margins: {
                 top: 15,
-                right: 15,
+                right: Number(document.getElementById('marginRight').value),
                 bottom: 15,
-                left: 15
+                left: Number(document.getElementById('marginLeft').value)
             }
         },
         fonts: {
