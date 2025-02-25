@@ -493,3 +493,59 @@ body {
 .custom-modal #submitBtn:hover {
     background-color: #45a049;
 }
+
+.bullets-container {
+    margin-bottom: 10px;
+}
+.bullet-item {
+    margin-bottom: 5px;
+}
+.bullet-input-container {
+    display: flex;
+    align-items: center;
+}
+.bullet-input {
+    flex-grow: 1;
+    margin-right: 5px;
+}
+.remove-bullet-btn {
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-bullet-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+.bullet-input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.bullet-input {
+    flex-grow: 1;
+}
+
+.bullet-width-info {
+    margin: 0 10px;
+    font-size: 0.8em;
+    min-width: 45px;
+}
+
+.remove-bullet-btn {
+    margin-left: 5px;
+}

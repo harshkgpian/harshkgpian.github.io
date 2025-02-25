@@ -21,7 +21,6 @@ const formData = {
 
 let sectionOrder = ['header', 'education', 'experience', 'projects', 'competitions', 'skills'];
 
-// Define sectionConfigs as a global variable at the top with other globals
 let sectionConfigs = {
     'personal': { title: 'Personal Information', fields: [ 
         { name: 'name', label: 'Full Name', type: 'text' }, 
@@ -107,10 +106,74 @@ function updateConfigWithCustomSection(sectionKey, sectionTitle) {
     console.log(sectionConfigs);
 }
 
-// Modify getFormContent to use the global sectionConfigs instead of a local variable
-function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
-    // Use the global sectionConfigs
+// Add a function to handle bullet point fields
+function addBulletField(sectionId, container, existingText = '') {
+    const bulletItem = document.createElement('div');
+    bulletItem.className = 'bullet-item';
+    bulletItem.innerHTML = `
+        <div class="bullet-input-container">
+            <input type="text" name="bullet" class="bullet-input" value="${existingText}" 
+                   placeholder="Enter bullet point" onchange="updateFormData('${sectionId}'); generateResume(); updateBulletWidthInfo(this);">
+            <span class="bullet-width-info">0%</span>
+            <button type="button" class="remove-bullet-btn" onclick="removeBullet(this)">×</button>
+        </div>
+    `;
+    container.appendChild(bulletItem);
     
+    // Initialize width info
+    if (existingText) {
+        updateBulletWidthInfo(bulletItem.querySelector('.bullet-input'));
+    }
+}
+
+function updateBulletWidthInfo(inputElement) {
+    // Get the relevant elements
+    const bulletItem = inputElement.closest('.bullet-item');
+    const widthInfoSpan = bulletItem.querySelector('.bullet-width-info');
+    const sectionId = bulletItem.closest('.section-content').id.replace('content-', '');
+    
+    // Get the section type
+    const type = sectionId.split('-')[0];
+    
+    // Create a temporary ResumeBuilder instance to calculate width
+    const tempBuilder = new ResumeBuilder(currentConfig);
+    
+    // Set font to normal as used for bullets
+    tempBuilder.setFont('normal');
+    
+    // Calculate available width for bullet text
+    const availableWidth = tempBuilder.contentWidth - tempBuilder.config.spacing.indentation;
+    
+    // Calculate actual width of the text
+    const actualTextWidth = tempBuilder.doc.getTextWidth(inputElement.value.trim());
+    
+    // Calculate percentage and round to nearest integer
+    const percentageUsed = Math.round((actualTextWidth / availableWidth) * 100);
+    
+    // Update the display
+    widthInfoSpan.textContent = `${percentageUsed}%`;
+    
+    // Add visual indicator for width
+    if (percentageUsed > 100) {
+        widthInfoSpan.style.color = 'red';
+        widthInfoSpan.textContent = `${percentageUsed}% (will wrap)`;
+    } else if (percentageUsed > 85) {
+        widthInfoSpan.style.color = 'orange';
+    } else {
+        widthInfoSpan.style.color = 'green';
+    }
+}
+// Function to remove a bullet point
+function removeBullet(button) {
+    const bulletItem = button.parentElement.parentElement;
+    const sectionId = bulletItem.closest('.section-content').id.replace('content-', '');
+    bulletItem.remove();
+    updateFormData(sectionId);
+    generateResume();
+}
+
+// Modify getFormContent to use individual bullet point fields instead of textarea
+function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
     // If the section type doesn't exist in the config, create it
     if (!sectionConfigs[type]) {
         updateConfigWithCustomSection(type, sectionTitle);
@@ -120,6 +183,7 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
 
     // Handle the special case for skills
     if (config.custom) {
+        // Skills section code remains the same
         return `
             <h3>Skills</h3>
             <div class="form-group">
@@ -139,7 +203,18 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
     let formContent = `<h3>${config.title}</h3>`;
 
     config.fields.forEach(field => {
-        if (field.type === 'textarea') {
+        if (field.name === 'bullets') {
+            // Replace textarea with container for individual bullet points
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <div class="bullets-container" id="bullets-${sectionId}">
+                        <!-- Bullet points will be added here -->
+                    </div>
+                    <button type="button" class="add-bullet-btn" onclick="addBulletField('${sectionId}', document.getElementById('bullets-${sectionId}'))">Add Bullet Point</button>
+                </div>
+            `;
+        } else if (field.type === 'textarea') {
             formContent += `
                 <div class="form-group">
                     <label>${field.label}</label>
@@ -372,7 +447,6 @@ function removeSection(sectionId) {
     generateResume();
 }
 
-// Modify updateFormData to include skills category and personal name updates
 function updateFormData(sectionId) {
     const section = document.getElementById(sectionId);
     const [type] = sectionId.split('-');
@@ -382,13 +456,12 @@ function updateFormData(sectionId) {
         fields: {}
     };
     
-    const inputs = section.querySelectorAll('input, textarea');
+    // Process all inputs except bullets
+    const inputs = section.querySelectorAll('input:not([name="bullet"]), textarea');
     inputs.forEach(input => {
         if (input.name === 'skill') {
             if (!data.fields.skills) data.fields.skills = [];
             if (input.value) data.fields.skills.push(input.value);
-        } else if (input.name === 'bullets') {
-            data.fields.bullets = input.value.split('\n').filter(bullet => bullet.trim() !== '');
         } else {
             data.fields[input.name] = input.value;
             
@@ -402,6 +475,16 @@ function updateFormData(sectionId) {
         }
     });
     
+    // Process bullet points separately
+    const bulletInputs = section.querySelectorAll('input[name="bullet"]');
+    if (bulletInputs.length > 0) {
+        data.fields.bullets = Array.from(bulletInputs)
+            .map(input => input.value)
+            .filter(value => value.trim() !== '');
+    } else {
+        data.fields.bullets = [];
+    }
+    
     const existingIndex = formData[type].findIndex(item => item.id === sectionId);
     if (existingIndex !== -1) {
         formData[type][existingIndex] = data;
@@ -411,7 +494,6 @@ function updateFormData(sectionId) {
 }
 
 
-// Function to update sectionConfigs with a new custom section
 function updateConfigWithCustomSection(sectionKey, sectionTitle) {
     if (!sectionKey || !sectionTitle) {
         console.error("Invalid section key or title.");
@@ -451,59 +533,9 @@ function updateConfigWithCustomSection(sectionKey, sectionTitle) {
     console.log(sectionConfigs);
 }
 
-// Modify getFormContent to use the global sectionConfigs instead of a local variable
-function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
-    // Use the global sectionConfigs
-    
-    // If the section type doesn't exist in the config, create it
-    if (!sectionConfigs[type]) {
-        updateConfigWithCustomSection(type, sectionTitle);
-    }
-
-    const config = sectionConfigs[type];
-
-    // Handle the special case for skills
-    if (config.custom) {
-        return `
-            <h3>Skills</h3>
-            <div class="form-group">
-                <label>Category</label>
-                <input type="text" name="category" onchange="updateFormData('${sectionId}'); generateResume();">
-            </div>
-            <div class="skills-container" id="skills-${sectionId}">
-                <div class="skill-item">
-                    <input type="text" name="skill" placeholder="Enter skill" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            </div>
-            <button class="add-skill-btn" onclick="addSkillField('${sectionId}')">Add Skill</button>
-        `;
-    }
-
-    // Generate form for standard sections
-    let formContent = `<h3>${config.title}</h3>`;
-
-    config.fields.forEach(field => {
-        if (field.type === 'textarea') {
-            formContent += `
-                <div class="form-group">
-                    <label>${field.label}</label>
-                    <textarea name="${field.name}" rows="${field.rows}" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
-                </div>
-            `;
-        } else {
-            formContent += `
-                <div class="form-group">
-                    <label>${field.label}</label>
-                    <input type="${field.type}" name="${field.name}" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-            `;
-        }
-    });
-
-    return formContent;
-}
 
 
+ 
 
 // Modify generateResume to handle custom sections
 function generateResume(order = sectionOrder) {
@@ -612,6 +644,7 @@ function generateResume(order = sectionOrder) {
     
     return builder;
 }
+
 function downloadPDF() {
     const builder = generateResume();
     builder.save('resume.pdf');

@@ -166,83 +166,105 @@ function populateFromDemoJSON() {
         updateFormData(sectionId);
     });
 
-    // Populate Experience
-    demoJSON.experience.forEach(experience => {
-        addSection('experience');
-        const sectionId = `experience-${sectionCounter.experience - 1}`;
-        const section = document.getElementById(sectionId);
-        
-        Object.entries(experience).forEach(([key, value]) => {
-            if (key === 'bullets') {
-                const textarea = section.querySelector('textarea[name="bullets"]');
-                if (textarea) {
-                    textarea.value = value.join('\n');
-                }
-            } else {
-                const input = section.querySelector(`input[name="${key}"]`);
-                if (input) {
-                    input.value = value;
-                }
-            }
-        });
-        updateFormData(sectionId);
-    });
+// Modify populateFromDemoJSON() to handle individual bullet points
 
-
-    // Populate Projects
-    demoJSON.projects.forEach(project => {
-        addSection('projects');
-        const sectionId = `projects-${sectionCounter.projects - 1}`;
-        const section = document.getElementById(sectionId);
-        
-        Object.entries(project).forEach(([key, value]) => {
-            if (key === 'bullets') {
-                const textarea = section.querySelector('textarea[name="bullets"]');
-                if (textarea) {
-                    textarea.value = value.join('\n');
-                }
-            } else if (key === 'tags') {
-                const input = section.querySelector('input[name="tags"]');
-                if (input) {
-                    input.value = value.join(', ');
-                }
-            } else {
-                const input = section.querySelector(`input[name="${key}"]`);
-                const textarea = section.querySelector(`textarea[name="${key}"]`);
-                if (input) {
-                    input.value = value;
-                } else if (textarea) {
-                    textarea.value = value;
-                }
+// For Experience sections
+demoJSON.experience.forEach(experience => {
+    addSection('experience');
+    const sectionId = `experience-${sectionCounter.experience - 1}`;
+    const section = document.getElementById(sectionId);
+    
+    Object.entries(experience).forEach(([key, value]) => {
+        if (key === 'bullets') {
+            // Find the bullets container
+            const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
+            if (bulletsContainer) {
+                // Clear any default bullet points
+                bulletsContainer.innerHTML = '';
+                
+                // Add each bullet point as a separate field
+                value.forEach(bulletText => {
+                    addBulletField(sectionId, bulletsContainer, bulletText);
+                });
             }
-        });
-        updateFormData(sectionId);
-    });
-
-    // Populate Competitions
-    demoJSON.competitions.forEach(competition => {
-        addSection('competitions');
-        const sectionId = `competitions-${sectionCounter.competitions - 1}`;
-        const section = document.getElementById(sectionId);
-        
-        Object.entries(competition).forEach(([key, value]) => {
-            if (key === 'bullets') {
-                const textarea = section.querySelector('textarea[name="bullets"]');
-                if (textarea) {
-                    textarea.value = value.join('\n');
-                }
-            } else {
-                const input = section.querySelector(`input[name="${key}"]`);
-                const textarea = section.querySelector(`textarea[name="${key}"]`);
-                if (input) {
-                    input.value = value;
-                } else if (textarea) {
-                    textarea.value = value;
-                }
+        } else {
+            const input = section.querySelector(`input[name="${key}"]`);
+            if (input) {
+                input.value = value;
             }
-        });
-        updateFormData(sectionId);
+        }
     });
+    updateFormData(sectionId);
+});
+
+// Similar changes for Projects section
+demoJSON.projects.forEach(project => {
+    addSection('projects');
+    const sectionId = `projects-${sectionCounter.projects - 1}`;
+    const section = document.getElementById(sectionId);
+    
+    Object.entries(project).forEach(([key, value]) => {
+        if (key === 'bullets') {
+            // Find the bullets container
+            const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
+            if (bulletsContainer) {
+                // Clear any default bullet points
+                bulletsContainer.innerHTML = '';
+                
+                // Add each bullet point as a separate field
+                value.forEach(bulletText => {
+                    addBulletField(sectionId, bulletsContainer, bulletText);
+                });
+            }
+        } else if (key === 'tags') {
+            const input = section.querySelector('input[name="tags"]');
+            if (input) {
+                input.value = value.join(', ');
+            }
+        } else {
+            const input = section.querySelector(`input[name="${key}"]`);
+            const textarea = section.querySelector(`textarea[name="${key}"]`);
+            if (input) {
+                input.value = value;
+            } else if (textarea) {
+                textarea.value = value;
+            }
+        }
+    });
+    updateFormData(sectionId);
+});
+
+// And for Competitions section
+demoJSON.competitions.forEach(competition => {
+    addSection('competitions');
+    const sectionId = `competitions-${sectionCounter.competitions - 1}`;
+    const section = document.getElementById(sectionId);
+    
+    Object.entries(competition).forEach(([key, value]) => {
+        if (key === 'bullets') {
+            // Find the bullets container
+            const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
+            if (bulletsContainer) {
+                // Clear any default bullet points
+                bulletsContainer.innerHTML = '';
+                
+                // Add each bullet point as a separate field
+                value.forEach(bulletText => {
+                    addBulletField(sectionId, bulletsContainer, bulletText);
+                });
+            }
+        } else {
+            const input = section.querySelector(`input[name="${key}"]`);
+            const textarea = section.querySelector(`textarea[name="${key}"]`);
+            if (input) {
+                input.value = value;
+            } else if (textarea) {
+                textarea.value = value;
+            }
+        }
+    });
+    updateFormData(sectionId);
+}); 
     
     // Populate Skills
     demoJSON.skills.forEach(skillCategory => {

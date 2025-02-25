@@ -18,7 +18,7 @@ class ResumeBuilder {
 
     // Modify the renderContent method to include skills
     
-    renderContent(content, sectionOrder = ['header', 'education', 'experience', 'projects', 'competitions','skills']) {
+    renderContent(content, sectionOrder = ['header', 'education', 'experience', 'projects', 'competitions','skills', ]) {
         console.log(content);
         this.content = content;
         
@@ -437,14 +437,34 @@ class ResumeBuilder {
             }
     
             // Render bullet points if available
+            // Add this inside the bullet points rendering section in addGeneralSection
             if (bullets && bullets.length > 0) {
                 this.setFont('normal');
                 bullets.forEach(bullet => {
+                    // Get total available width for bullet text
+                    const availableWidth = this.contentWidth - this.config.spacing.indentation;
+                    
+                    // Calculate the actual width of the bullet text with current font
+                    this.setFont('normal'); // Ensure we're using the correct font for measurement
+                    const actualTextWidth = this.doc.getTextWidth(bullet.trim());
+                    
+                    // Log the width information
+                    console.log({
+                        bulletText: bullet.trim().substring(0, 30) + (bullet.trim().length > 30 ? '...' : ''),
+                        fontName: this.doc.getFont().fontName,
+                        fontSize: this.doc.getFontSize(),
+                        textOccupiedWidth: actualTextWidth,
+                        availableWidth: availableWidth,
+                        exceedsWidth: actualTextWidth > availableWidth,
+                        percentageUsed: Math.round((actualTextWidth / availableWidth) * 100) + '%'
+                    });
+
+                    // Original bullet point rendering code continues...
                     const bulletText = this.doc.splitTextToSize(
                         bullet.trim(),
-                        this.contentWidth - this.config.spacing.indentation
+                        availableWidth
                     );
-    
+
                     bulletText.forEach((line, index) => {
                         this.checkAndAddPage();
                         if (index === 0) {
