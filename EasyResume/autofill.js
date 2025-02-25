@@ -36,9 +36,9 @@ const demoJSON = {
             duration: "May 2023 - August 2023",
             location: "Mountain View, CA",
             bullets: [
-                "Developed computational models for electric propulsion systems using MATLAB simulation environment",
-                "Conducted performance analysis of hybrid propulsion systems through Statistical Analysis and modeling",
-                "Created predictive maintenance algorithms using Machine Learning and Data Analytics"
+                "Developed advanced computational models for electric propulsion systems using MATLAB, achieving 25% improved accuracy.",
+                "Conducted comprehensive performance analysis of hybrid propulsion systems through Statistical Analysis and modeling.",
+                "Implemented predictive maintenance algorithms using Machine Learning, reducing system downtime by 40% through analytics."
             ],
             tags: ["MATLAB", "SIMULINK", "Machine Learning", "Statistical Analysis"]
         },
@@ -49,9 +49,9 @@ const demoJSON = {
             duration: "June 2023 - July 2023",
             location: "Cincinnati, OH",
             bullets: [
-                "Designed optimization algorithms for turbine blade cooling systems using Python and NumPy",
-                "Performed thermal analysis using ANSYS and Fluent for next-generation engine components",
-                "Developed automated reporting system for turbine performance metrics using CFD analysis tools"
+                "Designed and implemented optimization algorithms for turbine blade cooling systems using Python and NumPy libraries.",
+                "Performed comprehensive thermal analysis using ANSYS and Fluent for next-generation engine component validation.",
+                "Developed automated reporting system for turbine performance metrics, improving analysis efficiency by 50% using CFD."
             ],
             tags: ["Python", "CFD", "ANSYS", "Fluent", "NumPy"]
         },
@@ -61,9 +61,9 @@ const demoJSON = {
             duration: "May 2022 - Aug 2022",
             location: "Seattle, WA",
             bullets: [
-                "Implemented Computer Vision algorithms for autonomous aircraft navigation systems",
-                "Developed deep learning models for obstacle detection using PyTorch and TensorFlow",
-                "Created GUI-based testing platform using Python and OpenCV for vision system validation"
+                "Implemented advanced Computer Vision algorithms for autonomous aircraft navigation systems with 95% accuracy rate.",
+                "Developed and optimized deep learning models for obstacle detection using PyTorch and TensorFlow frameworks.",
+                "Created comprehensive GUI-based testing platform using Python and OpenCV for vision system validation and testing."
             ],
             tags: ["PyTorch", "Python", "Computer Vision", "TensorFlow", "OpenCV"]
         }
@@ -75,9 +75,9 @@ const demoJSON = {
             subtitle: "Graduate Thesis Project",
             duration: "January 2024 - Present",
             bullets: [
-                "Designed novel turbofan architecture using Python and CFD achieving 15% improved fuel efficiency",
-                "Conducted detailed analysis using ANSYS CFX and FEA for performance validation",
-                "Optimized variable bypass mechanism using Computational Methods for multiple flight conditions"
+                "Designed a novel turbofan architecture using CFD, achieving 15% improved fuel efficiency, performance optimization.",
+                "Conducted detailed analysis using ANSYS CFX and FEA for performance validation, ensuring accuracy and optimization.",
+                "Optimized variable bypass mechanism using advanced Computational Methods for multiple flight conditions performance."
             ],
             tags: ["Python", "CFD", "ANSYS CFX", "FEA", "Computational Methods"]
         },
@@ -87,9 +87,9 @@ const demoJSON = {
             subtitle: "Advanced Controls Project",
             duration: "Sept 2022 - Dec 2022",
             bullets: [
-                "Developed adaptive control system for VTOL aircraft using MATLAB and SIMULINK",
-                "Implemented Control Systems algorithms for transition phase optimization",
-                "Validated system performance through Hardware-in-the-Loop simulation"
+                "Developed adaptive control system for VTOL aircraft using MATLAB and SIMULINK for enhanced stability performance.",
+                "Implemented advanced Control Systems algorithms for transition phase optimization in complex dynamic flight conditions.",
+                "Validated system performance through Hardware-in-the-Loop simulation, ensuring real-time control, precision, reliability."
             ],
             tags: ["MATLAB", "SIMULINK", "Control Systems", "VTOL", "Hardware-in-the-Loop"]
         }
@@ -108,9 +108,9 @@ const demoJSON = {
             duration: "Jan 2023 - May 2023",
             location: "Washington, DC",
             bullets: [
-                "Led team in designing innovative Electric Propulsion system architecture",
-                "Presented winning concept using System Design methodology at NASA headquarters",
-                "Developed comprehensive simulation framework using MATLAB and SIMULINK"
+                "Led team in designing innovative Electric Propulsion system architecture, achieving 30% improved efficiency metrics.",
+                "Presented winning concept using System Design methodology at NASA headquarters, receiving recognition for innovation.",
+                "Developed comprehensive simulation framework using MATLAB and SIMULINK for performance validation and testing."
             ],
             tags: ["Electric Propulsion", "System Design", "MATLAB", "SIMULINK"]
         },
@@ -120,8 +120,8 @@ const demoJSON = {
             duration: "March 2023 - Present",
             location: "Orlando, FL",
             bullets: [
-                "Authored paper on novel approach to supersonic aircraft noise reduction using CFD",
-                "Presented Aeroacoustics research findings at AIAA Aviation Forum 2023"
+                "Authored comprehensive paper on novel approach to supersonic aircraft noise reduction using advanced CFD techniques.",
+                "Presented groundbreaking Aeroacoustics research findings at AIAA Aviation Forum, receiving distinguished recognition."
             ],
             tags: ["Aeroacoustics", "CFD", "Technical Writing"]
         }
