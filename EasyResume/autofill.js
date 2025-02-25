@@ -36,9 +36,9 @@ const demoJSON = {
             duration: "May 2023 - August 2023",
             location: "Mountain View, CA",
             bullets: [
-                "Developed advanced computational models for electric propulsion systems using MATLAB, achieving 25% improved accuracy.",
+                "Developed advanced computational models for electric propulsion systems using MATLAB/SIMULINK, 95% accuracy.",
                 "Conducted comprehensive performance analysis of hybrid propulsion systems through Statistical Analysis and modeling.",
-                "Implemented predictive maintenance algorithms using Machine Learning, reducing system downtime by 40% through analytics."
+                "Implemented predictive maintenance algorithms using Machine Learning, reducing system time by 40% through analytics."
             ],
             tags: ["MATLAB", "SIMULINK", "Machine Learning", "Statistical Analysis"]
         },
