@@ -99,7 +99,7 @@ class ResumeBuilder {
         } else {
             this.doc.text(name, this.config.page.margins.left, this.currentY);
         }
-        this.currentY += headerConfig.spacing;
+        this.currentY += this.config.spacing.headerGap;
     
         if (contacts && contacts.length > 0) {
             this.checkAndAddPage();
@@ -117,11 +117,35 @@ class ResumeBuilder {
                 !contact.includes('github')
             );
     
-            let currentX = this.config.formatting.textAlign.header === 'center'
-                ? (this.pageWidth / 2) - (this.doc.getTextWidth(contacts.join(' ')) / 2)
-                : this.config.page.margins.left;
-    
             try {
+                // Calculate total width first
+                let totalWidth = 0;
+                const contactsToAdd = [
+                    { contact: emailContact, key: 'email' },
+                    { contact: phoneContact, key: 'phone' },
+                    { contact: linkedinContact, key: 'linkedin' },
+                    { contact: githubContact, key: 'github' }
+                ].filter(item => item.contact);
+    
+                // Calculate width for contacts with icons
+                contactsToAdd.forEach(item => {
+                    if (item.contact) {
+                        totalWidth += iconConfig.size + iconConfig.spacing; // Icon width + spacing
+                        totalWidth += this.doc.getTextWidth(item.contact) + iconConfig.contactSpacing; // Text width + spacing
+                    }
+                });
+    
+                // Calculate width for other contacts
+                if (otherContacts.length > 0) {
+                    const otherContactsText = otherContacts.join(headerConfig.contactSeparator);
+                    totalWidth += this.doc.getTextWidth(otherContactsText);
+                }
+    
+                // Calculate starting X position to center everything
+                let currentX = this.config.formatting.textAlign.header === 'center'
+                    ? (this.pageWidth / 2) - (totalWidth / 2)
+                    : this.config.page.margins.left;
+    
                 const addContactWithIcon = (contact, iconKey) => {
                     if (contact) {
                         this.doc.addImage(
@@ -139,10 +163,7 @@ class ResumeBuilder {
                 };
     
                 // Add contacts with their respective icons
-                addContactWithIcon(emailContact, 'email');
-                addContactWithIcon(phoneContact, 'phone');
-                addContactWithIcon(linkedinContact, 'linkedin');
-                addContactWithIcon(githubContact, 'github');
+                contactsToAdd.forEach(item => addContactWithIcon(item.contact, item.key));
     
                 // Add remaining contacts if any
                 if (otherContacts.length > 0) {
@@ -162,15 +183,15 @@ class ResumeBuilder {
                 }
             }
             
-            this.currentY += this.config.spacing.sectionGap;
+            this.currentY += this.config.spacing.headerGap;
         }
     }
-
+    
     addSection(title, content) {
         this.checkAndAddPage();
         this.setFont('sectionHeader');
         this.doc.text(title.toUpperCase(), this.config.page.margins.left, this.currentY);
-        this.currentY += this.config.spacing.headerGap;
+        this.currentY += this.config.spacing.sectionGap;
 
         if (this.config.divider.style === 'line') {
             this.addDivider();
@@ -191,17 +212,16 @@ class ResumeBuilder {
 
 
     addEducation(school, degree, duration, location, gpa = null, honors = []) {
-        const eduConfig = this.config.sections.education;
 
         this.checkAndAddPage();
         
         // Render school name
-        this.setFont(eduConfig.schoolStyle === 'bold' ? 'sectionHeader' : 'normal');
+        this.setFont('sectionTitle');
         this.doc.text(school, this.config.page.margins.left, this.currentY);
         
         // Render duration if available
         if (duration && this.config.formatting.dateAlignment === 'right') {
-            this.setFont(eduConfig.dateStyle === 'bold' ? 'sectionHeader' : 'normal');
+            this.setFont('sectionTitle');
             this.doc.text(duration, 
                 this.pageWidth - this.config.page.margins.right - this.doc.getTextWidth(duration), 
                 this.currentY
@@ -216,7 +236,7 @@ class ResumeBuilder {
         this.doc.text(degree, this.config.page.margins.left, this.currentY);
         
         // Add GPA in bold if available
-        if (gpa !== null && eduConfig.showGPA) {
+        if (gpa !== null) {
             const degreeWidth = this.doc.getTextWidth(degree);
             const gpaText = ` | CGPA: ${gpa}`;
             
@@ -231,7 +251,7 @@ class ResumeBuilder {
         
         // Render location
         if (location) {
-            this.setFont(eduConfig.locationStyle === 'italic' ? 'small' : 'normal');
+            this.setFont('small');
             this.doc.text(location, 
                 this.pageWidth - this.config.page.margins.right - this.doc.getTextWidth(location), 
                 this.currentY
@@ -241,25 +261,6 @@ class ResumeBuilder {
         this.currentY += this.config.spacing.lineGap;
 
         // Render honors if available
-        if (honors.length > 0 && eduConfig.showHonors) {
-            this.setFont('normal');
-            honors.forEach(honor => {
-                const honorText = this.doc.splitTextToSize(
-                    `• ${honor}`, 
-                    this.contentWidth - this.config.spacing.indentation
-                );
-                
-                honorText.forEach(line => {
-                    this.checkAndAddPage();
-                    this.doc.text(
-                        line,
-                        this.config.page.margins.left + this.config.spacing.indentation,
-                        this.currentY
-                    );
-                    this.currentY += this.config.spacing.lineGap;
-                });
-            });
-        }
 
         this.currentY += this.config.spacing.paragraphGap;
     }
@@ -347,7 +348,7 @@ class ResumeBuilder {
             this.checkAndAddPage();
     
             // Render title
-            this.setFont('sectionHeader');
+            this.setFont('sectionTitle');
             this.doc.text(title, this.config.page.margins.left, this.currentY);
     
             // Render duration on the right if available
@@ -364,7 +365,7 @@ class ResumeBuilder {
             if (subtitle || location) {
                 this.checkAndAddPage();
                 if (subtitle) {
-                    this.setFont('normal');
+                    this.setFont('small');
                     this.doc.text(subtitle, this.config.page.margins.left, this.currentY);
                 }
                 if (location) {

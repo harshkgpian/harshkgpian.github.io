@@ -44,10 +44,6 @@ function getFormContent(type, sectionId) {
                     <input type="tel" name="phone" onchange="updateFormData('${sectionId}'); generateResume();">
                 </div>
                 <div class="form-group">
-                    <label>Location</label>
-                    <input type="text" name="location" onchange="updateFormData('${sectionId}'); generateResume();">
-                </div>
-                <div class="form-group">
                     <label>GitHub</label>
                     <input type="text" name="github" onchange="updateFormData('${sectionId}'); generateResume();">
                 </div>
@@ -174,6 +170,10 @@ function getFormContent(type, sectionId) {
                 <div class="form-group">
                     <label>Achievements (one per line)</label>
                     <textarea name="bullets" rows="4" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Technologies Used (comma-separated)</label>
+                    <input type="text" name="tags" onchange="updateFormData('${sectionId}'); generateResume();">
                 </div>
             `;
             break;
@@ -390,7 +390,6 @@ function generateResume(order = sectionOrder) {
             contacts: [
                 personal.email,
                 personal.phone,
-                personal.location,
                 personal.github,
                 personal.linkedin
             ].filter(Boolean)
@@ -452,7 +451,9 @@ function generateResume(order = sectionOrder) {
             duration: comp.fields.duration || '',
             location: comp.fields.location || '',
             description: comp.fields.description || '',
-            bullets: comp.fields.bullets || []
+            bullets: comp.fields.bullets || [],
+            tags: comp.fields.tags ? comp.fields.tags.split(',').map(tag => tag.trim()) : []
+
         }));
     }
 
@@ -461,96 +462,10 @@ function generateResume(order = sectionOrder) {
 
     const dataUrl = builder.getDataUrl();
     document.getElementById('pdfPreview').src = dataUrl;
+    return builder;
 }
-function downloadPDF(order = sectionOrder) {
-    const builder = new ResumeBuilder(currentConfig);
-    
-    const content = {
-        header: null,
-        education: [],
-        experience: [],    // Add these arrays
-        projects: [],      // to the content object
-        competitions: [],
-        skills: {},
-
-    };
-
-    // Handle header (personal) section
-    if (formData.personal.length > 0) {
-        const personal = formData.personal[0].fields;
-        content.header = {
-            name: personal.name || '',
-            contacts: [
-                personal.email,
-                personal.phone,
-                personal.location,
-                personal.github,
-                personal.linkedin
-            ].filter(Boolean)
-        };
-    }
-
-    // Handle education section
-    if (formData.education.length > 0) {
-        content.education = formData.education.map(edu => ({
-            school: edu.fields.school || '',
-            degree: edu.fields.degree || '',
-            duration: edu.fields.duration || '',
-            location: edu.fields.location || '',
-            gpa: edu.fields.gpa || ''
-        }));
-    }
-
-    // Handle skills section
-    if (formData.skills.length > 0) {
-        content.skills = formData.skills.reduce((acc, skillSection) => {
-            if (skillSection.fields.category && skillSection.fields.skills) {
-                acc[skillSection.fields.category] = skillSection.fields.skills;
-            }
-            return acc;
-        }, {});
-    }
-
-    // Add experience to content object
-    if (formData.experience.length > 0) {
-        content.experience = formData.experience.map(exp => ({
-            title: exp.fields.title || '',
-            subtitle: exp.fields.subtitle || '',
-            duration: exp.fields.duration || '',
-            location: exp.fields.location || '',
-            description: exp.fields.description || '',
-            bullets: exp.fields.bullets || [],
-            tags: exp.fields.tags ? exp.fields.tags.split(',').map(tag => tag.trim()) : []
-        }));
-    }
-
-    // Add projects to content object
-    if (formData.projects.length > 0) {
-        content.projects = formData.projects.map(proj => ({
-            title: proj.fields.title || '',
-            subtitle: proj.fields.subtitle || '',
-            duration: proj.fields.duration || '',
-            location: proj.fields.location || '',
-            description: proj.fields.description || '',
-            bullets: proj.fields.bullets || [],
-            tags: proj.fields.tags ? proj.fields.tags.split(',').map(tag => tag.trim()) : []
-        }));
-    }
-
-    // Add competitions to content object
-    if (formData.competitions.length > 0) {
-        content.competitions = formData.competitions.map(comp => ({
-            title: comp.fields.title || '',
-            subtitle: comp.fields.subtitle || '',
-            duration: comp.fields.duration || '',
-            location: comp.fields.location || '',
-            description: comp.fields.description || '',
-            bullets: comp.fields.bullets || []
-        }));
-    }
-
-    // Render all content at once
-    builder.renderContent(content, order);
+function downloadPDF() {
+    const builder = generateResume();
     builder.save('resume.pdf');
 }
 document.addEventListener('DOMContentLoaded', () => {

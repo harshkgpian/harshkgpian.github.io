@@ -6,9 +6,9 @@ const RESUME_CONFIG = {
         orientation: 'portrait',
         margins: {
             top: 15,
-            right: 15,
+            right: 10,
             bottom: 15,
-            left: 15
+            left: 10
         }
     },
     fonts: {
@@ -24,6 +24,12 @@ const RESUME_CONFIG = {
             size: 12,
             color: '#000000'
         },
+        sectionTitle: {
+            style: 'times',
+            weight: 'bold',
+            size: 11,
+            color: '#000000'
+        },
         normal: {
             style: 'times',
             weight: 'normal',
@@ -32,14 +38,14 @@ const RESUME_CONFIG = {
         },
         small: {
             style: 'times',
-            weight: 'normal',
+            weight: 'italic',
             size: 9,
             color: '#000000'
         }
     },
     spacing: {
         sectionGap: 3,
-        headerGap: 2,
+        headerGap: 6,
         lineGap: 5,
         paragraphGap: 2,
         indentation: 2
@@ -61,11 +67,10 @@ const RESUME_CONFIG = {
     },
     sections: {
         header: {
-            spacing: 5,
             contactSeparator: ' | ',
             icons: {
                 size: 3,
-                spacing: 1,
+                spacing: 3,
                 contactSpacing: 2,
                 verticalOffset: 0.75,
                 urls: {
@@ -76,18 +81,6 @@ const RESUME_CONFIG = {
                 }
             }
         },
-        experience: {
-            companyStyle: 'bold',
-            dateStyle: 'bold',
-            locationStyle: 'italic'
-        },
-        education: {
-            schoolStyle: 'bold',
-            dateStyle: 'normal',
-            locationStyle: 'italic',
-            showGPA: true,
-            showHonors: false
-        }
     },
     limits: {
         maxBulletPoints: 6
@@ -103,22 +96,29 @@ function openConfigModal() {
 }
 
 function loadCurrentConfig() {
-
-    
     // Font Settings
     document.getElementById('headerFont').value = currentConfig.fonts.header.style;
+    document.getElementById('headerWeight').value = currentConfig.fonts.header.weight;
     document.getElementById('headerSize').value = currentConfig.fonts.header.size;
     document.getElementById('headerColor').value = currentConfig.fonts.header.color;
     
+    document.getElementById('sectionTitleFont').value = currentConfig.fonts.sectionTitle.style;
+    document.getElementById('sectionTitleWeight').value = currentConfig.fonts.sectionTitle.weight;
+    document.getElementById('sectionTitleSize').value = currentConfig.fonts.sectionTitle.size;
+    document.getElementById('sectionTitleColor').value = currentConfig.fonts.sectionTitle.color;
+    
     document.getElementById('sectionHeaderFont').value = currentConfig.fonts.sectionHeader.style;
+    document.getElementById('sectionHeaderWeight').value = currentConfig.fonts.sectionHeader.weight;
     document.getElementById('sectionHeaderSize').value = currentConfig.fonts.sectionHeader.size;
     document.getElementById('sectionHeaderColor').value = currentConfig.fonts.sectionHeader.color;
     
     document.getElementById('normalFont').value = currentConfig.fonts.normal.style;
+    document.getElementById('normalWeight').value = currentConfig.fonts.normal.weight;
     document.getElementById('normalSize').value = currentConfig.fonts.normal.size;
     document.getElementById('normalColor').value = currentConfig.fonts.normal.color;
     
     document.getElementById('smallFont').value = currentConfig.fonts.small.style;
+    document.getElementById('smallWeight').value = currentConfig.fonts.small.weight;
     document.getElementById('smallSize').value = currentConfig.fonts.small.size;
     document.getElementById('smallColor').value = currentConfig.fonts.small.color;
     
@@ -142,10 +142,6 @@ function loadCurrentConfig() {
     document.getElementById('iconSpacing').value = currentConfig.sections.header.icons.spacing;
     document.getElementById('contactSpacing').value = currentConfig.sections.header.icons.contactSpacing;
     document.getElementById('iconVerticalOffset').value = currentConfig.sections.header.icons.verticalOffset;
-    document.getElementById('emailIconUrl').value = currentConfig.sections.header.icons.urls.email;
-    document.getElementById('phoneIconUrl').value = currentConfig.sections.header.icons.urls.phone;
-    document.getElementById('linkedinIconUrl').value = currentConfig.sections.header.icons.urls.linkedin;
-    document.getElementById('githubIconUrl').value = currentConfig.sections.header.icons.urls.github;
 }
 
 function saveConfig() {
@@ -164,25 +160,31 @@ function saveConfig() {
         fonts: {
             header: {
                 style: document.getElementById('headerFont').value,
-                weight: 'bold',
+                weight: document.getElementById('headerWeight').value,
                 size: Number(document.getElementById('headerSize').value),
                 color: document.getElementById('headerColor').value
             },
             sectionHeader: {
                 style: document.getElementById('sectionHeaderFont').value,
-                weight: 'bold',
+                weight: document.getElementById('sectionHeaderWeight').value,
                 size: Number(document.getElementById('sectionHeaderSize').value),
                 color: document.getElementById('sectionHeaderColor').value
             },
+            sectionTitle: {
+                style: document.getElementById('sectionTitleFont').value,
+                weight: document.getElementById('sectionTitleWeight').value,
+                size: Number(document.getElementById('sectionTitleSize').value),
+                color: document.getElementById('sectionTitleColor').value
+            },
             normal: {
                 style: document.getElementById('normalFont').value,
-                weight: 'normal',
+                weight: document.getElementById('normalWeight').value,
                 size: Number(document.getElementById('normalSize').value),
                 color: document.getElementById('normalColor').value
             },
             small: {
                 style: document.getElementById('smallFont').value,
-                weight: 'normal',
+                weight: document.getElementById('smallWeight').value,
                 size: Number(document.getElementById('smallSize').value),
                 color: document.getElementById('smallColor').value
             }
@@ -211,7 +213,6 @@ function saveConfig() {
         },
         sections: {
             header: {
-                spacing: 5,
                 contactSeparator: ' | ',
                 icons: {
                     size: Number(document.getElementById('iconSize').value),
@@ -219,25 +220,13 @@ function saveConfig() {
                     contactSpacing: Number(document.getElementById('contactSpacing').value),
                     verticalOffset: Number(document.getElementById('iconVerticalOffset').value),
                     urls: {
-                        email: document.getElementById('emailIconUrl').value,
-                        phone: document.getElementById('phoneIconUrl').value,
-                        linkedin: document.getElementById('linkedinIconUrl').value,
-                        github: document.getElementById('githubIconUrl').value
+                        email: "https://cdn-icons-png.flaticon.com/128/712/712040.png",
+                        phone: "https://cdn-icons-png.flaticon.com/128/25/25377.png",
+                        linkedin: "https://cdn-icons-png.flaticon.com/128/61/61109.png",
+                        github: "https://cdn-icons-png.flaticon.com/128/733/733609.png"
                     }
                 }
             },
-            experience: {
-                companyStyle: 'bold',
-                dateStyle: 'bold',
-                locationStyle: 'italic'
-            },
-            education: {
-                schoolStyle: 'bold',
-                dateStyle: 'times',
-                locationStyle: 'italic',
-                showGPA: true,
-                showHonors: false
-            }
         },
         limits: {
             maxBulletPoints: 6

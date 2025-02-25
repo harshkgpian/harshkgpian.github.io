@@ -3,127 +3,123 @@
 const demoJSON = {
     personal: [
         {
-            name: "Harsh Raj",
-            email: "harshrjto@gmail.com",
-            phone: "+91 8750798260",
-            github: "github.com/harshkgpian",
-            linkedin: "linkedin.com/in/harsh-raj"
-
+            name: "JOHN DOE",
+            email: "johndoe@email.com",
+            phone: "+1 555-123-4567",
+            github: "github.com/johndoe-aero",
+            linkedin: "linkedin.com/in/john-doe-aero"
         }
     ],
     education: [
         {
-            school: "Indian Institute of Technology, Kharagpur",
-            degree: "Master of Technology in Aerospace Engineering",
+            school: "Massachusetts Institute of Technology",
+            degree: "Master of Science in Aeronautics and Astronautics",
             duration: "2022-2024",
-            location: "West Bengal, India",
-            gpa: "8.64/10"
+            location: "Cambridge, MA, USA",
+            gpa: "3.92/4.0"
         },
         {
-            school: "Bharat National Public School",
-            degree: "Class XII - Central Board of Secondary Education",
+            school: "Lincoln High School",
+            degree: "High School Diploma - Advanced Placement",
             duration: "2019",
-            location: "Delhi, India",
-            gpa: "9/10"
+            location: "Boston, MA, USA",
+            gpa: "4.0/4.0"
         }
     ],
     experience: [
         {
-            title: "DRDO",
-            subtitle: "Propulsion Research Intern",
-            duration: "May 2023 - June 2023",
-            location: "Bengaluru",
+            title: "NASA Ames Research Center",
+            subtitle: "Propulsion Systems Intern",
+            duration: "May 2023 - August 2023",
+            location: "Mountain View, CA",
             bullets: [
-                "Designed engine starting system for 5th Generation AMCA Fighter Aircraft using MATLAB/SIMULINK",
-                "Evaluated pressure loss in APU, ATS, and Engine connections through statistical health monitoring models",
-                "Implemented diagnostics models for APU performance optimization and system health assessment"
+                "Developed computational models for electric propulsion systems using MATLAB simulation environment",
+                "Conducted performance analysis of hybrid propulsion systems through Statistical Analysis and modeling",
+                "Created predictive maintenance algorithms using Machine Learning and Data Analytics"
             ],
-            tags: ["MATLAB", "SIMULINK", "Statistical Analysis"]
+            tags: ["MATLAB", "SIMULINK", "Machine Learning", "Statistical Analysis"]
         },
         {
-            title: "Aerostrovilos Pvt. Ltd",
-            subtitle: "Turbomachinery and Python Developer Intern",
+            title: "General Electric Aviation",
+            subtitle: "Turbine Design Engineering Intern",
             duration: "June 2023 - July 2023",
-            location: "IIT Madras, Chennai",
+            location: "Cincinnati, OH",
             bullets: [
-                "Developed Python program for Radial Inflow Turbines performance prediction using loss correlations",
-                "Performed CFD analysis in Fluent and evaluated turbine creep life using ANSYS Mechanical",
-                "Generated detailed contour plots from CSV data for comprehensive turbine analysis"
+                "Designed optimization algorithms for turbine blade cooling systems using Python and NumPy",
+                "Performed thermal analysis using ANSYS and Fluent for next-generation engine components",
+                "Developed automated reporting system for turbine performance metrics using CFD analysis tools"
             ],
-            tags: ["Python", "CFD", "ANSYS", "Fluent"]
+            tags: ["Python", "CFD", "ANSYS", "Fluent", "NumPy"]
         },
         {
-            title: "Artenal Robotics",
-            subtitle: "Computer Vision Intern",
+            title: "Boeing Research & Technology",
+            subtitle: "Autonomous Systems Intern",
             duration: "May 2022 - Aug 2022",
-            location: "Vancouver, Canada",
+            location: "Seattle, WA",
             bullets: [
-                "Implemented TensorFlow-based object detection and orientation detection algorithms for robotics applications",
-                "Custom trained YOLO v5/v6 CNN models using advanced transfer learning techniques",
-                "Developed KTkinter-based image annotation application for streamlined workflow management"
+                "Implemented Computer Vision algorithms for autonomous aircraft navigation systems",
+                "Developed deep learning models for obstacle detection using PyTorch and TensorFlow",
+                "Created GUI-based testing platform using Python and OpenCV for vision system validation"
             ],
-            tags: ["TensorFlow", "Python", "YOLO", "CNN", "KTkinter"]
+            tags: ["PyTorch", "Python", "Computer Vision", "TensorFlow", "OpenCV"]
         }
     ],
     projects: [
         {
-            title: "Mixed Flow Compressor with Crossover Diffuser for UAVs",
-            subtitle: "M.Tech Project",
-            duration: "July 2024 - Present",
+            title: "Advanced Turbofan Engine Design with Variable Bypass",
+            subtitle: "Graduate Thesis Project",
+            duration: "January 2024 - Present",
             bullets: [
-                "Designed compressor achieving 3.8 pressure ratio and 85% efficiency using Python-based meanline methodology",
-                "Performed CFD analysis using BladeGen, Turbogrid, and CFX for comprehensive stage optimization",
-                "Optimized crossover diffuser design for optimal pressure recovery under diameter constraints"
+                "Designed novel turbofan architecture using Python and CFD achieving 15% improved fuel efficiency",
+                "Conducted detailed analysis using ANSYS CFX and FEA for performance validation",
+                "Optimized variable bypass mechanism using Computational Methods for multiple flight conditions"
             ],
-            tags: ["Python", "CFD", "BladeGen", "Turbogrid", "CFX"]
+            tags: ["Python", "CFD", "ANSYS CFX", "FEA", "Computational Methods"]
         },
         {
-            title: "VTOL and Fixed Wing Hybrid Drone Design",
-            subtitle: "Flight Testing Lab Project",
-            duration: "Aug 2022 - Nov 2022",
+            title: "Autonomous VTOL Aircraft Control System",
+            subtitle: "Advanced Controls Project",
+            duration: "Sept 2022 - Dec 2022",
             bullets: [
-                "Developed MATLAB/SIMULINK simulation with Simscape for hybrid VTOL and fixed-wing drone",
-                "Implemented PID control systems for flight mode transitions using OpenVSP",
-                "Analyzed aerodynamic performance and flight characteristics through comprehensive simulation"
+                "Developed adaptive control system for VTOL aircraft using MATLAB and SIMULINK",
+                "Implemented Control Systems algorithms for transition phase optimization",
+                "Validated system performance through Hardware-in-the-Loop simulation"
             ],
-            tags: ["MATLAB", "SIMULINK", "Simscape", "OpenVSP", "PID Control"]
+            tags: ["MATLAB", "SIMULINK", "Control Systems", "VTOL", "Hardware-in-the-Loop"]
         }
     ],
     skills: [
         {
             category: "Languages and Tools",
-            skills: ["C/C++", "Python", "OpenCV", "Matplotlib", "TensorFlow", "SimScape", "JS", "PyTorch", "CFD", "FEM"]
-        },
-        {
-            category: "Software",
-            skills: ["MATLAB/SIMULINK", "Solidworks", "ANSYS", "OpenFOAM", "GasTurb", "OpenVSP", "Vrep(CoppeliaSim)"]
+            skills: ["Python", "MATLAB", "C++", "ANSYS", "PyTorch", "TensorFlow", "OpenCV", "CAD", "CFD", "FEA"]
         }
     ],
     competitions: [
         {
-            title: "AIAA Jet Engine Design Competition",
-            subtitle: "Top 3 Recognition",
-            duration: "Dec 2022 - Apr 2023",
-            location: "Boston, USA",
+            title: "NASA University Student Design Challenge",
+            subtitle: "First Place Winner",
+            duration: "Jan 2023 - May 2023",
+            location: "Washington, DC",
             bullets: [
-                "Designed Hybrid-Electric Propulsion System with Fuselage Boundary Layer Ingestion",
-                "Presented at AIAA AVIATION Forum and received recognition for technical excellence",
-                "Optimized gas turbine systems for improved efficiency through advanced aerodynamics"
-            ]
+                "Led team in designing innovative Electric Propulsion system architecture",
+                "Presented winning concept using System Design methodology at NASA headquarters",
+                "Developed comprehensive simulation framework using MATLAB and SIMULINK"
+            ],
+            tags: ["Electric Propulsion", "System Design", "MATLAB", "SIMULINK"]
         },
         {
-            title: "ASME GtIndia Conference",
-            subtitle: "Research Paper Presenter",
-            duration: "June 2023 - Present",
-            location: "Bengaluru, India",
+            title: "AIAA Design Competition",
+            subtitle: "Distinguished Paper Award",
+            duration: "March 2023 - Present",
+            location: "Orlando, FL",
             bullets: [
-                "Co-authored research paper on Strategic Design for BLI Engine-Based Hybrid Propulsion",
-                "Presented findings at prestigious ASME GTIndia 2023 conference"
-            ]
+                "Authored paper on novel approach to supersonic aircraft noise reduction using CFD",
+                "Presented Aeroacoustics research findings at AIAA Aviation Forum 2023"
+            ],
+            tags: ["Aeroacoustics", "CFD", "Technical Writing"]
         }
     ]
 };
-
 function populateFromDemoJSON() {
     // Clear existing form data
     document.getElementById('formContainer').innerHTML = '';
