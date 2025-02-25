@@ -70,8 +70,8 @@ const RESUME_CONFIG = {
             contactSeparator: ' | ',
             icons: {
                 size: 3,
-                spacing: 3,
-                contactSpacing: 2,
+                spacing: 1,
+                contactSpacing: 4,
                 verticalOffset: 0.75,
                 urls: {
                     email: "https://cdn-icons-png.flaticon.com/128/712/712040.png",
