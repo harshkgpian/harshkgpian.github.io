@@ -159,29 +159,70 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
     return formContent;
 }
 
-// Update addCustomSection to use updateConfigWithCustomSection
 function addCustomSection() {
-    const sectionName = prompt("Enter the name of the new section:");
+    // Create a modal dialog instead of using prompt
+    const modal = document.createElement("div");
+    modal.className = "custom-modal";
+    modal.style.position = "fixed";
+    modal.style.top = "0";
+    modal.style.left = "0";
+    modal.style.width = "100%";
+    modal.style.zIndex = "1000";
     
-    if (sectionName && sectionName.trim() !== "") {
-        const formattedName = sectionName.toLowerCase().replace(/\s+/g, '_'); // Convert to lowercase and replace spaces with underscores
-        
-        // Create a new button dynamically and add it to the sidebar
-        const sidebar = document.querySelector(".action-buttons");
-        const newButton = document.createElement("button");
-        newButton.className = "add-btn";
-        newButton.textContent = `Add ${sectionName}`;
-        newButton.onclick = function() {
-            addSection(formattedName);
-        };
-        
-        sidebar.appendChild(newButton);
-
-        // Update the config with the new section
-        updateConfigWithCustomSection(formattedName, sectionName);
-    }
+    modal.innerHTML = `
+        <div class="modal-content" style="margin: 20px auto; max-width: 500px;">
+            <h3>Add New Section</h3>
+            <input type="text" id="sectionNameInput" placeholder="Enter section name">
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancel</button>
+                <button id="submitBtn">Add Section</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Focus the input field
+    const inputField = document.getElementById("sectionNameInput");
+    inputField.focus();
+    
+    // Handle submit button click
+    document.getElementById("submitBtn").addEventListener("click", function() {
+        const sectionName = inputField.value;
+        if (sectionName && sectionName.trim() !== "") {
+            const formattedName = sectionName.toLowerCase().replace(/\s+/g, '_');
+            
+            // Create a new button and add it to the sidebar
+            const sidebar = document.querySelector(".action-buttons");
+            const newButton = document.createElement("button");
+            newButton.className = "add-btn";
+            newButton.textContent = `Add ${sectionName}`;
+            newButton.onclick = function() {
+                addSection(formattedName);
+            };
+            
+            sidebar.appendChild(newButton);
+            
+            // Update the config
+            updateConfigWithCustomSection(formattedName, sectionName);
+            
+            // Remove the modal
+            document.body.removeChild(modal);
+        }
+    });
+    
+    // Handle cancel button click
+    document.getElementById("cancelBtn").addEventListener("click", function() {
+        document.body.removeChild(modal);
+    });
+    
+    // Close modal if user clicks outside of it
+    modal.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
 }
-
 
 // Helper function to update section name in the UI
 function updateSectionName(sectionId, newName) {
@@ -462,28 +503,7 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
     return formContent;
 }
 
-// Update addCustomSection to use updateConfigWithCustomSection
-function addCustomSection() {
-    const sectionName = prompt("Enter the name of the new section:");
-    
-    if (sectionName && sectionName.trim() !== "") {
-        const formattedName = sectionName.toLowerCase().replace(/\s+/g, '_'); // Convert to lowercase and replace spaces with underscores
-        
-        // Create a new button dynamically and add it to the sidebar
-        const sidebar = document.querySelector(".action-buttons");
-        const newButton = document.createElement("button");
-        newButton.className = "add-btn";
-        newButton.textContent = `Add ${sectionName}`;
-        newButton.onclick = function() {
-            addSection(formattedName);
-        };
-        
-        sidebar.appendChild(newButton);
 
-        // Update the config with the new section
-        updateConfigWithCustomSection(formattedName, sectionName);
-    }
-}
 
 // Modify generateResume to handle custom sections
 function generateResume(order = sectionOrder) {
