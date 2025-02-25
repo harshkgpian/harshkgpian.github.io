@@ -216,22 +216,6 @@ function addSkillField(sectionId) {
     skillsContainer.appendChild(skillItem);
 }
 
-function removeSection(sectionId) {
-    const section = document.getElementById(sectionId);
-    const groupContainer = section.parentElement;
-    section.remove();
-    
-    // Remove from formData
-    const [type] = sectionId.split('-');
-    formData[type] = formData[type].filter(item => item.id !== sectionId);
-    
-    // Remove group container if empty
-    if (groupContainer.querySelectorAll('.section-form').length === 0) {
-        groupContainer.remove();
-    }
-    
-    generateResume();
-}
 
 // Modify updateSectionTitle function to include skills and personal sections
 function updateSectionTitle(sectionId, type, value, additionalValue = '') {
@@ -271,7 +255,10 @@ function addSection(type) {
     const formContainer = document.getElementById('formContainer');
     const sectionId = `${type}-${sectionCounter[type]++}`;
     
+    // First, check if group container exists
     let groupContainer = document.querySelector(`.${type}-group`);
+    
+    // If group container doesn't exist, create it
     if (!groupContainer) {
         groupContainer = document.createElement('div');
         groupContainer.className = `section-group ${type}-group`;
@@ -286,7 +273,9 @@ function addSection(type) {
         formContainer.appendChild(groupContainer);
     }
     
+    // Get the group content
     const groupContent = groupContainer.querySelector('.group-content');
+    
     const form = document.createElement('div');
     form.className = 'section-form';
     form.id = sectionId;
@@ -328,6 +317,24 @@ function addSection(type) {
     if (nameInput) {
         nameInput.addEventListener('input', () => updateSectionTitle(sectionId, type, nameInput.value));
     }
+}
+function removeSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const groupContainer = section.parentElement.parentElement; // Get the main group container
+    const type = sectionId.split('-')[0]; // Get section type
+    
+    section.remove();
+    
+    // Remove from formData
+    formData[type] = formData[type].filter(item => item.id !== sectionId);
+    
+    // Check if group content is empty
+    const groupContent = groupContainer.querySelector('.group-content');
+    if (groupContent && groupContent.querySelectorAll('.section-form').length === 0) {
+        groupContainer.remove(); // Remove the entire group container
+    }
+    
+    generateResume();
 }
 
 // Modify updateFormData to include skills category and personal name updates
@@ -468,6 +475,8 @@ function downloadPDF() {
     const builder = generateResume();
     builder.save('resume.pdf');
 }
+
+document.querySelector('.btn-btn').addEventListener('click', preview);
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('configModal');
     const span = document.getElementsByClassName('close')[0];
