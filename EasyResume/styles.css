@@ -497,91 +497,174 @@ body {
 .bullets-container {
     margin-bottom: 10px;
     width: 100%;
-}
+}/* Bullet item styling improvements */
 .bullet-item {
-    margin-bottom: 5px;
+    margin-bottom: 10px; /* Increased spacing between bullet items */
 }
+
 .bullet-input-container {
     display: flex;
     align-items: center;
+    width: 100%;
+    gap: 8px; /* Added gap for better spacing */
 }
+
 .bullet-input {
     flex-grow: 1;
-    margin-right: 5px;
+    padding: 10px; /* Increased padding for larger text input area */
+    font-size: 0.9em; /* Slightly larger font */
+    min-height: 40px; /* Set minimum height */
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
 }
+
+.bullet-input:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+/* Simplified button styling */
 .remove-bullet-btn {
     background: #ff6b6b;
     color: white;
     border: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 15px;
-    font-size: 15px;
+    border-radius: 4px;
+    width: 25px;
+    height: 25px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.add-bullet-btn {
-    background: #4CAF50;
-    color: white;
-    border: none;
-    padding: 5px 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 5px;
+
+/* Remove the ::after content that was creating the extra symbol */
+.remove-bullet-btn::after {
+    content: none;
 }
+
+/* Basic style for the bullet input */
+.bullet-input {
+    flex-grow: 1;
+    padding: 8px;
+    height: auto;
+    min-height: 36px; /* Slightly taller input area */
+}
+
 .bullet-input-container {
     display: flex;
     align-items: center;
     width: 100%;
+    margin-bottom: 8px;
 }
 
-.bullet-input {
-    flex-grow: 1;
+.add-bullet-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Increased padding */
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 0.75em;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.add-bullet-btn:hover {
+    background: #3c9f40; /* Darker green on hover */
 }
 
 .bullet-width-info {
     margin: 0 10px;
     font-size: 0.8em;
     min-width: 45px;
+    color: #6b7280; /* Gray color for better visibility */
+}
+.maximized-section {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1000;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
-.preview-container {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+.blurred-background {
+    position: relative;
 }
 
-.preview-frame {
-    width: 100%;
-    height: 100%;
+.blurred-background::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 999;
+}
+
+.hidden-section {
+    display: none !important;
+}
+
+.section-actions {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
 
-#pdfPreview {
-    flex: 1;
-    width: 100% !important;
-    height: 100% !important;
+.maximize-btn {
+    background-color: #ff3333;
     border: none;
-    margin: 0;
-    padding: 0;
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    overflow: auto;
-    transform: translateZ(0); /* Hardware acceleration */
-}
-
-/* WebKit-specific styling for iframe content */
-#pdfPreview::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-#pdfPreview::-webkit-scrollbar-track {
-    background: #f1f1f1;
-}
-
-#pdfPreview::-webkit-scrollbar-thumb {
-    background: #888;
+    cursor: pointer;
+    color: white;
+    padding: 8px 12px;
     border-radius: 4px;
+    transition: background-color 0.2s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Remove any previous icon */
+.maximize-btn i, 
+.maximize-btn svg,
+.maximize-btn img,
+.maximize-btn span {
+    display: none;
+}
+
+.maximize-btn::after {
+    content: "↗";
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.maximize-btn:hover {
+    background-color: #ff0000;
+    transform: scale(1.05);
+}
+
+.maximized-section .maximize-btn {
+    display: none;
+}
+
+.maximized-section::after {
+    content: "Press ESC or ENTER to minimize";
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #777;
 }

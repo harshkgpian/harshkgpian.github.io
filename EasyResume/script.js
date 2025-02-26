@@ -600,7 +600,68 @@ function addBulletField(sectionId, container, existingText = '') {
     return bulletItem;
 }
 
-// Modify getFormContent to use individual bullet point fields instead of textarea
+// Function to maximize a section (expand it and blur everything else)
+function maximizeSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const formContainer = document.getElementById('formContainer');
+    
+    // Add classes for styling
+    section.classList.add('maximized-section');
+    formContainer.classList.add('blurred-background');
+    
+    // Hide all other sections
+    const allSections = document.querySelectorAll('.section-form');
+    allSections.forEach(s => {
+        if (s.id !== sectionId) {
+            s.classList.add('hidden-section');
+        }
+    });
+    
+    // Hide all group headers
+    const groupHeaders = document.querySelectorAll('.group-header');
+    groupHeaders.forEach(header => {
+        header.classList.add('hidden-section');
+    });
+    
+    // Focus on the first input field in the section
+    const firstInput = section.querySelector('input, textarea');
+    if (firstInput) {
+        firstInput.focus();
+    }
+    
+    // Add event listeners for escape and enter keys
+    document.addEventListener('keydown', minimizeOnKeypress);
+}
+
+// Function to minimize the section on keypress (Escape or Enter)
+function minimizeOnKeypress(event) {
+    if (event.key === 'Escape' || event.key === 'Enter') {
+        minimizeSection();
+        // Remove the event listener
+        document.removeEventListener('keydown', minimizeOnKeypress);
+    }
+}
+
+// Function to minimize the section
+function minimizeSection() {
+    // Remove maximized class from all sections
+    const maximizedSection = document.querySelector('.maximized-section');
+    if (maximizedSection) {
+        maximizedSection.classList.remove('maximized-section');
+    }
+    
+    // Remove the blurred background
+    const formContainer = document.getElementById('formContainer');
+    formContainer.classList.remove('blurred-background');
+    
+    // Show all sections again
+    const hiddenSections = document.querySelectorAll('.hidden-section');
+    hiddenSections.forEach(section => {
+        section.classList.remove('hidden-section');
+    });
+}
+
+// Modify the getFormContent function to add a maximize button to each section
 function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
     // If the section type doesn't exist in the config, create it
     if (!sectionConfigs[type]) {
@@ -611,9 +672,18 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
 
     // Handle the special case for skills
     if (config.custom) {
-        // Skills section code remains the same
+        // Skills section code with maximize button
         return `
-            <h3>Skills</h3>
+            <div class="section-actions">
+                <h3>Skills</h3>
+                <button type="button" class="maximize-btn" onclick="maximizeSection('${sectionId}')">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M4 4h6v2H6v10h10v-4h2v6H4z"></path>
+                        <path d="M14 4h6v6h-2V6h-4z"></path>
+                        <path d="M14 14l7-7-1.4-1.4-7 7z"></path>
+                    </svg>
+                </button>
+            </div>
             <div class="form-group">
                 <label>Category</label>
                 <input type="text" name="category" onchange="updateFormData('${sectionId}'); generateResume();">
@@ -627,8 +697,19 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
         `;
     }
 
-    // Generate form for standard sections
-    let formContent = `<h3>${config.title}</h3>`;
+    // Generate form for standard sections with maximize button
+    let formContent = `
+        <div class="section-actions">
+            <h3>${config.title}</h3>
+            <button type="button" class="maximize-btn" onclick="maximizeSection('${sectionId}')">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M4 4h6v2H6v10h10v-4h2v6H4z"></path>
+                    <path d="M14 4h6v6h-2V6h-4z"></path>
+                    <path d="M14 14l7-7-1.4-1.4-7 7z"></path>
+                </svg>
+            </button>
+        </div>
+    `;
 
     config.fields.forEach(field => {
         if (field.name === 'bullets') {
@@ -661,6 +742,8 @@ function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
 
     return formContent;
 }
+
+
 
 function addCustomSection() {
     // Create a modal dialog instead of using prompt
@@ -1097,7 +1180,6 @@ function downloadPDF() {
 
 
 
-document.querySelector('.btn-btn').addEventListener('click', preview);
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('configModal');
     const span = document.getElementsByClassName('close')[0];
@@ -1111,7 +1193,19 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.style.display = 'none';
         }
     }
+
 });
+    // Add click event listener to minimize section when clicking outside
+    document.addEventListener('click', function(event) {
+        const maximizedSection = document.querySelector('.maximized-section');
+        const modalContent = event.target.closest('.modal-content');
+        const maximizeBtn = event.target.closest('.maximize-btn');
+        
+        if (maximizedSection && !maximizedSection.contains(event.target) && 
+            !maximizeBtn && !modalContent) {
+            minimizeSection();
+        }
+    });
 
 
 
