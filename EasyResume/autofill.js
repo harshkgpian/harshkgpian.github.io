@@ -1,179 +1,171 @@
 // jsonVersion.js
 
 const demoJSON = {
-  "personal": [
-    {
-    "name": "Aniket Shah",
-    "email": "aniketshah1994@gmail.com",
-    "phone": "+91 7016522535",
-    "linkedin": "https://www.linkedin.com/in/aniket-shah-506a50166/",
-    }
+    "personal": [
+      {
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "phone": "+1 555-555-5555",
+        "linkedin": "https://www.linkedin.com/in/john-doe/",
+        "github": "https://github.com/johndoe"
+      }
     ],
     "summary": [
-        {
-          "summary": "Results-driven HR professional and entrepreneur with over 7 years of experience in human resources management and business leadership. Founded and scaled SOPify to 1 Cr annual revenue, demonstrating strong business acumen and team management skills. Proven track record in talent acquisition, employee engagement, and implementing HR technologies. SHRM-SCP and SPHR certified with expertise in strategic HR planning and digital transformation."
-        }
+      {
+        "summary": "Dedicated software engineer with over 8 years of experience in full-stack development, focusing on building scalable web applications. Proven ability to design, develop, and deploy complex software solutions. Skilled in optimizing processes and implementing AI tools to streamline workflows. Passionate about writing clean, maintainable code and contributing to open-source projects."
+      }
     ],
-  "education": [
-    {
-      "school": "NMIMS Mumbai",
-      "degree": "MBA - HR",
-      "duration": "June 2018 - March 2020",
-      "location": "",
-      "scoreType": "GPA",
-      "gpa": "3.08/4"
-    },
-    {
-      "school": "R.T.U",
-      "degree": "B.Tech in Civil Engineering",
-      "duration": "July 2012 - August 2016",
-      "location": "",
-      "scoreType": "Percentage",
-      "gpa": "63.1%"
-    }
-  ],
-  "experience": [
-    {
-      "title": "SOPify",
-      "titleLink": "",
-      "subtitle": "Founder",
-      "duration": "December 2021 - Present",
-      "location": "Pune (open to Relocate)",
-      "bullets": [
-        "Built and managed a team of 28, including 22 freelance writers, implementing an asset-light model that minimized costs while ensuring quality.",
-        "Developed and executed a comprehensive social media strategy, enhancing visibility across multiple platforms.",
-        "Integrated AI-driven tools like WhatsApp automation and custom GPTs for Statement of Purpose writing, improving service efficiency.",
-        "Created a fully online, asset-light business model with rigorous quality assurance, maximizing profitability and scalability.",
-        "Steered the company to achieve annual revenue of 1 Cr with profit margins reaching 60% through strategic initiatives.",
-        "Secured partnerships with industry leaders in educational consulting through effective business development strategies."
-      ],
-      "tags": [
-        "AI Tools",
-        "Automation",
-        "Social Media Strategy",
-        "Content Management",
-        "Business Development"
-      ]
-    },
-    {
-      "title": "Welspun",
-      "titleLink": "",
-      "subtitle": "Assistant Manager",
-      "duration": "August 2020 - November 2021",
-      "location": "",
-      "bullets": [
-        "Managed end-to-end Human Resources Activity for a diverse staff of 550 employees across multiple functions.",
-        "Identified critical positions and created a robust pool of internal/external candidates based on key competencies.",
-        "Managed end-to-end training schedules, ensuring strict adherence to the monthly training and development calendar.",
-        "Handled recruitment from Junior to GM level, overseeing sourcing, interviewing, shortlisting, joining, and onboarding.",
-        "Conducted Employee Engagement surveys and organized impactful activities such as outbound training and health challenges.",
-        "Digitalized job descriptions to create a comprehensive digital library for assessment and development centers resources."
-      ],
-      "tags": [
-        "HR Management",
-        "Talent Acquisition",
-        "Employee Engagement",
-        "Training and Development",
-        "Succession Planning"
-      ]
-    },
-    {
-      "title": "StoneCraft Developers",
-      "titleLink": "",
-      "subtitle": "Project Manager",
-      "duration": "August 2016 - February 2018",
-      "location": "",
-      "bullets": [
-        "Managed end-to-end construction activities, ensuring material quality through rigorous random quality checks conducted.",
-        "Oversaw sales activities by actively engaging with potential clients to significantly drive overall business growth."
-      ],
-      "tags": [
-        "Project Management",
-        "Construction Management",
-        "Quality Assurance"
-      ]
-    }
-  ],
-  "projects": [
-    {
-      "title": "Managerial Effectiveness Survey",
-      "titleLink": "",
-      "subtitle": "Creator & Implementer",
-      "duration": "",
-      "location": "",
-      "bullets": [
-        "Designed and implemented a comprehensive plant-wide employee sentiment survey to enhance engagement.",
-        "Analyzed employee engagement data to develop actionable culture improvement recommendations effectively.",
-        "Created a strategic communication plan with engaging road shows and town halls to drive meaningful change."
-      ],
-      "tags": [
-        "Employee Engagement",
-        "Data Analysis",
-        "Strategic Communication"
-      ]
-    },
-    {
-      "title": "GET Attrition Intervention",
-      "titleLink": "",
-      "subtitle": "Lead Analyst",
-      "duration": "",
-      "location": "",
-      "bullets": [
-        "Conducted structured interviews with over 30 GETs across multiple batches to gather valuable insights.",
-        "Analyzed feedback to improve retention strategies, resulting in a revised salary structure for all new GET batches."
-      ],
-      "tags": [
-        "Retention Strategies",
-        "Feedback Analysis",
-        "Salary Structure"
-      ]
-    }
-  ],
-  "skills": [
-    {
-      "category": "Human Resources",
-      "skills": [
-        "Talent Management",
-        "Succession Planning",
-        "Performance Management",
-        "Employee Engagement",
-        "Training and Development"
-      ]
-    },
-    {
-      "category": "Technical Skills",
-      "skills": [
-        "Advanced Excel",
-        "Success Factors",
-        "AI Tools",
-        "Automation",
-        "HRIS"
-      ]
-    },
-    {
-      "category": "Languages",
-      "skills": [
-        "English",
-        "Hindi",
-        "Gujarati"
-      ]
-    }
-  ],
-  "certifications": [
-    {
-      "title": "SHRM-SCP",
-      "issuer": "",
-      "date": "",
-      "url": ""
-    },
-    {
-      "title": "SPHR",
-      "issuer": "",
-      "date": "",
-      "url": ""
-    }
-  ]
+    "education": [
+      {
+        "school": "MIT",
+        "degree": "B.Sc in Computer Science",
+        "duration": "September 2012 - June 2016",
+        "location": "Cambridge, MA, USA",
+        "scoreType": "GPA",
+        "gpa": "3.75/4"
+      },
+      {
+        "school": "Stanford University",
+        "degree": "M.Sc in Software Engineering",
+        "duration": "September 2016 - June 2018",
+        "location": "Stanford, CA, USA",
+        "scoreType": "GPA",
+        "gpa": "3.9/4"
+      }
+    ],
+    "experience": [
+      {
+        "title": "TechCorp Solutions",
+        "titleLink": "https://techcorpsolutions.com",
+        "subtitle": "Software Engineer",
+        "duration": "July 2018 - Present",
+        "location": "San Francisco, CA, USA",
+        "bullets": [
+          "Led the development of a cloud-based SaaS platform, increasing customer retention by 40%.",
+          "Worked closely with cross-functional teams to design and implement new product features.",
+          "Introduced Agile methodologies to the development team, improving productivity by 25%.",
+          "Built and maintained RESTful APIs for mobile and web applications.",
+          "Collaborated with DevOps to automate deployment pipelines, reducing deployment time by 50%."
+        ],
+        "tags": [
+          "Full-Stack Development",
+          "Cloud Computing",
+          "Agile Methodologies",
+          "API Development",
+          "DevOps",
+          "Performance Optimization"
+        ]
+      },
+      {
+        "title": "CodeForge Technologies",
+        "titleLink": "https://codeforge.com",
+        "subtitle": "Junior Software Developer",
+        "duration": "June 2016 - June 2018",
+        "location": "New York, NY, USA",
+        "bullets": [
+          "Developed and maintained several web applications, increasing user engagement by 20%.",
+          "Participated in the design and implementation of features for e-commerce platforms.",
+          "Contributed to the backend development of high-traffic websites using Java and Spring Boot.",
+          "Collaborated with QA engineers to write unit tests and ensure code quality.",
+          "Improved codebase by refactoring legacy code and introducing design patterns."
+        ],
+        "tags": [
+          "Web Development",
+          "Java",
+          "Spring Boot",
+          "Unit Testing",
+          "E-commerce",
+          "Backend Development"
+        ]
+      }
+    ],
+    "projects": [
+      {
+        "title": "AI-Powered Code Review Tool",
+        "titleLink": "",
+        "subtitle": "Lead Developer",
+        "duration": "2022",
+        "location": "San Francisco, CA, USA",
+        "bullets": [
+          "Developed an AI-based code review tool using machine learning algorithms to identify bugs and suggest optimizations.",
+          "Integrated the tool into the CI/CD pipeline to automate the review process and reduce human errors."
+        ],
+        "tags": [
+          "AI Tools",
+          "Machine Learning",
+          "Code Optimization",
+          "CI/CD Integration"
+        ]
+      },
+      {
+        "title": "Project Management Dashboard",
+        "titleLink": "",
+        "subtitle": "Frontend Developer",
+        "duration": "2021",
+        "location": "New York, NY, USA",
+        "bullets": [
+          "Designed and implemented a project management dashboard to track team performance and project milestones.",
+          "Utilized React and Redux for building dynamic and interactive user interfaces."
+        ],
+        "tags": [
+          "React",
+          "Frontend Development",
+          "Project Management Tools"
+        ]
+      }
+    ],
+    "skills": [
+      {
+        "category": "Software Development",
+        "skills": [
+          "Full-Stack Development",
+          "Cloud Computing",
+          "API Development",
+          "Agile Methodologies",
+          "Machine Learning"
+        ]
+      },
+      {
+        "category": "Technical Skills",
+        "skills": [
+          "JavaScript",
+          "Python",
+          "Java",
+          "React",
+          "Node.js",
+          "SQL",
+          "AWS",
+          "Docker"
+        ]
+      },
+      {
+        "category": "Languages",
+        "skills": [
+          "English",
+          "Spanish"
+        ]
+      }
+    ],
+    "publications": [
+      {
+        "title": "Building Scalable Systems with Cloud Computing",
+        "titleLink": "https://cloudcomputingpublication.com",
+        "subtitle": "Author",
+        "duration": "2020",
+        "location": "USA",
+        "bullets": [
+          "Wrote a comprehensive guide on building scalable systems using cloud technologies.",
+          "Discussed best practices for managing cloud resources and optimizing for cost and performance."
+        ],
+        "tags": [
+          "Cloud Computing",
+          "Scalability",
+          "System Design"
+        ]
+      }
+    ]
 }
+
 // Helper function to detect and register custom sections
 function detectCustomSections() {
     // Look through the JSON for sections that might not be in the default config

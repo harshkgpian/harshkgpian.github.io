@@ -372,6 +372,10 @@ class ResumeBuilder {
         // Add SKILLS header
         this.addSection('SKILLS', null);
         
+        // Calculate max category width to find the consistent starting position for skills
+        const categoryWidth = this.config.spacing.skillIndentation; // Fixed width for all categories (in points)
+        const skillStartX = this.config.page.margins.left + categoryWidth;
+        
         Object.entries(skillsObject).forEach(([category, skills], index) => {
             if (!skills || skills.length === 0) return;
     
@@ -385,50 +389,111 @@ class ResumeBuilder {
             // Add category in bold using the same font
             this.doc.setFont(currentFont.fontName, 'bold');
             const categoryText = `${category}: `;
-            const categoryWidth = this.doc.getTextWidth(categoryText);
-            this.doc.text(
-                categoryText,
-                this.config.page.margins.left,
-                this.currentY
-            );
             
-            // Switch back to normal weight for skills
-            this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+            // Check if category width exceeds the allowed indentation
+            const categoryTextWidth = this.doc.getTextWidth(categoryText);
             
-            // Add skills with proper spacing
-            const skillsText = skills.join(', ');
-            const availableWidth = this.contentWidth - categoryWidth;
-            const wrappedSkills = this.doc.splitTextToSize(skillsText, availableWidth);
-            
-            // Position for first line of skills (same line as category)
-            this.doc.text(
-                wrappedSkills[0],
-                this.config.page.margins.left + categoryWidth,
-                this.currentY
-            );
-            
-            // If there are additional wrapped lines
-            if (wrappedSkills.length > 1) {
-                wrappedSkills.slice(1).forEach(line => {
-                    this.currentY += this.config.spacing.lineGap;
-                    this.checkAndAddPage();
-                    // Indent wrapped lines to align with first line of skills
-                    this.doc.text(
-                        line,
-                        this.config.page.margins.left + categoryWidth,
-                        this.currentY
-                    );
-                });
+            if (categoryTextWidth > categoryWidth) {
+                // For long categories, wrap within the category column
+                const wrappedCategory = this.doc.splitTextToSize(categoryText, categoryWidth);
+                
+                // Draw the first line of the category
+                this.doc.text(
+                    wrappedCategory[0],
+                    this.config.page.margins.left,
+                    this.currentY
+                );
+                
+                // Draw the skills at the fixed position on the first line
+                this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                const skillsText = skills.join(', ');
+                const availableWidth = this.contentWidth - categoryWidth;
+                const wrappedSkills = this.doc.splitTextToSize(skillsText, availableWidth);
+                
+                this.doc.text(
+                    wrappedSkills[0],
+                    skillStartX,
+                    this.currentY
+                );
+                
+                // Draw the remaining category lines (if any)
+                if (wrappedCategory.length > 1) {
+                    for (let i = 1; i < wrappedCategory.length; i++) {
+                        this.currentY += this.config.spacing.lineGap;
+                        this.checkAndAddPage();
+                        this.doc.setFont(currentFont.fontName, 'bold');
+                        this.doc.text(
+                            wrappedCategory[i],
+                            this.config.page.margins.left,
+                            this.currentY
+                        );
+                    }
+                }
+                
+                // Draw the remaining skill lines (if any)
+                if (wrappedSkills.length > 1) {
+                    // Only add line gap if we haven't already due to category wrapping
+                    if (wrappedCategory.length <= 1) {
+                        this.currentY += this.config.spacing.lineGap;
+                    }
+                    
+                    for (let i = 1; i < wrappedSkills.length; i++) {
+                        if (i > 1 || wrappedCategory.length <= 1) {
+                            this.currentY += this.config.spacing.lineGap;
+                        }
+                        this.checkAndAddPage();
+                        this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                        this.doc.text(
+                            wrappedSkills[i],
+                            skillStartX,
+                            this.currentY
+                        );
+                    }
+                }
+            } else {
+                // Original behavior when category fits within indentation
+                this.doc.text(
+                    categoryText,
+                    this.config.page.margins.left,
+                    this.currentY
+                );
+                
+                // Switch back to normal weight for skills
+                this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                
+                // Add skills with fixed starting position
+                const skillsText = skills.join(', ');
+                const availableWidth = this.contentWidth - categoryWidth;
+                const wrappedSkills = this.doc.splitTextToSize(skillsText, availableWidth);
+                
+                // Position for first line of skills (same line as category)
+                this.doc.text(
+                    wrappedSkills[0],
+                    skillStartX,
+                    this.currentY
+                );
+                
+                // If there are additional wrapped lines
+                if (wrappedSkills.length > 1) {
+                    wrappedSkills.slice(1).forEach(line => {
+                        this.currentY += this.config.spacing.lineGap;
+                        this.checkAndAddPage();
+                        this.doc.text(
+                            line,
+                            skillStartX,
+                            this.currentY
+                        );
+                    });
+                }
             }
     
             // Add more space between skill categories
-            this.currentY += this.config.spacing.lineGap ;
+            this.currentY += this.config.spacing.lineGap;
         });
     
         // Add final spacing after skills section
         this.currentY += this.config.spacing.sectionGap;
     }
-
     addGeneralSection(sectionTitle, entries) {
         if (!entries || entries.length === 0) return;
     

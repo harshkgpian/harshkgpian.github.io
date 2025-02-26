@@ -48,7 +48,8 @@ const RESUME_CONFIG = {
         headerGap: 6,
         lineGap: 5,
         paragraphGap: 2,
-        indentation: 2
+        indentation: 2,
+        skillIndentation: 40
     },
     formatting: {
         textAlign: {
@@ -142,6 +143,8 @@ function loadCurrentConfig() {
     document.getElementById('lineGap').value = currentConfig.spacing.lineGap;
     document.getElementById('paragraphGap').value = currentConfig.spacing.paragraphGap;
     document.getElementById('indentation').value = currentConfig.spacing.indentation;
+    document.getElementById('skillIndentation').value = currentConfig.spacing.skillIndentation;
+
     
     // Formatting Settings
     document.getElementById('headerAlign').value = currentConfig.formatting.textAlign.header;
@@ -208,7 +211,9 @@ function saveConfig() {
             headerGap: Number(document.getElementById('headerGap').value),
             lineGap: Number(document.getElementById('lineGap').value),
             paragraphGap: Number(document.getElementById('paragraphGap').value),
-            indentation: Number(document.getElementById('indentation').value)
+            indentation: Number(document.getElementById('indentation').value),
+            skillIndentation: Number(document.getElementById('skillIndentation').value)
+
         },
         formatting: {
             textAlign: {
