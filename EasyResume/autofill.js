@@ -1,177 +1,174 @@
 // jsonVersion.js
 
-let demoJSON = {
+let defaultJson = {
     "personal": [
       {
-        "name": "John Doe",
-        "email": "johndoe@example.com",
-        "phone": "+1 555-555-5555",
-        "linkedin": "https://www.linkedin.com/in/john-doe/",
-        "github": "https://github.com/johndoe"
+        "name": "Harsh Raj",
+        "email": "harshrjto@gmail.com",
+        "phone": "+91 8750798260",
+        "linkedin": "https://www.linkedin.com/in/harsh-raj/",
+        "github": "https://github.com/harshkgpian"
       }
     ],
     "summary": [
       {
-        "summary": "Dedicated software engineer with 8 years of experience in full-stack development, focusing on building scalable applications. Proven ability to design, develop, and deploy software solutions. Skilled in optimizing processes and implementing AI tools to streamline workflows. Passionate about writing clean, maintainable code and contributing to open-source projects."
+        "summary": "Aerospace engineer with expertise in turbomachinery, computational fluid dynamics, and deep learning. Passionate about solving engineering challenges using a combination of analytical and computational techniques. Experienced in research, design, and implementation of gas turbine components and AI-driven automation."
       }
     ],
     "education": [
       {
-        "school": "Massachusetts Institute of Technology, MIT",
-        "degree": "B.Sc in Computer Science",
-        "duration": "September 2012 - June 2016",
-        "location": "Cambridge, MA, USA",
-        "scoreType": "GPA",
-        "gpa": "3.75/4"
+        "school": "Indian Institute of Technology, Kharagpur",
+        "degree": "Master of Technology in Aerospace Engineering",
+        "duration": "July 2022 - Present",
+        "location": "Kharagpur, India",
+        "scoreType": "CGPA",
+        "gpa": "8.64/10"
       },
       {
-        "school": "Stanford University",
-        "degree": "M.Sc in Software Engineering",
-        "duration": "September 2016 - June 2018",
-        "location": "Stanford, CA, USA",
-        "scoreType": "GPA",
-        "gpa": "3.9/4"
+        "school": "Bharat National Public School",
+        "degree": "Class XII - Central Board of Secondary Education",
+        "duration": "2017",
+        "location": "Delhi, India",
+        "scoreType": "Percentage",
+        "gpa": "90%"
       }
     ],
     "experience": [
       {
-        "title": "TechCorp Solutions",
-        "titleLink": "https://techcorpsolutions.com",
-        "subtitle": "Software Engineer",
-        "duration": "July 2018 - Present",
-        "location": "San Francisco, CA, USA",
+        "title": "Aeronautical Development Agency",
+        "titleLink": "",
+        "subtitle": "Propulsion Research Intern",
+        "duration": "May 2023 - June 2023",
+        "location": "DRDO, Bengaluru",
         "bullets": [
-          "Led the development of a cloud-based SaaS platform, increasing customer retention by 40% and optimizing resource.",
-          "Worked closely with cross-functional teams to design and implement new product features while maintaining code quality.",
-          "Introduced Agile methodologies to the development team, improving productivity by 25% through effective sprint planning.",
-          "Collaborated with DevOps to automate deployment pipelines, reducing deployment time by 50% through efficient CI/CD.",
-          "Mentored junior developers and conducted code reviews, improving team code quality metrics by 35% over six months"
+          "Worked on preliminary design and analysis of engine starting system for 5th Generation AMCA Fighter Aircraft.",
+          "Utilized MATLAB/SIMULINK to evaluate pressure loss in valves and ducts connecting APU, ATS, and Engine.",
+          "Proposed a statistical approach for health monitoring of the APU using different prognostic and diagnostics models."
         ],
         "tags": [
-          "cloud-based",
-          "SaaS platform",
-          "product features",
-          "Agile methodologies",
-          "DevOps",
-          "deployment",
-          "code reviews"
+          "engine starting system",
+          "MATLAB/SIMULINK",
+          "pressure loss",
+          "APU",
+          "ATS",
+          "prognostic models",
+          "diagnostics"
         ]
       },
       {
-        "title": "CodeForge Technologies",
-        "titleLink": "https://codeforge.com",
-        "subtitle": "Junior Software Developer",
-        "duration": "June 2016 - June 2018",
-        "location": "New York, NY, USA",
+        "title": "Aerostrovilos Pvt. Ltd",
+        "titleLink": "",
+        "subtitle": "Turbomachinery and Python Developer Intern",
+        "duration": "June 2023 - July 2023",
+        "location": "IIT Madras, Chennai",
         "bullets": [
-          "Developed and maintained several web applications, increasing user engagement by 20% through intuitive interface design.",
-          "Participated in the design and implementation of features for e-commerce platforms using modern payment integrations.",
-          "Contributed to the backend development of high-traffic websites using Java with microservices architecture.",
-          "Collaborated with QA engineers to write unit tests and ensure code quality through comprehensive test coverage.",
-          "Improved codebase by refactoring legacy code and introducing design patterns for enhanced maintainability.",
-          "Implemented automated testing strategies that reduced bug detection time by 40% and improved release reliability"
+          "Developed a program for Off-design Performance Prediction of Radial Inflow Turbines using loss correlations in Python.",
+          "Conducted research about seals used in micro gas turbines, assisted in performing CFD analysis of the seal in Fluent.",
+          "Evaluated the creep life of the radial turbine and generated contour plots in ANSYS Mechanical using CSV data."
         ],
         "tags": [
-          "web applications",
-          "e-commerce",
-          "microservices",
-          "unit tests",
-          "legacy code",
-          "automated testing"
+          "Radial Inflow Turbines",
+          "Python",
+          "loss correlations",
+          "CFD analysis",
+          "ANSYS Mechanical",
+          "creep life",
+          "contour plots"
+        ]
+      },
+      {
+        "title": "Artenal Robotics",
+        "titleLink": "",
+        "subtitle": "Computer Vision Intern",
+        "duration": "May 2022 - Aug 2022",
+        "location": "Vancouver, Canada",
+        "bullets": [
+          "Utilized TensorFlow for Object Detection and Recognition and for developing orientation detection algorithms.",
+          "Custom trained CNN models, specializing in YOLO v5/v6 using advanced transfer learning techniques.",
+          "Created an efficient image annotation app using Python’s KTkinter library, streamlining project workflows."
+        ],
+        "tags": [
+          "TensorFlow",
+          "Object Detection",
+          "YOLO",
+          "CNN",
+          "Python",
+          "KTkinter"
         ]
       }
     ],
     "projects": [
       {
-        "title": "AI-Powered Code Review Tool",
-        "titleLink": "",
-        "subtitle": "Lead Developer",
-        "duration": "2022",
-        "location": "San Francisco, CA, USA",
+        "title": "Design of Mixed Flow Compressor with Crossover Diffuser for UAVs",
+        "duration": "July 2024 - Present",
         "bullets": [
-          "Developed an AI-based code review tool using ML, to identify bugs and suggest optimizations using neural networks.",
-          "Integrated the tool into CI/CD pipeline to automate the review process and reduce human errors through pattern detection."
+          "Designed a compressor with a pressure ratio of 3.8, 85% efficiency, and 4.3 kg/s mass flow for UAV application.",
+          "Developed a meanline design methodology using turbomachinery principles and convergence criteria in Python.",
+          "Performed parametric studies, used airfoil mapping to create 3D models of compressor and crossover diffuser.",
+          "Utilized BladeGen, Turbogrid, and CFX for generating mesh and performing CFD analysis of the combined stage.",
+          "Optimized the stage for diameter constraint and achieved optimal pressure recovery in crossover diffuser."
         ],
         "tags": [
-          "AI-based",
-          "code review",
-          "ML",
-          "neural networks",
-          "CI/CD pipeline"
+          "Mixed Flow Compressor",
+          "Crossover Diffuser",
+          "UAV",
+          "Python",
+          "BladeGen",
+          "Turbogrid",
+          "CFX",
+          "CFD Analysis"
         ]
-      },
+      }
+    ],
+    "competitions": [
       {
-        "title": "Project Management Dashboard",
-        "titleLink": "",
-        "subtitle": "Frontend Developer",
-        "duration": "2021",
-        "location": "New York, NY, USA",
+        "title": "AIAA Jet Engine Design Competition",
+        "subtitle": "Team Leader",  
+        "duration": "Dec 2022 - Apr 2023",
+        "location": "Boston, USA",
         "bullets": [
-          "Designed a project management dashboard to track team performance and milestones using real-time data visualization.",
-          "Utilized React and Redux for building dynamic and interactive user interfaces with advanced state management."
+          "Proposed an industry-level solution for a Hybrid-Electric Propulsion System using Fuselage Boundary Layer Ingestion.",
+          "Presented the solution to experts at AIAA AVIATION Forum and received top 3 recognition for the technical report.",
+          "Designed high-efficiency compressors and the BLI Fan using advanced Turbo-machinery Aerodynamics principles.",
+          "Engaged in extensive research of gas turbine systems to improve overall efficiency and cycle optimization."
         ],
         "tags": [
-          "project management",
-          "data visualization",
-          "React",
-          "Redux",
-          "user interfaces"
+          "Hybrid-Electric Propulsion",
+          "BLI",
+          "Turbo-machinery Aerodynamics",
+          "Gas Turbine Systems",
+          "Cycle Optimization"
         ]
       }
     ],
     "skills": [
       {
-        "category": "Software Development",
-        "skills": [
-          "Full-Stack Development",
-          "Cloud Computing",
-          "API Development",
-          "Agile Methodologies",
-          "Machine Learning"
-        ]
-      },
-      {
         "category": "Technical Skills",
         "skills": [
-          "JavaScript",
           "Python",
-          "Java",
-          "React",
-          "Node.js",
-          "SQL",
-          "AWS",
-          "Docker"
+          "MATLAB",
+          "CFD",
+          "FEM",
+          "Deep Learning",
+          "Turbomachinery"
         ]
       },
       {
-        "category": "Languages",
+        "category": "Software & Tools",
         "skills": [
-          "English",
-          "Spanish"
-        ]
-      }
-    ],
-    "publications": [
-      {
-        "title": "Building Scalable Systems with Cloud Computing",
-        "titleLink": "https://cloudcomputingpublication.com",
-        "subtitle": "Author",
-        "duration": "2020",
-        "location": "USA",
-        "bullets": [
-          "Wrote a comprehensive guide on building scalable systems using cloud technologies and distributed computing principles.",
-          "Discussed best practices for managing cloud resources, optimizing cost and performance through automated management."
-        ],
-        "tags": [
-          "scalable systems",
-          "cloud technologies",
-          "distributed computing",
-          "cloud resources",
-          "automated management"
+          "ANSYS",
+          "OpenFOAM",
+          "Simulink",
+          "SolidWorks",
+          "PyTorch",
+          "TensorFlow"
         ]
       }
     ]
 }
+
+let demoJSON = defaultJson;
+
 
 // Helper function to detect and register custom sections
 function detectCustomSections() {
@@ -462,6 +459,78 @@ function populateFromDemoJSON() {
     }
 }
 
+function populateFromDefaultJSON() {
+    try {
+        // First, detect and register any custom sections from the JSON
+        const customSections = detectCustomSections();
+        console.log('Detected custom sections:', customSections);
+        
+        // Update section order to include custom sections
+        if (typeof sectionOrder !== 'undefined') {
+            customSections.forEach(section => {
+                if (!sectionOrder.includes(section)) {
+                    sectionOrder.push(section);
+                }
+            });
+            console.log('Updated section order:', sectionOrder);
+        }
+        
+        // Populate all sections using our helper function
+        Object.entries(defaultJson).forEach(([sectionType, sectionData]) => {
+            if (sectionType !== 'skills') { // Skills needs special handling
+                populateSection(sectionType, sectionData);
+            }
+        });
+        
+        // Special handling for Skills section
+        if (defaultJson.skills && Array.isArray(defaultJson.skills)) {
+            defaultJson.skills.forEach(skillCategory => {
+                addSection('skills');
+                const sectionId = `skills-${sectionCounter.skills - 1}`;
+                const section = document.getElementById(sectionId);
+                
+                if (section) {
+                    // Set category
+                    const categoryInput = section.querySelector('input[name="category"]');
+                    if (categoryInput) {
+                        categoryInput.value = skillCategory.category;
+                    }
+
+                    // Add skills
+                    const skillsContainer = section.querySelector('.skills-container');
+                    if (skillsContainer) {
+                        skillCategory.skills.forEach((skill, index) => {
+                            if (index === 0) {
+                                // Use existing first skill input
+                                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
+                                if (firstSkillInput) {
+                                    firstSkillInput.value = skill;
+                                }
+                            } else {
+                                // Add new skill input for remaining skills
+                                addSkillField(sectionId);
+                                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
+                                inputs[inputs.length - 1].value = skill;
+                            }
+                        });
+                    }
+                    updateFormData(sectionId);
+                }
+            });
+        }
+
+        // Generate resume preview
+        console.log('Demo data loaded', sectionOrder);
+        if (typeof generateResume === 'function' && typeof sectionOrder !== 'undefined') {
+            generateResume(sectionOrder);
+        } else {
+            console.warn('generateResume function or sectionOrder not found');
+        }
+    } catch (error) {
+        console.error('Error loading demo data:', error);
+    }
+}
+
 // Function to load demo data
 function loadDemoData() {
     try {
@@ -470,6 +539,18 @@ function loadDemoData() {
         
         // Populate with demo data
         populateFromDemoJSON();
+    } catch (error) {
+        console.error('Error in loadDemoData:', error);
+    }
+}
+
+function loadDefaultData() {
+    try {
+        // Clear any existing data before loading demo
+        clearAllData();
+        
+        // Populate with demo data
+        populateFromDefaultJSON();
     } catch (error) {
         console.error('Error in loadDemoData:', error);
     }
