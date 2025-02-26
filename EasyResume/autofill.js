@@ -1,6 +1,6 @@
 // jsonVersion.js
 
-const demoJSON = {
+let demoJSON = {
     "personal": [
       {
         "name": "John Doe",
@@ -475,22 +475,134 @@ function loadDemoData() {
     }
 }
 
-window.onload = function() {
-    try {
-        // Make sure we're not referencing any undefined variables or functions
-        if (typeof loadDemoData === 'function') {
-            loadDemoData();
-        } else {
-            console.error('loadDemoData function not defined');
+// Function to create updated JSON from all form data
+function createUpdatedJSON() {
+    // Initialize the JSON structure with the same format as demoJSON
+    const updatedJSON = {};
+    
+    // Collect data from all section types defined in sectionCounter
+    Object.keys(sectionCounter).forEach(sectionType => {
+      if (!updatedJSON[sectionType]) {
+        updatedJSON[sectionType] = [];
+      }
+      
+      // Skip if no data exists for this section type
+      if (!formData[sectionType] || formData[sectionType].length === 0) {
+        return;
+      }
+      
+      // Process each item in this section type
+      formData[sectionType].forEach(item => {
+        const sectionData = {};
+        
+        // Handle special case for summary
+        if (sectionType === 'summary') {
+          if (item.fields.summary) {
+            sectionData.summary = item.fields.summary;
+          }
+        } 
+        // Handle special case for skills
+        else if (sectionType === 'skills') {
+          sectionData.category = item.fields.category || '';
+          sectionData.skills = item.fields.skills || [];
+        } 
+        // Handle all other fields for standard and custom sections
+        else {
+          // Copy all fields except bullets and tags which need special handling
+          Object.keys(item.fields).forEach(fieldName => {
+            if (fieldName !== 'bullets' && fieldName !== 'tags' && fieldName !== 'skills') {
+              sectionData[fieldName] = item.fields[fieldName] || '';
+            }
+          });
+          
+          // Handle bullets
+          if (item.fields.bullets) {
+            sectionData.bullets = Array.isArray(item.fields.bullets) ? 
+              item.fields.bullets : 
+              (typeof item.fields.bullets === 'string' ? 
+                item.fields.bullets.split('\n').filter(b => b.trim() !== '') : []);
+          }
+          
+          // Handle tags
+          if (item.fields.tags) {
+            sectionData.tags = typeof item.fields.tags === 'string' ? 
+              item.fields.tags.split(',').map(tag => tag.trim()).filter(tag => tag !== '') : 
+              (Array.isArray(item.fields.tags) ? item.fields.tags : []);
+          }
         }
         
-        // Initialize all sections as collapsed if the function exists
-        if (typeof initializeCollapsedGroups === 'function') {
-            initializeCollapsedGroups();
-        } else {
-            console.warn('initializeCollapsedGroups function not found');
+        // Only add non-empty section data
+        if (Object.keys(sectionData).length > 0) {
+          updatedJSON[sectionType].push(sectionData);
         }
+      });
+      
+      // Remove empty arrays
+      if (updatedJSON[sectionType].length === 0) {
+        delete updatedJSON[sectionType];
+      }
+    });
+    
+    return updatedJSON;
+  }
+  
+  // Function to log the updated JSON to console
+  function logUpdatedJSON() {
+    const updatedJSON = createUpdatedJSON();
+    console.log('Updated Resume JSON:');
+    console.log(JSON.stringify(updatedJSON, null, 2));
+    
+    // Provide feedback to the user
+    alert('Resume JSON data has been logged to the console. Press F12 to open the developer console and view it.');
+    
+    return updatedJSON;
+  }
+  
+  // Function to download the JSON file
+  function downloadJSON() {
+    const updatedJSON = createUpdatedJSON();
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(updatedJSON, null, 2));
+    const downloadAnchorNode = document.createElement('a');
+    downloadAnchorNode.setAttribute("href", dataStr);
+    downloadAnchorNode.setAttribute("download", "resume_data.json");
+    document.body.appendChild(downloadAnchorNode);
+    downloadAnchorNode.click();
+    downloadAnchorNode.remove();
+  }
+  
+// Remove the JSON buttons function completely
+function addJSONButtons() {
+    // This function is now empty - we're removing the buttons
+  }
+  
+  // Save to localStorage when JSON is updated
+  function saveToLocalStorage() {
+    const updatedJSON = createUpdatedJSON();
+    localStorage.setItem('resumeData', JSON.stringify(updatedJSON));
+  }
+  
+  // Modified window.onload function
+  window.onload = function() {
+    try {
+      // Check if there's data in localStorage
+      const savedData = localStorage.getItem('resumeData');
+      
+      if (savedData) {
+        // Use the saved data
+        demoJSON = JSON.parse(savedData);
+      }
+      
+      // Load data (either from localStorage or the default demo)
+      loadDemoData();
+      
+      // Setup event listener to save on form changes
+      document.addEventListener('change', saveToLocalStorage);
+      
+      // Initialize collapsed sections if the function exists
+      if (typeof initializeCollapsedGroups === 'function') {
+        initializeCollapsedGroups();
+      }
     } catch (error) {
-        console.error('Error in window.onload:', error);
+      console.error('Error in window.onload:', error);
     }
-};
+  };

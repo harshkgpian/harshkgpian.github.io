@@ -88,7 +88,32 @@ const RESUME_CONFIG = {
     }
 };
 
-let currentConfig = RESUME_CONFIG;
+// Load config from localStorage if available, otherwise use default
+let currentConfig = loadConfigFromLocalStorage() || RESUME_CONFIG;
+
+// Function to load configuration from localStorage
+function loadConfigFromLocalStorage() {
+    const savedConfig = localStorage.getItem('resumeConfig');
+    if (savedConfig) {
+        try {
+            return JSON.parse(savedConfig);
+        } catch (e) {
+            console.error('Error parsing saved config:', e);
+            return null;
+        }
+    }
+    return null;
+}
+
+// Function to save configuration to localStorage
+function saveConfigToLocalStorage() {
+    try {
+        localStorage.setItem('resumeConfig', JSON.stringify(currentConfig));
+        console.log('Configuration saved to localStorage');
+    } catch (e) {
+        console.error('Error saving config to localStorage:', e);
+    }
+}
 
 function openConfigModal() {
     const modal = document.getElementById('configModal');
@@ -144,7 +169,6 @@ function loadCurrentConfig() {
     document.getElementById('paragraphGap').value = currentConfig.spacing.paragraphGap;
     document.getElementById('indentation').value = currentConfig.spacing.indentation;
     document.getElementById('skillIndentation').value = currentConfig.spacing.skillIndentation;
-
     
     // Formatting Settings
     document.getElementById('headerAlign').value = currentConfig.formatting.textAlign.header;
@@ -213,7 +237,6 @@ function saveConfig() {
             paragraphGap: Number(document.getElementById('paragraphGap').value),
             indentation: Number(document.getElementById('indentation').value),
             skillIndentation: Number(document.getElementById('skillIndentation').value)
-
         },
         formatting: {
             textAlign: {
@@ -252,6 +275,9 @@ function saveConfig() {
         }
     };
 
+    // Save to localStorage
+    saveConfigToLocalStorage();
+
     // Close modal
     document.getElementById('configModal').style.display = 'none';
     
@@ -260,6 +286,13 @@ function saveConfig() {
     setTimeout(updateAllBulletWidthInfo, 100); 
 }
 
-
-
-
+// Add a function to reset config to defaults
+function resetConfig() {
+    if (confirm('Are you sure you want to reset all configuration to defaults?')) {
+        localStorage.removeItem('resumeConfig');
+        currentConfig = RESUME_CONFIG;
+        loadCurrentConfig();
+        generateResume();
+        setTimeout(updateAllBulletWidthInfo, 100);
+    }
+}
