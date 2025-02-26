@@ -656,7 +656,31 @@ function generateResume(order = sectionOrder) {
         builder.renderContent(content, order);
         
         const dataUrl = builder.getDataUrl();
-        document.getElementById('pdfPreview').src = dataUrl;
+        
+        // Create a modified URL with zoom and fit parameters
+        const enhancedUrl = dataUrl + "#zoom=100&view=FitH,top";
+        
+        // Set the iframe source
+        const pdfPreview = document.getElementById('pdfPreview');
+        pdfPreview.src = enhancedUrl;
+        
+        // Add a script to handle resizing after the PDF loads
+        pdfPreview.onload = function() {
+            // Create a resize observer to dynamically adjust the PDF view
+            const resizeObserver = new ResizeObserver(entries => {
+                try {
+                    // Try to access the iframe and adjust its content
+                    if (pdfPreview.contentWindow && pdfPreview.contentWindow.PDFViewerApplication) {
+                        pdfPreview.contentWindow.PDFViewerApplication.pdfViewer.currentScaleValue = 'page-width';
+                    }
+                } catch (e) {
+                    console.log("Cannot access PDF viewer application");
+                }
+            });
+            
+            // Observe the preview container for size changes
+            resizeObserver.observe(document.querySelector('.preview-container'));
+        };
 
         updateAllBulletWidthInfo();
     } catch (error) {
