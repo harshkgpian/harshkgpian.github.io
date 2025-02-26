@@ -1,132 +1,244 @@
 // jsonVersion.js
 
 const demoJSON = {
-    personal: [
+  "personal": [
+    {
+    "name": "Aniket Shah",
+    "email": "aniketshah1994@gmail.com",
+    "phone": "+91 7016522535",
+    "linkedin": "https://www.linkedin.com/in/aniket-shah-506a50166/",
+    }
+    ],
+    "summary": [
         {
-            name: "JOHN DOE",
-            email: "johndoe@email.com",
-            phone: "+1 555-123-4567",
-            github: "github.com/johndoe-aero",
-            linkedin: "linkedin.com/in/john-doe-aero"
+          "summary": "Results-driven HR professional and entrepreneur with over 7 years of experience in human resources management and business leadership. Founded and scaled SOPify to 1 Cr annual revenue, demonstrating strong business acumen and team management skills. Proven track record in talent acquisition, employee engagement, and implementing HR technologies. SHRM-SCP and SPHR certified with expertise in strategic HR planning and digital transformation."
         }
     ],
-    education: [
-        {
-            school: "Massachusetts Institute of Technology",
-            degree: "Master of Science in Aeronautics and Astronautics",
-            duration: "2022-2024",
-            location: "Cambridge, MA, USA",
-            scoreType: "CGPA",
-            gpa: "3.92/4.0"
-        },
-        {
-            school: "Lincoln High School",
-            degree: "High School Diploma - Advanced Placement",
-            duration: "2019",
-            location: "Boston, MA, USA",
-            scoreType: "Percentage",
-            gpa: "4.0/4.0"
+  "education": [
+    {
+      "school": "NMIMS Mumbai",
+      "degree": "MBA - HR",
+      "duration": "June 2018 - March 2020",
+      "location": "",
+      "scoreType": "GPA",
+      "gpa": "3.08/4"
+    },
+    {
+      "school": "R.T.U",
+      "degree": "B.Tech in Civil Engineering",
+      "duration": "July 2012 - August 2016",
+      "location": "",
+      "scoreType": "Percentage",
+      "gpa": "63.1%"
+    }
+  ],
+  "experience": [
+    {
+      "title": "SOPify",
+      "titleLink": "",
+      "subtitle": "Founder",
+      "duration": "December 2021 - Present",
+      "location": "Pune (open to Relocate)",
+      "bullets": [
+        "Built and managed a team of 28, including 22 freelance writers, implementing an asset-light model that minimized costs while ensuring quality.",
+        "Developed and executed a comprehensive social media strategy, enhancing visibility across multiple platforms.",
+        "Integrated AI-driven tools like WhatsApp automation and custom GPTs for Statement of Purpose writing, improving service efficiency.",
+        "Created a fully online, asset-light business model with rigorous quality assurance, maximizing profitability and scalability.",
+        "Steered the company to achieve annual revenue of 1 Cr with profit margins reaching 60% through strategic initiatives.",
+        "Secured partnerships with industry leaders in educational consulting through effective business development strategies."
+      ],
+      "tags": [
+        "AI Tools",
+        "Automation",
+        "Social Media Strategy",
+        "Content Management",
+        "Business Development"
+      ]
+    },
+    {
+      "title": "Welspun",
+      "titleLink": "",
+      "subtitle": "Assistant Manager",
+      "duration": "August 2020 - November 2021",
+      "location": "",
+      "bullets": [
+        "Managed end-to-end Human Resources Activity for a diverse staff of 550 employees across multiple functions.",
+        "Identified critical positions and created a robust pool of internal/external candidates based on key competencies.",
+        "Managed end-to-end training schedules, ensuring strict adherence to the monthly training and development calendar.",
+        "Handled recruitment from Junior to GM level, overseeing sourcing, interviewing, shortlisting, joining, and onboarding.",
+        "Conducted Employee Engagement surveys and organized impactful activities such as outbound training and health challenges.",
+        "Digitalized job descriptions to create a comprehensive digital library for assessment and development centers resources."
+      ],
+      "tags": [
+        "HR Management",
+        "Talent Acquisition",
+        "Employee Engagement",
+        "Training and Development",
+        "Succession Planning"
+      ]
+    },
+    {
+      "title": "StoneCraft Developers",
+      "titleLink": "",
+      "subtitle": "Project Manager",
+      "duration": "August 2016 - February 2018",
+      "location": "",
+      "bullets": [
+        "Managed end-to-end construction activities, ensuring material quality through rigorous random quality checks conducted.",
+        "Oversaw sales activities by actively engaging with potential clients to significantly drive overall business growth."
+      ],
+      "tags": [
+        "Project Management",
+        "Construction Management",
+        "Quality Assurance"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Managerial Effectiveness Survey",
+      "titleLink": "",
+      "subtitle": "Creator & Implementer",
+      "duration": "",
+      "location": "",
+      "bullets": [
+        "Designed and implemented a comprehensive plant-wide employee sentiment survey to enhance engagement.",
+        "Analyzed employee engagement data to develop actionable culture improvement recommendations effectively.",
+        "Created a strategic communication plan with engaging road shows and town halls to drive meaningful change."
+      ],
+      "tags": [
+        "Employee Engagement",
+        "Data Analysis",
+        "Strategic Communication"
+      ]
+    },
+    {
+      "title": "GET Attrition Intervention",
+      "titleLink": "",
+      "subtitle": "Lead Analyst",
+      "duration": "",
+      "location": "",
+      "bullets": [
+        "Conducted structured interviews with over 30 GETs across multiple batches to gather valuable insights.",
+        "Analyzed feedback to improve retention strategies, resulting in a revised salary structure for all new GET batches."
+      ],
+      "tags": [
+        "Retention Strategies",
+        "Feedback Analysis",
+        "Salary Structure"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Human Resources",
+      "skills": [
+        "Talent Management",
+        "Succession Planning",
+        "Performance Management",
+        "Employee Engagement",
+        "Training and Development"
+      ]
+    },
+    {
+      "category": "Technical Skills",
+      "skills": [
+        "Advanced Excel",
+        "Success Factors",
+        "AI Tools",
+        "Automation",
+        "HRIS"
+      ]
+    },
+    {
+      "category": "Languages",
+      "skills": [
+        "English",
+        "Hindi",
+        "Gujarati"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "title": "SHRM-SCP",
+      "issuer": "",
+      "date": "",
+      "url": ""
+    },
+    {
+      "title": "SPHR",
+      "issuer": "",
+      "date": "",
+      "url": ""
+    }
+  ]
+}
+// Helper function to detect and register custom sections
+function detectCustomSections() {
+    // Look through the JSON for sections that might not be in the default config
+    const standardSections = ['personal', 'summary', 'education', 'experience', 'projects', 'competitions', 'skills'];
+    
+    // Find custom sections in the demo JSON
+    const customSections = Object.keys(demoJSON).filter(key => !standardSections.includes(key));
+    
+    // Register each custom section
+    customSections.forEach(sectionKey => {
+        // Format section name for display (capitalize first letter)
+        const sectionTitle = sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
+        
+        // Check if we need to add to sectionCounter
+        if (typeof sectionCounter !== 'undefined' && sectionCounter[sectionKey] === undefined) {
+            sectionCounter[sectionKey] = 0;
         }
-    ],
-    experience: [
-        {
-            title: "NASA Ames Research Center",
-            titleLink: "https://www.nasa.gov/ames",
-            subtitle: "Propulsion Systems Intern",
-            duration: "May 2023 - August 2023",
-            location: "Mountain View, CA",
-            bullets: [
-                "Developed advanced computational models for electric propulsion systems using MATLAB/SIMULINK, 95% accuracy.",
-                "Conducted comprehensive performance analysis of hybrid propulsion systems through Statistical Analysis and modeling.",
-                "Implemented predictive maintenance algorithms using Machine Learning, reducing system time by 40% through analytics."
-            ],
-            tags: ["MATLAB", "SIMULINK", "Machine Learning", "Statistical Analysis"]
-        },
-        {
-            title: "General Electric Aviation",
-            titleLink: "https://www.ge.com/aviation",
-            subtitle: "Turbine Design Engineering Intern",
-            duration: "June 2023 - July 2023",
-            location: "Cincinnati, OH",
-            bullets: [
-                "Designed and implemented optimization algorithms for turbine blade cooling systems using Python and NumPy libraries.",
-                "Performed comprehensive thermal analysis using ANSYS and Fluent for next-generation engine component validation.",
-                "Developed automated reporting system for turbine performance metrics, improving analysis efficiency by 50% using CFD."
-            ],
-            tags: ["Python", "CFD", "ANSYS", "Fluent", "NumPy"]
-        },
-        {
-            title: "Boeing Research & Technology",
-            subtitle: "Autonomous Systems Intern",
-            duration: "May 2022 - Aug 2022",
-            location: "Seattle, WA",
-            bullets: [
-                "Implemented advanced Computer Vision algorithms for autonomous aircraft navigation systems with 95% accuracy rate.",
-                "Developed and optimized deep learning models for obstacle detection using PyTorch and TensorFlow frameworks.",
-                "Created comprehensive GUI-based testing platform using Python and OpenCV for vision system validation and testing."
-            ],
-            tags: ["PyTorch", "Python", "Computer Vision", "TensorFlow", "OpenCV"]
+        
+        // Check if we need to add to formData
+        if (typeof formData !== 'undefined' && formData[sectionKey] === undefined) {
+            formData[sectionKey] = [];
         }
-    ],
-    projects: [
-        {
-            title: "Advanced Turbofan Engine Design with Variable Bypass",
-            titleLink: "https://github.com/johndoe-aero/turbofan-design",
-            subtitle: "Graduate Thesis Project",
-            duration: "January 2024 - Present",
-            bullets: [
-                "Designed a novel turbofan architecture using CFD, achieving 15% improved fuel efficiency, performance optimization.",
-                "Conducted detailed analysis using ANSYS CFX and FEA for performance validation, ensuring accuracy and optimization.",
-                "Optimized variable bypass mechanism using advanced Computational Methods for multiple flight conditions performance."
-            ],
-            tags: ["Python", "CFD", "ANSYS CFX", "FEA", "Computational Methods"]
-        },
-        {
-            title: "Autonomous VTOL Aircraft Control System",
-            titleLink: "https://github.com/johndoe-aero/vtol-control",
-            subtitle: "Advanced Controls Project",
-            duration: "Sept 2022 - Dec 2022",
-            bullets: [
-                "Developed adaptive control system for VTOL aircraft using MATLAB and SIMULINK for enhanced stability performance.",
-                "Implemented advanced Control Systems algorithms for transition phase optimization in complex dynamic flight conditions.",
-                "Validated system performance through Hardware-in-the-Loop simulation, ensuring real-time control, precision, reliability."
-            ],
-            tags: ["MATLAB", "SIMULINK", "Control Systems", "VTOL", "Hardware-in-the-Loop"]
+        
+        // Register the custom section in the config
+        if (typeof updateConfigWithCustomSection === 'function') {
+            updateConfigWithCustomSection(sectionKey, sectionTitle);
+        } else {
+            console.warn('updateConfigWithCustomSection function not found');
         }
-    ],
-    skills: [
-        {
-            category: "Languages and Tools",
-            skills: ["Python", "MATLAB", "C++", "ANSYS", "PyTorch", "TensorFlow", "OpenCV", "CAD", "CFD", "FEA"]
-        }
-    ],
-    competitions: [
-        {
-            title: "NASA University Student Design Challenge",
-            titleLink: "https://www.nasa.gov/stem/studentchallenge",
-            subtitle: "First Place Winner",
-            duration: "Jan 2023 - May 2023",
-            location: "Washington, DC",
-            bullets: [
-                "Led team in designing innovative Electric Propulsion system architecture, achieving 30% improved efficiency metrics.",
-                "Presented winning concept using System Design methodology at NASA headquarters, receiving recognition for innovation.",
-                "Developed comprehensive simulation framework using MATLAB and SIMULINK for performance validation and testing."
-            ],
-            tags: ["Electric Propulsion", "System Design", "MATLAB", "SIMULINK"]
-        },
-        {
-            title: "AIAA Design Competition",
-            subtitle: "Distinguished Paper Award",
-            duration: "March 2023 - Present",
-            location: "Orlando, FL",
-            bullets: [
-                "Authored comprehensive paper on novel approach to supersonic aircraft noise reduction using advanced CFD techniques.",
-                "Presented groundbreaking Aeroacoustics research findings at AIAA Aviation Forum, receiving distinguished recognition."
-            ],
-            tags: ["Aeroacoustics", "CFD", "Technical Writing"]
-        }
-    ]
-};
+        
+        // Add button for the custom section if it doesn't exist
+        createSectionButton(sectionKey, sectionTitle);
+    });
+    
+    return customSections;
+}
+
+// Function to create buttons for custom sections
+function createSectionButton(sectionKey, sectionTitle) {
+    // Check if button already exists
+    const existingButton = document.querySelector(`.add-btn[data-section="${sectionKey}"]`);
+    if (existingButton) {
+        return; // Don't create duplicates
+    }
+    
+    // Create a new button and add it to the sidebar
+    const sidebar = document.querySelector(".action-buttons");
+    if (sidebar) {
+        const newButton = document.createElement("button");
+        newButton.className = "add-btn";
+        newButton.setAttribute('data-section', sectionKey); // Mark with section type
+        newButton.textContent = `Add ${sectionTitle}`;
+        newButton.onclick = function() {
+            if (typeof addSection === 'function') {
+                addSection(sectionKey);
+            } else {
+                console.warn('addSection function not found');
+            }
+        };
+        
+        sidebar.appendChild(newButton);
+    } else {
+        console.warn('Sidebar element not found');
+    }
+}
 
 // Function to clear all existing data before loading demo
 function clearAllData() {
@@ -146,16 +258,27 @@ function clearAllData() {
         console.warn('Resume element not found');
     }
     
+    // Get all section types from the JSON
+    const allSectionTypes = Object.keys(demoJSON);
+    
     // Clear formData object
     if (typeof formData !== 'undefined') {
+        // Reset formData with all section types
         formData = {
             personal: [],
             education: [],
             experience: [],
             projects: [],
-            skills: [],
-            competitions: []
+            competitions: [],
+            skills: []
         };
+        
+        // Add custom section types from JSON
+        allSectionTypes.forEach(type => {
+            if (!formData[type]) {
+                formData[type] = [];
+            }
+        });
     } else {
         console.warn('formData variable not defined yet');
     }
@@ -170,209 +293,170 @@ function clearAllData() {
             skills: 0,
             competitions: 0
         };
+        
+        // Add custom section types from JSON
+        allSectionTypes.forEach(type => {
+            if (!sectionCounter[type]) {
+                sectionCounter[type] = 0;
+            }
+        });
     } else {
         console.warn('sectionCounter variable not defined yet');
     }
 }
 
+function populateSection(sectionType, sectionData) {
+    if (!sectionData || !Array.isArray(sectionData) || sectionData.length === 0) {
+        return;
+    }
+
+    sectionData.forEach(itemData => {
+        addSection(sectionType);
+        const sectionId = `${sectionType}-${sectionCounter[sectionType] - 1}`;
+        const section = document.getElementById(sectionId);
+        
+        if (section) {
+            Object.entries(itemData).forEach(([key, value]) => {
+                if (key === 'bullets') {
+                    // Find the bullets container
+                    const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
+                    if (bulletsContainer) {
+                        // Clear any default bullet points
+                        bulletsContainer.innerHTML = '';
+                        
+                        // Add each bullet point as a separate field
+                        value.forEach(bulletText => {
+                            addBulletField(sectionId, bulletsContainer, bulletText);
+                        });
+                    }
+                } else if (key === 'tags') {
+                    const input = section.querySelector('input[name="tags"]');
+                    if (input) {
+                        input.value = Array.isArray(value) ? value.join(', ') : value;
+                    }
+                } else if (key === 'skills') {
+                    // Handle skills array for skills section
+                    const skillsContainer = section.querySelector('.skills-container');
+                    if (skillsContainer) {
+                        value.forEach((skill, index) => {
+                            if (index === 0) {
+                                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
+                                if (firstSkillInput) {
+                                    firstSkillInput.value = skill;
+                                }
+                            } else {
+                                addSkillField(sectionId);
+                                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
+                                inputs[inputs.length - 1].value = skill;
+                            }
+                        });
+                    }
+                } else if (key === 'summary' && sectionType === 'summary') {
+                    // Special handling for summary text
+                    const textarea = section.querySelector('textarea[name="summary"]');
+                    if (textarea) {
+                        textarea.value = value;
+                    }
+                } else {
+                    const input = section.querySelector(`input[name="${key}"]`);
+                    const textarea = section.querySelector(`textarea[name="${key}"]`);
+                    if (input) {
+                        input.value = value;
+                    } else if (textarea) {
+                        textarea.value = value;
+                    }
+                }
+            });
+            updateFormData(sectionId);
+            
+            // Update section title
+            let titleField = null;
+            if (sectionType === 'education') {
+                titleField = section.querySelector('input[name="school"]');
+            } else if (sectionType === 'skills') {
+                titleField = section.querySelector('input[name="category"]');
+            } else if (sectionType === 'personal') {
+                titleField = section.querySelector('input[name="name"]');
+            } else if (sectionType === 'summary') {
+                titleField = { value: 'Professional Summary' }; // Static title for summary
+            } else {
+                titleField = section.querySelector('input[name="title"]');
+            }
+            
+            if (titleField && titleField.value) {
+                updateSectionTitle(sectionId, sectionType, titleField.value);
+            }
+        }
+    });
+}
+
+
 function populateFromDemoJSON() {
     try {
-        // Clear existing form data - using the clearAllData function
-        clearAllData();
+        // First, detect and register any custom sections from the JSON
+        const customSections = detectCustomSections();
+        console.log('Detected custom sections:', customSections);
         
-        // Populate Personal Information, Education, Experience, and Skills
-        demoJSON.personal.forEach(personalInfo => {
-            addSection('personal');
-            const sectionId = `personal-${sectionCounter.personal - 1}`;
-            const section = document.getElementById(sectionId);
-            
-            if (section) {
-                Object.entries(personalInfo).forEach(([key, value]) => {
-                    const input = section.querySelector(`input[name="${key}"]`);
-                    if (input) {
-                        input.value = value;
-                    }
-                });
-                updateFormData(sectionId);
-            }
-        });
-
-        // Populate Education
-        demoJSON.education.forEach(education => {
-            addSection('education');
-            const sectionId = `education-${sectionCounter.education - 1}`;
-            const section = document.getElementById(sectionId);
-            
-            if (section) {
-                Object.entries(education).forEach(([key, value]) => {
-                    const input = section.querySelector(`input[name="${key}"]`);
-                    if (input) {
-                        input.value = value;
-                    }
-                });
-                updateFormData(sectionId);
-            }
-        });
-
-        // For Experience sections
-        demoJSON.experience.forEach(experience => {
-            addSection('experience');
-            const sectionId = `experience-${sectionCounter.experience - 1}`;
-            const section = document.getElementById(sectionId);
-            
-            if (section) {
-                Object.entries(experience).forEach(([key, value]) => {
-                    if (key === 'bullets') {
-                        // Find the bullets container
-                        const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
-                        if (bulletsContainer) {
-                            // Clear any default bullet points
-                            bulletsContainer.innerHTML = '';
-                            
-                            // Add each bullet point as a separate field
-                            value.forEach(bulletText => {
-                                addBulletField(sectionId, bulletsContainer, bulletText);
-                            });
-                        }
-                    } else if (key === 'tags') {
-                        const input = section.querySelector('input[name="tags"]');
-                        if (input) {
-                            input.value = value.join(', ');
-                        }
-                    } else {
-                        const input = section.querySelector(`input[name="${key}"]`);
-                        if (input) {
-                            input.value = value;
-                        }
-                    }
-                });
-                updateFormData(sectionId);
-            }
-        });
-
-        // Similar changes for Projects section
-        demoJSON.projects.forEach(project => {
-            addSection('projects');
-            const sectionId = `projects-${sectionCounter.projects - 1}`;
-            const section = document.getElementById(sectionId);
-            
-            if (section) {
-                Object.entries(project).forEach(([key, value]) => {
-                    if (key === 'bullets') {
-                        // Find the bullets container
-                        const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
-                        if (bulletsContainer) {
-                            // Clear any default bullet points
-                            bulletsContainer.innerHTML = '';
-                            
-                            // Add each bullet point as a separate field
-                            value.forEach(bulletText => {
-                                addBulletField(sectionId, bulletsContainer, bulletText);
-                            });
-                        }
-                    } else if (key === 'tags') {
-                        const input = section.querySelector('input[name="tags"]');
-                        if (input) {
-                            input.value = value.join(', ');
-                        }
-                    } else {
-                        const input = section.querySelector(`input[name="${key}"]`);
-                        const textarea = section.querySelector(`textarea[name="${key}"]`);
-                        if (input) {
-                            input.value = value;
-                        } else if (textarea) {
-                            textarea.value = value;
-                        }
-                    }
-                });
-                updateFormData(sectionId);
-            }
-        });
-
-        // And for Competitions section
-        demoJSON.competitions.forEach(competition => {
-            addSection('competitions');
-            const sectionId = `competitions-${sectionCounter.competitions - 1}`;
-            const section = document.getElementById(sectionId);
-            
-            if (section) {
-                Object.entries(competition).forEach(([key, value]) => {
-                    if (key === 'bullets') {
-                        // Find the bullets container
-                        const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
-                        if (bulletsContainer) {
-                            // Clear any default bullet points
-                            bulletsContainer.innerHTML = '';
-                            
-                            // Add each bullet point as a separate field
-                            value.forEach(bulletText => {
-                                addBulletField(sectionId, bulletsContainer, bulletText);
-                            });
-                        }
-                    } else if (key === 'tags') {
-                        const input = section.querySelector('input[name="tags"]');
-                        if (input) {
-                            input.value = value.join(', ');
-                        }
-                    } else {
-                        const input = section.querySelector(`input[name="${key}"]`);
-                        const textarea = section.querySelector(`textarea[name="${key}"]`);
-                        if (input) {
-                            input.value = value;
-                        } else if (textarea) {
-                            textarea.value = value;
-                        }
-                    }
-                });
-                updateFormData(sectionId);
-            }
-        }); 
-        
-        // Populate Skills
-        demoJSON.skills.forEach(skillCategory => {
-            addSection('skills');
-            const sectionId = `skills-${sectionCounter.skills - 1}`;
-            const section = document.getElementById(sectionId);
-            
-            if (section) {
-                // Set category
-                const categoryInput = section.querySelector('input[name="category"]');
-                if (categoryInput) {
-                    categoryInput.value = skillCategory.category;
+        // Update section order to include custom sections
+        if (typeof sectionOrder !== 'undefined') {
+            customSections.forEach(section => {
+                if (!sectionOrder.includes(section)) {
+                    sectionOrder.push(section);
                 }
+            });
+            console.log('Updated section order:', sectionOrder);
+        }
+        
+        // Populate all sections using our helper function
+        Object.entries(demoJSON).forEach(([sectionType, sectionData]) => {
+            if (sectionType !== 'skills') { // Skills needs special handling
+                populateSection(sectionType, sectionData);
+            }
+        });
+        
+        // Special handling for Skills section
+        if (demoJSON.skills && Array.isArray(demoJSON.skills)) {
+            demoJSON.skills.forEach(skillCategory => {
+                addSection('skills');
+                const sectionId = `skills-${sectionCounter.skills - 1}`;
+                const section = document.getElementById(sectionId);
+                
+                if (section) {
+                    // Set category
+                    const categoryInput = section.querySelector('input[name="category"]');
+                    if (categoryInput) {
+                        categoryInput.value = skillCategory.category;
+                    }
 
-                // Add skills
-                const skillsContainer = section.querySelector('.skills-container');
-                if (skillsContainer) {
-                    skillCategory.skills.forEach((skill, index) => {
-                        if (index === 0) {
-                            // Use existing first skill input
-                            const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
-                            if (firstSkillInput) {
-                                firstSkillInput.value = skill;
+                    // Add skills
+                    const skillsContainer = section.querySelector('.skills-container');
+                    if (skillsContainer) {
+                        skillCategory.skills.forEach((skill, index) => {
+                            if (index === 0) {
+                                // Use existing first skill input
+                                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
+                                if (firstSkillInput) {
+                                    firstSkillInput.value = skill;
+                                }
+                            } else {
+                                // Add new skill input for remaining skills
+                                addSkillField(sectionId);
+                                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
+                                inputs[inputs.length - 1].value = skill;
                             }
-                        } else {
-                            // Add new skill input for remaining skills
-                            addSkillField(sectionId);
-                            const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
-                            inputs[inputs.length - 1].value = skill;
-                        }
-                    });
+                        });
+                    }
+                    updateFormData(sectionId);
                 }
-                updateFormData(sectionId);
-            }
-        });
+            });
+        }
 
-        // Generate resume preview - Use a try/catch to handle any potential errors
-        try {
-            console.log('Demo data loaded', sectionOrder);
-            if (typeof generateResume === 'function' && typeof sectionOrder !== 'undefined') {
-                generateResume(sectionOrder);
-            } else {
-                console.warn('generateResume function or sectionOrder not found');
-            }
-        } catch (error) {
-            console.error('Error generating resume preview:', error);
+        // Generate resume preview
+        console.log('Demo data loaded', sectionOrder);
+        if (typeof generateResume === 'function' && typeof sectionOrder !== 'undefined') {
+            generateResume(sectionOrder);
+        } else {
+            console.warn('generateResume function or sectionOrder not found');
         }
     } catch (error) {
         console.error('Error loading demo data:', error);
@@ -406,13 +490,6 @@ window.onload = function() {
             initializeCollapsedGroups();
         } else {
             console.warn('initializeCollapsedGroups function not found');
-        }
-        
-        // Generate the resume if the function exists
-        if (typeof generateResume === 'function' && typeof sectionOrder !== 'undefined') {
-            generateResume(sectionOrder);
-        } else {
-            console.warn('generateResume function or sectionOrder not found');
         }
     } catch (error) {
         console.error('Error in window.onload:', error);

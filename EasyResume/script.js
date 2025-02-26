@@ -1,4 +1,3 @@
-// Update sectionCounter and formData
 let sectionCounter = {
     personal: 0,
     education: 0,
@@ -6,7 +5,8 @@ let sectionCounter = {
     projects: 0,
     competitions: 0,
     skills: 0,
-    general: 0,  // For any other custom sections
+    summary: 0,  // Add this if missing
+    general: 0
 };
 
 let formData = {
@@ -16,10 +16,11 @@ let formData = {
     projects: [],
     competitions: [],
     skills: [],
-    general: []  // For any other custom sections
+    summary: [],  // Add this if missing
+    general: []
 };
 
-let sectionOrder = ['header', 'education', 'experience', 'projects', 'competitions', 'skills'];
+let sectionOrder = ['header', 'summary', 'education', 'experience', 'projects', 'competitions', 'skills'];
 
 let sectionConfigs = {
     'personal': { title: 'Personal Information', fields: [ 
@@ -28,6 +29,9 @@ let sectionConfigs = {
         { name: 'phone', label: 'Phone', type: 'tel' },
         { name: 'github', label: 'GitHub', type: 'text' },
         { name: 'linkedin', label: 'LinkedIn', type: 'text' }
+    ]},
+    'summary': { title: 'Summary', fields: [ 
+        { name: 'summary', label: 'Professional Summary', type: 'textarea', rows: 4 }
     ]},
     'education': { title: 'Education', fields: [ 
         { name: 'school', label: 'School/University', type: 'text' },
@@ -477,6 +481,12 @@ function updateFormData(sectionId) {
     const section = document.getElementById(sectionId);
     const [type] = sectionId.split('-');
     
+    // Ensure the section type exists in formData
+    if (!formData[type]) {
+        formData[type] = [];
+        console.warn(`Created missing formData section for ${type}`);
+    }
+    
     const data = {
         id: sectionId,
         fields: {}
@@ -490,6 +500,11 @@ function updateFormData(sectionId) {
             if (input.value) data.fields.skills.push(input.value);
         } else {
             data.fields[input.name] = input.value;
+            
+            // Add debug log for summary field
+            if (type === 'summary' && input.name === 'summary') {
+                console.log("Captured summary text:", input.value);
+            }
             
             // Update section title when relevant fields are changed
             if ((input.name === 'title' && (type === 'experience' || type === 'projects' || type === 'competitions')) ||
@@ -507,8 +522,6 @@ function updateFormData(sectionId) {
         data.fields.bullets = Array.from(bulletInputs)
             .map(input => input.value)
             .filter(value => value.trim() !== '');
-    } else {
-        data.fields.bullets = [];
     }
     
     const existingIndex = formData[type].findIndex(item => item.id === sectionId);
@@ -537,12 +550,13 @@ function generateResume(order = sectionOrder) {
     
     // Create a dynamic content object based on the sectionOrder
     const content = {
-        header: null
+        header: null,
+        summary: ''  // Initialize summary as empty string
     };
     
     // Initialize section arrays based on sectionConfigs
     Object.keys(sectionConfigs).forEach(sectionKey => {
-        if (sectionKey !== 'personal' && sectionKey !== 'skills') {
+        if (sectionKey !== 'personal' && sectionKey !== 'skills' && sectionKey !== 'summary') {
             content[sectionKey] = [];
         }
     });
@@ -551,7 +565,7 @@ function generateResume(order = sectionOrder) {
     content.skills = {};
 
     // Handle header (personal) section
-    if (formData.personal.length > 0) {
+    if (formData.personal && formData.personal.length > 0) {
         const personal = formData.personal[0].fields;
         content.header = {
             name: personal.name || '',
@@ -564,9 +578,20 @@ function generateResume(order = sectionOrder) {
         };
     }
 
+    // Handle summary section with safety checks
+    if (formData.summary && formData.summary.length > 0) {
+        const summaryData = formData.summary[0].fields;
+        if (summaryData && summaryData.summary) {
+            content.summary = summaryData.summary;
+            console.log("Summary content set to:", content.summary);
+        }
+    }
+
+    // Rest of your code remains the same...
+
     // Process all section types including custom ones
     Object.keys(formData).forEach(sectionType => {
-        if (sectionType === 'personal') return; // Already handled above
+        if (sectionType === 'personal' || sectionType === 'summary') return; // Already handled above
         
         if (sectionType === 'skills') {
             if (formData.skills.length > 0) {
@@ -613,6 +638,7 @@ function generateResume(order = sectionOrder) {
     });
 
     // Ensure all required properties exist in content to prevent jsPDF errors
+    if (!content.summary) content.summary = '';
     if (!content.education) content.education = [];
     if (!content.experience) content.experience = [];
     if (!content.projects) content.projects = [];

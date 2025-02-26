@@ -18,8 +18,37 @@ class ResumeBuilder {
 
     // Modify the renderContent method to include skills
     
-    renderContent(content, sectionOrder = ['header', 'education', 'experience', 'projects', 'competitions','skills', ]) {
-        console.log(content);
+    addProfessionalSummary(summary) {
+        // Check if summary is a string, otherwise convert it
+        const summaryText = typeof summary === 'string' ? summary : 
+                            (summary && summary.toString ? summary.toString() : '');
+        
+        if (!summaryText || summaryText.trim() === '') return;
+        
+        this.checkAndAddPage();
+        
+        // Add section header
+        this.addSection('PROFESSIONAL SUMMARY', null);
+        
+        // Render the summary text with proper wrapping
+        this.setFont('normal');
+        const summaryLines = this.doc.splitTextToSize(
+            summaryText,
+            this.contentWidth
+        );
+        
+        summaryLines.forEach(line => {
+            this.checkAndAddPage();
+            this.doc.text(line, this.config.page.margins.left, this.currentY);
+            this.currentY += this.config.spacing.lineGap;
+        });
+        
+        this.currentY += this.config.spacing.paragraphGap;
+    }
+
+    // Update the renderContent method to include the professional summary section
+    renderContent(content, sectionOrder = ['header', 'summary', 'education', 'experience', 'projects', 'competitions', 'skills']) {
+        console.log("Content received:", content);
         this.content = content;
         
         this.doc = new window.jspdf.jsPDF({
@@ -29,7 +58,7 @@ class ResumeBuilder {
         });
         
         this.currentY = this.config.page.margins.top;
-    
+
         // Iterate through the section order and render each section if it exists
         sectionOrder.forEach(section => {
             switch(section.toLowerCase()) {
@@ -38,8 +67,23 @@ class ResumeBuilder {
                         this.addHeader(content.header.name, content.header.contacts);
                     }
                     break;
-    
+
+                case 'summary':
+                    // Safely handle summary data, even if it's an object
+                    if (content.summary) {
+                        const summaryText = typeof content.summary === 'string' ? 
+                            content.summary : 
+                            (content.summary.toString ? content.summary.toString() : '');
+                        
+                        if (summaryText.trim() !== '') {
+                            this.addProfessionalSummary(summaryText);
+                        }
+                    }
+                    break;
+
                 case 'education':
+                    // Rest of cases remain the same
+                    // ...
                     if (content.education && content.education.length > 0) {
                         this.addSection('EDUCATION', null);
                         content.education.forEach(edu => {
@@ -54,13 +98,13 @@ class ResumeBuilder {
                         });
                     }
                     break;
-    
+
                 case 'skills':
                     if (content.skills && Object.keys(content.skills).length > 0) {
                         this.addSkills(content.skills);
                     }
                     break;
-    
+
                 default:
                     // Handle experience, projects, competitions, and any other sections
                     if (content[section] && Array.isArray(content[section])) {
@@ -98,7 +142,7 @@ class ResumeBuilder {
             this.doc.text(name, this.config.page.margins.left, this.currentY);
         }
         this.currentY += this.config.spacing.headerGap;
-    
+
         if (contacts && contacts.length > 0) {
             this.checkAndAddPage();
             this.setFont('small');
@@ -114,7 +158,7 @@ class ResumeBuilder {
                 !contact.includes('linkedin') && 
                 !contact.includes('github')
             );
-    
+
             try {
                 // Calculate total width first
                 let totalWidth = 0;
@@ -124,30 +168,48 @@ class ResumeBuilder {
                     { contact: linkedinContact, key: 'linkedin' },
                     { contact: githubContact, key: 'github' }
                 ].filter(item => item.contact);
-    
-                // Calculate width for contacts with icons
+
+                // Format the display text for each contact type
                 contactsToAdd.forEach(item => {
                     if (item.contact) {
+                        // Create display versions of contacts
+                        if (item.key === 'linkedin') {
+                            // Extract username from LinkedIn URL
+                            item.displayText = item.contact.replace(/https?:\/\/(www\.)?linkedin\.com\/in\//, '')
+                                .replace(/\/$/, ''); // Remove trailing slash if present
+                        } else if (item.key === 'github') {
+                            // Extract username from GitHub URL
+                            item.displayText = item.contact.replace(/https?:\/\/(www\.)?github\.com\//, '')
+                                .replace(/\/$/, ''); // Remove trailing slash if present
+                        } else if (item.key === 'phone') {
+                            // Remove spaces from phone numbers
+                            item.displayText = item.contact.replace(/\s+/g, '');
+                        } else {
+                            item.displayText = item.contact;
+                        }
+                        
+                        // Calculate width for this contact
                         totalWidth += iconConfig.size + iconConfig.spacing; // Icon width + spacing
-                        totalWidth += this.doc.getTextWidth(item.contact) + iconConfig.contactSpacing; // Text width + spacing
+                        totalWidth += this.doc.getTextWidth(item.displayText) + iconConfig.contactSpacing; // Text width + spacing
                     }
                 });
-    
+
                 // Calculate width for other contacts
                 if (otherContacts.length > 0) {
                     const otherContactsText = otherContacts.join(headerConfig.contactSeparator);
                     totalWidth += this.doc.getTextWidth(otherContactsText);
                 }
-    
+
                 // Calculate starting X position to center everything
                 let currentX = this.config.formatting.textAlign.header === 'center'
                     ? (this.pageWidth / 2) - (totalWidth / 2)
                     : this.config.page.margins.left;
-    
-                const addContactWithIcon = (contact, iconKey) => {
-                    if (contact) {
+
+                const addContactWithIcon = (contactObj) => {
+                    if (contactObj.contact) {
+                        // Add icon
                         this.doc.addImage(
-                            iconConfig.urls[iconKey],
+                            iconConfig.urls[contactObj.key],
                             'PNG',
                             currentX,
                             this.currentY - (iconConfig.size * iconConfig.verticalOffset),
@@ -156,42 +218,57 @@ class ResumeBuilder {
                         );
                         currentX += iconConfig.size + iconConfig.spacing;
                         
-                        // Add hyperlinks for LinkedIn and GitHub contacts
-                        if (iconKey === 'linkedin' || iconKey === 'github') {
-                            // Create a clickable link if it's a profile URL
-                            const url = contact.startsWith('http') ? contact : 
-                                        iconKey === 'linkedin' ? `https://linkedin.com/in/${contact.replace(/.*\/in\//, '')}` :
-                                        iconKey === 'github' ? `https://github.com/${contact.replace(/.*github.com\//, '')}` : null;
+                        // Display the formatted text version
+                        const displayText = contactObj.displayText;
+                        
+                        // Create appropriate links
+                        if (contactObj.key === 'linkedin') {
+                            // Create LinkedIn hyperlink
+                            const url = contactObj.contact.startsWith('http') ? contactObj.contact : 
+                                    `https://linkedin.com/in/${displayText}`;
                             
-                            if (url) {
-                                const linkWidth = this.doc.getTextWidth(contact);
-                                this.doc.text(contact, currentX, this.currentY);
-                                this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url });
-                            } else {
-                                this.doc.text(contact, currentX, this.currentY);
-                            }
-                        } else if (iconKey === 'email') {
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url });
+                        } 
+                        else if (contactObj.key === 'github') {
+                            // Create GitHub hyperlink
+                            const url = contactObj.contact.startsWith('http') ? contactObj.contact : 
+                                    `https://github.com/${displayText}`;
+                            
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url });
+                        } 
+                        else if (contactObj.key === 'email') {
                             // Create mailto link for email
-                            const linkWidth = this.doc.getTextWidth(contact);
-                            this.doc.text(contact, currentX, this.currentY);
-                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url: `mailto:${contact}` });
-                        } else {
-                            this.doc.text(contact, currentX, this.currentY);
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url: `mailto:${contactObj.contact}` });
+                        }
+                        else if (contactObj.key === 'phone') {
+                            // Create tel link for phone
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url: `tel:${contactObj.contact.replace(/\s+/g, '')}` });
+                        }  
+                        else {
+                            this.doc.text(displayText, currentX, this.currentY);
                         }
                         
-                        currentX += this.doc.getTextWidth(contact) + iconConfig.contactSpacing;
+                        currentX += this.doc.getTextWidth(displayText) + iconConfig.contactSpacing;
                     }
                 };
-    
+
                 // Add contacts with their respective icons
-                contactsToAdd.forEach(item => addContactWithIcon(item.contact, item.key));
-    
+                contactsToAdd.forEach(item => addContactWithIcon(item));
+
                 // Add remaining contacts if any
                 if (otherContacts.length > 0) {
                     const otherContactsText = otherContacts.join(headerConfig.contactSeparator);
                     this.doc.text(otherContactsText, currentX, this.currentY);
                 }
-    
+
             } catch (error) {
                 console.error('Error loading icons:', error);
                 // Fallback: show all contacts without icons
