@@ -658,7 +658,7 @@ function generateResume(order = sectionOrder) {
         const dataUrl = builder.getDataUrl();
         
         // Create a modified URL with zoom and fit parameters
-        const enhancedUrl = dataUrl + "#zoom=100&view=FitH,top";
+        const enhancedUrl = dataUrl + "#view=FitH&toolbar=0";
         
         // Set the iframe source
         const pdfPreview = document.getElementById('pdfPreview');

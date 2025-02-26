@@ -492,7 +492,7 @@ class ResumeBuilder {
         });
     
         // Add final spacing after skills section
-        this.currentY += this.config.spacing.sectionGap/2;
+        this.currentY += this.config.spacing.sectionGap-1;
     }
 
         addGeneralSection(sectionTitle, entries) {
