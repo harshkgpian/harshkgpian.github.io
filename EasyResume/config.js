@@ -38,7 +38,7 @@ const RESUME_CONFIG = {
         },
         small: {
             style: 'times',
-            weight: 'italic',
+            weight: 'bolditalic',
             size: 9,
             color: '#000000'
         }

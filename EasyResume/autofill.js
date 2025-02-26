@@ -12,12 +12,12 @@ const demoJSON = {
     ],
     "summary": [
       {
-        "summary": "Dedicated software engineer with over 8 years of experience in full-stack development, focusing on building scalable web applications. Proven ability to design, develop, and deploy complex software solutions. Skilled in optimizing processes and implementing AI tools to streamline workflows. Passionate about writing clean, maintainable code and contributing to open-source projects."
+        "summary": "Dedicated software engineer with 8 years of experience in full-stack development, focusing on building scalable applications. Proven ability to design, develop, and deploy software solutions. Skilled in optimizing processes and implementing AI tools to streamline workflows. Passionate about writing clean, maintainable code and contributing to open-source projects."
       }
     ],
     "education": [
       {
-        "school": "MIT",
+        "school": "Massachusetts Institute of Technology, MIT",
         "degree": "B.Sc in Computer Science",
         "duration": "September 2012 - June 2016",
         "location": "Cambridge, MA, USA",
@@ -41,19 +41,20 @@ const demoJSON = {
         "duration": "July 2018 - Present",
         "location": "San Francisco, CA, USA",
         "bullets": [
-          "Led the development of a cloud-based SaaS platform, increasing customer retention by 40%.",
-          "Worked closely with cross-functional teams to design and implement new product features.",
-          "Introduced Agile methodologies to the development team, improving productivity by 25%.",
-          "Built and maintained RESTful APIs for mobile and web applications.",
-          "Collaborated with DevOps to automate deployment pipelines, reducing deployment time by 50%."
+          "Led the development of a cloud-based SaaS platform, increasing customer retention by 40% and optimizing resource.",
+          "Worked closely with cross-functional teams to design and implement new product features while maintaining code quality.",
+          "Introduced Agile methodologies to the development team, improving productivity by 25% through effective sprint planning.",
+          "Collaborated with DevOps to automate deployment pipelines, reducing deployment time by 50% through efficient CI/CD.",
+          "Mentored junior developers and conducted code reviews, improving team code quality metrics by 35% over six months"
         ],
         "tags": [
-          "Full-Stack Development",
-          "Cloud Computing",
-          "Agile Methodologies",
-          "API Development",
+          "cloud-based",
+          "SaaS platform",
+          "product features",
+          "Agile methodologies",
           "DevOps",
-          "Performance Optimization"
+          "deployment",
+          "code reviews"
         ]
       },
       {
@@ -63,19 +64,20 @@ const demoJSON = {
         "duration": "June 2016 - June 2018",
         "location": "New York, NY, USA",
         "bullets": [
-          "Developed and maintained several web applications, increasing user engagement by 20%.",
-          "Participated in the design and implementation of features for e-commerce platforms.",
-          "Contributed to the backend development of high-traffic websites using Java and Spring Boot.",
-          "Collaborated with QA engineers to write unit tests and ensure code quality.",
-          "Improved codebase by refactoring legacy code and introducing design patterns."
+          "Developed and maintained several web applications, increasing user engagement by 20% through intuitive interface design.",
+          "Participated in the design and implementation of features for e-commerce platforms using modern payment integrations.",
+          "Contributed to the backend development of high-traffic websites using Java with microservices architecture.",
+          "Collaborated with QA engineers to write unit tests and ensure code quality through comprehensive test coverage.",
+          "Improved codebase by refactoring legacy code and introducing design patterns for enhanced maintainability.",
+          "Implemented automated testing strategies that reduced bug detection time by 40% and improved release reliability"
         ],
         "tags": [
-          "Web Development",
-          "Java",
-          "Spring Boot",
-          "Unit Testing",
-          "E-commerce",
-          "Backend Development"
+          "web applications",
+          "e-commerce",
+          "microservices",
+          "unit tests",
+          "legacy code",
+          "automated testing"
         ]
       }
     ],
@@ -87,14 +89,15 @@ const demoJSON = {
         "duration": "2022",
         "location": "San Francisco, CA, USA",
         "bullets": [
-          "Developed an AI-based code review tool using machine learning algorithms to identify bugs and suggest optimizations.",
-          "Integrated the tool into the CI/CD pipeline to automate the review process and reduce human errors."
+          "Developed an AI-based code review tool using ML, to identify bugs and suggest optimizations using neural networks.",
+          "Integrated the tool into CI/CD pipeline to automate the review process and reduce human errors through pattern detection."
         ],
         "tags": [
-          "AI Tools",
-          "Machine Learning",
-          "Code Optimization",
-          "CI/CD Integration"
+          "AI-based",
+          "code review",
+          "ML",
+          "neural networks",
+          "CI/CD pipeline"
         ]
       },
       {
@@ -104,13 +107,15 @@ const demoJSON = {
         "duration": "2021",
         "location": "New York, NY, USA",
         "bullets": [
-          "Designed and implemented a project management dashboard to track team performance and project milestones.",
-          "Utilized React and Redux for building dynamic and interactive user interfaces."
+          "Designed a project management dashboard to track team performance and milestones using real-time data visualization.",
+          "Utilized React and Redux for building dynamic and interactive user interfaces with advanced state management."
         ],
         "tags": [
+          "project management",
+          "data visualization",
           "React",
-          "Frontend Development",
-          "Project Management Tools"
+          "Redux",
+          "user interfaces"
         ]
       }
     ],
@@ -154,13 +159,15 @@ const demoJSON = {
         "duration": "2020",
         "location": "USA",
         "bullets": [
-          "Wrote a comprehensive guide on building scalable systems using cloud technologies.",
-          "Discussed best practices for managing cloud resources and optimizing for cost and performance."
+          "Wrote a comprehensive guide on building scalable systems using cloud technologies and distributed computing principles.",
+          "Discussed best practices for managing cloud resources, optimizing cost and performance through automated management."
         ],
         "tags": [
-          "Cloud Computing",
-          "Scalability",
-          "System Design"
+          "scalable systems",
+          "cloud technologies",
+          "distributed computing",
+          "cloud resources",
+          "automated management"
         ]
       }
     ]
