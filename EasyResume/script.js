@@ -193,13 +193,411 @@ function updateBulletWidthInfo(inputElement) {
     }
 }
 
-// Function to remove a bullet point
+// History tracking for undo operations
+let actionHistory = [];
+const MAX_HISTORY_LENGTH = 50; // Limit history to prevent memory issues
+
+// Function to push an action to history
+function pushToHistory(action) {
+    actionHistory.push(action);
+    if (actionHistory.length > MAX_HISTORY_LENGTH) {
+        actionHistory.shift(); // Remove oldest action if we exceed the limit
+    }
+}
+
+// Modified removeBullet function to track removals
 function removeBullet(button) {
     const bulletItem = button.parentElement.parentElement;
     const sectionId = bulletItem.closest('.section-content').id.replace('content-', '');
+    const bulletInput = bulletItem.querySelector('.bullet-input');
+    const bulletText = bulletInput.value;
+    const bulletContainer = bulletItem.parentElement;
+    const bulletIndex = Array.from(bulletContainer.children).indexOf(bulletItem);
+    
+    // Store the action for potential undo
+    pushToHistory({
+        type: 'removeBullet',
+        sectionId: sectionId,
+        bulletText: bulletText,
+        container: bulletContainer,
+        index: bulletIndex
+    });
+    
+    // Remove the bullet
     bulletItem.remove();
     updateFormData(sectionId);
     generateResume();
+}
+
+// Modified removeSection function to track section removals
+function removeSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const groupContainer = section.parentElement.parentElement; // Get the main group container
+    const type = sectionId.split('-')[0]; // Get section type
+    
+    // Store all section data before removal
+    const sectionContent = section.innerHTML;
+    const sectionData = formData[type].find(item => item.id === sectionId);
+    const groupContent = groupContainer.querySelector('.group-content');
+    const sectionIndex = Array.from(groupContent.children).indexOf(section);
+    
+    // Push to history
+    pushToHistory({
+        type: 'removeSection',
+        sectionId: sectionId,
+        sectionType: type,
+        sectionContent: sectionContent,
+        sectionData: JSON.parse(JSON.stringify(sectionData)), // Deep copy
+        groupContainer: groupContainer,
+        sectionIndex: sectionIndex
+    });
+    
+    // Remove from DOM
+    section.remove();
+    
+    // Remove from formData
+    formData[type] = formData[type].filter(item => item.id !== sectionId);
+    
+    // Check if group content is empty
+    if (groupContent && groupContent.querySelectorAll('.section-form').length === 0) {
+        groupContainer.remove(); // Remove the entire group container
+    }
+    
+    generateResume();
+}
+
+// Modified addSection function to track section additions
+function addSection(type) {
+    const formContainer = document.getElementById('formContainer');
+    const sectionId = `${type}-${sectionCounter[type]++}`;
+    
+    // First, check if group container exists
+    let groupContainer = document.querySelector(`.${type}-group`);
+    
+    // If group container doesn't exist, create it
+    if (!groupContainer) {
+        groupContainer = document.createElement('div');
+        groupContainer.className = `section-group ${type}-group`;
+        groupContainer.innerHTML = `
+            <div class="group-header" onclick="toggleGroup('${type}')">
+                <h3>${type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                <span class="group-toggle-icon">▼</span>
+            </div>
+            <div class="group-content" id="group-content-${type}">
+            </div>
+        `;
+        formContainer.appendChild(groupContainer);
+    }
+    
+    // Get the group content
+    const groupContent = groupContainer.querySelector('.group-content');
+    
+    const form = document.createElement('div');
+    form.className = 'section-form';
+    form.id = sectionId;
+    
+    let formContent = getFormContent(type, sectionId);
+    
+    form.innerHTML = `
+        <div class="section-header" onclick="toggleSection('${sectionId}')">
+            <span class="drag-handle">⋮⋮</span>
+            <span class="section-title">${type.charAt(0).toUpperCase() + type.slice(1)} ${sectionCounter[type]}</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="content-${sectionId}">
+            ${formContent}
+            <button class="remove-btn" onclick="removeSection('${sectionId}')">Remove Section</button>
+        </div>
+    `;
+    
+    groupContent.appendChild(form);
+    
+    // Store the action for potential undo
+    pushToHistory({
+        type: 'addSection',
+        sectionId: sectionId,
+        sectionType: type
+    });
+    
+    makeGroupsDraggable();
+    makeDraggable();
+    generateResume(sectionOrder);
+
+    // Add input event listeners for dynamic title updates
+    const titleInput = form.querySelector('input[name="title"]');
+    const schoolInput = form.querySelector('input[name="school"]');
+    const categoryInput = form.querySelector('input[name="category"]');
+    const nameInput = form.querySelector('input[name="name"]');
+
+    // Track field changes
+    const trackFieldChange = (input) => {
+        if (!input) return;
+        
+        // Add the initial value tracker
+        input.dataset.initialValue = input.value;
+        
+        input.addEventListener('focus', function() {
+            // Store the starting value when focus begins
+            this.dataset.initialValue = this.value;
+        });
+        
+        input.addEventListener('blur', function() {
+            // If value changed, store the change
+            if (this.dataset.initialValue !== this.value) {
+                pushToHistory({
+                    type: 'fieldChange',
+                    sectionId: sectionId,
+                    fieldName: this.name,
+                    oldValue: this.dataset.initialValue,
+                    newValue: this.value,
+                    inputElement: this
+                });
+                // Update the stored value
+                this.dataset.initialValue = this.value;
+            }
+        });
+    };
+
+    // Apply field change tracking to all inputs and textareas in the section
+    form.querySelectorAll('input, textarea').forEach(input => {
+        trackFieldChange(input);
+    });
+
+    if (titleInput) {
+        titleInput.addEventListener('input', () => updateSectionTitle(sectionId, type, titleInput.value));
+    }
+    if (schoolInput) {
+        schoolInput.addEventListener('input', () => updateSectionTitle(sectionId, type, schoolInput.value));
+    }
+    if (categoryInput) {
+        categoryInput.addEventListener('input', () => updateSectionTitle(sectionId, type, categoryInput.value));
+    }
+    if (nameInput) {
+        nameInput.addEventListener('input', () => updateSectionTitle(sectionId, type, nameInput.value));
+    }
+}
+
+// New function to handle undo operations
+function undoLastAction() {
+    if (actionHistory.length === 0) return;
+    
+    const lastAction = actionHistory.pop();
+    
+    switch (lastAction.type) {
+        case 'removeBullet':
+            // Re-add the bullet at the same position
+            const container = lastAction.container;
+            const children = container.children;
+            
+            if (lastAction.index >= children.length) {
+                // If the position is beyond current children, just append
+                addBulletField(lastAction.sectionId, container, lastAction.bulletText);
+            } else {
+                // Insert at the original position
+                const tempBullet = document.createElement('div');
+                addBulletField(lastAction.sectionId, tempBullet, lastAction.bulletText);
+                container.insertBefore(tempBullet.firstChild, children[lastAction.index]);
+            }
+            
+            // Update form data and regenerate resume
+            updateFormData(lastAction.sectionId);
+            break;
+            
+        case 'removeSection':
+            // Check if the group container still exists
+            let groupContainer = lastAction.groupContainer;
+            let groupContent = groupContainer.querySelector('.group-content');
+            
+            // If group container was removed, recreate it
+            if (!document.body.contains(groupContainer)) {
+                const formContainer = document.getElementById('formContainer');
+                const type = lastAction.sectionType;
+                
+                groupContainer = document.createElement('div');
+                groupContainer.className = `section-group ${type}-group`;
+                groupContainer.innerHTML = `
+                    <div class="group-header" onclick="toggleGroup('${type}')">
+                        <h3>${type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                        <span class="group-toggle-icon">▼</span>
+                    </div>
+                    <div class="group-content" id="group-content-${type}">
+                    </div>
+                `;
+                formContainer.appendChild(groupContainer);
+                groupContent = groupContainer.querySelector('.group-content');
+            }
+            
+            // Create the section
+            const form = document.createElement('div');
+            form.className = 'section-form';
+            form.id = lastAction.sectionId;
+            form.innerHTML = lastAction.sectionContent;
+            
+            // Add it at the correct position
+            if (lastAction.sectionIndex >= groupContent.children.length) {
+                groupContent.appendChild(form);
+            } else {
+                groupContent.insertBefore(form, groupContent.children[lastAction.sectionIndex]);
+            }
+            
+            // Restore the data
+            if (!formData[lastAction.sectionType]) {
+                formData[lastAction.sectionType] = [];
+            }
+            formData[lastAction.sectionType].push(lastAction.sectionData);
+            
+            // Reattach event listeners
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    updateFormData(lastAction.sectionId);
+                    generateResume();
+                });
+                
+                // Store initial value for tracking changes
+                input.dataset.initialValue = input.value;
+                
+                input.addEventListener('focus', function() {
+                    this.dataset.initialValue = this.value;
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.dataset.initialValue !== this.value) {
+                        pushToHistory({
+                            type: 'fieldChange',
+                            sectionId: lastAction.sectionId,
+                            fieldName: this.name,
+                            oldValue: this.dataset.initialValue,
+                            newValue: this.value,
+                            inputElement: this
+                        });
+                        this.dataset.initialValue = this.value;
+                    }
+                });
+            });
+            
+            makeGroupsDraggable();
+            makeDraggable();
+            break;
+            
+        case 'addSection':
+            // Simply remove the section that was added
+            const section = document.getElementById(lastAction.sectionId);
+            if (section) {
+                const type = lastAction.sectionType;
+                const parentGroup = section.parentElement.parentElement;
+                
+                // Remove the section
+                section.remove();
+                
+                // Remove from formData
+                formData[type] = formData[type].filter(item => item.id !== lastAction.sectionId);
+                
+                // If this was the last section in the group, remove the group container too
+                const remainingSections = parentGroup.querySelectorAll('.section-form');
+                if (remainingSections.length === 0) {
+                    parentGroup.remove();
+                }
+                
+                // Decrement the counter
+                if (sectionCounter[type] > 0) {
+                    sectionCounter[type]--;
+                }
+            }
+            break;
+            
+        case 'fieldChange':
+            // Restore the previous field value
+            if (lastAction.inputElement && document.body.contains(lastAction.inputElement)) {
+                lastAction.inputElement.value = lastAction.oldValue;
+                lastAction.inputElement.dataset.initialValue = lastAction.oldValue;
+                
+                // Update the form data and section title if needed
+                updateFormData(lastAction.sectionId);
+                
+                // If this is a field that affects the section title, update it
+                const section = document.getElementById(lastAction.sectionId);
+                if (section) {
+                    const type = lastAction.sectionId.split('-')[0];
+                    if ((lastAction.fieldName === 'title' && (type === 'experience' || type === 'projects' || type === 'competitions')) ||
+                        (lastAction.fieldName === 'school' && type === 'education') ||
+                        (lastAction.fieldName === 'category' && type === 'skills') ||
+                        (lastAction.fieldName === 'name' && type === 'personal')) {
+                        updateSectionTitle(lastAction.sectionId, type, lastAction.oldValue);
+                    }
+                }
+            }
+            break;
+    }
+    
+    // Regenerate the resume after any undo operation
+    generateResume();
+}
+
+// Add a key event listener for Ctrl+Z to trigger undo
+document.addEventListener('keydown', function(event) {
+    // Check for Ctrl+Z (Windows/Linux) or Command+Z (Mac)
+    if ((event.ctrlKey || event.metaKey) && event.key === 'z') {
+        event.preventDefault(); // Prevent browser's default undo
+        undoLastAction();
+    }
+});
+
+// Modify the addBulletField function to track bullet addition
+function addBulletField(sectionId, container, existingText = '') {
+    const bulletItem = document.createElement('div');
+    bulletItem.className = 'bullet-item';
+    bulletItem.innerHTML = `
+        <div class="bullet-input-container">
+            <input type="text" name="bullet" class="bullet-input" value="${existingText}" 
+                   placeholder="Enter bullet point" 
+                   oninput="updateBulletWidthInfo(this); updateFormData('${sectionId}');" 
+                   onchange="generateResume();">
+            <span class="bullet-width-info">0%</span>
+            <button type="button" class="remove-bullet-btn" onclick="removeBullet(this)">×</button>
+        </div>
+    `;
+    container.appendChild(bulletItem);
+    
+    // Track field changes for the newly added bullet
+    const bulletInput = bulletItem.querySelector('.bullet-input');
+    
+    // Initialize width info if there's existing text
+    if (existingText) {
+        updateBulletWidthInfo(bulletInput);
+    }
+    
+    // Track the addition for undo
+    if (existingText === '') {  // Only track new bullets, not ones being restored
+        pushToHistory({
+            type: 'addBullet',
+            sectionId: sectionId,
+            bulletItem: bulletItem
+        });
+    }
+    
+    // Add change tracking
+    bulletInput.dataset.initialValue = existingText;
+    
+    bulletInput.addEventListener('focus', function() {
+        this.dataset.initialValue = this.value;
+    });
+    
+    bulletInput.addEventListener('blur', function() {
+        if (this.dataset.initialValue !== this.value) {
+            pushToHistory({
+                type: 'fieldChange',
+                sectionId: sectionId,
+                fieldName: 'bullet',
+                oldValue: this.dataset.initialValue,
+                newValue: this.value,
+                inputElement: this
+            });
+            this.dataset.initialValue = this.value;
+        }
+    });
+    
+    return bulletItem;
 }
 
 // Modify getFormContent to use individual bullet point fields instead of textarea
