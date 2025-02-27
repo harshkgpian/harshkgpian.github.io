@@ -19,7 +19,7 @@ let defaultJson = {
       {
         "school": "Indian Institute of Technology, Kharagpur",
         "degree": "Master of Technology in Aerospace Engineering",
-        "duration": "July 2022 - Present",
+        "duration": "Dec 2020 - Present",
         "location": "Kharagpur, India",
         "scoreType": "CGPA",
         "gpa": "8.64/10"
@@ -36,7 +36,7 @@ let defaultJson = {
     "experience": [
       {
         "title": "Aeronautical Development Agency",
-        "titleLink": "",
+        "titleLink": "https://drive.google.com/file/d/1cpOYDpnv-Wc9Zr24QX7lxXX0HkmTcyee/view",
         "subtitle": "Propulsion Research Intern",
         "duration": "May 2023 - June 2023",
         "location": "DRDO, Bengaluru",
@@ -173,7 +173,7 @@ let demoJSON = defaultJson;
 // Helper function to detect and register custom sections
 function detectCustomSections() {
     // Look through the JSON for sections that might not be in the default config
-    const standardSections = ['personal', 'summary', 'education', 'experience', 'projects', 'competitions', 'skills'];
+    const standardSections = ['personal', 'summary', 'education', 'experience', 'projects', 'skills'];
     
     // Find custom sections in the demo JSON
     const customSections = Object.keys(demoJSON).filter(key => !standardSections.includes(key));
@@ -209,6 +209,7 @@ function detectCustomSections() {
 
 // Function to create buttons for custom sections
 function createSectionButton(sectionKey, sectionTitle) {
+    console.log('Creating button for custom section:', sectionKey);
     // Check if button already exists
     const existingButton = document.querySelector(`.add-btn[data-section="${sectionKey}"]`);
     if (existingButton) {
@@ -369,13 +370,13 @@ function populateSection(sectionType, sectionData) {
             let titleField = null;
             if (sectionType === 'education') {
                 titleField = section.querySelector('input[name="school"]');
+            } else if (sectionType === 'summary') {
+                titleField = { value: 'Professional Summary' }; // Static title for summary
             } else if (sectionType === 'skills') {
                 titleField = section.querySelector('input[name="category"]');
             } else if (sectionType === 'personal') {
                 titleField = section.querySelector('input[name="name"]');
-            } else if (sectionType === 'summary') {
-                titleField = { value: 'Professional Summary' }; // Static title for summary
-            } else {
+            }  else {
                 titleField = section.querySelector('input[name="title"]');
             }
             
@@ -459,77 +460,7 @@ function populateFromDemoJSON() {
     }
 }
 
-function populateFromDefaultJSON() {
-    try {
-        // First, detect and register any custom sections from the JSON
-        const customSections = detectCustomSections();
-        console.log('Detected custom sections:', customSections);
-        
-        // Update section order to include custom sections
-        if (typeof sectionOrder !== 'undefined') {
-            customSections.forEach(section => {
-                if (!sectionOrder.includes(section)) {
-                    sectionOrder.push(section);
-                }
-            });
-            console.log('Updated section order:', sectionOrder);
-        }
-        
-        // Populate all sections using our helper function
-        Object.entries(defaultJson).forEach(([sectionType, sectionData]) => {
-            if (sectionType !== 'skills') { // Skills needs special handling
-                populateSection(sectionType, sectionData);
-            }
-        });
-        
-        // Special handling for Skills section
-        if (defaultJson.skills && Array.isArray(defaultJson.skills)) {
-            defaultJson.skills.forEach(skillCategory => {
-                addSection('skills');
-                const sectionId = `skills-${sectionCounter.skills - 1}`;
-                const section = document.getElementById(sectionId);
-                
-                if (section) {
-                    // Set category
-                    const categoryInput = section.querySelector('input[name="category"]');
-                    if (categoryInput) {
-                        categoryInput.value = skillCategory.category;
-                    }
 
-                    // Add skills
-                    const skillsContainer = section.querySelector('.skills-container');
-                    if (skillsContainer) {
-                        skillCategory.skills.forEach((skill, index) => {
-                            if (index === 0) {
-                                // Use existing first skill input
-                                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
-                                if (firstSkillInput) {
-                                    firstSkillInput.value = skill;
-                                }
-                            } else {
-                                // Add new skill input for remaining skills
-                                addSkillField(sectionId);
-                                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
-                                inputs[inputs.length - 1].value = skill;
-                            }
-                        });
-                    }
-                    updateFormData(sectionId);
-                }
-            });
-        }
-
-        // Generate resume preview
-        console.log('Demo data loaded', sectionOrder);
-        if (typeof generateResume === 'function' && typeof sectionOrder !== 'undefined') {
-            generateResume(sectionOrder);
-        } else {
-            console.warn('generateResume function or sectionOrder not found');
-        }
-    } catch (error) {
-        console.error('Error loading demo data:', error);
-    }
-}
 
 // Function to load demo data
 function loadDemoData() {
@@ -550,7 +481,8 @@ function loadDefaultData() {
         clearAllData();
         
         // Populate with demo data
-        populateFromDefaultJSON();
+        demoJSON = defaultJson;
+        populateFromDemoJSON();
     } catch (error) {
         console.error('Error in loadDemoData:', error);
     }
@@ -632,24 +564,10 @@ function createUpdatedJSON() {
     const updatedJSON = createUpdatedJSON();
     console.log('Updated Resume JSON:');
     console.log(JSON.stringify(updatedJSON, null, 2));
-    
-    // Provide feedback to the user
-    alert('Resume JSON data has been logged to the console. Press F12 to open the developer console and view it.');
-    
+        
     return updatedJSON;
   }
   
-  // Function to download the JSON file
-  function downloadJSON() {
-    const updatedJSON = createUpdatedJSON();
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(updatedJSON, null, 2));
-    const downloadAnchorNode = document.createElement('a');
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "resume_data.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
-  }
   
 // Remove the JSON buttons function completely
 function addJSONButtons() {
@@ -659,6 +577,8 @@ function addJSONButtons() {
   // Save to localStorage when JSON is updated
   function saveToLocalStorage() {
     const updatedJSON = createUpdatedJSON();
+    const updatedsectionOrder = getSectionOrder();
+    localStorage.setItem('sectionOrder', updatedsectionOrder);
     localStorage.setItem('resumeData', JSON.stringify(updatedJSON));
   }
   
@@ -667,10 +587,14 @@ function addJSONButtons() {
     try {
       // Check if there's data in localStorage
       const savedData = localStorage.getItem('resumeData');
+      const savedOrder = localStorage.getItem('sectionOrder');
       
-      if (savedData) {
+      if (savedData && savedOrder) {
         // Use the saved data
         demoJSON = JSON.parse(savedData);
+        sectionOrder = savedOrder.split(',');
+        console.log('sectionOrder from localStorage:', sectionOrder);
+        console.log('Loaded data from localStorage');
       }
       
       // Load data (either from localStorage or the default demo)
