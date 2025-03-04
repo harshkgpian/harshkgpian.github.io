@@ -27,7 +27,7 @@ let defaultJson = {
       {
         "school": "Bharat National Public School",
         "degree": "Class XII - Central Board of Secondary Education",
-        "duration": "2017",
+        "duration": "2020",
         "location": "Delhi, India",
         "scoreType": "Percentage",
         "gpa": "90%"
