@@ -6,7 +6,7 @@ let defaultJson = {
         "name": "Harsh Raj",
         "email": "harshrjto@gmail.com",
         "phone": "+91 8750798260",
-        "linkedin": "https://www.linkedin.com/in/harsh-raj/",
+        "linkedin": "https://www.linkedin.com/in/harsh-raj-27b054210/",
         "github": "https://github.com/harshkgpian"
       }
     ],
