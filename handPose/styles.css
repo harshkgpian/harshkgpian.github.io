@@ -1,57 +1,184 @@
+/* Base styles */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
-    color: #333;
+    background: #000;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
 }
 
-h1 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-}
-
-#sketch-holder {
+/* Sketch container styles */
+.sketch-container {
     position: relative;
     width: 100%;
-    max-width: 640px;
-    margin: 0 auto;
-    height: 480px;
+    height: 100%;
 }
 
-.status {
-    margin: 20px 0;
-    padding: 10px;
-    background-color: #ecf0f1;
-    border-radius: 5px;
-}
-
-.controls {
-    margin-top: 20px;
-}
-
-button {
+/* Status display styles */
+.status-display {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    color: #00ff00;
+    font-size: 18px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+    z-index: 1000;
+    background: rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
-    background-color: #3498db;
-    color: white;
-    border: none;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+    border: 1px solid #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+}
+
+/* HUD Corner elements */
+.hud-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.hud-corner {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border: 2px solid #00a2ff;
+    opacity: 0.7;
+}
+
+.hud-corner::before,
+.hud-corner::after {
+    content: '';
+    position: absolute;
+    background: #00a2ff;
+    opacity: 0.7;
+}
+
+.top-left {
+    top: 20px;
+    left: 20px;
+    border-right: none;
+    border-bottom: none;
+}
+
+.top-right {
+    top: 20px;
+    right: 20px;
+    border-left: none;
+    border-bottom: none;
+}
+
+.bottom-left {
+    bottom: 20px;
+    left: 20px;
+    border-right: none;
+    border-top: none;
+}
+
+.bottom-right {
+    bottom: 20px;
+    right: 20px;
+    border-left: none;
+    border-top: none;
+}
+
+/* Button styles */
+button {
+    font-family: 'Courier New', monospace;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 15px rgba(0, 162, 255, 0.3);
 }
 
 button:hover {
-    background-color: #2980b9;
+    box-shadow: 0 0 25px rgba(0, 162, 255, 0.5);
 }
 
-button:active {
-    background-color: #1f6aa5;
+/* Scanning line animation */
+@keyframes scan {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(100%);
+    }
+}
+
+.scan-line {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, 
+        rgba(0, 162, 255, 0),
+        rgba(0, 162, 255, 0.5),
+        rgba(0, 162, 255, 0));
+    animation: scan 3s linear infinite;
+    pointer-events: none;
+}
+
+/* Custom styles for the counter button */
+.counter-btn {
+    position: absolute;
+    padding: 15px 30px;
+    background: rgba(0, 150, 255, 0.3);
+    border: 2px solid #00a2ff;
+    color: #00ff00;
+    font-size: 16px;
+    cursor: pointer;
+    text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.counter-btn.hover {
+    background: rgba(0, 150, 255, 0.5);
+    box-shadow: 0 0 25px rgba(0, 162, 255, 0.5);
+}
+
+.counter-btn.active {
+    background: rgba(0, 255, 0, 0.5);
+    border-color: #00ff00;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.5);
+}
+
+/* Additional HUD elements */
+.grid-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        linear-gradient(rgba(0, 162, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 162, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .status-display {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .hud-corner {
+        width: 30px;
+        height: 30px;
+    }
+
+    .counter-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }

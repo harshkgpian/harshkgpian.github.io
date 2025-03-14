@@ -3,26 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hand Detection with ml5.js and p5.js</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Load p5.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
-    <!-- Load ml5.js -->
+    <title>Iron Man Hand Interface</title>
+    
+    <!-- P5.js and ML5.js libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
     <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Hand Detection with ml5.js and p5.js</h1>
-        <div id="sketch-holder">
-            <!-- p5.js canvas will be inserted here -->
+        <!-- Status display with Iron Man-style design -->
+        <div id="status" class="status-display">
+            JARVIS Initializing...
         </div>
-        <div class="status">
-            <p id="status">Loading model...</p>
-        </div>
-        <div class="controls">
-            <button id="toggle-btn">Pause Detection</button>
+
+        <!-- Main canvas holder -->
+        <div id="sketch-holder" class="sketch-container"></div>
+
+        <!-- HUD Elements -->
+        <div class="hud-overlay">
+            <div class="hud-corner top-left"></div>
+            <div class="hud-corner top-right"></div>
+            <div class="hud-corner bottom-left"></div>
+            <div class="hud-corner bottom-right"></div>
         </div>
     </div>
+
+    <!-- Custom JavaScript -->
     <script src="sketch.js"></script>
 </body>
 </html>
