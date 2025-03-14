@@ -13,7 +13,7 @@ let predictionThreshold = 500; // Time threshold in ms to consider a prediction 
 let drawingPoints = [];
 let isDrawing = false;
 let currentStroke = [];
-const distanceThreshold = 40; // Threshold distance to activate drawing mode
+const distanceThreshold = 80; // Threshold distance to activate drawing mode
 let clearBtn;
 
 function setup() {
