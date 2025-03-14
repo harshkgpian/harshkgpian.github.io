@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Detection with ml5.js and p5.js</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Load p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <!-- Load ml5.js -->
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Hand Detection with ml5.js and p5.js</h1>
+        <div id="sketch-holder">
+            <!-- p5.js canvas will be inserted here -->
+        </div>
+        <div class="status">
+            <p id="status">Loading model...</p>
+        </div>
+        <div class="controls">
+            <button id="toggle-btn">Pause Detection</button>
+        </div>
+    </div>
+    <script src="sketch.js"></script>
+</body>
+</html>
