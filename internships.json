@@ -176,8 +176,8 @@
     "companyName": "Reliable Allied Services",
     "location": "Delhi, Ghaziabad, Noida",
     "duration": "6 Months",
-    "stipend": "₹ 4,000-7000 /month",
-    "postedTime": "N/A", 
+    "stipend": "₹ 4,000-6,000 /month",
+    "postedTime": "N/A",
     "activelyHiring": "Yes",
     "detailsUrl": "https://internshala.com/internship/detail/human-resources-hr-internship-in-multiple-locations-at-reliable-allied-services1741759245",
     "description": "Selected intern's day-to-day responsibilities include: 1. Understanding job descriptions 2. Assessing the candidates (shortlisting, resume evaluation, and phone screening) 3. Calling up candidates and explaining the job details 4. Coordinating with candidates/clients for recruitment 5. Setting up the interviews 6. Lining up the candidates for the interview as per the schedule Additional points: 1. Incentive of INR 500 per hiring. 2. On successful completion of 3 months internship, the stipend will increase to 10-12k, and upon successful completion of another 3 months of training period you will be hired as an on-role recruiter.",
@@ -6983,6 +6983,50 @@
     "requirements": "N/A"
   },
   {
+    "internshipId": "2729645",
+    "jobTitle": "HR Intern",
+    "companyName": "MonkSays Superfoods Private Limited",
+    "location": "Hyderabad",
+    "duration": "3 Months",
+    "stipend": "₹ 10,000-12,000 /month",
+    "postedTime": "N/A",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/recruitment-internship-in-hyderabad-at-monksays-superfoods-private-limited1742042498",
+    "description": "Selected intern's day-to-day responsibilities include: 1. Assist in the recruitment process, including job postings, screening resumes, and scheduling interviews. 2. Maintain and update employee records and HR databases. 3. Participate in onboarding processes for new employees.",
+    "skills": [
+      "MS-Office",
+      "Certificate"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2730683",
+    "jobTitle": "Social Media Marketing",
+    "companyName": "Toniq Retail Brands Private Limited",
+    "location": "Chennai",
+    "duration": "3 Months",
+    "stipend": "₹ 15,000 /month",
+    "postedTime": "2 days ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/social-media-marketing-internship-in-chennai-at-toniq-retail-brands-private-limited1742206896",
+    "description": "Selected intern's day-to-day responsibilities include: Content Creation: Assist in creating Instagram posts, Reels, and Stories aligned with brand aesthetics. Shoot and edit engaging short-form video content for Reels. Design basic creatives using Canva or similar tools. Social Media Management: Schedule and post content on Instagram (feed, Stories, Reels, IGTV if applicable). Monitor engagement and respond to comments, DMs, and customer queries. Maintain a consistent brand voice and visual identity across all posts. Trend Research &amp; Strategy: Stay updated on trending formats, viral audio, and engagement tactics. Identify new social media trends and competitor activities to improve content strategy. Research and suggest creative campaign ideas to increase engagement. Analytics &amp; Performance Tracking: Track post performance and analyze engagement metrics (likes, shares, comments, reach). Provide weekly reports on growth, engagement, and audience insights.",
+    "skills": [
+      "Creative Writing",
+      "Digital Marketing",
+      "Email Marketing",
+      "English Proficiency (Spoken)",
+      "English Proficiency (Written)",
+      "Instagram Marketing",
+      "Social Media Marketing",
+      "Certificate",
+      "Letter of recommendation",
+      "Informal dress code"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
     "internshipId": "2731129",
     "jobTitle": "Campus Ambassador",
     "companyName": "House Of Couton Private Limited",
@@ -8999,27 +9043,6 @@
     "requirements": "N/A"
   },
   {
-    "internshipId": "2731863",
-    "jobTitle": "Software Engineer",
-    "companyName": "FYSCAL TECHNOLOGIES PTE. LTD.",
-    "location": "Noida",
-    "duration": "3 Months",
-    "stipend": "₹ 15,000-30,000 /month",
-    "postedTime": "1 day ago",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/software-engineer-internship-in-noida-at-fyscal-technologies-pte-ltd1742300472",
-    "description": "As a software engineer intern in the engineering team at Fyscal, you'll be responsible for building modules and features for Fyscal's various projects. Selected intern's day-to-day responsibilities include: 1. Design and implement technical features and control the communication around them 2. Prepare and execute scalable test plans 3. Research and explore the latest tools and technologies 4. Identify and help fix performance, scalability, and other live issues in a time-critical environment 5. Participate regularly in team meetings to discuss projects, brainstorm ideas, and put forward solutions to any issues",
-    "skills": [
-      "Algorithms",
-      "Data Structures",
-      "HTML&CSS",
-      "JavaScript",
-      "Job offer"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
     "internshipId": "2730239",
     "jobTitle": "Software Testing",
     "companyName": "Quantum IT Innovation",
@@ -9038,6 +9061,225 @@
       "Certificate",
       "Letter of recommendation",
       "5 days a week"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2729186",
+    "jobTitle": "Software Testing",
+    "companyName": "ONE XL INFO LLP",
+    "location": "Pune",
+    "duration": "3 Months",
+    "stipend": "₹ 7,000 /month",
+    "postedTime": "N/A",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-pune-at-one-xl-info-llp1741958982",
+    "description": "Selected intern's day-to-day responsibilities: 1. Execute manual and automated test cases to ensure software meets specified requirements 2. Perform functional, regression, and performance testing on web and mobile applications 3. Identify, document, and track software defects using bug-tracking tools 4. Communicate bugs and issues clearly to the development team for resolution 5. Assist in developing and maintaining detailed test plans, test cases, and test scripts 6. Participate in test plan and test case reviews with the QA team 7. Work closely with developers, product managers, and QA team members to understand product functionality and requirements 8. Participate in daily stand-ups, sprint planning, and retrospectives 9. Document testing processes, results, and any new issues encountered during testing 10. Provide feedback on software usability and functionality Requirements: 1. Currently pursuing or recently completed a degree in Computer Science, IT, Engineering, or a related field 2. Basic understanding of software development and testing methodologies 3. Familiarity with testing tools such as Selenium, JIRA, or similar 4. Knowledge of programming languages (e.g., Java, Python) is a plus 5. Strong analytical and problem-solving skills 6. Excellent attention to detail and organizational skills 7. Good verbal and written communication skills 8. Ability to work independently and as part of a team 9. Experience with automated testing tools 10. Understanding of Agile/Scrum development processes 11. Basic knowledge of version control systems like Git",
+    "skills": [
+      "Software Testing"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2725729",
+    "jobTitle": "Software Testing",
+    "companyName": "Wobot Intelligence Private Limited",
+    "location": "Delhi",
+    "duration": "6 Months",
+    "stipend": "₹ 10,000 /month",
+    "postedTime": "1 week ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-delhi-at-wobot-intelligence-private-limited1741591096",
+    "description": "Selected intern's day-to-day responsibilities: 1. Understand the functional requirements and project scope 2. Collaborate with development and product teams to clarify requirements and prepare a test plan 3. Review and execute test plans and cases according to testing standards 4. Execute test cases using IDE tools and/or manual testing, then analyze results 5. Report and document bugs, track resolution, and ensure fixes are implemented 6. Provide testing insights to enhance system performance and reliability 7. Continuously improve testing methodologies and processes, focusing on automation 8. Work with cross-functional teams to maintain quality throughout the software development lifecycle",
+    "skills": [
+      "Database Testing",
+      "GUI Testing",
+      "JavaScript",
+      "Manual Testing",
+      "Python",
+      "Selenium",
+      "Software Testing",
+      "Certificate",
+      "5 days a week"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2722470",
+    "jobTitle": "Software Testing",
+    "companyName": "Pericent",
+    "location": "Rajasthan",
+    "duration": "6 Months",
+    "stipend": "₹ 10,000 /month",
+    "postedTime": "1 week ago",
+    "activelyHiring": "No",
+    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-rajasthan-at-pericent1741259738",
+    "description": "Selected Intern's Day-to-Day Responsibilities Include: A. Business Analysis Responsibilities 1. Data Collection &amp; Market Research - Gather and analyze business data to identify trends and insights. - Conduct competitor research and industry analysis. - Assist in preparing reports and dashboards. 2. Requirement Gathering &amp; Documentation - Document business requirements (BRD, SRS). - Create process flow diagrams and business models. - Assist in stakeholder communication and requirement discussions. 3. Process Improvement &amp; Strategy Support - Identify inefficiencies in current business operations. - Provide data-driven recommendations for process enhancements. - Support project management activities. 4. Software &amp; Tools Usage - Work with BI tools (Tableau, Power BI) for data visualization. - Use Excel and SQL for data manipulation. - Assist with tools like JIRA and Confluence for project tracking. B. Quality Analysis Responsibilities 1. Testing &amp; Validation - Assist in writing test cases and test scripts. - Conduct manual and automated testing of software applications. - Identify bugs, document issues, and report them. 2. Quality Control &amp; Process Monitoring - Ensure business requirements align with product functionality. - Conduct User Acceptance Testing (UAT) with stakeholders. - Validate data accuracy and integrity in reports. 3. Defect Tracking &amp; Resolution - Use tools like JIRA and Bugzilla for defect tracking. - Collaborate with development teams to resolve issues. - Assist in root cause analysis for system failures. 4. Compliance &amp; Documentation - Ensure quality standards and compliance guidelines are met. - Help maintain test documentation and reports. - Review and update test cases based on business needs.",
+    "skills": [
+      "Database Testing",
+      "GUI Testing",
+      "Manual Testing",
+      "Software Testing",
+      "Flexible work hours"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2723438",
+    "jobTitle": "Software Testing",
+    "companyName": "Relinns Technologies",
+    "location": "Chandigarh, Mohali",
+    "duration": "6 Months",
+    "stipend": "₹ 10,000 /month",
+    "postedTime": "1 week ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-multiple-locations-at-relinns-technologies1741255684",
+    "description": "Selected intern's day-to-day responsibilities include: 1. Understand business processes and client requirements for the project 2. Create detailed, comprehensive, and well-structured test plans and test cases 3. Identify, record, document thoroughly, and track bugs 4. Estimate, prioritize, plan and coordinate testing activities 5. Develop and apply testing processes for new and existing products to meet client needs 6. Liaise with internal teams (developers and product managers) to understand system requirements 7. Perform both manual and automated testing and investigate automation test failures 8. Work closely with development teams to improve test coverage &amp; quality and assist in resolving issues identified during testing 9. Meet departmental goals and define key performance indicators (KPIs) 10. Prepare the status report of testing activities 11. Update project managers regularly about the progress of testing activities 12. Perform other duties as assigned",
+    "skills": [
+      "Manual Testing",
+      "Software Testing",
+      "Certificate",
+      "Letter of recommendation",
+      "Flexible work hours",
+      "Job offer"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2722046",
+    "jobTitle": "Software Testing",
+    "companyName": "Educase India",
+    "location": "Work from home",
+    "duration": "6 Months",
+    "stipend": "₹ 7,500 /month",
+    "postedTime": "2 weeks ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-educase-india1741153603",
+    "description": "Are you a passionate and tech-savvy individual looking to kickstart your career in software testing? Join us at Educase India as a Software Testing intern and gain hands-on experience in manual testing, software testing, GUI testing, and database testing. Key Responsibilities: 1. Conduct thorough manual testing of software applications to identify bugs and defects. 2. Develop and execute test cases to ensure the quality and functionality of software products. 3. Perform GUI testing to evaluate the user interface for ease of use and efficiency. 4. Conduct database testing to validate data integrity and accuracy. 5. Collaborate with the development team to troubleshoot and resolve issues in a timely manner. 6. Document test results and provide recommendations for improvements. 7. Stay updated on industry best practices and emerging trends in software testing. If you are a detail-oriented and proactive individual with a strong passion for quality assurance, we want to hear from you! Apply now and take the first step towards a rewarding career in software testing with Educase India.",
+    "skills": [
+      "Database Testing",
+      "GUI Testing",
+      "Manual Testing",
+      "Software Testing",
+      "Certificate"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2716768",
+    "jobTitle": "Software Testing",
+    "companyName": "Tellis Technologies Private Limited",
+    "location": "Work from home",
+    "duration": "6 Months",
+    "stipend": "₹ 5,000-8,000 /month",
+    "postedTime": "2 weeks ago",
+    "activelyHiring": "No",
+    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-tellis-technologies-private-limited1740627019",
+    "description": "Are you passionate about software testing and looking for an exciting internship opportunity? Tellis Technologies Private Limited is seeking a Software Testing intern who is skilled in Manual Testing, Software Testing, GUI Testing, and Database Testing. As a key member of our testing team, you will have the opportunity to work on cutting-edge projects and gain valuable hands-on experience in the field of software testing. Your responsibilities will include: 1. Conducting manual testing on software applications to identify bugs and defects 2. Performing software testing to ensure quality and functionality meet company standards 3. Conducting GUI testing to ensure user interface elements function correctly 4. Performing database testing to ensure data integrity and accuracy 5. Collaborating with developers and other team members to resolve issues and improve software quality 6. Writing test cases and test scripts to ensure comprehensive test coverage 7. Providing detailed reports and documentation on test results and findings Requirements: Stipend: 5,000 - 8,000 1. Internet Connection : High-speed Wi-Fi/LAN (mandatory for WFH setup). 2. Collaboration : Screen-sharing via Google Meet during work hours. 3. System Configuration : High-performance system to ensure seamless operations. 4. Working Hours : 10 AM - 7 PM (Mon-Sat) with a 1-hour break. Flexibility may be considered based on availability. 5. Role &amp; Skills : Software Testing. 6. Duration : 6 months (WFH). 7. Stipend : 5,000 - 8,000/ 8. Education Criteria : Open to all educational backgrounds (no pass-out year restrictions). 9. Interview Process : Assignment Screening Technical Round. If you are a motivated and detail-oriented individual with a passion for software testing, we want to hear from you. Join us at Tellis Technologies Private Limited and take your career to the next level!",
+    "skills": [
+      "Database Testing",
+      "GUI Testing",
+      "Manual Testing",
+      "Software Testing",
+      "Certificate",
+      "Flexible work hours"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2713112",
+    "jobTitle": "Software Testing",
+    "companyName": "Zansys Technologies",
+    "location": "Work from home",
+    "duration": "3 Months",
+    "stipend": "₹ 6,000 /month",
+    "postedTime": "3 weeks ago",
+    "activelyHiring": "No",
+    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-zansys-technologies1740147311",
+    "description": "Selected intern's day-to-day responsibilities include: 1. Create detailed and structured test plans. 2. Working on Transactional and E-Commerce related websites and web applications. 3. Identify, record and document bugs and also track them.",
+    "skills": [
+      "Manual Testing",
+      "Software Testing",
+      "Certificate",
+      "Letter of recommendation"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2701599",
+    "jobTitle": "Software Testing",
+    "companyName": "OyeLabs",
+    "location": "Work from home",
+    "duration": "6 Months",
+    "stipend": "₹ 5,000-10,000 /month",
+    "postedTime": "3 weeks ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-oyelabs1738903582",
+    "description": "Selected intern's day-to-day responsibilities include: 1. Work on testing current products and identifying deficiencies. 2. Suggest solutions to identified product problems. 3. Investigate product quality to make improvements to achieve better customer satisfaction. 4. Plan, create, and manage the overall quality planning strategy. 5. Collaborate with the product development team to ensure consistent project execution. 6. Identify quality assurance process bottlenecks and suggest actions for improvement. 7. Oversee continuous improvement projects. 8. Collect quality data. 9. Identify key KPIs for product quality. 10. Prepare and present reports and metrics to senior management.",
+    "skills": [
+      "APIs",
+      "CI/CD",
+      "Data Analytics",
+      "Database Testing",
+      "Effective Communication",
+      "GUI Testing",
+      "Manual Testing",
+      "Problem Solving",
+      "Software Testing",
+      "SQL",
+      "Time Management",
+      "Certificate",
+      "Letter of recommendation",
+      "Flexible work hours"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2730659",
+    "jobTitle": "Software Testing For Accounting Software",
+    "companyName": "Meru Technosoft Private Limited",
+    "location": "Work from home",
+    "duration": "6 Months",
+    "stipend": "₹ 6,000 /month",
+    "postedTime": "2 days ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-for-accounting-software-internship-at-meru-technosoft-private-limited1742211541",
+    "description": "Selected intern's day-to-day responsibilities: 1. Perform functional, regression, and integration testing for accounting software 2. Identify, document, and track bugs and defects using bug tracking tools (JIRA, Trello, etc.) 3. Validate financial calculations, reports, and transaction flows in the software 4. Work closely with developers and business analysts to understand accounting workflows 5. Create and execute test cases, test plans, and scripts for software validation 6. Perform UI/UX testing to ensure ease of use for accounting professionals 7. Conduct API testing using tools like Postman (Good to have) 8. Ensure compliance with financial regulations and accounting principles in software features 9. Suggest improvements and optimizations for better performance and accuracy Requirements: 1. Manual &amp; automated testing 2. Bug reporting &amp; tracking (JIRA, Trello, etc.) 3. Functional &amp; regression testing 4. Test case &amp; script writing 5. Accounting/finance domain knowledge (preferred) 6. API Testing (Postman, Swagger) (Good to have) 7. Performance &amp; UI testing Qualifications: 1. 1+ year of experience in software testing 2. Experience in testing accounting or financial applications (Preferred) 3. Strong understanding of financial transactions, ledgers, and reporting 4. Hands-on experience in test case creation and bug tracking 5. Knowledge of basic SQL queries for database validation 6. Ability to work independently in a remote environment",
+    "skills": [
+      "Accounting",
+      "Software Testing",
+      "Certificate",
+      "Letter of recommendation"
+    ],
+    "perks": [],
+    "requirements": "N/A"
+  },
+  {
+    "internshipId": "2731863",
+    "jobTitle": "Software Engineer",
+    "companyName": "FYSCAL TECHNOLOGIES PTE. LTD.",
+    "location": "Noida",
+    "duration": "3 Months",
+    "stipend": "₹ 15,000-30,000 /month",
+    "postedTime": "1 day ago",
+    "activelyHiring": "Yes",
+    "detailsUrl": "https://internshala.com/internship/detail/software-engineer-internship-in-noida-at-fyscal-technologies-pte-ltd1742300472",
+    "description": "As a software engineer intern in the engineering team at Fyscal, you'll be responsible for building modules and features for Fyscal's various projects. Selected intern's day-to-day responsibilities include: 1. Design and implement technical features and control the communication around them 2. Prepare and execute scalable test plans 3. Research and explore the latest tools and technologies 4. Identify and help fix performance, scalability, and other live issues in a time-critical environment 5. Participate regularly in team meetings to discuss projects, brainstorm ideas, and put forward solutions to any issues",
+    "skills": [
+      "Algorithms",
+      "Data Structures",
+      "HTML&CSS",
+      "JavaScript",
+      "Job offer"
     ],
     "perks": [],
     "requirements": "N/A"
@@ -9095,23 +9337,6 @@
     "requirements": "N/A"
   },
   {
-    "internshipId": "2729186",
-    "jobTitle": "Software Testing",
-    "companyName": "ONE XL INFO LLP",
-    "location": "Pune",
-    "duration": "3 Months",
-    "stipend": "₹ 7,000 /month",
-    "postedTime": "N/A",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-pune-at-one-xl-info-llp1741958982",
-    "description": "Selected intern's day-to-day responsibilities: 1. Execute manual and automated test cases to ensure software meets specified requirements 2. Perform functional, regression, and performance testing on web and mobile applications 3. Identify, document, and track software defects using bug-tracking tools 4. Communicate bugs and issues clearly to the development team for resolution 5. Assist in developing and maintaining detailed test plans, test cases, and test scripts 6. Participate in test plan and test case reviews with the QA team 7. Work closely with developers, product managers, and QA team members to understand product functionality and requirements 8. Participate in daily stand-ups, sprint planning, and retrospectives 9. Document testing processes, results, and any new issues encountered during testing 10. Provide feedback on software usability and functionality Requirements: 1. Currently pursuing or recently completed a degree in Computer Science, IT, Engineering, or a related field 2. Basic understanding of software development and testing methodologies 3. Familiarity with testing tools such as Selenium, JIRA, or similar 4. Knowledge of programming languages (e.g., Java, Python) is a plus 5. Strong analytical and problem-solving skills 6. Excellent attention to detail and organizational skills 7. Good verbal and written communication skills 8. Ability to work independently and as part of a team 9. Experience with automated testing tools 10. Understanding of Agile/Scrum development processes 11. Basic knowledge of version control systems like Git",
-    "skills": [
-      "Software Testing"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
     "internshipId": "2725884",
     "jobTitle": "Software Development",
     "companyName": "GS1India",
@@ -9135,31 +9360,6 @@
       "ReactJS",
       "Certificate",
       "Letter of recommendation",
-      "5 days a week"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
-    "internshipId": "2725729",
-    "jobTitle": "Software Testing",
-    "companyName": "Wobot Intelligence Private Limited",
-    "location": "Delhi",
-    "duration": "6 Months",
-    "stipend": "₹ 10,000 /month",
-    "postedTime": "1 week ago",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-delhi-at-wobot-intelligence-private-limited1741591096",
-    "description": "Selected intern's day-to-day responsibilities: 1. Understand the functional requirements and project scope 2. Collaborate with development and product teams to clarify requirements and prepare a test plan 3. Review and execute test plans and cases according to testing standards 4. Execute test cases using IDE tools and/or manual testing, then analyze results 5. Report and document bugs, track resolution, and ensure fixes are implemented 6. Provide testing insights to enhance system performance and reliability 7. Continuously improve testing methodologies and processes, focusing on automation 8. Work with cross-functional teams to maintain quality throughout the software development lifecycle",
-    "skills": [
-      "Database Testing",
-      "GUI Testing",
-      "JavaScript",
-      "Manual Testing",
-      "Python",
-      "Selenium",
-      "Software Testing",
-      "Certificate",
       "5 days a week"
     ],
     "perks": [],
@@ -9239,49 +9439,6 @@
     "requirements": "N/A"
   },
   {
-    "internshipId": "2722470",
-    "jobTitle": "Software Testing",
-    "companyName": "Pericent",
-    "location": "Rajasthan",
-    "duration": "6 Months",
-    "stipend": "₹ 10,000 /month",
-    "postedTime": "1 week ago",
-    "activelyHiring": "No",
-    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-rajasthan-at-pericent1741259738",
-    "description": "Selected Intern's Day-to-Day Responsibilities Include: A. Business Analysis Responsibilities 1. Data Collection &amp; Market Research - Gather and analyze business data to identify trends and insights. - Conduct competitor research and industry analysis. - Assist in preparing reports and dashboards. 2. Requirement Gathering &amp; Documentation - Document business requirements (BRD, SRS). - Create process flow diagrams and business models. - Assist in stakeholder communication and requirement discussions. 3. Process Improvement &amp; Strategy Support - Identify inefficiencies in current business operations. - Provide data-driven recommendations for process enhancements. - Support project management activities. 4. Software &amp; Tools Usage - Work with BI tools (Tableau, Power BI) for data visualization. - Use Excel and SQL for data manipulation. - Assist with tools like JIRA and Confluence for project tracking. B. Quality Analysis Responsibilities 1. Testing &amp; Validation - Assist in writing test cases and test scripts. - Conduct manual and automated testing of software applications. - Identify bugs, document issues, and report them. 2. Quality Control &amp; Process Monitoring - Ensure business requirements align with product functionality. - Conduct User Acceptance Testing (UAT) with stakeholders. - Validate data accuracy and integrity in reports. 3. Defect Tracking &amp; Resolution - Use tools like JIRA and Bugzilla for defect tracking. - Collaborate with development teams to resolve issues. - Assist in root cause analysis for system failures. 4. Compliance &amp; Documentation - Ensure quality standards and compliance guidelines are met. - Help maintain test documentation and reports. - Review and update test cases based on business needs.",
-    "skills": [
-      "Database Testing",
-      "GUI Testing",
-      "Manual Testing",
-      "Software Testing",
-      "Flexible work hours"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
-    "internshipId": "2723438",
-    "jobTitle": "Software Testing",
-    "companyName": "Relinns Technologies",
-    "location": "Chandigarh, Mohali",
-    "duration": "6 Months",
-    "stipend": "₹ 10,000 /month",
-    "postedTime": "1 week ago",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/software-testing-internship-in-multiple-locations-at-relinns-technologies1741255684",
-    "description": "Selected intern's day-to-day responsibilities include: 1. Understand business processes and client requirements for the project 2. Create detailed, comprehensive, and well-structured test plans and test cases 3. Identify, record, document thoroughly, and track bugs 4. Estimate, prioritize, plan and coordinate testing activities 5. Develop and apply testing processes for new and existing products to meet client needs 6. Liaise with internal teams (developers and product managers) to understand system requirements 7. Perform both manual and automated testing and investigate automation test failures 8. Work closely with development teams to improve test coverage &amp; quality and assist in resolving issues identified during testing 9. Meet departmental goals and define key performance indicators (KPIs) 10. Prepare the status report of testing activities 11. Update project managers regularly about the progress of testing activities 12. Perform other duties as assigned",
-    "skills": [
-      "Manual Testing",
-      "Software Testing",
-      "Certificate",
-      "Letter of recommendation",
-      "Flexible work hours",
-      "Job offer"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
     "internshipId": "2722147",
     "jobTitle": "Software Development",
     "companyName": "Justbe Tech Soft Pvt Ltd",
@@ -9301,27 +9458,6 @@
       "Sass",
       "TypeScript",
       "Letter of recommendation"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
-    "internshipId": "2722046",
-    "jobTitle": "Software Testing",
-    "companyName": "Educase India",
-    "location": "Work from home",
-    "duration": "6 Months",
-    "stipend": "₹ 7,500 /month",
-    "postedTime": "2 weeks ago",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-educase-india1741153603",
-    "description": "Are you a passionate and tech-savvy individual looking to kickstart your career in software testing? Join us at Educase India as a Software Testing intern and gain hands-on experience in manual testing, software testing, GUI testing, and database testing. Key Responsibilities: 1. Conduct thorough manual testing of software applications to identify bugs and defects. 2. Develop and execute test cases to ensure the quality and functionality of software products. 3. Perform GUI testing to evaluate the user interface for ease of use and efficiency. 4. Conduct database testing to validate data integrity and accuracy. 5. Collaborate with the development team to troubleshoot and resolve issues in a timely manner. 6. Document test results and provide recommendations for improvements. 7. Stay updated on industry best practices and emerging trends in software testing. If you are a detail-oriented and proactive individual with a strong passion for quality assurance, we want to hear from you! Apply now and take the first step towards a rewarding career in software testing with Educase India.",
-    "skills": [
-      "Database Testing",
-      "GUI Testing",
-      "Manual Testing",
-      "Software Testing",
-      "Certificate"
     ],
     "perks": [],
     "requirements": "N/A"
@@ -9486,28 +9622,6 @@
       "Java",
       "Letter of recommendation",
       "5 days a week"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
-    "internshipId": "2716768",
-    "jobTitle": "Software Testing",
-    "companyName": "Tellis Technologies Private Limited",
-    "location": "Work from home",
-    "duration": "6 Months",
-    "stipend": "₹ 5,000-8,000 /month",
-    "postedTime": "2 weeks ago",
-    "activelyHiring": "No",
-    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-tellis-technologies-private-limited1740627019",
-    "description": "Are you passionate about software testing and looking for an exciting internship opportunity? Tellis Technologies Private Limited is seeking a Software Testing intern who is skilled in Manual Testing, Software Testing, GUI Testing, and Database Testing. As a key member of our testing team, you will have the opportunity to work on cutting-edge projects and gain valuable hands-on experience in the field of software testing. Your responsibilities will include: 1. Conducting manual testing on software applications to identify bugs and defects 2. Performing software testing to ensure quality and functionality meet company standards 3. Conducting GUI testing to ensure user interface elements function correctly 4. Performing database testing to ensure data integrity and accuracy 5. Collaborating with developers and other team members to resolve issues and improve software quality 6. Writing test cases and test scripts to ensure comprehensive test coverage 7. Providing detailed reports and documentation on test results and findings Requirements: Stipend: 5,000 - 8,000 1. Internet Connection : High-speed Wi-Fi/LAN (mandatory for WFH setup). 2. Collaboration : Screen-sharing via Google Meet during work hours. 3. System Configuration : High-performance system to ensure seamless operations. 4. Working Hours : 10 AM - 7 PM (Mon-Sat) with a 1-hour break. Flexibility may be considered based on availability. 5. Role &amp; Skills : Software Testing. 6. Duration : 6 months (WFH). 7. Stipend : 5,000 - 8,000/ 8. Education Criteria : Open to all educational backgrounds (no pass-out year restrictions). 9. Interview Process : Assignment Screening Technical Round. If you are a motivated and detail-oriented individual with a passion for software testing, we want to hear from you. Join us at Tellis Technologies Private Limited and take your career to the next level!",
-    "skills": [
-      "Database Testing",
-      "GUI Testing",
-      "Manual Testing",
-      "Software Testing",
-      "Certificate",
-      "Flexible work hours"
     ],
     "perks": [],
     "requirements": "N/A"
@@ -9685,26 +9799,6 @@
     "requirements": "N/A"
   },
   {
-    "internshipId": "2713112",
-    "jobTitle": "Software Testing",
-    "companyName": "Zansys Technologies",
-    "location": "Work from home",
-    "duration": "3 Months",
-    "stipend": "₹ 6,000 /month",
-    "postedTime": "3 weeks ago",
-    "activelyHiring": "No",
-    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-zansys-technologies1740147311",
-    "description": "Selected intern's day-to-day responsibilities include: 1. Create detailed and structured test plans. 2. Working on Transactional and E-Commerce related websites and web applications. 3. Identify, record and document bugs and also track them.",
-    "skills": [
-      "Manual Testing",
-      "Software Testing",
-      "Certificate",
-      "Letter of recommendation"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
     "internshipId": "2712927",
     "jobTitle": "Software Development",
     "companyName": "IPExcel Services Private Limited",
@@ -9858,60 +9952,6 @@
       "Letter of recommendation",
       "Flexible work hours",
       "5 days a week"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
-    "internshipId": "2702673",
-    "jobTitle": "Software Development",
-    "companyName": "Bumi",
-    "location": "Work from home",
-    "duration": "6 Months",
-    "stipend": "₹ 5,000-10,000 /month",
-    "postedTime": "3 weeks ago",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-part-time-software-development-internship-at-bumi1739006199",
-    "description": "Selected intern's day-to-day responsibilities include: 1. Co-develop, maintain and improve trading bot functionalities, including performance optimization and integration with multiple platforms. 2. Co-design, implement and optimize algorithmic trading strategies based on market data and performance analysis. 3. Implement market structure analysis to refine execution tactics 4. Identify and implement strategies to mitigate losses for trading bots based on data and market performance and other techniques. 5. Experience with algorithmic trading frameworks and back/forward testing. 6. Ensure API security and secure connections between bots and platform infrastructure. 7. Support documentation and SOPs for bot-related tasks. 8. Collaborate with cross-functional teams to align bot features with product goals and user needs. 9. Troubleshoot and debug issues to ensure platform reliability and seamless user experience. 10. Engage in code reviews to enhance team collaboration and coding standards. &amp; update bots to adapt to evolving compliance, security, and operational standards. 11. Other duties may be required part-time = 5,000 RS full time = 10,000 RS Top Benefits: 1. 30-hour or 4-day work week with 1 business day paid on Fridays 2. Security coverage at home through a VPN 3. 100% Remote work from home 4. Provided Equipment Upgrade 5. Monthly women health days for pain are partially/full paid off 6. Paid vacation leave 7. Paid study days during exam periods 8. Sick days covered 9. Health and dental insurance plan (scheduled) 10. University educational certification and training opportunities (scheduled)",
-    "skills": [
-      "Algorithms",
-      "JavaScript",
-      "Python",
-      "SQL",
-      "Certificate",
-      "Letter of recommendation",
-      "Flexible work hours",
-      "5 days a week"
-    ],
-    "perks": [],
-    "requirements": "N/A"
-  },
-  {
-    "internshipId": "2701599",
-    "jobTitle": "Software Testing",
-    "companyName": "OyeLabs",
-    "location": "Work from home",
-    "duration": "6 Months",
-    "stipend": "₹ 5,000-10,000 /month",
-    "postedTime": "3 weeks ago",
-    "activelyHiring": "Yes",
-    "detailsUrl": "https://internshala.com/internship/detail/work-from-home-software-testing-internship-at-oyelabs1738903582",
-    "description": "Selected intern's day-to-day responsibilities include: 1. Work on testing current products and identifying deficiencies. 2. Suggest solutions to identified product problems. 3. Investigate product quality to make improvements to achieve better customer satisfaction. 4. Plan, create, and manage the overall quality planning strategy. 5. Collaborate with the product development team to ensure consistent project execution. 6. Identify quality assurance process bottlenecks and suggest actions for improvement. 7. Oversee continuous improvement projects. 8. Collect quality data. 9. Identify key KPIs for product quality. 10. Prepare and present reports and metrics to senior management.",
-    "skills": [
-      "APIs",
-      "CI/CD",
-      "Data Analytics",
-      "Database Testing",
-      "Effective Communication",
-      "GUI Testing",
-      "Manual Testing",
-      "Problem Solving",
-      "Software Testing",
-      "SQL",
-      "Time Management",
-      "Certificate",
-      "Letter of recommendation",
-      "Flexible work hours"
     ],
     "perks": [],
     "requirements": "N/A"
