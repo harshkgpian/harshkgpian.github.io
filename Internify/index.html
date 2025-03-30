@@ -3,13 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internshala Internship Listings</title>
+    <title>Internship Listings</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Internship Listings</h1>
+        <!-- Header with minimal logo -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <h1>Internship Listings</h1>
+            </div>
+        </div>
         
+        <!-- Compact filter controls -->
         <div class="controls">
             <input type="text" id="searchInput" placeholder="Search by job title or company...">
             <input type="text" id="skillsInput" placeholder="Search by skills...">
@@ -29,47 +36,20 @@
                 <option value="high-to-low">Stipend: High to Low</option>
                 <option value="low-to-high">Stipend: Low to High</option>
             </select>
-            <div class="stipend-filter">
-                <select id="stipendRange">
-                    <option value="all">All Stipends</option>
-                    <option value="unpaid">Unpaid</option>
-                    <option value="0-500">₹0 - ₹500</option>
-                    <option value="500-1000">₹500 - ₹1,000</option>
-                    <option value="1000-5000">₹1,000 - ₹5,000</option>
-                    <option value="5000-10000">₹5,000 - ₹10,000</option>
-                    <option value="10000-15000">₹10,000 - ₹15,000</option>
-                    <option value="15000-100000">₹15,000+</option>
-                </select>
-            </div>
-            <button class="refresh-btn" id="refreshBtn">Refresh Data</button>
+            <select id="stipendRange">
+                <option value="all">All Stipends</option>
+                <option value="unpaid">Unpaid</option>
+                <option value="0-5000">₹0 - ₹5,000</option>
+                <option value="5000-10000">₹5,000 - ₹10,000</option>
+                <option value="10000-15000">₹10,000 - ₹15,000</option>
+                <option value="15000+">₹15,000+</option>
+            </select>
         </div>
 
-        <table id="internshipTable">
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Company</th>
-                    <th>Location</th>
-                    <th>Duration</th>
-                    <th>Stipend</th>
-                    <th>Posted</th>
-                    <th>Skills</th>
-                    <th>Apply</th>
-                </tr>
-            </thead>
-            <tbody id="internshipTableBody">
-                <!-- Data will be populated by JavaScript -->
-            </tbody>
-        </table>
-
-        <!-- Inputs for session and apply URL -->
-        <!-- <div class="apply-section">
-            <input type="text" id="sessionCookie" placeholder="Enter PHPSESSID cookie value" value="09haou40vigi079dn76mnqnbihapsmde">
-            <button class="apply-btn" id="autoApplyBtn">Auto Apply</button>
-        </div> -->
-
-        <!-- Result container to show login status and screenshots -->
-
+        <!-- Card grid layout for listings with preload data -->
+        <div id="internshipListings" class="listings-grid">
+            <div class="loading">Loading internship listings...</div>
+        </div>
     </div>
 
     <script src="script.js"></script>
