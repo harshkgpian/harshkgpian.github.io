@@ -1,105 +1,387 @@
 /**
- * stream-search.js - Academic Stream Search functionality for Internship Website
- * Helps users find internships relevant to their academic field (Engineering, CS, etc.)
+ * improved-stream-search.js - Enhanced Academic Stream Search functionality for Internship Website
+ * Provides accurate matching of internships to academic fields using relevance scoring
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Stream definitions with keywords for each field
+    // Enhanced stream definitions with primary, secondary, and negative keywords
     const streamDefinitions = {
       "Computer Science": {
-        keywords: [
-          "computer science", "software", "web development", "app development", "mobile", 
-          "frontend", "backend", "full stack", "fullstack", "javascript", "python", "java", 
-          "c++", "programming", "coding", "developer", "html", "css", "react", "node", 
-          "angular", "vue", "database", "sql", "nosql", "mongodb", "devops", "cloud", 
-          "aws", "azure", "machine learning", "deep learning", "ai", "artificial intelligence",
-          "data science", "algorithms", "git", "github", "software engineer", "sde", "cs"
+        // Primary keywords are highly relevant to this field (high matching score)
+        primaryKeywords: [
+          "computer science", "software engineer", "software developer", "full stack", "frontend developer", 
+          "backend developer", "web developer", "mobile developer", "app developer", "data scientist", 
+          "machine learning engineer", "artificial intelligence", "devops engineer", "cloud engineer", 
+          "game developer"
+        ],
+        // Secondary keywords provide supporting evidence (medium matching score)
+        secondaryKeywords: [
+          "javascript", "python", "java", "c++", "c#", "programming", "coding", "html", "css", 
+          "react", "node", "angular", "vue", "database", "sql", "nosql", "mongodb", "aws", 
+          "azure", "git", "github", "algorithms", "data structures", "api", "restful", "sde", "cs"
+        ],
+        // Minimum match requirement - internship must contain at least one primary keyword
+        // OR at least two secondary keywords to be considered
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        // Negative keywords help exclude false matches (e.g., "technical writing" shouldn't match CS)
+        negativeKeywords: [
+          "electrical circuit", "mechanical design", "civil construction", "chemical process",
+          "biomedical", "genetic", "aeronautical"
+        ],
+        // Context pairs: if keyword1 appears near keyword2, it's highly relevant
+        contextPairs: [
+          ["software", "developer"], 
+          ["web", "developer"],
+          ["code", "develop"],
+          ["app", "development"],
+          ["data", "science"],
+          ["frontend", "developer"],
+          ["backend", "developer"]
         ]
       },
       "Mechanical Engineering": {
-        keywords: [
-          "mechanical", "mechanical engineering", "cad", "cam", "solidworks", "autocad", 
-          "thermodynamics", "fluid mechanics", "hvac", "manufacturing", "production", 
-          "machining", "cnc", "3d printing", "robotics", "automation", "mechanical design", 
-          "product design", "thermal", "automotive", "aerospace", "finite element analysis", 
-          "fea", "computational fluid dynamics", "cfd", "dynamics", "kinematics", "mechatronics", 
-          "inventor", "catia", "iot", "mech"
+        primaryKeywords: [
+          "mechanical engineer", "mechanical design", "product design engineer", "thermal engineer",
+          "hvac engineer", "manufacturing engineer", "robotics engineer", "automotive engineer",
+          "mechanical systems", "aerospace engineer", "hardware engineer"
+        ],
+        secondaryKeywords: [
+          "cad", "cam", "solidworks", "autocad", "thermodynamics", "fluid mechanics", "hvac", 
+          "manufacturing", "production", "machining", "cnc", "3d printing", "robotics", "automation", 
+          "mechanical design", "product design", "thermal", "automotive", "finite element analysis", 
+          "fea", "dynamics", "kinematics", "mechatronics", "inventor", "catia", "mech"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "web development", "app developer", "frontend", "backend",
+          "electrical circuit", "pcb", "civil construction", "chemical process", "genetic"
+        ],
+        contextPairs: [
+          ["mechanical", "engineer"],
+          ["mechanical", "design"],
+          ["product", "design"],
+          ["thermal", "analysis"],
+          ["mechanical", "systems"]
         ]
       },
       "Electrical Engineering": {
-        keywords: [
-          "electrical", "electrical engineering", "electronics", "circuitry", "pcb design", 
-          "embedded systems", "vlsi", "verilog", "hdl", "microcontrollers", "power systems", 
-          "control systems", "signal processing", "communications", "rf", "circuit design", 
-          "arduino", "raspberry pi", "iot", "electric machines", "power electronics", 
+        primaryKeywords: [
+          "electrical engineer", "electronics engineer", "embedded systems engineer", "power systems engineer",
+          "control systems engineer", "circuit design", "pcb design", "vlsi design", "hardware engineer",
+          "rf engineer", "communication systems"
+        ],
+        secondaryKeywords: [
+          "electrical", "electronics", "circuitry", "embedded systems", "vlsi", "verilog", "hdl", 
+          "microcontrollers", "power systems", "control systems", "signal processing", "communications", 
+          "rf", "arduino", "raspberry pi", "iot", "electric machines", "power electronics", 
           "renewable energy", "semiconductor", "digital electronics", "analog", "ee"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "web development", "mechanical design", "civil construction",
+          "chemical process", "genetic", "aerospace"
+        ],
+        contextPairs: [
+          ["electrical", "engineer"],
+          ["embedded", "systems"],
+          ["circuit", "design"],
+          ["pcb", "design"],
+          ["power", "systems"]
         ]
       },
       "Civil Engineering": {
-        keywords: [
-          "civil", "civil engineering", "structural", "construction", "building", "architecture", 
+        primaryKeywords: [
+          "civil engineer", "structural engineer", "construction engineer", "geotechnical engineer",
+          "transportation engineer", "environmental engineer", "water resources engineer",
+          "urban planner", "site engineer"
+        ],
+        secondaryKeywords: [
+          "civil", "structural", "construction", "building", "architecture", 
           "autocad", "revit", "bim", "surveying", "geotechnical", "transportation", 
           "environmental engineering", "water resources", "infrastructure", "project management", 
           "structural analysis", "concrete design", "steel design", "highways", "bridges", 
           "dams", "urban planning", "sustainability", "gis", "staad pro", "etabs"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "electrical circuit", "mechanical design",
+          "chemical process", "genetic", "aerospace"
+        ],
+        contextPairs: [
+          ["civil", "engineer"],
+          ["structural", "design"],
+          ["construction", "manager"],
+          ["site", "engineer"],
+          ["urban", "planning"]
         ]
       },
       "Aerospace Engineering": {
-        keywords: [
+        primaryKeywords: [
+          "aerospace engineer", "aeronautical engineer", "aircraft design", "spacecraft design",
+          "propulsion engineer", "avionics engineer", "flight test engineer", "aerodynamics engineer",
+          "satellite systems", "rocket engineer", "flight dynamics"
+        ],
+        secondaryKeywords: [
           "aerospace", "aeronautical", "aviation", "aircraft", "spacecraft", "rocket", 
           "propulsion", "aerodynamics", "avionics", "flight mechanics", "satellite", 
-          "space systems", "computational fluid dynamics", "cfd", "structures", "composites", 
-          "aeroelasticity", "orbital mechanics", "aircraft design", "spacecraft design", 
-          "airframe", "astronautics", "nasa", "isro", "wind tunnel", "aero", "drone"
+          "space systems", "computational fluid dynamics", "cfd", "composites", 
+          "aeroelasticity", "orbital mechanics", "airframe", "astronautics", "nasa", "isro", 
+          "wind tunnel", "aero", "drone"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "web development", "electrical circuit", "civil construction",
+          "chemical process", "genetic"
+        ],
+        contextPairs: [
+          ["aerospace", "engineer"],
+          ["aircraft", "design"],
+          ["spacecraft", "design"],
+          ["propulsion", "systems"],
+          ["aerodynamic", "analysis"]
         ]
       },
       "Chemical Engineering": {
-        keywords: [
-          "chemical", "chemical engineering", "chemistry", "process", "process engineering", 
+        primaryKeywords: [
+          "chemical engineer", "process engineer", "biochemical engineer", "petroleum engineer",
+          "pharmaceutical engineer", "materials engineer", "polymer engineer", "chemical process design"
+        ],
+        secondaryKeywords: [
+          "chemical", "chemistry", "process", "process engineering", 
           "petrochemical", "refinery", "reactor design", "thermodynamics", "fluid dynamics", 
           "heat transfer", "mass transfer", "unit operations", "aspen", "hysys", "chemcad", 
           "biochemical", "pharmaceutical", "polymer", "materials science", "process control", 
           "separation processes", "reaction engineering", "fermentation", "distillation"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "electrical circuit", "mechanical design", "civil construction", 
+          "aerospace"
+        ],
+        contextPairs: [
+          ["chemical", "engineer"],
+          ["process", "engineer"],
+          ["petroleum", "engineer"],
+          ["reactor", "design"],
+          ["process", "control"]
         ]
       },
       "Biotechnology": {
-        keywords: [
+        primaryKeywords: [
+          "biotechnology engineer", "biomedical engineer", "bioinformatics scientist", 
+          "genomics researcher", "pharmaceutical researcher", "bioprocess engineer", 
+          "clinical research", "biologist", "molecular biologist"
+        ],
+        secondaryKeywords: [
           "biotechnology", "biotech", "biomedical", "biology", "life sciences", "molecular biology", 
           "genetic engineering", "genomics", "proteomics", "bioinformatics", "biochemistry", 
           "microbiology", "immunology", "pharmaceutical", "bioprocess", "biomaterials", 
           "tissue engineering", "cell culture", "recombinant dna", "crispr", "bioreactor", 
           "biomedicine", "bio"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "electrical circuit", "mechanical design", "civil construction",
+          "aerospace"
+        ],
+        contextPairs: [
+          ["biomedical", "engineer"],
+          ["biotechnology", "researcher"],
+          ["pharmaceutical", "research"],
+          ["genetic", "engineering"],
+          ["clinical", "research"]
         ]
       },
       "Management & Business": {
-        keywords: [
+        primaryKeywords: [
+          "business analyst", "financial analyst", "marketing manager", "hr intern", 
+          "business development", "operations manager", "supply chain analyst", 
+          "project manager", "consultant", "management trainee"
+        ],
+        secondaryKeywords: [
           "management", "business", "marketing", "finance", "accounting", "human resources", 
           "hr", "operations", "supply chain", "logistics", "consulting", "analytics", 
           "business development", "sales", "market research", "digital marketing", "seo", 
           "social media", "content", "brand", "e-commerce", "startup", "entrepreneurship", 
           "mba", "investment", "strategy", "administration", "commerce"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "electrical circuit", "mechanical design", "civil construction",
+          "chemical process", "genetic", "aerospace"
+        ],
+        contextPairs: [
+          ["business", "analyst"],
+          ["marketing", "manager"],
+          ["financial", "analysis"],
+          ["supply", "chain"],
+          ["human", "resources"]
         ]
       },
       "Design": {
-        keywords: [
+        primaryKeywords: [
+          "ui designer", "ux designer", "product designer", "graphic designer", 
+          "industrial designer", "web designer", "interaction designer", "visual designer",
+          "motion designer", "3d artist", "interior designer", "fashion designer"
+        ],
+        secondaryKeywords: [
           "design", "graphic design", "ui", "ux", "user interface", "user experience", 
           "product design", "industrial design", "web design", "visual design", "interaction design", 
           "animation", "illustration", "photoshop", "illustrator", "indesign", "figma", 
           "sketch", "adobe", "typography", "branding", "creative", "art direction", 
           "motion graphics", "3d design", "interior design", "fashion design"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 3, // Design needs more secondary matches due to term overlap
+        negativeKeywords: [
+          "software developer", "electrical circuit", "mechanical engineer", "civil construction",
+          "chemical process", "genetic", "aerospace"
+        ],
+        contextPairs: [
+          ["ui", "designer"],
+          ["ux", "designer"],
+          ["graphic", "designer"],
+          ["product", "designer"],
+          ["visual", "designer"]
         ]
       },
       "Content & Communication": {
-        keywords: [
+        primaryKeywords: [
+          "content writer", "copywriter", "technical writer", "editor", "journalist",
+          "communications specialist", "public relations", "media coordinator",
+          "social media manager", "content strategist"
+        ],
+        secondaryKeywords: [
           "content", "content writing", "copywriting", "editing", "proofreading", "journalism", 
           "media", "communication", "content creation", "social media", "blog", "seo writing", 
           "technical writing", "creative writing", "scriptwriting", "public relations", "pr", 
           "advertising", "digital media", "content strategy", "content marketing"
+        ],
+        minPrimaryMatches: 1,
+        minSecondaryMatches: 2,
+        negativeKeywords: [
+          "software developer", "electrical circuit", "mechanical design", "civil construction",
+          "chemical process", "genetic", "aerospace"
+        ],
+        contextPairs: [
+          ["content", "writer"],
+          ["technical", "writer"],
+          ["social", "media"],
+          ["public", "relations"],
+          ["digital", "content"]
         ]
       }
     };
   
-    // Function to filter listings by selected stream
+    /**
+     * Calculates a relevance score for an internship based on a weighted algorithm
+     * @param {Object} internship - The internship data object
+     * @param {Object} streamKeywords - The keywords definition for a specific stream
+     * @return {Object} - Score details and matches found
+     */
+    function calculateRelevanceScore(internship, streamKeywords) {
+      const textToSearch = [
+        (internship.jobTitle || '').toLowerCase(),
+        (internship.companyName || '').toLowerCase(),
+        (internship.description || '').toLowerCase(),
+        ...(internship.skills || []).map(skill => skill.toLowerCase())
+      ].join(' ');
+      
+      // Track matches for debugging and explanation
+      const matches = {
+        primary: [],
+        secondary: [],
+        negative: [],
+        contextPairs: []
+      };
+      
+      // Search for primary keywords (high value matches)
+      streamKeywords.primaryKeywords.forEach(keyword => {
+        if (textToSearch.includes(keyword.toLowerCase())) {
+          matches.primary.push(keyword);
+        }
+      });
+      
+      // Search for secondary keywords (supporting evidence)
+      streamKeywords.secondaryKeywords.forEach(keyword => {
+        if (textToSearch.includes(keyword.toLowerCase())) {
+          matches.secondary.push(keyword);
+        }
+      });
+      
+      // Check for negative keywords (indicators this isn't a match)
+      streamKeywords.negativeKeywords.forEach(keyword => {
+        if (textToSearch.includes(keyword.toLowerCase())) {
+          matches.negative.push(keyword);
+        }
+      });
+      
+      // Check for context pairs (words appearing together strongly indicate relevance)
+      streamKeywords.contextPairs.forEach(([word1, word2]) => {
+        // Look for both words within 10 words of each other
+        const pattern = new RegExp(`\\b${word1}\\b[\\s\\S]{0,50}\\b${word2}\\b|\\b${word2}\\b[\\s\\S]{0,50}\\b${word1}\\b`, 'i');
+        if (pattern.test(textToSearch)) {
+          matches.contextPairs.push(`${word1} + ${word2}`);
+        }
+      });
+      
+      // Calculate final score
+      let score = 0;
+      
+      // Primary keywords are worth 10 points each
+      score += matches.primary.length * 10;
+      
+      // Secondary keywords are worth 3 points each
+      score += matches.secondary.length * 3;
+      
+      // Context pairs are worth 15 points each
+      score += matches.contextPairs.length * 15;
+      
+      // Negative keywords are worth -20 points each
+      score -= matches.negative.length * 20;
+      
+      // Title matches get extra weight
+      const titleText = (internship.jobTitle || '').toLowerCase();
+      matches.primary.forEach(keyword => {
+        if (titleText.includes(keyword.toLowerCase())) {
+          score += 30; // Huge bonus for primary keyword in title
+        }
+      });
+      
+      matches.secondary.forEach(keyword => {
+        if (titleText.includes(keyword.toLowerCase())) {
+          score += 8; // Good bonus for secondary keyword in title
+        }
+      });
+      
+      // Check if the internship meets minimum relevance criteria
+      const meetsCriteria = (
+        (matches.primary.length >= streamKeywords.minPrimaryMatches) ||
+        (matches.secondary.length >= streamKeywords.minSecondaryMatches)
+      ) && (matches.negative.length === 0); // Any negative keywords disqualify
+      
+      // Final result
+      return {
+        score,
+        matches,
+        meetsCriteria,
+        // For debugging and UI feedback
+        explanation: `Primary: ${matches.primary.length}/${streamKeywords.minPrimaryMatches} required, 
+                      Secondary: ${matches.secondary.length}/${streamKeywords.minSecondaryMatches} required, 
+                      Context pairs: ${matches.contextPairs.length}, 
+                      Negative: ${matches.negative.length} (0 allowed)`
+      };
+    }
+  
+    // Function to filter listings by selected stream with improved scoring
     function filterByStream() {
       const selectedStream = document.getElementById('streamFilter').value;
       const listingsContainer = document.getElementById('internshipListings');
@@ -119,8 +401,8 @@ document.addEventListener('DOMContentLoaded', () => {
       listingsContainer.innerHTML = `<div class="loading">Finding the best ${selectedStream} internships for you...</div>`;
   
       // Get keywords for the selected stream
-      const streamKeywords = streamDefinitions[selectedStream]?.keywords || [];
-      if (streamKeywords.length === 0) return;
+      const streamKeywords = streamDefinitions[selectedStream];
+      if (!streamKeywords) return;
   
       // Make sure window.allInternships exists
       if (!window.allInternships || !Array.isArray(window.allInternships)) {
@@ -131,39 +413,40 @@ document.addEventListener('DOMContentLoaded', () => {
   
       console.log(`Filtering ${window.allInternships.length} internships for ${selectedStream}...`);
   
-      // Filter internships based on stream keywords
-      const streamFilteredInternships = window.allInternships.filter(internship => {
-        // Search in job title
-        const titleMatch = streamKeywords.some(keyword => 
-          (internship.jobTitle || '').toLowerCase().includes(keyword)
-        );
-        
-        // Search in skills
-        const skillsMatch = internship.skills && streamKeywords.some(keyword => 
-          internship.skills.some(skill => skill.toLowerCase().includes(keyword))
-        );
-        
-        // Search in description (if available)
-        const descriptionMatch = internship.description && streamKeywords.some(keyword => 
-          internship.description.toLowerCase().includes(keyword)
-        );
-        
-        // Search in company name (sometimes relevant)
-        const companyMatch = streamKeywords.some(keyword => 
-          (internship.companyName || '').toLowerCase().includes(keyword)
-        );
-        
-        return titleMatch || skillsMatch || descriptionMatch || companyMatch;
-      });
-  
-      console.log(`Found ${streamFilteredInternships.length} matches for ${selectedStream}`);
-  
+      // Filter and score internships based on the improved relevance algorithm
+      const scoredInternships = window.allInternships.map(internship => {
+        const relevance = calculateRelevanceScore(internship, streamKeywords);
+        return {
+          ...internship,
+          relevance
+        };
+      }).filter(internship => internship.relevance.meetsCriteria && internship.relevance.score > 0);
+      
+      // Sort by relevance score (highest first)
+      scoredInternships.sort((a, b) => b.relevance.score - a.relevance.score);
+      
+      // Log statistics for debugging
+      console.log(`Found ${scoredInternships.length} matches for ${selectedStream} after relevance scoring`);
+      
+      // If available, extract top matches to show to user
+      const topMatches = scoredInternships.slice(0, 3);
+      if (topMatches.length > 0) {
+        console.log("Top matches:", topMatches.map(i => ({
+          title: i.jobTitle,
+          score: i.relevance.score,
+          primaryMatches: i.relevance.matches.primary,
+          contextPairs: i.relevance.matches.contextPairs
+        })));
+      }
+      
       // If we can't use the main script's populateCards function, create our own
       if (typeof window.populateCards !== 'function') {
         console.warn("Using fallback display method since populateCards is not available");
-        displayFilteredResults(streamFilteredInternships, selectedStream);
+        displayFilteredResults(scoredInternships, selectedStream);
       } else {
-        window.populateCards(streamFilteredInternships);
+        // Remove relevance data before passing to populateCards (to prevent conflicts)
+        const cleanedInternships = scoredInternships.map(({ relevance, ...rest }) => rest);
+        window.populateCards(cleanedInternships);
       }
     }
   
@@ -183,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const fragment = document.createDocumentFragment();
       
       // Display the internships
-      internships.forEach((internship, index) => {
+      internships.forEach((internship) => {
         const card = document.createElement('div');
         card.className = 'job-card';
         
@@ -213,6 +496,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         (internship.postedTime || '').toLowerCase().includes('few');
         const postedTimeClass = isRecent ? 'posted-time recent' : 'posted-time';
         
+        // Add relevance score indicator if available (for debugging)
+        const relevanceDisplay = internship.relevance ? 
+            `<span class="relevance-score" title="${internship.relevance.explanation}">Relevance: ${internship.relevance.score}</span>` : '';
+        
         card.innerHTML = `
             <div class="job-header">
                 <div class="job-title">${internship.jobTitle || 'Untitled Position'}</div>
@@ -240,6 +527,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="skills-container">
                     ${skillsHTML}
                 </div>
+                ${relevanceDisplay}
             </div>
             <div class="job-footer">
                 <span class="${postedTimeClass}">${isRecent ? 'New • ' : ''}${internship.postedTime || 'Unknown'}</span>
@@ -254,7 +542,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const resultHeader = document.createElement('div');
       resultHeader.className = 'results-header';
       resultHeader.innerHTML = `
-        <div class="results-count">Found <span>${internships.length}</span> ${streamName} internships</div>
+        <div class="results-count">Found <span>${internships.length}</span> relevant ${streamName} internships</div>
       `;
       
       listingsContainer.appendChild(resultHeader);
@@ -270,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
   
-      console.log("Stream search initialized");
+      console.log("Enhanced stream search initialized");
   
       // Add event listener to the stream filter
       streamFilter.addEventListener('change', () => {
@@ -290,6 +578,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return this._allInternships || [];
           }
         });
+      }
+      
+      // Optionally add a button to improve UX
+      const filtersSection = document.querySelector('.filters-section');
+      if (filtersSection) {
+        const refreshButton = document.createElement('button');
+        refreshButton.className = 'refresh-button';
+        refreshButton.textContent = 'Refresh Results';
+        refreshButton.addEventListener('click', filterByStream);
+        filtersSection.appendChild(refreshButton);
       }
     }
   
