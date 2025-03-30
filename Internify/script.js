@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const refreshBtn = document.getElementById('refreshBtn');
     const searchInput = document.getElementById('searchInput');
     const skillsInput = document.getElementById('skillsInput');
-    const keywordInput = document.getElementById('keywordInput');
     const timeFilter = document.getElementById('timeFilter');
     const locationFilter = document.getElementById('locationFilter');
     const stipendSort = document.getElementById('stipendSort');
@@ -184,17 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
         populateTable(results);
     }
 
-    // Handle keyword search
-    keywordInput.addEventListener('keydown', (event) => {
-        if (event.key === 'Enter') {
-            const keyword = keywordInput.value.trim();
-            if (keyword) {
-                searchByKeyword(keyword);
-            } else {
-                filterAndSortData(); // Show all data if no keyword
-            }
-        }
-    });
 
     // Function to refresh data
     async function refreshData() {
