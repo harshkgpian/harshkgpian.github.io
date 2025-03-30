@@ -16,8 +16,31 @@
             </div>
         </div>
         
+        <!-- Featured stream filter at the top -->
+        <div class="featured-filter">
+            <label for="streamFilter">Find internships for your stream:</label>
+            <select id="streamFilter">
+                <option value="">All Streams</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Aerospace Engineering">Aerospace Engineering</option>
+                <option value="Chemical Engineering">Chemical Engineering</option>
+                <option value="Biotechnology">Biotechnology</option>
+                <option value="Management & Business">Management & Business</option>
+                <option value="Design">Design & Creative</option>
+                <option value="Content & Communication">Content & Communication</option>
+            </select>
+        </div>
+        
+        <!-- Additional filters in a collapsible section for mobile -->
+        <div class="filter-toggle">
+            <button id="toggleFilters">More Filters ▼</button>
+        </div>
+        
         <!-- Compact filter controls -->
-        <div class="controls">
+        <div class="controls" id="filterControls">
             <input type="text" id="searchInput" placeholder="Search by job title or company...">
             <input type="text" id="skillsInput" placeholder="Search by skills...">
             <select id="timeFilter">
@@ -46,12 +69,25 @@
             </select>
         </div>
 
-        <!-- Card grid layout for listings with preload data -->
+        <!-- Card grid layout for listings -->
         <div id="internshipListings" class="listings-grid">
             <div class="loading">Loading internship listings...</div>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script src="stream-search.js"></script>
+    <script>
+        // Simple script to toggle filters visibility on mobile
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleFilters');
+            const filterControls = document.getElementById('filterControls');
+            
+            toggleBtn.addEventListener('click', function() {
+                const isVisible = filterControls.classList.toggle('visible');
+                toggleBtn.textContent = isVisible ? 'Hide Filters ▲' : 'More Filters ▼';
+            });
+        });
+    </script>
 </body>
 </html>

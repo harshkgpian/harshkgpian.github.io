@@ -33,6 +33,9 @@ let isInitialLoad = true;
 // Direct data source URL
 const dataSourceUrl = 'https://harshkgpian.github.io/internships.json';
 
+// Make these variables and functions available to other scripts
+window.allInternships = allInternships;
+
 // Function to fetch data from source
 async function fetchDataFromSource() {
     try {
@@ -62,6 +65,8 @@ async function fetchDataFromSource() {
         }
         
         allInternships = await response.json();
+        // Update the global reference
+        window.allInternships = allInternships;
         console.log(`Loaded ${allInternships.length} internships`);
         
         filterAndSortData();
