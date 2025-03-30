@@ -1,170 +1,183 @@
 // jsonVersion.js
 
 let defaultJson = {
-    "personal": [
-      {
-        "name": "Harsh Raj",
-        "email": "harshrjto@gmail.com",
-        "phone": "+91 8750798260",
-        "linkedin": "https://www.linkedin.com/in/harsh-raj-27b054210/",
-        "github": "https://github.com/harshkgpian"
-      }
-    ],
-    "summary": [
-      {
-        "summary": "Aerospace engineer with expertise in turbomachinery, computational fluid dynamics, and deep learning. Passionate about solving engineering challenges using a combination of analytical and computational techniques. Experienced in research, design, and implementation of gas turbine components and AI-driven automation."
-      }
-    ],
-    "education": [
-      {
-        "school": "Indian Institute of Technology, Kharagpur",
-        "degree": "Master of Technology in Aerospace Engineering",
-        "duration": "Dec 2020 - Present",
-        "location": "Kharagpur, India",
-        "scoreType": "CGPA",
-        "gpa": "8.64/10"
-      },
-      {
-        "school": "Bharat National Public School",
-        "degree": "Class XII - Central Board of Secondary Education",
-        "duration": "2020",
-        "location": "Delhi, India",
-        "scoreType": "Percentage",
-        "gpa": "90%"
-      }
-    ],
-    "experience": [
-      {
-        "title": "Aeronautical Development Agency",
-        "titleLink": "https://drive.google.com/file/d/1cpOYDpnv-Wc9Zr24QX7lxXX0HkmTcyee/view",
-        "subtitle": "Propulsion Research Intern",
-        "duration": "May 2023 - June 2023",
-        "location": "DRDO, Bengaluru",
-        "bullets": [
-          "Worked on preliminary design and analysis of engine starting system for 5th Generation AMCA Fighter Aircraft.",
-          "Utilized MATLAB/SIMULINK to evaluate pressure loss in valves and ducts connecting APU, ATS, and Engine.",
-          "Proposed a statistical approach for health monitoring of the APU using different prognostic and diagnostics models."
-        ],
-        "tags": [
-          "engine starting system",
-          "MATLAB/SIMULINK",
-          "pressure loss",
-          "APU",
-          "ATS",
-          "prognostic models",
-          "diagnostics"
-        ]
-      },
-      {
-        "title": "Aerostrovilos Pvt. Ltd",
-        "titleLink": "",
-        "subtitle": "Turbomachinery and Python Developer Intern",
-        "duration": "June 2023 - July 2023",
-        "location": "IIT Madras, Chennai",
-        "bullets": [
-          "Developed a program for Off-design Performance Prediction of Radial Inflow Turbines using loss correlations in Python.",
-          "Conducted research about seals used in micro gas turbines, assisted in performing CFD analysis of the seal in Fluent.",
-          "Evaluated the creep life of the radial turbine and generated contour plots in ANSYS Mechanical using CSV data."
-        ],
-        "tags": [
-          "Radial Inflow Turbines",
-          "Python",
-          "loss correlations",
-          "CFD analysis",
-          "ANSYS Mechanical",
-          "creep life",
-          "contour plots"
-        ]
-      },
-      {
-        "title": "Artenal Robotics",
-        "titleLink": "",
-        "subtitle": "Computer Vision Intern",
-        "duration": "May 2022 - Aug 2022",
-        "location": "Vancouver, Canada",
-        "bullets": [
-          "Utilized TensorFlow for Object Detection and Recognition and for developing orientation detection algorithms.",
-          "Custom trained CNN models, specializing in YOLO v5/v6 using advanced transfer learning techniques.",
-          "Created an efficient image annotation app using Python’s KTkinter library, streamlining project workflows."
-        ],
-        "tags": [
-          "TensorFlow",
-          "Object Detection",
-          "YOLO",
-          "CNN",
-          "Python",
-          "KTkinter"
-        ]
-      }
-    ],
-    "projects": [
-      {
-        "title": "Design of Mixed Flow Compressor with Crossover Diffuser for UAVs",
-        "duration": "July 2024 - Present",
-        "bullets": [
-          "Designed a compressor with a pressure ratio of 3.8, 85% efficiency, and 4.3 kg/s mass flow for UAV application.",
-          "Developed a meanline design methodology using turbomachinery principles and convergence criteria in Python.",
-          "Performed parametric studies, used airfoil mapping to create 3D models of compressor and crossover diffuser.",
-          "Utilized BladeGen, Turbogrid, and CFX for generating mesh and performing CFD analysis of the combined stage.",
-          "Optimized the stage for diameter constraint and achieved optimal pressure recovery in crossover diffuser."
-        ],
-        "tags": [
-          "Mixed Flow Compressor",
-          "Crossover Diffuser",
-          "UAV",
-          "Python",
-          "BladeGen",
-          "Turbogrid",
-          "CFX",
-          "CFD Analysis"
-        ]
-      }
-    ],
-    "competitions": [
-      {
-        "title": "AIAA Jet Engine Design Competition",
-        "subtitle": "Team Leader",  
-        "duration": "Dec 2022 - Apr 2023",
-        "location": "Boston, USA",
-        "bullets": [
-          "Proposed an industry-level solution for a Hybrid-Electric Propulsion System using Fuselage Boundary Layer Ingestion.",
-          "Presented the solution to experts at AIAA AVIATION Forum and received top 3 recognition for the technical report.",
-          "Designed high-efficiency compressors and the BLI Fan using advanced Turbo-machinery Aerodynamics principles.",
-          "Engaged in extensive research of gas turbine systems to improve overall efficiency and cycle optimization."
-        ],
-        "tags": [
-          "Hybrid-Electric Propulsion",
-          "BLI",
-          "Turbo-machinery Aerodynamics",
-          "Gas Turbine Systems",
-          "Cycle Optimization"
-        ]
-      }
-    ],
-    "skills": [
-      {
-        "category": "Technical Skills",
-        "skills": [
-          "Python",
-          "MATLAB",
-          "CFD",
-          "FEM",
-          "Deep Learning",
-          "Turbomachinery"
-        ]
-      },
-      {
-        "category": "Software & Tools",
-        "skills": [
-          "ANSYS",
-          "OpenFOAM",
-          "Simulink",
-          "SolidWorks",
-          "PyTorch",
-          "TensorFlow"
-        ]
-      }
-    ]
+  "personal": [
+    {
+      "name": "Harsh Raj",
+      "email": "harshrjto@gmail.com",
+      "phone": "+91 8750798260",
+      "linkedin": "linkedin.com/in/harsh-raj",
+      "github": "github.com/harshkgpian"
+    }
+  ],
+  "summary": [
+    {
+      "summary": "Highly motivated Aerospace Engineering M.Tech candidate with a strong foundation in design, analysis, and simulation of aerospace systems. Experienced in developing PLC programs and utilizing SCADA systems for automation. Proven ability to collaborate effectively within cross-functional teams and experience in renewable energy systems."
+    }
+  ],
+  "education": [
+    {
+      "school": "Indian Institute of Technology, Kharagpur",
+      "degree": "Master of Technology in Aerospace Engineering",
+      "duration": "November 2020 – Present",
+      "location": "West Bengal, India",
+      "scoreType": "CGPA",
+      "gpa": "8.64/10"
+    },
+    {
+      "school": "Bharat National Public School",
+      "degree": "Class XII - Central Board of Secondary Education",
+      "duration": "May 2019",
+      "location": "Delhi, India",
+      "scoreType": "Percentage",
+      "gpa": "90%"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Aeronautical Development Agency",
+      "subtitle": "Propulsion Research Intern",
+      "duration": "May 2023 – June 2023",
+      "location": "Bengaluru",
+      "bullets": [
+        "Conducted preliminary design and analysis of an engine starting system for a 5th Generation AMCA Fighter Aircraft.",
+        "Utilized MATLAB/SIMULINK to evaluate pressure loss in valves and ducts connecting the APU, ATS, and Engine.",
+        "Proposed a statistical approach for health monitoring of the APU using different prognostic and diagnostic models."
+      ],
+      "tags": ["MATLAB/SIMULINK"]
+    },
+    {
+      "title": "Aerostrovilos Pvt. Ltd",
+      "subtitle": "Turbomachinery and Python Developer Intern",
+      "duration": "June 2023 – July 2023",
+      "location": "IIT Madras, Chennai",
+      "bullets": [
+        "Developed a Python program for Off-design Performance Prediction of Radial Inflow Turbines using loss correlations.",
+        "Researched seals used in micro gas turbines and assisted in performing CFD analysis of the seal in Fluent.",
+        "Evaluated the creep life of the radial turbine and generated contour plots in ANSYS Mechanical using CSV data."
+      ],
+      "tags": ["Python", "CFD", "ANSYS"]
+    },
+    {
+      "title": "Artenal Robotics",
+      "subtitle": "Computer Vision Intern",
+      "duration": "May 2022 – Aug 2022",
+      "location": "Vancouver, Canada",
+      "bullets": [
+        "Utilized TensorFlow for object detection and recognition, along with the development of orientation detection algorithms.",
+        "Custom trained CNN models, specializing in YOLO v5/v6, leveraging advanced transfer learning techniques.",
+        "Created an efficient image annotation app using Python’s Tkinter library, enhancing project workflows."
+      ],
+      "tags": ["TensorFlow", "YOLO v5/v6", "Python"]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Design of Mixed Flow Compressor with Crossover Diffuser for UAVs",
+      "duration": "July 2024 – Present",
+      "bullets": [
+        "Designed a compressor with a pressure ratio of 3.8, 85% efficiency, and 4.3 kg/s mass flow for UAV applications.",
+        "Developed a meanline design methodology using turbomachinery principles and convergence criteria in Python.",
+        "Performed parametric studies using airfoil mapping to create 3D models of the compressor and crossover diffuser.",
+        "Utilized BladeGen, Turbogrid, and CFX for generating mesh and performing CFD analysis of the combined stage.",
+        "Optimized the stage for diameter constraint and achieved optimal pressure recovery in the crossover diffuser."
+      ],
+      "tags": ["CFD", "Python", "BladeGen", "Turbogrid", "CFX"]
+    },
+    {
+      "title": "VTOL and Fixed Wing Hybrid Drone Design",
+      "duration": "Aug 2022 – Nov 2022",
+      "bullets": [
+        "Designed and simulated a hybrid VTOL and fixed-wing drone using MATLAB/SIMULINK with the Simscape library.",
+        "Conducted comprehensive analysis of the drone’s flight characteristics and aerodynamic performance in OpenVSP.",
+        "Designed and implemented PID control systems to facilitate transitions between hover and horizontal flight modes."
+      ],
+      "tags": ["MATLAB/SIMULINK", "OpenVSP"]
+    },
+    {
+      "title": "Piezo-Electric Droplet Generator",
+      "duration": "Aug 2022 – Nov 2022",
+      "bullets": [
+        "Designed a Piezoelectric Droplet Generator to understand how different fuels burn and behave in combustion processes.",
+        "Utilized 3D printing techniques to fabricate critical components from CAD models developed in SOLIDWORKS.",
+        "Configured and integrated electrical connections using Arduino, for precision and control in droplet generation."
+      ],
+      "tags": ["SOLIDWORKS", "Arduino"]
+    },
+    {
+      "title": "Aerial Image Segmentation with PyTorch",
+      "duration": "July 2022",
+      "bullets": [
+        "Developed a custom dataset class and applied image-mask augmentation using Albumentations.",
+        "Utilized a pre-trained U-Net model from the PyTorch Segmentation Model library for the Massachusetts Roads Segmentation Dataset.",
+        "Streamlined model training by creating efficient training and evaluation functions."
+      ],
+      "tags": ["PyTorch", "Albumentations"]
+    }
+  ],
+  "conferences": [
+    {
+      "title": "AIAA Jet Engine Design Competition",
+      "duration": "Dec 2022 – Apr 2023",
+      "location": "Boston, USA",
+      "bullets": [
+        "Proposed an industry-level solution for a Hybrid-Electric Propulsion System incorporating Fuselage Boundary Layer Ingestion.",
+        "Presented the solution at the AIAA AVIATION Forum and received top 3 recognition for the technical report.",
+        "Designed high-efficiency compressors using advanced turbomachinery aerodynamics principles."
+      ],
+      "tags": ["compressors"]
+    },
+    {
+      "title": "ASME GtIndia Conference",
+      "duration": "June 2023 – Present",
+      "location": "Bengaluru, India",
+      "bullets": [
+        "Co-authored a research paper on ”Strategic Design for BLI Engine-Based Hybrid Propulsion” at ASME GTIndia 2023."
+      ],
+      "tags": ["BLI Engine"]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages and Tools",
+      "skills": [
+        "C/C++",
+        "Python",
+        "OpenCV",
+        "Matplotlib",
+        "TensorFlow",
+        "SimScape",
+        "JS",
+        "PyTorch",
+        "CFD",
+        "FEM"
+      ]
+    },
+    {
+      "category": "Softwares",
+      "skills": [
+        "MATLAB/SIMULINK",
+        "Solidworks",
+        "ANSYS",
+        "OpenFOAM",
+        "GasTurb",
+        "OpenVSP",
+        "Vrep(CoppeliaSim)"
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "title": "Lead Aerospace Engineering team",
+      "organization": "Calculatoratoz.com",
+      "duration": null,
+      "location": null,
+      "bullets": [
+        "Managed and deployed over 500 aerospace calculators."
+      ],
+      "tags": []
+    }
+  ]
 }
 
 let demoJSON = defaultJson;
