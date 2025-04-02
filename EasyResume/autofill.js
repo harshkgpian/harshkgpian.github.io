@@ -3,179 +3,333 @@
 let defaultJson = {
   "personal": [
     {
-      "name": "Harsh Raj",
-      "email": "harshrjto@gmail.com",
-      "phone": "+91 8750798260",
-      "linkedin": "linkedin.com/in/harsh-raj",
-      "github": "github.com/harshkgpian"
+      "name": "Sanika Yashwant Naik",
+      "email": "sanikayashwantnaik@gmail.com",
+      "phone": "+91-9820158226",
+      "location": "Mumbai"
     }
   ],
   "summary": [
     {
-      "summary": "Highly motivated Aerospace Engineering M.Tech candidate with a strong foundation in design, analysis, and simulation of aerospace systems. Experienced in developing PLC programs and utilizing SCADA systems for automation. Proven ability to collaborate effectively within cross-functional teams and experience in renewable energy systems."
-    }
-  ],
-  "education": [
-    {
-      "school": "Indian Institute of Technology, Kharagpur",
-      "degree": "Master of Technology in Aerospace Engineering",
-      "duration": "November 2020 – Present",
-      "location": "West Bengal, India",
-      "scoreType": "CGPA",
-      "gpa": "8.64/10"
-    },
-    {
-      "school": "Bharat National Public School",
-      "degree": "Class XII - Central Board of Secondary Education",
-      "duration": "May 2019",
-      "location": "Delhi, India",
-      "scoreType": "Percentage",
-      "gpa": "90%"
+      "summary": "Seasoned HR Business Partner with 4.5+ years at Wipro, specializing in strategic HR interventions, end-to-end recruitment management, and talent management for large, global technology accounts (1,600+ professionals). Proven ability to partner with senior leaders, drive talent acquisition for software engineering and product roles, enhance candidate experience, and implement diversity initiatives. Expertise in HR process transformation, performance management, compliance, and leveraging recruitment metrics and sourcing strategies via platforms like LinkedIn and Naukri.com to build strong talent pipelines and improve employer branding. Reduced employee attrition by 15% YoY."
     }
   ],
   "experience": [
     {
-      "title": "Aeronautical Development Agency",
-      "subtitle": "Propulsion Research Intern",
-      "duration": "May 2023 – June 2023",
-      "location": "Bengaluru",
+      "title": "Wipro Ltd",
+      "subtitle": "Manager-HR",
+      "duration": "September 2020 - Present",
+      "location": "Mumbai",
       "bullets": [
-        "Conducted preliminary design and analysis of an engine starting system for a 5th Generation AMCA Fighter Aircraft.",
-        "Utilized MATLAB/SIMULINK to evaluate pressure loss in valves and ducts connecting the APU, ATS, and Engine.",
-        "Proposed a statistical approach for health monitoring of the APU using different prognostic and diagnostic models."
+        "Served as the primary HR Business Partner for major revenue-generating accounts in Capital Markets & Insurance, supporting 1,600+ professionals globally to optimize human capital.",
+        "Managed comprehensive end-to-end people processes, encompassing account Talent Acquisition, Recruitment Management for promotions, merit salary increases, appraisals, talent review, and planning while ensuring strict Compliance with client SLAs.",
+        "Successfully reduced employee attrition by 15% year-over-year through data-driven insights, analysis of Recruitment Metrics, and impactful HR initiatives fostering a performance-driven culture.",
+        "Led ‘TalentFest’ & ‘RoleRotationDrive’ at WDC, implementing skill-based job matching and enhancing workforce agility to strengthen the internal Talent Pipeline.",
+        "Anchored the 'Supers' program to develop top performers via strategic career mapping, technology exposure, and certified coaching sessions.",
+        "Designed and launched ‘PMEssentials’ to effectively upskill Project Leads for managerial roles through targeted training, leadership development modules, and dedicated mentorship.",
+        "Spearheaded ‘PowerUp’, enhancing collaboration, Communication Skills, and customer service among employees through interactive learning, self-paced modules, workshops, and real-world case studies.",
+        "Directed the '5 Habits' Culture Transformation initiative, securing leadership buy-in and executing a strategic awareness campaign to embed cultural change across the organization.",
+        "Established a continuous feedback loop integrated with Cultural Transformation efforts, collaborating with central teams to weave improvements into core people processes.",
+        "Implemented structured engagement plans for New Gen Associates focused on Recognition, Collaboration, and Communication, enhancing their integration and skill development.",
+        "Designed formal and informal engagement programs, including recognition initiatives and team-building activities, contributing positively to Employer Branding and workplace culture.",
+        "Conducted Training Needs Analysis (TNA), aligning learning solutions with organizational goals by collaborating with business leaders and L&D teams, and managed the annual training calendar.",
+        "Ensured rigorous Compliance and managed grievance resolution for assigned accounts, maintaining adherence to Geo labor laws and organizational policies.",
+        "Authored the organization-level NGA Compliance Standard Operating Procedure (SOP), detailing the Fresher Engagement Matrix, Capability Framework, and Compliance Guidelines.",
+        "Led a comprehensive Compliance Audit involving 200+ interviews to assess employee classification, roles, and adherence to U.S. labor laws using a legally vetted questionnaire.",
+        "Championed Well-being Initiatives, organizing workshops and stress management programs, and drove Diversity Initiatives, boosting diversity in promotions by 10% based on quarterly dashboard metrics.",
+        "Anchored key DEI initiatives like Pride Month celebrations and cultural awareness workshops, fostering inclusivity and managing Employee Resource Groups (ERGs).",
+        "Prepared and presented the quarterly DEI dashboard to the Wipro DEI council, highlighting key Diversity Initiatives metrics and reflecting QOQ progress."
       ],
-      "tags": ["MATLAB/SIMULINK"]
+      "tags": [
+        "HR Business Partner",
+        "Talent Acquisition",
+        "Recruitment Management",
+        "Compliance",
+        "Recruitment Metrics",
+        "Talent Pipeline",
+        "Communication Skills",
+        "Employer Branding",
+        "Diversity Initiatives",
+        "Leadership",
+        "Change Management",
+        "Engagement",
+        "Capability Building",
+        "TNA",
+        "Grievance Management",
+        "DEI"
+      ]
     },
     {
-      "title": "Aerostrovilos Pvt. Ltd",
-      "subtitle": "Turbomachinery and Python Developer Intern",
-      "duration": "June 2023 – July 2023",
-      "location": "IIT Madras, Chennai",
+      "title": "THATMATE (Social Startup)",
+      "subtitle": "Intern",
       "bullets": [
-        "Developed a Python program for Off-design Performance Prediction of Radial Inflow Turbines using loss correlations.",
-        "Researched seals used in micro gas turbines and assisted in performing CFD analysis of the seal in Fluent.",
-        "Evaluated the creep life of the radial turbine and generated contour plots in ANSYS Mechanical using CSV data."
+        "Developed and executed comprehensive content strategies to bolster marketing campaigns and refine brand messaging across diverse platforms.",
+        "Collaborated effectively using strong Communication Skills with cross-functional teams, including designers and developers, to create engaging content.",
+        "Worked closely with the CEO and COO to devise organizational strategies and secure funding through grants and competitions."
       ],
-      "tags": ["Python", "CFD", "ANSYS"]
+      "tags": [
+        "Content Strategy",
+        "Marketing Campaigns",
+        "Brand Messaging",
+        "Collaboration",
+        "Communication Skills",
+        "Organizational Strategy",
+        "Funding"
+      ]
     },
     {
-      "title": "Artenal Robotics",
-      "subtitle": "Computer Vision Intern",
-      "duration": "May 2022 – Aug 2022",
-      "location": "Vancouver, Canada",
+      "title": "Honeywell",
+      "subtitle": "Intern",
       "bullets": [
-        "Utilized TensorFlow for object detection and recognition, along with the development of orientation detection algorithms.",
-        "Custom trained CNN models, specializing in YOLO v5/v6, leveraging advanced transfer learning techniques.",
-        "Created an efficient image annotation app using Python’s Tkinter library, enhancing project workflows."
+        "Benchmarked Honeywell's Recognition Practices by evaluating the technological infrastructure and tools of competitors.",
+        "Recommended best practices including social recognition and peer-to-peer recognition features to foster increased employee engagement and enhance the overall Candidate Experience perception."
       ],
-      "tags": ["TensorFlow", "YOLO v5/v6", "Python"]
+      "tags": [
+        "Benchmarking",
+        "Recognition Practices",
+        "Employee Engagement",
+        "Candidate Experience",
+        "HR Tech"
+      ]
+    },
+    {
+      "title": "UPGRAD",
+      "subtitle": "Intern",
+      "bullets": [
+        "Conducted benchmarking of career paths for various roles within the Education industry.",
+        "Created career role trajectories to support succession planning and build a robust Talent Pipeline."
+      ],
+      "tags": [
+        "Benchmarking",
+        "Career Paths",
+        "Succession Planning",
+        "Talent Pipeline",
+        "Education Industry"
+      ]
+    },
+    {
+      "title": "Wipro",
+      "subtitle": "Intern",
+      "bullets": [
+        "Engaged Distinguished Members of Technical Society associates in Co-Innovation partnerships.",
+        "Performed an in-depth gender diversity study for a Financial Services business unit, supporting Diversity Initiatives.",
+        "Conducted hypothesis testing to analyze the effectiveness of promotions within the Financial sector."
+      ],
+      "tags": [
+        "Co-Innovation",
+        "Diversity Initiatives",
+        "Gender Diversity",
+        "Hypothesis Testing",
+        "Financial Services"
+      ]
     }
   ],
   "projects": [
     {
-      "title": "Design of Mixed Flow Compressor with Crossover Diffuser for UAVs",
-      "duration": "July 2024 – Present",
+      "title": "Building a Role Competency Architecture",
+      "subtitle": "Contributor",
       "bullets": [
-        "Designed a compressor with a pressure ratio of 3.8, 85% efficiency, and 4.3 kg/s mass flow for UAV applications.",
-        "Developed a meanline design methodology using turbomachinery principles and convergence criteria in Python.",
-        "Performed parametric studies using airfoil mapping to create 3D models of the compressor and crossover diffuser.",
-        "Utilized BladeGen, Turbogrid, and CFX for generating mesh and performing CFD analysis of the combined stage.",
-        "Optimized the stage for diameter constraint and achieved optimal pressure recovery in the crossover diffuser."
+        "Contributed to developing a talent framework of skill clusters aligned with client expectations.",
+        "Aimed to balance supply-demand, analyze financial impacts, and support career growth, multi-skilling, and succession readiness for the Talent Pipeline through job rotations."
       ],
-      "tags": ["CFD", "Python", "BladeGen", "Turbogrid", "CFX"]
+      "tags": [
+        "Competency Architecture",
+        "Talent Framework",
+        "Skill Clusters",
+        "Supply Demand",
+        "Talent Pipeline",
+        "Job Rotation"
+      ]
     },
     {
-      "title": "VTOL and Fixed Wing Hybrid Drone Design",
-      "duration": "Aug 2022 – Nov 2022",
+      "title": "Wipro Career Essentials",
+      "subtitle": "Core Team Member",
       "bullets": [
-        "Designed and simulated a hybrid VTOL and fixed-wing drone using MATLAB/SIMULINK with the Simscape library.",
-        "Conducted comprehensive analysis of the drone’s flight characteristics and aerodynamic performance in OpenVSP.",
-        "Designed and implemented PID control systems to facilitate transitions between hover and horizontal flight modes."
+        "Participated in building a comprehensive, AI-integrated competency framework with 'Cymorg'.",
+        "Combined practice-defined technical skills and role-based functional competencies for a unified assessment model covering over 5,000 employees in a major Digital unit."
       ],
-      "tags": ["MATLAB/SIMULINK", "OpenVSP"]
+      "tags": [
+        "Competency Framework",
+        "AI",
+        "Technical Skills",
+        "Functional Competencies",
+        "Assessment Model"
+      ]
     },
     {
-      "title": "Piezo-Electric Droplet Generator",
-      "duration": "Aug 2022 – Nov 2022",
+      "title": "Research Paper on Revamping Relocation Policy",
+      "subtitle": "Key Contributor",
+      "duration": "November 2023 - Ongoing",
       "bullets": [
-        "Designed a Piezoelectric Droplet Generator to understand how different fuels burn and behave in combustion processes.",
-        "Utilized 3D printing techniques to fabricate critical components from CAD models developed in SOLIDWORKS.",
-        "Configured and integrated electrical connections using Arduino, for precision and control in droplet generation."
+        "Playing a key role in research initiated to simplify complexities within Wipro's Global Relocation policy.",
+        "Aiming to enhance relocation processes by addressing identified issues and examining industry trends for better Compliance and employee experience."
       ],
-      "tags": ["SOLIDWORKS", "Arduino"]
+      "tags": [
+        "Research",
+        "Relocation Policy",
+        "Compliance",
+        "Process Improvement",
+        "Industry Trends"
+      ]
     },
     {
-      "title": "Aerial Image Segmentation with PyTorch",
-      "duration": "July 2022",
+      "title": "Elevating Onboarding Experience",
+      "subtitle": "Analyst",
       "bullets": [
-        "Developed a custom dataset class and applied image-mask augmentation using Albumentations.",
-        "Utilized a pre-trained U-Net model from the PyTorch Segmentation Model library for the Massachusetts Roads Segmentation Dataset.",
-        "Streamlined model training by creating efficient training and evaluation functions."
+        "Analyzed historical onboarding practices across various Geos, identifying trends and patterns.",
+        "Conducted benchmarking against industry peers to pinpoint best practices for enhancing the Candidate Experience.",
+        "Formulated a personalized onboarding strategy tailored to diverse geographies, contributing to Employer Branding."
       ],
-      "tags": ["PyTorch", "Albumentations"]
+      "tags": [
+        "Onboarding",
+        "Benchmarking",
+        "Candidate Experience",
+        "Employer Branding",
+        "Process Improvement"
+      ]
+    },
+    {
+      "title": "Development of Success Profiles",
+      "subtitle": "Collaborator",
+      "bullets": [
+        "Collaborated closely with the Talent Transformation Team to craft comprehensive success profiles for Leadership roles.",
+        "Conducted thorough Competency-based Interviews with leaders to inform talent review and succession planning strategies.",
+        "Ensured the development of a robust Talent Pipeline for critical leadership positions."
+      ],
+      "tags": [
+        "Success Profiles",
+        "Leadership Roles",
+        "Competency-based Interviews",
+        "Talent Review",
+        "Succession Planning",
+        "Talent Pipeline"
+      ]
     }
   ],
-  "conferences": [
+  "education": [
     {
-      "title": "AIAA Jet Engine Design Competition",
-      "duration": "Dec 2022 – Apr 2023",
-      "location": "Boston, USA",
-      "bullets": [
-        "Proposed an industry-level solution for a Hybrid-Electric Propulsion System incorporating Fuselage Boundary Layer Ingestion.",
-        "Presented the solution at the AIAA AVIATION Forum and received top 3 recognition for the technical report.",
-        "Designed high-efficiency compressors using advanced turbomachinery aerodynamics principles."
-      ],
-      "tags": ["compressors"]
+      "school": "SBM, NMIMS",
+      "degree": "MBA-HR",
+      "duration": "2020",
+      "location": "Mumbai",
+      "scoreType": "CGPA",
+      "gpa": "3.2/4"
     },
     {
-      "title": "ASME GtIndia Conference",
-      "duration": "June 2023 – Present",
-      "location": "Bengaluru, India",
+      "school": "RAIT",
+      "degree": "BE (Computer Science)",
+      "duration": "2017",
+      "location": "Mumbai",
+      "scoreType": "CGPA",
+      "gpa": "7.8/10"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "Pursuing HR Ignite - HRBP certification by AON"
+    },
+    {
+      "title": "Pursuing Gen-AI by CHRMP"
+    },
+    {
+      "title": "Pursuing Lean Six Sigma - Black Belt"
+    },
+    {
+      "title": "Lean Six Sigma Green Belt Certification"
+    },
+    {
+      "title": "Tableau Software"
+    },
+    {
+      "title": "Employing Abilities @Work - SHRM"
+    },
+    {
+      "title": "Delivering Employee Feedback, Coaching and Developing - LinkedIn"
+    },
+    {
+      "title": "Digital Marketing - Google Garage"
+    },
+    {
+      "title": "International Leadership and Organizational Behaviours - LinkedIn"
+    },
+    {
+      "title": "FLOW and C&B Certification by Wipro"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Multiple Recognitions",
+      "subtitle": "Wipro Ltd",
       "bullets": [
-        "Co-authored a research paper on ”Strategic Design for BLI Engine-Based Hybrid Propulsion” at ASME GTIndia 2023."
+        "Received 17 awards over 4.5 years during Quarterly All Hands Meets for successfully launching and implementing multiple initiatives, including accolades directly from clients."
       ],
-      "tags": ["BLI Engine"]
+      "tags": [
+        "Recognition",
+        "Initiative Implementation",
+        "Client Accolades"
+      ]
     }
   ],
   "skills": [
     {
-      "category": "Languages and Tools",
+      "category": "HR & Talent Acquisition",
       "skills": [
-        "C/C++",
-        "Python",
-        "OpenCV",
-        "Matplotlib",
-        "TensorFlow",
-        "SimScape",
-        "JS",
-        "PyTorch",
-        "CFD",
-        "FEM"
+        "Talent Acquisition",
+        "HR Business Partnering",
+        "Recruitment Management",
+        "Candidate Experience Enhancement",
+        "Employer Branding",
+        "Diversity Initiatives (DEI)",
+        "Talent Pipeline Development",
+        "Sourcing Strategies",
+        "Competency-based Interviews",
+        "Recruitment Metrics Analysis",
+        "Compliance Management (Geo Labor Laws)",
+        "HR Process Transformation",
+        "Performance Management",
+        "Talent Management",
+        "Change Management",
+        "Employee Engagement",
+        "Capability Building",
+        "Training Needs Analysis (TNA)",
+        "Grievance Resolution",
+        "Succession Planning",
+        "Onboarding Strategy",
+        "Campus Hiring (Implied through NGA programs)",
+        "High-volume Hiring Support (Implied by scale)"
       ]
     },
     {
-      "category": "Softwares",
+      "category": "Tools & Platforms",
       "skills": [
-        "MATLAB/SIMULINK",
-        "Solidworks",
-        "ANSYS",
-        "OpenFOAM",
-        "GasTurb",
-        "OpenVSP",
-        "Vrep(CoppeliaSim)"
+        "ATS (General Proficiency)",
+        "HRIS (General Proficiency)",
+        "LinkedIn Recruiter / Sourcing",
+        "Naukri.com",
+        "Global Job Boards (Implied)",
+        "Tableau Software",
+        "Microsoft Office Suite"
       ]
-    }
-  ],
-  "leadership": [
+    },
     {
-      "title": "Lead Aerospace Engineering team",
-      "organization": "Calculatoratoz.com",
-      "duration": null,
-      "location": null,
-      "bullets": [
-        "Managed and deployed over 500 aerospace calculators."
-      ],
-      "tags": []
+      "category": "Methodologies & Frameworks",
+      "skills": [
+        "Lean Six Sigma (Green Belt Certified, Black Belt Pursuing)",
+        "Competency Framework Development"
+      ]
+    },
+    {
+      "category": "Soft Skills",
+      "skills": [
+        "Communication Skills",
+        "Leadership",
+        "Collaboration",
+        "Stakeholder Management",
+        "Problem-Solving",
+        "Data Analysis",
+        "Strategic Planning",
+        "Cross-cultural Collaboration (Implied by global role)"
+      ]
     }
   ]
 }

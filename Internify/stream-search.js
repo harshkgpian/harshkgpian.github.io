@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Negative keywords help exclude false matches (e.g., "technical writing" shouldn't match CS)
         negativeKeywords: [
           "electrical circuit", "mechanical design", "civil construction", "chemical process",
-          "biomedical", "genetic", "aeronautical"
+          "biomedical", "genetic", "aeronautical", "content writer", "seo specialist",
+          "marketing", "data entry", "customer service", "sales", "accounting", "finance",
+          "administrative", "virtual assistant", "social media manager"
         ],
         // Context pairs: if keyword1 appears near keyword2, it's highly relevant
         contextPairs: [
@@ -56,7 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
         minSecondaryMatches: 2,
         negativeKeywords: [
           "software developer", "web development", "app developer", "frontend", "backend",
-          "electrical circuit", "pcb", "civil construction", "chemical process", "genetic"
+          "electrical circuit", "pcb", "civil construction", "chemical process", "genetic",
+          "content writer", "seo", "marketing", "data entry", "customer service", "sales",
+          "accounting", "virtual assistant", "social media", "administrative", "receptionist",
+          "coordinator", "hr", "human resources"
         ],
         contextPairs: [
           ["mechanical", "engineer"],
@@ -136,7 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
         minSecondaryMatches: 2,
         negativeKeywords: [
           "software developer", "web development", "electrical circuit", "civil construction",
-          "chemical process", "genetic"
+          "chemical process", "genetic", "content writer", "seo", "marketing", "data entry",
+          "customer service", "sales", "accounting", "virtual assistant", "social media",
+          "administrative", "receptionist", "recruiter", "hr assistant", "digital marketing"
         ],
         contextPairs: [
           ["aerospace", "engineer"],
@@ -216,7 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
         minSecondaryMatches: 2,
         negativeKeywords: [
           "software developer", "electrical circuit", "mechanical design", "civil construction",
-          "chemical process", "genetic", "aerospace"
+          "chemical process", "genetic", "aerospace", "content writer", "seo", "marketing",
+          "data entry", "customer service", "sales", "accounting", "virtual assistant",
+          "social media", "administrative", "receptionist", "recruiter", "hr assistant"
         ],
         contextPairs: [
           ["business", "analyst"],
@@ -288,8 +297,29 @@ document.addEventListener('DOMContentLoaded', () => {
      * @return {Object} - Score details and matches found
      */
     function calculateRelevanceScore(internship, streamKeywords) {
+      // Quick rejection for common non-relevant job titles
+      const jobTitle = (internship.jobTitle || '').toLowerCase();
+      const quickRejectTitles = [
+        "data entry", "virtual assistant", "content writer", "seo specialist", 
+        "digital marketing", "social media", "customer service", "sales representative",
+        "marketing intern", "accountant", "recruiter", "hr intern"
+      ];
+      
+      // Immediately reject if the job title contains common non-technical roles
+      // This speeds up processing and improves accuracy
+      for (const rejectTitle of quickRejectTitles) {
+        if (jobTitle.includes(rejectTitle)) {
+          return {
+            score: -999,
+            matches: { primary: [], secondary: [], negative: [rejectTitle], contextPairs: [] },
+            meetsCriteria: false,
+            explanation: `Quick rejected based on job title containing "${rejectTitle}"`
+          };
+        }
+      }
+      
       const textToSearch = [
-        (internship.jobTitle || '').toLowerCase(),
+        jobTitle,
         (internship.companyName || '').toLowerCase(),
         (internship.description || '').toLowerCase(),
         ...(internship.skills || []).map(skill => skill.toLowerCase())
@@ -345,11 +375,20 @@ document.addEventListener('DOMContentLoaded', () => {
       // Context pairs are worth 15 points each
       score += matches.contextPairs.length * 15;
       
-      // Negative keywords are worth -20 points each
-      score -= matches.negative.length * 20;
+      // Negative keywords are worth -100 points each (increased penalty to ensure exclusion)
+      score -= matches.negative.length * 100;
+      
+      // If any negative keywords are found in the title, immediately disqualify with a large penalty
+      titleText = (internship.jobTitle || '').toLowerCase();
+      streamKeywords.negativeKeywords.forEach(keyword => {
+        if (titleText.includes(keyword.toLowerCase())) {
+          score -= 500; // Huge penalty for negative keyword in title
+          matches.negative.push(`TITLE: ${keyword}`);
+        }
+      });
       
       // Title matches get extra weight
-      const titleText = (internship.jobTitle || '').toLowerCase();
+      titleText = (internship.jobTitle || '').toLowerCase();
       matches.primary.forEach(keyword => {
         if (titleText.includes(keyword.toLowerCase())) {
           score += 30; // Huge bonus for primary keyword in title
@@ -366,7 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const meetsCriteria = (
         (matches.primary.length >= streamKeywords.minPrimaryMatches) ||
         (matches.secondary.length >= streamKeywords.minSecondaryMatches)
-      ) && (matches.negative.length === 0); // Any negative keywords disqualify
+      ) && (matches.negative.length === 0) && (score > 6); // Require score > 6 and no negative keywords
       
       // Final result
       return {
@@ -397,6 +436,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
   
+      // Store the current filtered results to apply filters on this subset
+      // This prevents resetting to all internships when stream filter is active
+      let dataToFilter = window.cachedFilteredData || window.allInternships;
+      
+      if (!Array.isArray(dataToFilter) || dataToFilter.length === 0) {
+        dataToFilter = window.allInternships;
+      }
+  
       // Show loading message
       listingsContainer.innerHTML = `<div class="loading">Finding the best ${selectedStream} internships for you...</div>`;
   
@@ -404,23 +451,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const streamKeywords = streamDefinitions[selectedStream];
       if (!streamKeywords) return;
   
-      // Make sure window.allInternships exists
-      if (!window.allInternships || !Array.isArray(window.allInternships)) {
-        console.error("allInternships is not available on the window object or is not an array");
+      // Make sure we have internships to filter
+      if (!dataToFilter || !Array.isArray(dataToFilter)) {
+        console.error("No internship data available to filter");
         listingsContainer.innerHTML = '<div class="loading">Error: Unable to access internship data</div>';
         return;
       }
   
-      console.log(`Filtering ${window.allInternships.length} internships for ${selectedStream}...`);
+      console.log(`Filtering ${dataToFilter.length} internships for ${selectedStream}...`);
   
       // Filter and score internships based on the improved relevance algorithm
-      const scoredInternships = window.allInternships.map(internship => {
+      const scoredInternships = dataToFilter.map(internship => {
         const relevance = calculateRelevanceScore(internship, streamKeywords);
         return {
           ...internship,
           relevance
         };
-      }).filter(internship => internship.relevance.meetsCriteria && internship.relevance.score > 0);
+      }).filter(internship => internship.relevance.meetsCriteria && internship.relevance.score > 6);
       
       // Sort by relevance score (highest first)
       scoredInternships.sort((a, b) => b.relevance.score - a.relevance.score);
@@ -438,6 +485,10 @@ document.addEventListener('DOMContentLoaded', () => {
           contextPairs: i.relevance.matches.contextPairs
         })));
       }
+      
+      // Store the stream-filtered results in a special variable
+      // This allows other filters to work on these results
+      window.streamFilteredInternships = scoredInternships;
       
       // If we can't use the main script's populateCards function, create our own
       if (typeof window.populateCards !== 'function') {
@@ -549,7 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
       listingsContainer.appendChild(fragment);
     }
   
-    // Initialize the stream search functionality
+    // Initialize the stream search functionality with improved filter handling
     function initStreamSearch() {
       // Wait for the stream filter to be available in the DOM
       const streamFilter = document.getElementById('streamFilter');
@@ -580,6 +631,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
       
+      // Override main script filters to work with stream filtering
+      overrideMainFilters();
+      
+      // Hook into other filter elements to maintain stream filtering
+      const otherFilters = [
+        document.getElementById('searchInput'),
+        document.getElementById('skillsInput'),
+        document.getElementById('timeFilter'),
+        document.getElementById('locationFilter'),
+        document.getElementById('stipendSort'),
+        document.getElementById('stipendRange')
+      ].filter(Boolean);
+      
+      // For each filter input/select, make sure it preserves our stream filtering
+      otherFilters.forEach(filter => {
+        const eventType = filter.tagName === 'INPUT' ? 'input' : 'change';
+        
+        // Add event listener that ensures stream filter is maintained
+        filter.addEventListener(eventType, () => {
+          const selectedStream = document.getElementById('streamFilter')?.value;
+          if (selectedStream) {
+            console.log("Maintaining stream filter after other filter change");
+          }
+        }, true); // Capture phase to run before the main handler
+      });
+      
       // Optionally add a button to improve UX
       const filtersSection = document.querySelector('.filters-section');
       if (filtersSection) {
@@ -593,5 +670,33 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Run initialization when the page is loaded
     // Use a small delay to ensure the main script has initialized
-    setTimeout(initStreamSearch, 1000);
+    setTimeout(() => {
+      initStreamSearch();
+      
+      // Set up MutationObserver to detect when the filters section is added to the DOM
+      // This handles cases where the page loads dynamically
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'childList' && mutation.addedNodes.length) {
+            const streamFilter = document.getElementById('streamFilter');
+            if (streamFilter && !streamFilter._initialized) {
+              console.log("Stream filter detected in DOM via MutationObserver");
+              streamFilter._initialized = true;
+              streamFilter.addEventListener('change', filterByStream);
+              overrideMainFilters();
+            }
+          }
+        }
+      });
+      
+      // Start observing changes to the body
+      observer.observe(document.body, { childList: true, subtree: true });
+      
+      // Check if any stream is already selected (page refresh case)
+      const streamFilter = document.getElementById('streamFilter');
+      if (streamFilter && streamFilter.value) {
+        console.log("Stream already selected on page load:", streamFilter.value);
+        filterByStream();
+      }
+    }, 1000);
   });
