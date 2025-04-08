@@ -49,7 +49,7 @@ const RESUME_CONFIG = {
         lineGap: 5,
         paragraphGap: 2,
         indentation: 2,
-        skillIndentation: 40
+        skillIndentation: 42
     },
     formatting: {
         textAlign: {
