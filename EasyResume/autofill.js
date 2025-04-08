@@ -11,98 +11,119 @@ let defaultJson ={
   ],
   "summary": [
     {
-      "summary": "Highly motivated engineer with a Master's and Bachelor's degree in Aerospace Engineering from IIT Kharagpur, demonstrating strong analytical and problem-solving skills. Proven ability to deliver impactful projects in data analysis and machine learning. Seeking to leverage expertise in technical software and maritime knowledge to contribute to challenging marine engineering and ship management projects."
+      "summary": "Highly motivated Aerospace Engineering graduate with a Masters and Bachelors of Technology from IIT Kharagpur, demonstrating strong skills in data analytics, machine learning, and problem-solving. Developed simulation software and applied numerical methods for optimization. Proficient in Python, MATLAB, and deep learning frameworks. Eager to leverage these skills to contribute to innovative solutions in battery technology and data science."
     }
   ],
   "education": [
     {
       "school": "Indian Institute of Technology Kharagpur",
       "degree": "Masters & Bachelors of Technology- Aerospace Engineering",
-      "duration": "Sep 2020 - Present",
-      "location": "Kharagpur, West Bengal, India",
+      "duration": "September 2020 - Present",
       "scoreType": "CGPA",
       "gpa": "8.02/10"
     }
   ],
   "experience": [
     {
-      "title": "Mining Disease-Symptom Relation for Severe Disease Diagnosis",
-      "subtitle": "Summer Internship project|Prof. Koustav Rudra|IIT Kharagpur",
-      "duration": "Jun’24 - Jul’24",
+      "title": "IIT Kharagpur",
+      "subtitle": "Summer Internship project",
+      "duration": "June 2024 - July 2024",
       "bullets": [
-        "Extracted 1.6M textual abstracts from MEDLINE/PubMed using BeautifulSoup to analyze disease-symptom relations, demonstrating maritime knowledge in information retrieval.",
-        "Queried and analyzed 8,514 diseases and 842 symptoms using Whoosh Python, quantifying occurrences and pairwise counts, showcasing strong technical software skills.",
-        "Utilized NegEx library in an NLP pipeline with the en_core_web_sm spaCy model and enclinicaltermset for relation analysis, highlighting proficiency in advanced materials and data processing."
+        "Extracted 1.6M textual abstracts from MEDLINE/PubMed using BeautifulSoup to analyze disease-symptom relations, demonstrating strong data analytics skills.",
+        "Queried and analyzed 8,514 diseases and 842 symptoms using Whoosh Python, quantifying occurrences and pairwise counts.",
+        "Utilized NegEx library in an NLP pipeline with the en_core_web_sm spaCy model and enclinicaltermset for relation analysis."
       ],
       "tags": [
-        "Maritime knowledge",
-        "technical software",
-        "advanced materials"
+        "data analytics",
+        "NLP",
+        "Python"
       ]
     }
   ],
   "projects": [
     {
       "title": "Chat Based Intelligent Tour Planning Assistant",
-      "duration": "Nov 2024",
+      "duration": "November 2024",
       "bullets": [
-        "Designed a Neo4j graph schema to manage user personas, traits, attributes, and preferences for personalized itinerary generation, showcasing maritime engineering design principles.",
-        "Deployed Llama 3 for advanced NLP-driven preference extraction and intelligent real-time adaptive itinerary recommendations, demonstrating proficiency in technical software.",
-        "Developed a fast workflow combining graph traversal and LLM insights to generate tailored itineraries for diverse user personas, reflecting strong problem-solving skills."
+        "Designed a Neo4j graph schema to manage user personas, traits, attributes, and preferences for personalized itinerary generation.",
+        "Deployed Llama 3 for advanced NLP-driven preference extraction and intelligent real-time adaptive itinerary recommendations.",
+        "Developed a fast workflow combining graph traversal and LLM insights to generate tailored itineraries for diverse user personas."
       ],
       "tags": [
-        "Maritime engineering",
-        "technical software",
-        "problem-solving skills"
+        "NLP",
+        "Neo4j"
       ]
     },
     {
       "title": "Loan Eligibility Prediction",
-      "subtitle": "IIT Kharagpur",
-      "duration": "Apr’23 - May’23",
+      "duration": "April 2023 - May 2023",
       "bullets": [
-        "Analyzed lending club data across diverse borrower profiles to assess loan repayment behaviors, trends, and risk factors, applying analytical skills relevant to maritime inspections.",
-        "Performed exploratory data analysis (EDA), data preprocessing, and identified feature correlation via correlation matrix, demonstrating strong data management capabilities.",
-        "Transformed categorical values into numerical values using one-hot encoding and label encoding, handling diverse data types, showcasing technical software proficiency.",
-        "Developed a 4-layer neural network model using TensorFlow library, trained the model, achieving prediction accuracy of 89%, highlighting expertise in machine learning."
+        "Analyzed lending club data across diverse borrower profiles, to assess the loan repayment behaviors, trends, and the risk factors.",
+        "Performed exploratory data analysis (EDA), data prepossessing, and identified feature correlation via correlation matrix.",
+        "Transformed categorical values into numerical values using one-hot encoding and label encoding, handling diverse data types.",
+        "Developed a 4-layer neural network model using TensorFlow library, trained the model, achieving prediction accuracy of 89%, demonstrating machine learning expertise."
       ],
       "tags": [
-        "maritime inspections",
-        "data management",
-        "technical software"
+        "machine learning",
+        "data analytics",
+        "TensorFlow"
       ]
     },
     {
       "title": "Automated Manufacturing Unit-State Prediction",
-      "subtitle": "Data Analytics General Championship|IIT Kharagpur",
-      "duration": "Feb’23 - Mar’23",
+      "duration": "February 2023 - March 2023",
       "bullets": [
-        "Performed a systematic analysis to assess the relative significance of different sensors in forecasting the product’s final outcome, a skill applicable to Maintenance & Repair operations.",
-        "Performed Fault analysis using the z-score method and implemented data filtering with Kalman Filter for data pre-processing, showcasing problem-solving skills.",
-        "Ensembled high-performing time series, DL and auto ML models - LSTM, 1D CNN, and AutoGluon achieving 94% accuracy, demonstrating proficiency in technical software.",
-        "Secured gold medal in the Data Analytics General Championship by successfully predicting system states with high precision, highlighting strong performance standards."
+        "Performed a systematic analysis to assess the relative significance of different sensors in forecasting the product’s final outcome.",
+        "Performed Fault analysis using the z-score method and implemented data filtering with Kalman Filter for data pre-processing.",
+        "Ensembled high-performing time series, DL and auto ML models - LSTM, 1D CNN, and AutoGluon achieving 94% accuracy.",
+        "Secured gold medal in the Data Analytics General Championship by successfully predicting system states with high precision."
       ],
       "tags": [
-        "Maintenance & Repair",
-        "problem-solving skills",
-        "technical software",
-        "performance standards"
+        "data analytics",
+        "machine learning"
       ]
     },
     {
       "title": "Cricket Match Result Prediction Algorithm",
-      "subtitle": "American Express Decision Science Challenge",
-      "duration": "Jun’24",
+      "duration": "June 2024",
       "bullets": [
-        "Developed a machine learning pipeline utilizing the gradient boosting algorithms to forecast the winner of T20 cricket matches, showcasing analytical skills applicable to ship management.",
-        "Engineered over 20 features and implemented hyperparameter tuning, regularization, feature selection, and data normalization, demonstrating strong technical software skills.",
-        "Deployed CatBoost and LightGBM models in an ensemble, achieving 68% accuracy and ranking top 30 out of 423 teams, highlighting collaborative team environment and performance standards."
+        "Developed a machine learning pipeline utilizing the gradient boosting algorithms to forecast the winner of T20 cricket matches.",
+        "Engineered over 20 features and implemented hyperparameter tuning, regularization, feature selection, and data normalization.",
+        "Deployed CatBoost and LightGBM models in an ensemble , achieving 68% accuracy and ranking top 30 out of 423 teams."
       ],
       "tags": [
-        "ship management",
-        "technical software",
-        "collaborative team environment",
-        "performance standards"
+        "machine learning",
+        "data analytics"
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "title": "Captain Athletics",
+      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
+      "duration": "August 2022 - April 2024",
+      "bullets": [
+        "Executed athlete selection for 200+ participants, effectively mentored both junior and senior teams in Inter Hall Athletics event.",
+        "Managed INR 70 k budget for Inter Hall Athletics General Championship, provided logistical and equipment support in the event.",
+        "Led the team to a commendable bronze medal victory in Inter Hall Athletics 2023 and 2024, serving as a player and team leader."
+      ],
+      "tags": [
+        "leadership",
+        "management"
+      ]
+    },
+    {
+      "title": "Secretary Sports and Games",
+      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
+      "duration": "January 2022 - April 2022",
+      "bullets": [
+        "Elected by 680 boarders of RK hall for athletics in Sports and Games General Championship, overseeing a budget of INR 60k.",
+        "Led the team formation, conducted player trials to identify talented individuals, and organized training sessions to improve skills.",
+        "Implemented incentives to expand the fresher pool of probables and provided evaluation-feedback to nurture a competitive mindset."
+      ],
+      "tags": [
+        "leadership",
+        "management"
       ]
     }
   ],
@@ -137,78 +158,49 @@ let defaultJson ={
       ]
     }
   ],
-  "leadership": [
-    {
-      "title": "Captain Athletics",
-      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
-      "duration": "Aug’22 - Apr’24",
-      "bullets": [
-        "Executed athlete selection for 200+ participants, effectively mentored both junior and senior teams in Inter Hall Athletics event, demonstrating strong Operations and team management skills.",
-        "Managed INR 70k budget for Inter Hall Athletics General Championship, provided logistical and equipment support in the event, showcasing financial management abilities.",
-        "Led the team to a commendable bronze medal victory in Inter Hall Athletics 2023 and 2024, serving as a player and team leader, highlighting strong performance standards."
-      ],
-      "tags": [
-        "Operations",
-        "team management",
-        "performance standards"
-      ]
-    },
-    {
-      "title": "Secretary Sports and Games",
-      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
-      "duration": "Jan’22 - Apr’22",
-      "bullets": [
-        "Elected by 680 boarders of RK hall for athletics in Sports and Games General Championship, overseeing a budget of INR 60k, demonstrating strong leadership skills.",
-        "Led the team formation, conducted player trials to identify talented individuals, and organized training sessions to improve skills, showing proficiency in Operations.",
-        "Implemented incentives to expand the fresher pool of probables and provided evaluation-feedback to nurture a competitive mindset, enhancing team performance."
-      ],
-      "tags": [
-        "leadership skills",
-        "Operations"
-      ]
-    }
-  ],
   "awards": [
     {
-      "title": "Ranked 6th and honored by the District Magistrate Gariyaband (C.G.)",
-      "subtitle": "Exceptional performance in Prayas entrance exam",
-      "duration": "",
-      "bullets": [],
+      "title": "Ranked 6th",
+      "organization": "District Magistrate Gariyaband (C.G.)",
+      "duration": null,
+      "bullets": [
+        "Honored for exceptional performance in Prayas entrance exam"
+      ],
       "tags": []
     },
     {
       "title": "Sports official",
-      "subtitle": "1st Children’s Athletics Championship IIT Kharagpur",
-      "duration": "",
+      "organization": "1st Children’s Athletics Championship IIT Kharagpur",
+      "duration": null,
       "bullets": [
-        "Managed 10+ events and over 150 participants."
+        "Managed 10+ events and over 150 participants"
       ],
-      "tags": [
-        "Operations"
-      ]
+      "tags": []
     },
     {
       "title": "Won gold",
-      "subtitle": "Hammer throw at 2nd Athletics Championship IIT Kharagpur 2023",
-      "duration": "",
+      "organization": "2nd Athletics Championship IIT Kharagpur 2023",
+      "duration": null,
       "bullets": [
-        "Competing over 150 players of Midnapore"
+        "Gold in hammer throw, competing over 150 players of Midnapore"
       ],
       "tags": []
     }
   ],
   "extracurricular": [
     {
-      "title": "Secured 4th in Hammer Throw",
-      "subtitle": "Supported gold-winning athletics team of IIT Kharagpur at 56th Inter IIT Sports Meet 2023",
-      "duration": "",
-      "bullets": [],
+      "title": "4th in Hammer Throw",
+      "organization": "56th Inter IIT Sports Meet 2023",
+      "duration": null,
+      "bullets": [
+        "Supported gold-winning athletics team of IIT Kharagpur"
+      ],
       "tags": []
     },
     {
-      "title": "Secured silver in hammer throw",
-      "subtitle": "1st Athletics Championship IIT Kharagpur’22",
-      "duration": "",
+      "title": "Silver in hammer throw",
+      "organization": "1st Athletics Championship IIT Kharagpur’22",
+      "duration": null,
       "bullets": [
         "Competing with 100+ players of Midnapore"
       ],
@@ -216,9 +208,11 @@ let defaultJson ={
     },
     {
       "title": "Core member",
-      "subtitle": "Silver-winning Choreography team of RK Hall in Inter-Hall Social and Culture General Championship 2023",
-      "duration": "",
-      "bullets": [],
+      "organization": "Inter-Hall Social and Culture General Championship 2023",
+      "duration": null,
+      "bullets": [
+        "Silver-winning Choreography team of RK Hall"
+      ],
       "tags": []
     }
   ]
