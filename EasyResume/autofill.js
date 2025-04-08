@@ -1,335 +1,225 @@
 // jsonVersion.js
 
-let defaultJson = {
+let defaultJson ={
   "personal": [
     {
-      "name": "Sanika Yashwant Naik",
-      "email": "sanikayashwantnaik@gmail.com",
-      "phone": "+91-9820158226",
-      "location": "Mumbai"
+      "name": "NAMAN KUMAR SAHU",
+      "email": "naman.prayas51jee19@gmail.com",
+      "phone": "+91-8269563206",
+      "linkedin": "https://www.linkedin.com/in/naman-sahu-63907621a/"
     }
   ],
   "summary": [
     {
-      "summary": "Seasoned HR Business Partner with 4.5+ years at Wipro, specializing in strategic HR interventions, end-to-end recruitment management, and talent management for large, global technology accounts (1,600+ professionals). Proven ability to partner with senior leaders, drive talent acquisition for software engineering and product roles, enhance candidate experience, and implement diversity initiatives. Expertise in HR process transformation, performance management, compliance, and leveraging recruitment metrics and sourcing strategies via platforms like LinkedIn and Naukri.com to build strong talent pipelines and improve employer branding. Reduced employee attrition by 15% YoY."
+      "summary": "Highly motivated engineer with a Master's and Bachelor's degree in Aerospace Engineering from IIT Kharagpur, demonstrating strong analytical and problem-solving skills. Proven ability to deliver impactful projects in data analysis and machine learning. Seeking to leverage expertise in technical software and maritime knowledge to contribute to challenging marine engineering and ship management projects."
+    }
+  ],
+  "education": [
+    {
+      "school": "Indian Institute of Technology Kharagpur",
+      "degree": "Masters & Bachelors of Technology- Aerospace Engineering",
+      "duration": "Sep 2020 - Present",
+      "location": "Kharagpur, West Bengal, India",
+      "scoreType": "CGPA",
+      "gpa": "8.02/10"
     }
   ],
   "experience": [
     {
-      "title": "Wipro Ltd",
-      "subtitle": "Manager-HR",
-      "duration": "September 2020 - Present",
-      "location": "Mumbai",
+      "title": "Mining Disease-Symptom Relation for Severe Disease Diagnosis",
+      "subtitle": "Summer Internship project|Prof. Koustav Rudra|IIT Kharagpur",
+      "duration": "Jun’24 - Jul’24",
       "bullets": [
-        "Served as the primary HR Business Partner for major revenue-generating accounts in Capital Markets & Insurance, supporting 1,600+ professionals globally to optimize human capital.",
-        "Managed comprehensive end-to-end people processes, encompassing account Talent Acquisition, Recruitment Management for promotions, merit salary increases, appraisals, talent review, and planning while ensuring strict Compliance with client SLAs.",
-        "Successfully reduced employee attrition by 15% year-over-year through data-driven insights, analysis of Recruitment Metrics, and impactful HR initiatives fostering a performance-driven culture.",
-        "Led ‘TalentFest’ & ‘RoleRotationDrive’ at WDC, implementing skill-based job matching and enhancing workforce agility to strengthen the internal Talent Pipeline.",
-        "Anchored the 'Supers' program to develop top performers via strategic career mapping, technology exposure, and certified coaching sessions.",
-        "Designed and launched ‘PMEssentials’ to effectively upskill Project Leads for managerial roles through targeted training, leadership development modules, and dedicated mentorship.",
-        "Spearheaded ‘PowerUp’, enhancing collaboration, Communication Skills, and customer service among employees through interactive learning, self-paced modules, workshops, and real-world case studies.",
-        "Directed the '5 Habits' Culture Transformation initiative, securing leadership buy-in and executing a strategic awareness campaign to embed cultural change across the organization.",
-        "Established a continuous feedback loop integrated with Cultural Transformation efforts, collaborating with central teams to weave improvements into core people processes.",
-        "Implemented structured engagement plans for New Gen Associates focused on Recognition, Collaboration, and Communication, enhancing their integration and skill development.",
-        "Designed formal and informal engagement programs, including recognition initiatives and team-building activities, contributing positively to Employer Branding and workplace culture.",
-        "Conducted Training Needs Analysis (TNA), aligning learning solutions with organizational goals by collaborating with business leaders and L&D teams, and managed the annual training calendar.",
-        "Ensured rigorous Compliance and managed grievance resolution for assigned accounts, maintaining adherence to Geo labor laws and organizational policies.",
-        "Authored the organization-level NGA Compliance Standard Operating Procedure (SOP), detailing the Fresher Engagement Matrix, Capability Framework, and Compliance Guidelines.",
-        "Led a comprehensive Compliance Audit involving 200+ interviews to assess employee classification, roles, and adherence to U.S. labor laws using a legally vetted questionnaire.",
-        "Championed Well-being Initiatives, organizing workshops and stress management programs, and drove Diversity Initiatives, boosting diversity in promotions by 10% based on quarterly dashboard metrics.",
-        "Anchored key DEI initiatives like Pride Month celebrations and cultural awareness workshops, fostering inclusivity and managing Employee Resource Groups (ERGs).",
-        "Prepared and presented the quarterly DEI dashboard to the Wipro DEI council, highlighting key Diversity Initiatives metrics and reflecting QOQ progress."
+        "Extracted 1.6M textual abstracts from MEDLINE/PubMed using BeautifulSoup to analyze disease-symptom relations, demonstrating maritime knowledge in information retrieval.",
+        "Queried and analyzed 8,514 diseases and 842 symptoms using Whoosh Python, quantifying occurrences and pairwise counts, showcasing strong technical software skills.",
+        "Utilized NegEx library in an NLP pipeline with the en_core_web_sm spaCy model and enclinicaltermset for relation analysis, highlighting proficiency in advanced materials and data processing."
       ],
       "tags": [
-        "HR Business Partner",
-        "Talent Acquisition",
-        "Recruitment Management",
-        "Compliance",
-        "Recruitment Metrics",
-        "Talent Pipeline",
-        "Communication Skills",
-        "Employer Branding",
-        "Diversity Initiatives",
-        "Leadership",
-        "Change Management",
-        "Engagement",
-        "Capability Building",
-        "TNA",
-        "Grievance Management",
-        "DEI"
-      ]
-    },
-    {
-      "title": "THATMATE (Social Startup)",
-      "subtitle": "Intern",
-      "bullets": [
-        "Developed and executed comprehensive content strategies to bolster marketing campaigns and refine brand messaging across diverse platforms.",
-        "Collaborated effectively using strong Communication Skills with cross-functional teams, including designers and developers, to create engaging content.",
-        "Worked closely with the CEO and COO to devise organizational strategies and secure funding through grants and competitions."
-      ],
-      "tags": [
-        "Content Strategy",
-        "Marketing Campaigns",
-        "Brand Messaging",
-        "Collaboration",
-        "Communication Skills",
-        "Organizational Strategy",
-        "Funding"
-      ]
-    },
-    {
-      "title": "Honeywell",
-      "subtitle": "Intern",
-      "bullets": [
-        "Benchmarked Honeywell's Recognition Practices by evaluating the technological infrastructure and tools of competitors.",
-        "Recommended best practices including social recognition and peer-to-peer recognition features to foster increased employee engagement and enhance the overall Candidate Experience perception."
-      ],
-      "tags": [
-        "Benchmarking",
-        "Recognition Practices",
-        "Employee Engagement",
-        "Candidate Experience",
-        "HR Tech"
-      ]
-    },
-    {
-      "title": "UPGRAD",
-      "subtitle": "Intern",
-      "bullets": [
-        "Conducted benchmarking of career paths for various roles within the Education industry.",
-        "Created career role trajectories to support succession planning and build a robust Talent Pipeline."
-      ],
-      "tags": [
-        "Benchmarking",
-        "Career Paths",
-        "Succession Planning",
-        "Talent Pipeline",
-        "Education Industry"
-      ]
-    },
-    {
-      "title": "Wipro",
-      "subtitle": "Intern",
-      "bullets": [
-        "Engaged Distinguished Members of Technical Society associates in Co-Innovation partnerships.",
-        "Performed an in-depth gender diversity study for a Financial Services business unit, supporting Diversity Initiatives.",
-        "Conducted hypothesis testing to analyze the effectiveness of promotions within the Financial sector."
-      ],
-      "tags": [
-        "Co-Innovation",
-        "Diversity Initiatives",
-        "Gender Diversity",
-        "Hypothesis Testing",
-        "Financial Services"
+        "Maritime knowledge",
+        "technical software",
+        "advanced materials"
       ]
     }
   ],
   "projects": [
     {
-      "title": "Building a Role Competency Architecture",
-      "subtitle": "Contributor",
+      "title": "Chat Based Intelligent Tour Planning Assistant",
+      "duration": "Nov 2024",
       "bullets": [
-        "Contributed to developing a talent framework of skill clusters aligned with client expectations.",
-        "Aimed to balance supply-demand, analyze financial impacts, and support career growth, multi-skilling, and succession readiness for the Talent Pipeline through job rotations."
+        "Designed a Neo4j graph schema to manage user personas, traits, attributes, and preferences for personalized itinerary generation, showcasing maritime engineering design principles.",
+        "Deployed Llama 3 for advanced NLP-driven preference extraction and intelligent real-time adaptive itinerary recommendations, demonstrating proficiency in technical software.",
+        "Developed a fast workflow combining graph traversal and LLM insights to generate tailored itineraries for diverse user personas, reflecting strong problem-solving skills."
       ],
       "tags": [
-        "Competency Architecture",
-        "Talent Framework",
-        "Skill Clusters",
-        "Supply Demand",
-        "Talent Pipeline",
-        "Job Rotation"
+        "Maritime engineering",
+        "technical software",
+        "problem-solving skills"
       ]
     },
     {
-      "title": "Wipro Career Essentials",
-      "subtitle": "Core Team Member",
+      "title": "Loan Eligibility Prediction",
+      "subtitle": "IIT Kharagpur",
+      "duration": "Apr’23 - May’23",
       "bullets": [
-        "Participated in building a comprehensive, AI-integrated competency framework with 'Cymorg'.",
-        "Combined practice-defined technical skills and role-based functional competencies for a unified assessment model covering over 5,000 employees in a major Digital unit."
+        "Analyzed lending club data across diverse borrower profiles to assess loan repayment behaviors, trends, and risk factors, applying analytical skills relevant to maritime inspections.",
+        "Performed exploratory data analysis (EDA), data preprocessing, and identified feature correlation via correlation matrix, demonstrating strong data management capabilities.",
+        "Transformed categorical values into numerical values using one-hot encoding and label encoding, handling diverse data types, showcasing technical software proficiency.",
+        "Developed a 4-layer neural network model using TensorFlow library, trained the model, achieving prediction accuracy of 89%, highlighting expertise in machine learning."
       ],
       "tags": [
-        "Competency Framework",
-        "AI",
-        "Technical Skills",
-        "Functional Competencies",
-        "Assessment Model"
+        "maritime inspections",
+        "data management",
+        "technical software"
       ]
     },
     {
-      "title": "Research Paper on Revamping Relocation Policy",
-      "subtitle": "Key Contributor",
-      "duration": "November 2023 - Ongoing",
+      "title": "Automated Manufacturing Unit-State Prediction",
+      "subtitle": "Data Analytics General Championship|IIT Kharagpur",
+      "duration": "Feb’23 - Mar’23",
       "bullets": [
-        "Playing a key role in research initiated to simplify complexities within Wipro's Global Relocation policy.",
-        "Aiming to enhance relocation processes by addressing identified issues and examining industry trends for better Compliance and employee experience."
+        "Performed a systematic analysis to assess the relative significance of different sensors in forecasting the product’s final outcome, a skill applicable to Maintenance & Repair operations.",
+        "Performed Fault analysis using the z-score method and implemented data filtering with Kalman Filter for data pre-processing, showcasing problem-solving skills.",
+        "Ensembled high-performing time series, DL and auto ML models - LSTM, 1D CNN, and AutoGluon achieving 94% accuracy, demonstrating proficiency in technical software.",
+        "Secured gold medal in the Data Analytics General Championship by successfully predicting system states with high precision, highlighting strong performance standards."
       ],
       "tags": [
-        "Research",
-        "Relocation Policy",
-        "Compliance",
-        "Process Improvement",
-        "Industry Trends"
+        "Maintenance & Repair",
+        "problem-solving skills",
+        "technical software",
+        "performance standards"
       ]
     },
     {
-      "title": "Elevating Onboarding Experience",
-      "subtitle": "Analyst",
+      "title": "Cricket Match Result Prediction Algorithm",
+      "subtitle": "American Express Decision Science Challenge",
+      "duration": "Jun’24",
       "bullets": [
-        "Analyzed historical onboarding practices across various Geos, identifying trends and patterns.",
-        "Conducted benchmarking against industry peers to pinpoint best practices for enhancing the Candidate Experience.",
-        "Formulated a personalized onboarding strategy tailored to diverse geographies, contributing to Employer Branding."
+        "Developed a machine learning pipeline utilizing the gradient boosting algorithms to forecast the winner of T20 cricket matches, showcasing analytical skills applicable to ship management.",
+        "Engineered over 20 features and implemented hyperparameter tuning, regularization, feature selection, and data normalization, demonstrating strong technical software skills.",
+        "Deployed CatBoost and LightGBM models in an ensemble, achieving 68% accuracy and ranking top 30 out of 423 teams, highlighting collaborative team environment and performance standards."
       ],
       "tags": [
-        "Onboarding",
-        "Benchmarking",
-        "Candidate Experience",
-        "Employer Branding",
-        "Process Improvement"
-      ]
-    },
-    {
-      "title": "Development of Success Profiles",
-      "subtitle": "Collaborator",
-      "bullets": [
-        "Collaborated closely with the Talent Transformation Team to craft comprehensive success profiles for Leadership roles.",
-        "Conducted thorough Competency-based Interviews with leaders to inform talent review and succession planning strategies.",
-        "Ensured the development of a robust Talent Pipeline for critical leadership positions."
-      ],
-      "tags": [
-        "Success Profiles",
-        "Leadership Roles",
-        "Competency-based Interviews",
-        "Talent Review",
-        "Succession Planning",
-        "Talent Pipeline"
-      ]
-    }
-  ],
-  "education": [
-    {
-      "school": "SBM, NMIMS",
-      "degree": "MBA-HR",
-      "duration": "2020",
-      "location": "Mumbai",
-      "scoreType": "CGPA",
-      "gpa": "3.2/4"
-    },
-    {
-      "school": "RAIT",
-      "degree": "BE (Computer Science)",
-      "duration": "2017",
-      "location": "Mumbai",
-      "scoreType": "CGPA",
-      "gpa": "7.8/10"
-    }
-  ],
-  "certifications": [
-    {
-      "title": "Pursuing HR Ignite - HRBP certification by AON"
-    },
-    {
-      "title": "Pursuing Gen-AI by CHRMP"
-    },
-    {
-      "title": "Pursuing Lean Six Sigma - Black Belt"
-    },
-    {
-      "title": "Lean Six Sigma Green Belt Certification"
-    },
-    {
-      "title": "Tableau Software"
-    },
-    {
-      "title": "Employing Abilities @Work - SHRM"
-    },
-    {
-      "title": "Delivering Employee Feedback, Coaching and Developing - LinkedIn"
-    },
-    {
-      "title": "Digital Marketing - Google Garage"
-    },
-    {
-      "title": "International Leadership and Organizational Behaviours - LinkedIn"
-    },
-    {
-      "title": "FLOW and C&B Certification by Wipro"
-    }
-  ],
-  "awards": [
-    {
-      "title": "Multiple Recognitions",
-      "subtitle": "Wipro Ltd",
-      "bullets": [
-        "Received 17 awards over 4.5 years during Quarterly All Hands Meets for successfully launching and implementing multiple initiatives, including accolades directly from clients."
-      ],
-      "tags": [
-        "Recognition",
-        "Initiative Implementation",
-        "Client Accolades"
+        "ship management",
+        "technical software",
+        "collaborative team environment",
+        "performance standards"
       ]
     }
   ],
   "skills": [
     {
-      "category": "HR & Talent Acquisition",
+      "category": "Languages/Frameworks",
       "skills": [
-        "Talent Acquisition",
-        "HR Business Partnering",
-        "Recruitment Management",
-        "Candidate Experience Enhancement",
-        "Employer Branding",
-        "Diversity Initiatives (DEI)",
-        "Talent Pipeline Development",
-        "Sourcing Strategies",
-        "Competency-based Interviews",
-        "Recruitment Metrics Analysis",
-        "Compliance Management (Geo Labor Laws)",
-        "HR Process Transformation",
-        "Performance Management",
-        "Talent Management",
-        "Change Management",
-        "Employee Engagement",
-        "Capability Building",
-        "Training Needs Analysis (TNA)",
-        "Grievance Resolution",
-        "Succession Planning",
-        "Onboarding Strategy",
-        "Campus Hiring (Implied through NGA programs)",
-        "High-volume Hiring Support (Implied by scale)"
+        "Python",
+        "C++",
+        "SQL",
+        "TensorFlow",
+        "Keras",
+        "PyTorch",
+        "Scikit-learn",
+        "Pandas",
+        "NumPy",
+        "Seaborn",
+        "MATLAB"
       ]
     },
     {
-      "category": "Tools & Platforms",
+      "category": "Software/ Developer Tools",
       "skills": [
-        "ATS (General Proficiency)",
-        "HRIS (General Proficiency)",
-        "LinkedIn Recruiter / Sourcing",
-        "Naukri.com",
-        "Global Job Boards (Implied)",
-        "Tableau Software",
-        "Microsoft Office Suite"
+        "VS Code",
+        "Google Colab",
+        "Jupyter Notebook",
+        "Github",
+        "MS Excel",
+        "Canva",
+        "MYSQL",
+        "MATLAB"
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "title": "Captain Athletics",
+      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
+      "duration": "Aug’22 - Apr’24",
+      "bullets": [
+        "Executed athlete selection for 200+ participants, effectively mentored both junior and senior teams in Inter Hall Athletics event, demonstrating strong Operations and team management skills.",
+        "Managed INR 70k budget for Inter Hall Athletics General Championship, provided logistical and equipment support in the event, showcasing financial management abilities.",
+        "Led the team to a commendable bronze medal victory in Inter Hall Athletics 2023 and 2024, serving as a player and team leader, highlighting strong performance standards."
+      ],
+      "tags": [
+        "Operations",
+        "team management",
+        "performance standards"
       ]
     },
     {
-      "category": "Methodologies & Frameworks",
-      "skills": [
-        "Lean Six Sigma (Green Belt Certified, Black Belt Pursuing)",
-        "Competency Framework Development"
+      "title": "Secretary Sports and Games",
+      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
+      "duration": "Jan’22 - Apr’22",
+      "bullets": [
+        "Elected by 680 boarders of RK hall for athletics in Sports and Games General Championship, overseeing a budget of INR 60k, demonstrating strong leadership skills.",
+        "Led the team formation, conducted player trials to identify talented individuals, and organized training sessions to improve skills, showing proficiency in Operations.",
+        "Implemented incentives to expand the fresher pool of probables and provided evaluation-feedback to nurture a competitive mindset, enhancing team performance."
+      ],
+      "tags": [
+        "leadership skills",
+        "Operations"
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "title": "Ranked 6th and honored by the District Magistrate Gariyaband (C.G.)",
+      "subtitle": "Exceptional performance in Prayas entrance exam",
+      "duration": "",
+      "bullets": [],
+      "tags": []
+    },
+    {
+      "title": "Sports official",
+      "subtitle": "1st Children’s Athletics Championship IIT Kharagpur",
+      "duration": "",
+      "bullets": [
+        "Managed 10+ events and over 150 participants."
+      ],
+      "tags": [
+        "Operations"
       ]
     },
     {
-      "category": "Soft Skills",
-      "skills": [
-        "Communication Skills",
-        "Leadership",
-        "Collaboration",
-        "Stakeholder Management",
-        "Problem-Solving",
-        "Data Analysis",
-        "Strategic Planning",
-        "Cross-cultural Collaboration (Implied by global role)"
-      ]
+      "title": "Won gold",
+      "subtitle": "Hammer throw at 2nd Athletics Championship IIT Kharagpur 2023",
+      "duration": "",
+      "bullets": [
+        "Competing over 150 players of Midnapore"
+      ],
+      "tags": []
+    }
+  ],
+  "extracurricular": [
+    {
+      "title": "Secured 4th in Hammer Throw",
+      "subtitle": "Supported gold-winning athletics team of IIT Kharagpur at 56th Inter IIT Sports Meet 2023",
+      "duration": "",
+      "bullets": [],
+      "tags": []
+    },
+    {
+      "title": "Secured silver in hammer throw",
+      "subtitle": "1st Athletics Championship IIT Kharagpur’22",
+      "duration": "",
+      "bullets": [
+        "Competing with 100+ players of Midnapore"
+      ],
+      "tags": []
+    },
+    {
+      "title": "Core member",
+      "subtitle": "Silver-winning Choreography team of RK Hall in Inter-Hall Social and Culture General Championship 2023",
+      "duration": "",
+      "bullets": [],
+      "tags": []
     }
   ]
 }
