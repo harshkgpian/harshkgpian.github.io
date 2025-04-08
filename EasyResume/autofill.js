@@ -11,7 +11,7 @@ let defaultJson ={
   ],
   "summary": [
     {
-      "summary": "Highly motivated Aerospace Engineering graduate with a Masters and Bachelors of Technology from IIT Kharagpur, demonstrating strong skills in data analytics, machine learning, and problem-solving. Developed simulation software and applied numerical methods for optimization. Proficient in Python, MATLAB, and deep learning frameworks. Eager to leverage these skills to contribute to innovative solutions in battery technology and data science."
+      "summary": "Highly motivated Aerospace Engineering graduate with a Masters and Bachelors of Technology from IIT Kharagpur, demonstrating strong skills in data analytics, machine learning, and problem-solving. Successfully developed simulation software and applied numerical methods for optimization challenges. Proficient in Python, MATLAB, and deep learning frameworks. Eager to leverage these skills to contribute to innovative solutions in battery technology and the broader field of data science."
     }
   ],
   "education": [
@@ -29,9 +29,9 @@ let defaultJson ={
       "subtitle": "Summer Internship project",
       "duration": "June 2024 - July 2024",
       "bullets": [
-        "Extracted 1.6M textual abstracts from MEDLINE/PubMed using BeautifulSoup to analyze disease-symptom relations, demonstrating strong data analytics skills.",
-        "Queried and analyzed 8,514 diseases and 842 symptoms using Whoosh Python, quantifying occurrences and pairwise counts.",
-        "Utilized NegEx library in an NLP pipeline with the en_core_web_sm spaCy model and enclinicaltermset for relation analysis."
+        "Extracted 1.6M textual abstracts from MEDLINE/PubMed using BeautifulSoup for comprehensive analysis of disease-symptom relations, demonstrating strong data analytics skills in a real-world application.",
+        "Queried and meticulously analyzed 8,514 diseases and 842 symptoms using Whoosh Python, accurately quantifying occurrences and pairwise counts to identify significant correlations.",
+        "Utilized NegEx library within a sophisticated NLP pipeline incorporating the en_core_web_sm spaCy model and enclinicaltermset for nuanced relation analysis in medical text."
       ],
       "tags": [
         "data analytics",
@@ -45,9 +45,9 @@ let defaultJson ={
       "title": "Chat Based Intelligent Tour Planning Assistant",
       "duration": "November 2024",
       "bullets": [
-        "Designed a Neo4j graph schema to manage user personas, traits, attributes, and preferences for personalized itinerary generation.",
-        "Deployed Llama 3 for advanced NLP-driven preference extraction and intelligent real-time adaptive itinerary recommendations.",
-        "Developed a fast workflow combining graph traversal and LLM insights to generate tailored itineraries for diverse user personas."
+        "Designed an efficient Neo4j graph schema to effectively manage intricate user personas, encompassing diverse traits, attributes, and preferences for highly personalized itinerary generation.",
+        "Deployed the advanced Llama 3 model for sophisticated NLP-driven preference extraction and the provision of intelligent real-time adaptive itinerary recommendations to enhance user experience.",
+        "Developed a streamlined workflow that strategically combines rapid graph traversal techniques and insightful LLM outputs to generate uniquely tailored itineraries catering to a wide range of diverse user personas."
       ],
       "tags": [
         "NLP",
@@ -58,10 +58,10 @@ let defaultJson ={
       "title": "Loan Eligibility Prediction",
       "duration": "April 2023 - May 2023",
       "bullets": [
-        "Analyzed lending club data across diverse borrower profiles, to assess the loan repayment behaviors, trends, and the risk factors.",
-        "Performed exploratory data analysis (EDA), data prepossessing, and identified feature correlation via correlation matrix.",
-        "Transformed categorical values into numerical values using one-hot encoding and label encoding, handling diverse data types.",
-        "Developed a 4-layer neural network model using TensorFlow library, trained the model, achieving prediction accuracy of 89%, demonstrating machine learning expertise."
+        "Conducted a thorough analysis of lending club data across diverse borrower profiles, to accurately assess the historical loan repayment behaviors, identify key financial trends, and pinpoint critical risk factors.",
+        "Performed comprehensive exploratory data analysis (EDA) and rigorous data prepossessing, effectively identifying crucial feature correlation through the application of a correlation matrix.",
+        "Skillfully transformed diverse categorical values into usable numerical representations using both one-hot encoding and label encoding techniques, adeptly handling various complex data types.",
+        "Developed a robust 4-layer neural network model utilizing the TensorFlow library, diligently trained the model with optimized parameters, ultimately achieving a commendable prediction accuracy of 89%, clearly demonstrating machine learning expertise."
       ],
       "tags": [
         "machine learning",
@@ -73,10 +73,10 @@ let defaultJson ={
       "title": "Automated Manufacturing Unit-State Prediction",
       "duration": "February 2023 - March 2023",
       "bullets": [
-        "Performed a systematic analysis to assess the relative significance of different sensors in forecasting the product’s final outcome.",
-        "Performed Fault analysis using the z-score method and implemented data filtering with Kalman Filter for data pre-processing.",
-        "Ensembled high-performing time series, DL and auto ML models - LSTM, 1D CNN, and AutoGluon achieving 94% accuracy.",
-        "Secured gold medal in the Data Analytics General Championship by successfully predicting system states with high precision."
+        "Performed a systematic and detailed analysis to accurately assess the relative significance and impact of different sensors in reliably forecasting the final outcome of the manufactured product.",
+        "Executed thorough Fault analysis utilizing the z-score method and implemented effective data filtering techniques with the Kalman Filter for enhanced data pre-processing and noise reduction.",
+        "Expertly ensembled high-performing time series, deep learning (DL), and automated machine learning (auto ML) models - specifically LSTM, 1D CNN, and AutoGluon - achieving an impressive 94% prediction accuracy.",
+        "Successfully secured the gold medal in the Data Analytics General Championship by consistently and accurately predicting complex system states with a high degree of precision and reliability."
       ],
       "tags": [
         "data analytics",
@@ -87,9 +87,9 @@ let defaultJson ={
       "title": "Cricket Match Result Prediction Algorithm",
       "duration": "June 2024",
       "bullets": [
-        "Developed a machine learning pipeline utilizing the gradient boosting algorithms to forecast the winner of T20 cricket matches.",
-        "Engineered over 20 features and implemented hyperparameter tuning, regularization, feature selection, and data normalization.",
-        "Deployed CatBoost and LightGBM models in an ensemble , achieving 68% accuracy and ranking top 30 out of 423 teams."
+        "Developed a comprehensive machine learning pipeline strategically utilizing advanced gradient boosting algorithms to accurately forecast the winner of dynamic T20 cricket matches.",
+        "Meticulously engineered over 20 relevant features and implemented crucial techniques including hyperparameter tuning, regularization, feature selection, and effective data normalization.",
+        "Successfully deployed both CatBoost and LightGBM models within a powerful ensemble framework, achieving a notable 68% prediction accuracy and securing a top 30 ranking out of 423 participating teams."
       ],
       "tags": [
         "machine learning",
@@ -103,9 +103,9 @@ let defaultJson ={
       "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
       "duration": "August 2022 - April 2024",
       "bullets": [
-        "Executed athlete selection for 200+ participants, effectively mentored both junior and senior teams in Inter Hall Athletics event.",
-        "Managed INR 70 k budget for Inter Hall Athletics General Championship, provided logistical and equipment support in the event.",
-        "Led the team to a commendable bronze medal victory in Inter Hall Athletics 2023 and 2024, serving as a player and team leader."
+        "Efficiently executed the athlete selection process for over 200 participants, while also effectively mentoring both junior and senior teams participating in the highly competitive Inter Hall Athletics event.",
+        "Responsibly managed a budget of INR 70,000 for the Inter Hall Athletics General Championship, ensuring the provision of essential logistical and equipment support throughout the entire event.",
+        "Successfully led the team to a commendable bronze medal victory in both the Inter Hall Athletics events of 2023 and 2024, demonstrating strong leadership skills while also actively participating as a key player."
       ],
       "tags": [
         "leadership",
@@ -117,9 +117,9 @@ let defaultJson ={
       "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
       "duration": "January 2022 - April 2022",
       "bullets": [
-        "Elected by 680 boarders of RK hall for athletics in Sports and Games General Championship, overseeing a budget of INR 60k.",
-        "Led the team formation, conducted player trials to identify talented individuals, and organized training sessions to improve skills.",
-        "Implemented incentives to expand the fresher pool of probables and provided evaluation-feedback to nurture a competitive mindset."
+        "Elected by 680 boarders of RK hall to represent athletics in the prestigious Sports and Games General Championship, effectively overseeing a budget of INR 60,000 for all sporting activities.",
+        "Skillfully led the team formation process, conducted rigorous player trials to accurately identify talented individuals, and organized focused training sessions aimed at significantly improving overall team skills and performance.",
+        "Proactively implemented strategic incentives designed to expand the fresher pool of potential team members and provided constructive evaluation-feedback mechanisms to consistently nurture a competitive mindset within the entire team."
       ],
       "tags": [
         "leadership",
@@ -164,7 +164,7 @@ let defaultJson ={
       "organization": "District Magistrate Gariyaband (C.G.)",
       "duration": null,
       "bullets": [
-        "Honored for exceptional performance in Prayas entrance exam"
+        "Achieved 6th rank and was honored by the District Magistrate Gariyaband (C.G.) for exceptional performance in the Prayas entrance examination."
       ],
       "tags": []
     },
@@ -173,7 +173,7 @@ let defaultJson ={
       "organization": "1st Children’s Athletics Championship IIT Kharagpur",
       "duration": null,
       "bullets": [
-        "Managed 10+ events and over 150 participants"
+        "Served as a sports official at the 1st Children’s Athletics Championship IIT Kharagpur, efficiently managing over 10 events and coordinating more than 150 participants."
       ],
       "tags": []
     },
@@ -182,7 +182,7 @@ let defaultJson ={
       "organization": "2nd Athletics Championship IIT Kharagpur 2023",
       "duration": null,
       "bullets": [
-        "Gold in hammer throw, competing over 150 players of Midnapore"
+        "Won a gold medal in the hammer throw event at the 2nd Athletics Championship IIT Kharagpur 2023, successfully competing against over 150 players from the Midnapore region."
       ],
       "tags": []
     }
@@ -193,7 +193,7 @@ let defaultJson ={
       "organization": "56th Inter IIT Sports Meet 2023",
       "duration": null,
       "bullets": [
-        "Supported gold-winning athletics team of IIT Kharagpur"
+        "Secured 4th position in the Hammer Throw event and actively supported the gold-winning athletics team of IIT Kharagpur at the prestigious 56th Inter IIT Sports Meet 2023."
       ],
       "tags": []
     },
@@ -202,7 +202,7 @@ let defaultJson ={
       "organization": "1st Athletics Championship IIT Kharagpur’22",
       "duration": null,
       "bullets": [
-        "Competing with 100+ players of Midnapore"
+        "Achieved a silver medal in the hammer throw event at the 1st Athletics Championship IIT Kharagpur’22, successfully competing with over 100 players from the Midnapore region."
       ],
       "tags": []
     },
@@ -211,7 +211,7 @@ let defaultJson ={
       "organization": "Inter-Hall Social and Culture General Championship 2023",
       "duration": null,
       "bullets": [
-        "Silver-winning Choreography team of RK Hall"
+        "Served as a core member of the silver-winning Choreography team representing RK Hall in the Inter-Hall Social and Culture General Championship 2023."
       ],
       "tags": []
     }
