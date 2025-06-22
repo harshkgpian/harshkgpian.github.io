@@ -1,219 +1,333 @@
 // jsonVersion.js
 
-let defaultJson ={
+let defaultJson = {
   "personal": [
     {
-      "name": "NAMAN KUMAR SAHU",
-      "email": "naman.prayas51jee19@gmail.com",
-      "phone": "+91-8269563206",
-      "linkedin": "https://www.linkedin.com/in/naman-sahu-63907621a/"
-    }
-  ],
-  "summary": [
-    {
-      "summary": "Highly motivated Aerospace Engineering graduate with a Masters and Bachelors of Technology from IIT Kharagpur, demonstrating strong skills in data analytics, machine learning, and problem-solving. Successfully developed simulation software and applied numerical methods for optimization challenges. Proficient in Python, MATLAB, and deep learning frameworks. Eager to leverage these skills to contribute to innovative solutions in battery technology and the broader field of data science."
+      "name": "Harsh Raj",
+      "email": "harshrjto@gmail.com",
+      "phone": "+91 8750798260",
+      "github": "github.com/harshkgpian",
+      "linkedin": "linkedin.com/in/harsh-raj",
+      "website": "LinkedInAutoApply.com"
     }
   ],
   "education": [
     {
-      "school": "Indian Institute of Technology Kharagpur",
-      "degree": "Masters & Bachelors of Technology- Aerospace Engineering",
-      "duration": "September 2020 - Present",
+      "school": "Indian Institute of Technology, Kharagpur",
+      "degree": "Master of Technology in Aerospace Engineering",
+      "duration": "November 2020 - Present",
+      "location": "West Bengal, India",
       "scoreType": "CGPA",
-      "gpa": "8.02/10"
+      "gpa": "8.52/10"
+    },
+    {
+      "school": "Bharat National Public School",
+      "degree": "Class XII - Central Board of Secondary Education",
+      "duration": "May 2019",
+      "location": "Delhi, India",
+      "scoreType": "Percentage",
+      "gpa": "90%"
     }
   ],
   "experience": [
     {
-      "title": "IIT Kharagpur",
-      "subtitle": "Summer Internship project",
-      "duration": "June 2024 - July 2024",
+      "title": "LinkedInAutoApply.com",
+      "subtitle": "Full-Stack Founder & Developer",
+      "duration": "January 2024 - Present",
+      "location": "Remote",
       "bullets": [
-        "Extracted 1.6M textual abstracts from MEDLINE/PubMed using BeautifulSoup for comprehensive analysis of disease-symptom relations, demonstrating strong data analytics skills in a real-world application.",
-        "Queried and meticulously analyzed 8,514 diseases and 842 symptoms using Whoosh Python, accurately quantifying occurrences and pairwise counts to identify significant correlations.",
-        "Utilized NegEx library within a sophisticated NLP pipeline incorporating the en_core_web_sm spaCy model and enclinicaltermset for nuanced relation analysis in medical text."
+        "Engineered LinkedInAutoApply.com, a full-stack Node.js/React platform for automated job searching on LinkedIn.",
+        "Automated application processes, significantly enhancing job seeker efficiency through this software development.",
+        "Implemented a secure Razorpay payment system for managing user subscriptions effectively.",
+        "Architected backend with Firebase for scalable data storage and real-time application updates.",
+        "Utilized Python and Generative AI for advanced feature development like resume parsing.",
+        "Implemented tailored application message generation, enhancing the Artificial Intelligence capabilities of the platform."
       ],
       "tags": [
-        "data analytics",
-        "NLP",
-        "Python"
+        "Node.js",
+        "React",
+        "Software Development",
+        "Razorpay",
+        "Firebase",
+        "Python",
+        "Generative AI",
+        "Artificial Intelligence",
+        "Documentation"
+      ]
+    },
+    {
+      "title": "GradStem",
+      "subtitle": "Data Science Intern / AI Engineering Intern",
+      "duration": "May 2023 - June 2023",
+      "location": "Remote",
+      "bullets": [
+        "Developed Python code interacting with Indeed API, retrieving and classifying thousands of job listings.",
+        "Employed Artificial Intelligence for technical/non-technical classification in this software development task.",
+        "Leveraged OpenAI GPT-4o API for resume personalization, improving Applicant Tracking System (ATS) scores.",
+        "This was a key software development aspect in HR tech, enhancing candidate matching.",
+        "Automated job applications on Greenhouse/Workday using JavaScript, Selenium, Python, and Generative AI.",
+        "Incorporated LLM API for intelligent form completion and produced relevant documentation and unit testing artifacts."
+      ],
+      "tags": [
+        "Python",
+        "Artificial Intelligence",
+        "Software Development",
+        "OpenAI GPT-4o",
+        "ATS",
+        "JavaScript",
+        "Selenium",
+        "Generative AI",
+        "Documentation",
+        "Unit Testing"
+      ]
+    },
+    {
+      "title": "Artenal Robotics",
+      "subtitle": "Deep Learning / Computer Vision Intern",
+      "duration": "May 2022 - August 2022",
+      "location": "Vancouver, Canada",
+      "bullets": [
+        "Applied TensorFlow for Object Detection, Recognition, and for developing new orientation detection algorithms.",
+        "These algorithms were key components of the Artificial Intelligence system developed using Python.",
+        "Custom trained Convolutional Neural Network (CNN) models like YOLO v5/v6 in Python.",
+        "Utilized advanced transfer learning techniques for this Artificial Intelligence software development.",
+        "Created efficient image annotation app with Python's Tkinter library, streamlining project workflows.",
+        "This software development improved the quality and accessibility of documentation for datasets and code reviews."
+      ],
+      "tags": [
+        "TensorFlow",
+        "Object Detection",
+        "Artificial Intelligence",
+        "Python",
+        "CNN",
+        "YOLO",
+        "Software Development",
+        "Documentation",
+        "Code Reviews"
       ]
     }
   ],
   "projects": [
     {
-      "title": "Chat Based Intelligent Tour Planning Assistant",
-      "duration": "November 2024",
+      "title": "WhatsApp Automation Tool",
+      "subtitle": "Independent Software Development Project",
+      "duration": "January 2024 - Present",
+      "location": "Remote",
       "bullets": [
-        "Designed an efficient Neo4j graph schema to effectively manage intricate user personas, encompassing diverse traits, attributes, and preferences for highly personalized itinerary generation.",
-        "Deployed the advanced Llama 3 model for sophisticated NLP-driven preference extraction and the provision of intelligent real-time adaptive itinerary recommendations to enhance user experience.",
-        "Developed a streamlined workflow that strategically combines rapid graph traversal techniques and insightful LLM outputs to generate uniquely tailored itineraries catering to a wide range of diverse user personas."
+        "Developed Electron desktop app with whatsapp-web.js for end-to-end WhatsApp messaging automation.",
+        "Implemented bulk messaging, auto-responders, contact scraping, and scheduling using JavaScript for lead outreach.",
+        "Engineered CLI and REST API hooks for seamless integration into existing business workflows.",
+        "Packaged the software development as an application with an auto-updating installer feature and documentation."
       ],
       "tags": [
-        "NLP",
-        "Neo4j"
+        "Electron",
+        "JavaScript",
+        "Node.js",
+        "Automation",
+        "Software Development",
+        "API",
+        "Documentation"
       ]
     },
     {
-      "title": "Loan Eligibility Prediction",
-      "duration": "April 2023 - May 2023",
+      "title": "Virtual AI Girlfriend",
+      "subtitle": "Self Project",
+      "duration": "July 2024",
+      "location": "Personal",
       "bullets": [
-        "Conducted a thorough analysis of lending club data across diverse borrower profiles, to accurately assess the historical loan repayment behaviors, identify key financial trends, and pinpoint critical risk factors.",
-        "Performed comprehensive exploratory data analysis (EDA) and rigorous data prepossessing, effectively identifying crucial feature correlation through the application of a correlation matrix.",
-        "Skillfully transformed diverse categorical values into usable numerical representations using both one-hot encoding and label encoding techniques, adeptly handling various complex data types.",
-        "Developed a robust 4-layer neural network model utilizing the TensorFlow library, diligently trained the model with optimized parameters, ultimately achieving a commendable prediction accuracy of 89%, clearly demonstrating machine learning expertise."
+        "Developed web app (HTML, JS, CSS, Node.js) simulating interactive virtual partner conversations.",
+        "This project was a direct application of Generative AI and software development principles.",
+        "Integrated Groq API with LLAMA 3 models for dynamic, context-aware conversational responses.",
+        "Ensured multi-language support, showcasing versatile Artificial Intelligence and software development capabilities.",
+        "Created visually appealing chat interface with customizable partner personalities and interests for user experience.",
+        "Conducted unit testing for critical components of the Generative AI system."
       ],
       "tags": [
-        "machine learning",
-        "data analytics",
-        "TensorFlow"
+        "HTML",
+        "JavaScript",
+        "Node.js",
+        "Generative AI",
+        "Software Development",
+        "Groq API",
+        "LLAMA 3",
+        "Artificial Intelligence",
+        "Unit Testing"
       ]
     },
     {
-      "title": "Automated Manufacturing Unit-State Prediction",
-      "duration": "February 2023 - March 2023",
+      "title": "Perplexity AI-Like System",
+      "subtitle": "Self Project",
+      "duration": "July 2024",
+      "location": "Personal",
       "bullets": [
-        "Performed a systematic and detailed analysis to accurately assess the relative significance and impact of different sensors in reliably forecasting the final outcome of the manufactured product.",
-        "Executed thorough Fault analysis utilizing the z-score method and implemented effective data filtering techniques with the Kalman Filter for enhanced data pre-processing and noise reduction.",
-        "Expertly ensembled high-performing time series, deep learning (DL), and automated machine learning (auto ML) models - specifically LSTM, 1D CNN, and AutoGluon - achieving an impressive 94% prediction accuracy.",
-        "Successfully secured the gold medal in the Data Analytics General Championship by consistently and accurately predicting complex system states with a high degree of precision and reliability."
+        "Developed Python system where LLM uses Google Search API to find and scrape web content.",
+        "Utilized BeautifulSoup for efficient web scraping in this Artificial Intelligence software development project.",
+        "Implemented Retrieval-Augmented Generation (RAG) for synthesizing scraped, up-to-date information.",
+        "This cutting-edge Generative AI technique was central for dynamic content creation and documentation.",
+        "Utilized Groq API for faster LLM inference, significantly improving system performance and efficiency.",
+        "The Artificial Intelligence system's architecture underwent several code reviews for optimization."
       ],
       "tags": [
-        "data analytics",
-        "machine learning"
+        "Python",
+        "LLM",
+        "BeautifulSoup",
+        "Artificial Intelligence",
+        "Software Development",
+        "RAG",
+        "Generative AI",
+        "Documentation",
+        "Groq API",
+        "Code Reviews"
       ]
     },
     {
-      "title": "Cricket Match Result Prediction Algorithm",
-      "duration": "June 2024",
+      "title": "Aerial Image Segmentation with PyTorch",
+      "subtitle": "Self Project",
+      "duration": "July 2022",
+      "location": "Personal",
       "bullets": [
-        "Developed a comprehensive machine learning pipeline strategically utilizing advanced gradient boosting algorithms to accurately forecast the winner of dynamic T20 cricket matches.",
-        "Meticulously engineered over 20 relevant features and implemented crucial techniques including hyperparameter tuning, regularization, feature selection, and effective data normalization.",
-        "Successfully deployed both CatBoost and LightGBM models within a powerful ensemble framework, achieving a notable 68% prediction accuracy and securing a top 30 ranking out of 423 participating teams."
+        "Developed custom Python dataset class, applied image-mask augmentation via Albumentations for road segmentation.",
+        "Harnessed pre-trained U-Net model from PyTorch Segmentation Model library for this project.",
+        "Streamlined model training with efficient training/evaluation functions in this software development.",
+        "Conducted comprehensive unit testing to ensure the reliability of segmentation model components."
       ],
       "tags": [
-        "machine learning",
-        "data analytics"
+        "Python",
+        "PyTorch",
+        "U-Net",
+        "Albumentations",
+        "Software Development",
+        "Unit Testing",
+        "Deep Learning"
+      ]
+    },
+    {
+      "title": "Rock Paper Scissor Game",
+      "subtitle": "Self project",
+      "duration": "May 2023 - June 2023",
+      "location": "Personal",
+      "bullets": [
+        "Built real-time 'Rock, Paper, Scissors' web app training deep learning models using Python.",
+        "Utilized webcam images with JavaScript and TensorFlow.js for this Artificial Intelligence project.",
+        "Leveraged TensorFlow and transfer learning for user-driven model training with real-time predictions.",
+        "This was a practical application of Artificial Intelligence and software development principles and documentation.",
+        "Enabled model download for user convenience, extending utility of the trained deep learning model."
+      ],
+      "tags": [
+        "Python",
+        "JavaScript",
+        "TensorFlow.js",
+        "Deep Learning",
+        "Artificial Intelligence",
+        "Software Development",
+        "Documentation"
+      ]
+    },
+    {
+      "title": "VTOL and Fixed Wing Hybrid Drone Design",
+      "subtitle": "Flight Testing Lab Project",
+      "duration": "August 2022 - November 2022",
+      "location": "IIT Kharagpur",
+      "bullets": [
+        "Designed and simulated hybrid VTOL and fixed-wing drone using MATLAB/SIMULINK and Simscape library.",
+        "Conducted comprehensive analysis of drone’s flight characteristics and aerodynamic performance in OpenVSP.",
+        "Designed and implemented PID control systems for transitions between hover and horizontal flight."
+      ],
+      "tags": [
+        "MATLAB",
+        "SIMULINK",
+        "Simscape",
+        "OpenVSP",
+        "PID Control",
+        "Aerospace Engineering"
       ]
     }
   ],
   "leadership": [
     {
-      "title": "Captain Athletics",
-      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
-      "duration": "August 2022 - April 2024",
+      "title": "Physics Olympiad Mentor",
+      "organization": "IIT Kharagpur (Extended Online)",
+      "duration": "August 2022 - Present",
+      "location": "IIT Kharagpur",
       "bullets": [
-        "Efficiently executed the athlete selection process for over 200 participants, while also effectively mentoring both junior and senior teams participating in the highly competitive Inter Hall Athletics event.",
-        "Responsibly managed a budget of INR 70,000 for the Inter Hall Athletics General Championship, ensuring the provision of essential logistical and equipment support throughout the entire event.",
-        "Successfully led the team to a commendable bronze medal victory in both the Inter Hall Athletics events of 2023 and 2024, demonstrating strong leadership skills while also actively participating as a key player."
+        "Recorded and delivered comprehensive physics lectures for national Physics Olympiad (NSEP, INPhO) preparation.",
+        "Provided guidance and mentorship, contributing to improved understanding of complex physics concepts."
       ],
       "tags": [
-        "leadership",
-        "management"
+        "Mentorship",
+        "Teaching",
+        "Physics Education"
       ]
     },
     {
-      "title": "Secretary Sports and Games",
-      "organization": "Radhakrishnan Hall of Residence|IIT Kharagpur",
-      "duration": "January 2022 - April 2022",
+      "title": "Football Team Player & Training Organizer",
+      "organization": "Inter IIT Sports Competition",
+      "duration": "November 2020 - May 2023",
+      "location": "IIT Kharagpur",
       "bullets": [
-        "Elected by 680 boarders of RK hall to represent athletics in the prestigious Sports and Games General Championship, effectively overseeing a budget of INR 60,000 for all sporting activities.",
-        "Skillfully led the team formation process, conducted rigorous player trials to accurately identify talented individuals, and organized focused training sessions aimed at significantly improving overall team skills and performance.",
-        "Proactively implemented strategic incentives designed to expand the fresher pool of potential team members and provided constructive evaluation-feedback mechanisms to consistently nurture a competitive mindset within the entire team."
+        "Represented IIT Kharagpur as a football player in the prestigious Inter IIT sports competition.",
+        "Organized and conducted rigorous training sessions for over 30 players, enhancing team skills."
       ],
       "tags": [
-        "leadership",
-        "management"
+        "Leadership",
+        "Teamwork",
+        "Sports Coaching"
       ]
     }
   ],
   "skills": [
     {
-      "category": "Languages/Frameworks",
+      "category": "Languages and Tools",
       "skills": [
         "Python",
-        "C++",
-        "SQL",
+        "Java",
+        "C/C++",
+        "JavaScript",
+        "Node.js",
+        "Electron",
         "TensorFlow",
-        "Keras",
         "PyTorch",
+        "Keras",
         "Scikit-learn",
+        "OpenCV",
         "Pandas",
         "NumPy",
+        "Matplotlib",
         "Seaborn",
-        "MATLAB"
+        "SQL",
+        "BeautifulSoup",
+        "Selenium",
+        "Firebase",
+        "Razorpay API",
+        "Groq API",
+        "OpenAI API"
       ]
     },
     {
-      "category": "Software/ Developer Tools",
+      "category": "AI & Data Analysis",
       "skills": [
-        "VS Code",
-        "Google Colab",
-        "Jupyter Notebook",
-        "Github",
-        "MS Excel",
-        "Canva",
-        "MYSQL",
-        "MATLAB"
+        "Generative AI",
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Natural Language Processing (NLP)",
+        "Data Visualization",
+        "Web Scraping",
+        "Retrieval-Augmented Generation (RAG)",
+        "Transformers",
+        "Computer Vision"
       ]
-    }
-  ],
-  "awards": [
-    {
-      "title": "Ranked 6th",
-      "organization": "District Magistrate Gariyaband (C.G.)",
-      "duration": null,
-      "bullets": [
-        "Achieved 6th rank and was honored by the District Magistrate Gariyaband (C.G.) for exceptional performance in the Prayas entrance examination."
-      ],
-      "tags": []
     },
     {
-      "title": "Sports official",
-      "organization": "1st Children’s Athletics Championship IIT Kharagpur",
-      "duration": null,
-      "bullets": [
-        "Served as a sports official at the 1st Children’s Athletics Championship IIT Kharagpur, efficiently managing over 10 events and coordinating more than 150 participants."
-      ],
-      "tags": []
-    },
-    {
-      "title": "Won gold",
-      "organization": "2nd Athletics Championship IIT Kharagpur 2023",
-      "duration": null,
-      "bullets": [
-        "Won a gold medal in the hammer throw event at the 2nd Athletics Championship IIT Kharagpur 2023, successfully competing against over 150 players from the Midnapore region."
-      ],
-      "tags": []
-    }
-  ],
-  "extracurricular": [
-    {
-      "title": "4th in Hammer Throw",
-      "organization": "56th Inter IIT Sports Meet 2023",
-      "duration": null,
-      "bullets": [
-        "Secured 4th position in the Hammer Throw event and actively supported the gold-winning athletics team of IIT Kharagpur at the prestigious 56th Inter IIT Sports Meet 2023."
-      ],
-      "tags": []
-    },
-    {
-      "title": "Silver in hammer throw",
-      "organization": "1st Athletics Championship IIT Kharagpur’22",
-      "duration": null,
-      "bullets": [
-        "Achieved a silver medal in the hammer throw event at the 1st Athletics Championship IIT Kharagpur’22, successfully competing with over 100 players from the Midnapore region."
-      ],
-      "tags": []
-    },
-    {
-      "title": "Core member",
-      "organization": "Inter-Hall Social and Culture General Championship 2023",
-      "duration": null,
-      "bullets": [
-        "Served as a core member of the silver-winning Choreography team representing RK Hall in the Inter-Hall Social and Culture General Championship 2023."
-      ],
-      "tags": []
+      "category": "Software Development Practices",
+      "skills": [
+        "Software Development",
+        "Unit Testing",
+        "Code Reviews",
+        "Documentation",
+        "REST API Development",
+        "Agile Methodologies"
+      ]
     }
   ]
 }
