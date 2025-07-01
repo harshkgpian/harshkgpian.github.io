@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Demo Humanizer</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 20px;
+      }
+      textarea {
+        width: 90%;
+        min-height: 150px;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+      button {
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+      #status {
+        margin-top: 15px;
+        font-style: italic;
+      }
+      #result {
+        margin-top: 15px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Text Humanizer Demo</h1>
+    <p>Enter text to humanize using the Undetectable AI Pro extension.</p>
+
+    <textarea id="inputText" placeholder="Enter text here..."></textarea>
+    <button id="generateButton">Generate Humanized Text</button>
+
+    <div id="status">Status: Idle</div>
+    <h2>Result:</h2>
+    <div id="result"></div>
+
+    <script src="demo.js"></script>
+  </body>
+</html>

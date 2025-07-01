@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEET Botany Quiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>NEET Botany Quiz</h1>
+    <div id="quiz-container">
+      <div id="question-container">
+        <h2 id="question"></h2>
+        <div id="options-container"></div>
+        <button id="next-btn" class="btn">Next</button>
+      </div>
+      <div id="results-container" style="display: none;">
+        <h2>Quiz Results</h2>
+        <div id="score-container"></div>
+        <div id="review-container"></div>
+        <button id="restart-btn" class="btn">Restart Quiz</button>
+      </div>
+      <div id="explanation-container" style="display: none;">
+        <h3>Explanation</h3>
+        <p id="explanation-text"></p>
+        <p id="source-text"></p>
+        <button id="continue-btn" class="btn">Continue</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -18,7 +18,7 @@ let defaultJson = {
       "duration": "November 2020 - Present",
       "location": "West Bengal, India",
       "scoreType": "CGPA",
-      "gpa": "8.52/10"
+      "gpa": "8.64/10"
     },
     {
       "school": "Bharat National Public School",
@@ -31,68 +31,61 @@ let defaultJson = {
   ],
   "experience": [
     {
-      "title": "LinkedInAutoApply.com",
-      "subtitle": "Full-Stack Founder & Developer",
+      "title": "Full-Stack Founder & Developer",
+      "company": "LinkedInAutoApply.com",
       "duration": "January 2024 - Present",
       "location": "Remote",
       "bullets": [
-        "Engineered LinkedInAutoApply.com, a full-stack Node.js/React platform for automated job searching on LinkedIn.",
-        "Automated application processes, significantly enhancing job seeker efficiency through this software development.",
-        "Implemented a secure Razorpay payment system for managing user subscriptions effectively.",
-        "Architected backend with Firebase for scalable data storage and real-time application updates.",
-        "Utilized Python and Generative AI for advanced feature development like resume parsing.",
-        "Implemented tailored application message generation, enhancing the Artificial Intelligence capabilities of the platform."
+        "Engineered and launched LinkedInAutoApply.com, a full-stack platform using Node.js and React for automated job applications.",
+        "Integrated a secure Razorpay payment gateway to efficiently manage user subscriptions and transactions.",
+        "Architected a scalable backend with Firebase for robust data storage and real-time application updates.",
+        "Leveraged Python and Generative AI for intelligent resume parsing and personalized application message generation."
       ],
       "tags": [
         "Node.js",
         "React",
-        "Software Development",
-        "Razorpay",
+        "Razorpay API",
         "Firebase",
         "Python",
         "Generative AI",
-        "Artificial Intelligence",
-        "Documentation"
+        "Full-Stack Development",
+        "SaaS",
+        "Automated Solutions"
       ]
     },
     {
-      "title": "GradStem",
-      "subtitle": "Data Science Intern / AI Engineering Intern",
+      "title": "Data Science Intern / AI Engineering Intern",
+      "company": "GradStem",
       "duration": "May 2023 - June 2023",
       "location": "Remote",
       "bullets": [
-        "Developed Python code interacting with Indeed API, retrieving and classifying thousands of job listings.",
-        "Employed Artificial Intelligence for technical/non-technical classification in this software development task.",
-        "Leveraged OpenAI GPT-4o API for resume personalization, improving Applicant Tracking System (ATS) scores.",
-        "This was a key software development aspect in HR tech, enhancing candidate matching.",
-        "Automated job applications on Greenhouse/Workday using JavaScript, Selenium, Python, and Generative AI.",
-        "Incorporated LLM API for intelligent form completion and produced relevant documentation and unit testing artifacts."
+        "Developed Python scripts for Indeed API integration, classifying thousands of job listings efficiently.",
+        "Applied Artificial Intelligence techniques for precise technical and non-technical job classification.",
+        "Utilized OpenAI GPT-4o API for resume personalization, improving Applicant Tracking System (ATS) compatibility.",
+        "Automated job applications on Greenhouse/Workday using JavaScript, Selenium, Python, and Generative AI."
       ],
       "tags": [
         "Python",
         "Artificial Intelligence",
-        "Software Development",
         "OpenAI GPT-4o",
-        "ATS",
+        "ATS Optimization",
         "JavaScript",
         "Selenium",
         "Generative AI",
-        "Documentation",
-        "Unit Testing"
+        "Data Science",
+        "API Integration"
       ]
     },
     {
-      "title": "Artenal Robotics",
-      "subtitle": "Deep Learning / Computer Vision Intern",
+      "title": "Deep Learning / Computer Vision Intern",
+      "company": "Artenal Robotics",
       "duration": "May 2022 - August 2022",
       "location": "Vancouver, Canada",
       "bullets": [
-        "Applied TensorFlow for Object Detection, Recognition, and for developing new orientation detection algorithms.",
-        "These algorithms were key components of the Artificial Intelligence system developed using Python.",
-        "Custom trained Convolutional Neural Network (CNN) models like YOLO v5/v6 in Python.",
-        "Utilized advanced transfer learning techniques for this Artificial Intelligence software development.",
-        "Created efficient image annotation app with Python's Tkinter library, streamlining project workflows.",
-        "This software development improved the quality and accessibility of documentation for datasets and code reviews."
+        "Applied TensorFlow for object detection, recognition, and developing new orientation detection algorithms.",
+        "Custom trained Convolutional Neural Network (CNN) models like YOLO v5/v6 using Python.",
+        "Utilized advanced transfer learning techniques for enhanced AI software development and efficiency.",
+        "Created an efficient image annotation app with Python's Tkinter library, streamlining project workflows."
       ],
       "tags": [
         "TensorFlow",
@@ -101,32 +94,57 @@ let defaultJson = {
         "Python",
         "CNN",
         "YOLO",
-        "Software Development",
-        "Documentation",
-        "Code Reviews"
+        "Deep Learning",
+        "Computer Vision",
+        "Transfer Learning"
       ]
     }
   ],
   "projects": [
+    {
+      "title": "Nexus - Smart Scheduler (Voice Agent)",
+      "subtitle": "Self Project",
+      "duration": "July 2024",
+      "location": "Personal",
+      "bullets": [
+        "Developed a conversational AI scheduling assistant with text and real-time voice modes, integrating Google Calendar.",
+        "Implemented 'See, Then Act' logic ensuring no conflicting schedule suggestions for optimal planning.",
+        "Utilized OpenAI Realtime API for low-latency, conversational voice interactions with server-side turn detection.",
+        "Built with Node.js, Express.js, Vanilla HTML, CSS, JavaScript, and OpenAI Chat API (gpt-4.1-nano)."
+      ],
+      "tags": [
+        "Node.js",
+        "Express.js",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "OpenAI API",
+        "Google Calendar API",
+        "Artificial Intelligence",
+        "Generative AI",
+        "Voice AI",
+        "API Integration"
+      ]
+    },
     {
       "title": "WhatsApp Automation Tool",
       "subtitle": "Independent Software Development Project",
       "duration": "January 2024 - Present",
       "location": "Remote",
       "bullets": [
-        "Developed Electron desktop app with whatsapp-web.js for end-to-end WhatsApp messaging automation.",
+        "Developed an Electron desktop app with `whatsapp-web.js` for end-to-end WhatsApp messaging automation.",
         "Implemented bulk messaging, auto-responders, contact scraping, and scheduling using JavaScript for lead outreach.",
-        "Engineered CLI and REST API hooks for seamless integration into existing business workflows.",
-        "Packaged the software development as an application with an auto-updating installer feature and documentation."
+        "Engineered CLI and REST API hooks for seamless integration into existing business workflows efficiently.",
+        "Packaged the application with an auto-updating installer feature for enhanced user experience."
       ],
       "tags": [
         "Electron",
         "JavaScript",
         "Node.js",
         "Automation",
+        "REST API",
         "Software Development",
-        "API",
-        "Documentation"
+        "CLI Tools"
       ]
     },
     {
@@ -135,23 +153,21 @@ let defaultJson = {
       "duration": "July 2024",
       "location": "Personal",
       "bullets": [
-        "Developed web app (HTML, JS, CSS, Node.js) simulating interactive virtual partner conversations.",
-        "This project was a direct application of Generative AI and software development principles.",
+        "Developed a web app (HTML, JS, CSS, Node.js) simulating interactive virtual partner conversations.",
         "Integrated Groq API with LLAMA 3 models for dynamic, context-aware conversational responses.",
-        "Ensured multi-language support, showcasing versatile Artificial Intelligence and software development capabilities.",
-        "Created visually appealing chat interface with customizable partner personalities and interests for user experience.",
-        "Conducted unit testing for critical components of the Generative AI system."
+        "Ensured multi-language support and created a visually appealing chat interface with customizable partner personalities.",
+        "Conducted thorough unit testing for critical components of the Generative AI system."
       ],
       "tags": [
         "HTML",
         "JavaScript",
         "Node.js",
         "Generative AI",
-        "Software Development",
         "Groq API",
         "LLAMA 3",
         "Artificial Intelligence",
-        "Unit Testing"
+        "Unit Testing",
+        "Conversational AI"
       ]
     },
     {
@@ -160,24 +176,21 @@ let defaultJson = {
       "duration": "July 2024",
       "location": "Personal",
       "bullets": [
-        "Developed Python system where LLM uses Google Search API to find and scrape web content.",
-        "Utilized BeautifulSoup for efficient web scraping in this Artificial Intelligence software development project.",
+        "Developed a Python system where an LLM uses Google Search API to find and scrape web content.",
+        "Utilized BeautifulSoup for efficient and precise web scraping and data extraction.",
         "Implemented Retrieval-Augmented Generation (RAG) for synthesizing scraped, up-to-date information.",
-        "This cutting-edge Generative AI technique was central for dynamic content creation and documentation.",
-        "Utilized Groq API for faster LLM inference, significantly improving system performance and efficiency.",
-        "The Artificial Intelligence system's architecture underwent several code reviews for optimization."
+        "Utilized Groq API for faster LLM inference, significantly improving system performance and efficiency."
       ],
       "tags": [
         "Python",
         "LLM",
         "BeautifulSoup",
         "Artificial Intelligence",
-        "Software Development",
         "RAG",
         "Generative AI",
-        "Documentation",
         "Groq API",
-        "Code Reviews"
+        "Web Scraping",
+        "Information Retrieval"
       ]
     },
     {
@@ -186,9 +199,9 @@ let defaultJson = {
       "duration": "July 2022",
       "location": "Personal",
       "bullets": [
-        "Developed custom Python dataset class, applied image-mask augmentation via Albumentations for road segmentation.",
-        "Harnessed pre-trained U-Net model from PyTorch Segmentation Model library for this project.",
-        "Streamlined model training with efficient training/evaluation functions in this software development.",
+        "Developed a custom Python dataset class, applying image-mask augmentation via Albumentations for road segmentation.",
+        "Harnessed a pre-trained U-Net model from the PyTorch Segmentation Model library effectively.",
+        "Streamlined model training with efficient training/evaluation functions in this software development initiative.",
         "Conducted comprehensive unit testing to ensure the reliability of segmentation model components."
       ],
       "tags": [
@@ -196,21 +209,21 @@ let defaultJson = {
         "PyTorch",
         "U-Net",
         "Albumentations",
-        "Software Development",
         "Unit Testing",
-        "Deep Learning"
+        "Deep Learning",
+        "Image Segmentation",
+        "Computer Vision"
       ]
     },
     {
-      "title": "Rock Paper Scissor Game",
-      "subtitle": "Self project",
+      "title": "Rock Paper Scissors Game",
+      "subtitle": "Self Project",
       "duration": "May 2023 - June 2023",
       "location": "Personal",
       "bullets": [
-        "Built real-time 'Rock, Paper, Scissors' web app training deep learning models using Python.",
-        "Utilized webcam images with JavaScript and TensorFlow.js for this Artificial Intelligence project.",
+        "Built a real-time 'Rock, Paper, Scissors' web app, training deep learning models using Python.",
+        "Utilized webcam images with JavaScript and TensorFlow.js for real-time AI integration.",
         "Leveraged TensorFlow and transfer learning for user-driven model training with real-time predictions.",
-        "This was a practical application of Artificial Intelligence and software development principles and documentation.",
         "Enabled model download for user convenience, extending utility of the trained deep learning model."
       ],
       "tags": [
@@ -219,8 +232,8 @@ let defaultJson = {
         "TensorFlow.js",
         "Deep Learning",
         "Artificial Intelligence",
-        "Software Development",
-        "Documentation"
+        "Web Development",
+        "Real-time Applications"
       ]
     },
     {
@@ -229,7 +242,7 @@ let defaultJson = {
       "duration": "August 2022 - November 2022",
       "location": "IIT Kharagpur",
       "bullets": [
-        "Designed and simulated hybrid VTOL and fixed-wing drone using MATLAB/SIMULINK and Simscape library.",
+        "Designed and simulated a hybrid VTOL and fixed-wing drone using MATLAB/SIMULINK and Simscape library.",
         "Conducted comprehensive analysis of drone’s flight characteristics and aerodynamic performance in OpenVSP.",
         "Designed and implemented PID control systems for transitions between hover and horizontal flight."
       ],
@@ -239,7 +252,9 @@ let defaultJson = {
         "Simscape",
         "OpenVSP",
         "PID Control",
-        "Aerospace Engineering"
+        "Aerospace Engineering",
+        "Drone Design",
+        "Simulation"
       ]
     }
   ],
@@ -250,13 +265,14 @@ let defaultJson = {
       "duration": "August 2022 - Present",
       "location": "IIT Kharagpur",
       "bullets": [
-        "Recorded and delivered comprehensive physics lectures for national Physics Olympiad (NSEP, INPhO) preparation.",
-        "Provided guidance and mentorship, contributing to improved understanding of complex physics concepts."
+        "Recorded and delivered comprehensive physics lectures to prepare students for national Physics Olympiads.",
+        "Provided expert guidance and mentorship, improving understanding of complex physics concepts effectively."
       ],
       "tags": [
         "Mentorship",
         "Teaching",
-        "Physics Education"
+        "Physics Education",
+        "Academic Support"
       ]
     },
     {
@@ -271,7 +287,9 @@ let defaultJson = {
       "tags": [
         "Leadership",
         "Teamwork",
-        "Sports Coaching"
+        "Sports Coaching",
+        "Event Organization",
+        "Athletics"
       ]
     }
   ],
@@ -300,7 +318,12 @@ let defaultJson = {
         "Firebase",
         "Razorpay API",
         "Groq API",
-        "OpenAI API"
+        "OpenAI API",
+        "MATLAB",
+        "SIMULINK",
+        "Simscape",
+        "OpenVSP",
+        "Tkinter"
       ]
     },
     {
@@ -315,7 +338,11 @@ let defaultJson = {
         "Web Scraping",
         "Retrieval-Augmented Generation (RAG)",
         "Transformers",
-        "Computer Vision"
+        "Computer Vision",
+        "Object Detection",
+        "Image Segmentation",
+        "Transfer Learning",
+        "Conversational AI"
       ]
     },
     {
@@ -326,11 +353,15 @@ let defaultJson = {
         "Code Reviews",
         "Documentation",
         "REST API Development",
-        "Agile Methodologies"
+        "Agile Methodologies",
+        "Full-Stack Development",
+        "System Design",
+        "API Integration"
       ]
     }
   ]
 }
+
 
 let demoJSON = defaultJson;
 

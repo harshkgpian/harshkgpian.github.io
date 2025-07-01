@@ -65,6 +65,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+        
+        button.small {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
         button:hover {
@@ -124,6 +131,7 @@
             border-radius: 10px;
             margin: 15px 0;
             text-align: left;
+            position: relative;
         }
 
         .progress-bar {
@@ -190,6 +198,10 @@
             margin-bottom: 15px;
             opacity: 0.7;
         }
+        
+        .download-container {
+            margin-top: 10px;
+        }
 
         @media (max-width: 768px) {
             .container {
@@ -223,14 +235,14 @@
             <div id="sender-status" class="status info">Initializing connection...</div>
             
             <div class="connection-info">
-                <strong>Share this connection data with the receiver:</strong>
-                <textarea id="offer-data" readonly placeholder="Connection data will appear here..."></textarea>
-                <button onclick="copyToClipboard('offer-data')">📋 Copy</button>
+                <strong>Share this connection code with the receiver:</strong>
+                <textarea id="offer-data" readonly placeholder="Connection code will appear here..."></textarea>
+                <button class="small" onclick="copyToClipboard('offer-data')">📋 Copy Code</button>
             </div>
 
             <div>
-                <label><strong>Paste receiver's response here:</strong></label>
-                <textarea id="answer-input" placeholder="Paste the receiver's connection response here..."></textarea>
+                <label><strong>Paste receiver's response code here:</strong></label>
+                <textarea id="answer-input" placeholder="Paste the receiver's response code here..."></textarea>
                 <button onclick="handleAnswer()">🔗 Connect</button>
             </div>
 
@@ -255,23 +267,23 @@
         <!-- Receiver Section -->
         <div id="receiver-section" class="section">
             <h2>File Receiver</h2>
-            <div id="receiver-status" class="status info">Ready to receive connection data...</div>
+            <div id="receiver-status" class="status info">Ready to receive connection code...</div>
             
             <div>
-                <label><strong>Paste sender's connection data here:</strong></label>
-                <textarea id="offer-input" placeholder="Paste the sender's connection data here..."></textarea>
-                <button onclick="handleOffer()">🔗 Connect</button>
+                <label><strong>Paste sender's connection code here:</strong></label>
+                <textarea id="offer-input" placeholder="Paste the sender's connection code here..."></textarea>
+                <button onclick="handleOffer()">🔗 Generate Response</button>
             </div>
 
             <div class="connection-info">
-                <strong>Send this response back to the sender:</strong>
-                <textarea id="answer-data" readonly placeholder="Response data will appear here..."></textarea>
-                <button onclick="copyToClipboard('answer-data')">📋 Copy</button>
+                <strong>Send this response code back to the sender:</strong>
+                <textarea id="answer-data" readonly placeholder="Response code will appear here..."></textarea>
+                <button class="small" onclick="copyToClipboard('answer-data')">📋 Copy Code</button>
             </div>
 
             <div id="receive-area" style="display:none;">
-                <div class="status info">Ready to receive files...</div>
-                <div id="received-files"></div>
+                <h3>Received Files</h3>
+                <div id="received-files-list"></div>
             </div>
         </div>
     </div>
@@ -282,14 +294,19 @@
         let currentRole = null;
         let fileQueue = [];
         let currentFileIndex = 0;
+        
+        // --- Variables for Receiving Files ---
         let receivedChunks = [];
-        let expectedFileSize = 0;
-        let receivedSize = 0;
-        let currentFileName = '';
+        let currentReceivingFile = {
+            name: '',
+            size: 0,
+            receivedSize: 0,
+            id: null
+        };
+        let receivedFileBlobs = {}; // Store received blobs for download
 
         const CHUNK_SIZE = 16384; // 16KB chunks
 
-        // STUN servers for NAT traversal
         const configuration = {
             iceServers: [
                 { urls: 'stun:stun.l.google.com:19302' },
@@ -299,6 +316,7 @@
 
         function initializeSender() {
             currentRole = 'sender';
+            document.querySelector('.role-selection').style.display = 'none';
             document.getElementById('sender-section').classList.add('active');
             setupPeerConnection();
             createDataChannel();
@@ -307,6 +325,7 @@
 
         function initializeReceiver() {
             currentRole = 'receiver';
+            document.querySelector('.role-selection').style.display = 'none';
             document.getElementById('receiver-section').classList.add('active');
             setupPeerConnection();
         }
@@ -314,13 +333,9 @@
         function setupPeerConnection() {
             peerConnection = new RTCPeerConnection(configuration);
 
-            peerConnection.onicecandidate = (event) => {
-                // ICE candidates are automatically included in the offer/answer
-            };
-
             peerConnection.onconnectionstatechange = () => {
                 const state = peerConnection.connectionState;
-                updateStatus(`Connection state: ${state}`);
+                console.log(`Connection state: ${state}`);
                 
                 if (state === 'connected') {
                     updateStatus('✅ Connected! Ready to transfer files.', 'success');
@@ -329,6 +344,8 @@
                     } else {
                         document.getElementById('receive-area').style.display = 'block';
                     }
+                } else if (['disconnected', 'failed', 'closed'].includes(state)) {
+                    updateStatus(`Connection ${state}. Please refresh to start over.`, 'error');
                 }
             };
 
@@ -341,21 +358,13 @@
         }
 
         function createDataChannel() {
-            dataChannel = peerConnection.createDataChannel('fileTransfer', {
-                ordered: true
-            });
+            dataChannel = peerConnection.createDataChannel('fileTransfer', { ordered: true });
             setupDataChannelHandlers();
         }
 
         function setupDataChannelHandlers() {
-            dataChannel.onopen = () => {
-                console.log('Data channel opened');
-            };
-
-            dataChannel.onmessage = (event) => {
-                handleIncomingData(event.data);
-            };
-
+            dataChannel.onopen = () => console.log('Data channel opened');
+            dataChannel.onmessage = (event) => handleIncomingData(event.data);
             dataChannel.onerror = (error) => {
                 console.error('Data channel error:', error);
                 updateStatus('❌ Data channel error occurred', 'error');
@@ -367,233 +376,259 @@
                 const offer = await peerConnection.createOffer();
                 await peerConnection.setLocalDescription(offer);
                 
-                // Wait for ICE gathering to complete
-                await new Promise((resolve) => {
+                await new Promise(resolve => {
                     if (peerConnection.iceGatheringState === 'complete') {
                         resolve();
                     } else {
                         peerConnection.addEventListener('icegatheringstatechange', () => {
-                            if (peerConnection.iceGatheringState === 'complete') {
-                                resolve();
-                            }
+                            if (peerConnection.iceGatheringState === 'complete') resolve();
                         });
                     }
                 });
 
-                const offerData = JSON.stringify(peerConnection.localDescription);
-                document.getElementById('offer-data').value = offerData;
-                updateStatus('📋 Copy the connection data above and send it to the receiver', 'info');
+                // Encode the offer to a single-line string for easier copy-pasting
+                const offerCode = btoa(JSON.stringify(peerConnection.localDescription));
+                document.getElementById('offer-data').value = offerCode;
+                updateStatus('📋 Copy the connection code and send it to the receiver.', 'info');
             } catch (error) {
                 console.error('Error creating offer:', error);
-                updateStatus('❌ Error creating connection', 'error');
+                updateStatus('❌ Error creating connection offer.', 'error');
             }
         }
 
         async function handleOffer() {
-            const offerInput = document.getElementById('offer-input').value.trim();
-            if (!offerInput) {
-                updateStatus('❌ Please paste the sender\'s connection data', 'error');
+            const offerCode = document.getElementById('offer-input').value.trim();
+            if (!offerCode) {
+                updateStatus('❌ Please paste the sender\'s connection code.', 'error');
                 return;
             }
 
             try {
-                const offer = JSON.parse(offerInput);
-                await peerConnection.setRemoteDescription(offer);
+                // Decode the offer from Base64
+                const offer = JSON.parse(atob(offerCode));
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
                 
                 const answer = await peerConnection.createAnswer();
                 await peerConnection.setLocalDescription(answer);
                 
-                // Wait for ICE gathering to complete
-                await new Promise((resolve) => {
+                await new Promise(resolve => {
                     if (peerConnection.iceGatheringState === 'complete') {
                         resolve();
                     } else {
                         peerConnection.addEventListener('icegatheringstatechange', () => {
-                            if (peerConnection.iceGatheringState === 'complete') {
-                                resolve();
-                            }
+                            if (peerConnection.iceGatheringState === 'complete') resolve();
                         });
                     }
                 });
 
-                const answerData = JSON.stringify(peerConnection.localDescription);
-                document.getElementById('answer-data').value = answerData;
-                updateStatus('📋 Copy the response above and send it back to the sender', 'info');
+                // Encode the answer
+                const answerCode = btoa(JSON.stringify(peerConnection.localDescription));
+                document.getElementById('answer-data').value = answerCode;
+                updateStatus('📋 Copy the response code and send it back to the sender.', 'info');
             } catch (error) {
                 console.error('Error handling offer:', error);
-                updateStatus('❌ Invalid connection data', 'error');
+                updateStatus('❌ Invalid connection code. Please check and try again.', 'error');
             }
         }
 
         async function handleAnswer() {
-            const answerInput = document.getElementById('answer-input').value.trim();
-            if (!answerInput) {
-                updateStatus('❌ Please paste the receiver\'s response', 'error');
+            const answerCode = document.getElementById('answer-input').value.trim();
+            if (!answerCode) {
+                updateStatus('❌ Please paste the receiver\'s response code.', 'error');
                 return;
             }
 
             try {
-                const answer = JSON.parse(answerInput);
-                await peerConnection.setRemoteDescription(answer);
+                // Decode the answer
+                const answer = JSON.parse(atob(answerCode));
+                await peerConnection.setRemoteDescription(new RTCSessionDescription(answer));
                 updateStatus('🔗 Connecting...', 'info');
             } catch (error) {
                 console.error('Error handling answer:', error);
-                updateStatus('❌ Invalid response data', 'error');
+                updateStatus('❌ Invalid response code.', 'error');
             }
         }
+        
+        // --- File Sending Logic ---
 
         function handleFileSelect(event) {
             const files = Array.from(event.target.files);
             if (files.length === 0) return;
 
-            fileQueue = files;
+            fileQueue = [...fileQueue, ...files];
             displayFileList();
             
-            if (dataChannel && dataChannel.readyState === 'open') {
-                startFileTransfer();
+            if (dataChannel && dataChannel.readyState === 'open' && currentFileIndex === 0) {
+                 startFileTransfer();
             } else {
-                updateStatus('⏳ Files selected. Waiting for connection...', 'info');
+                 updateStatus('⏳ Files queued. Waiting for connection or previous transfer to finish.', 'info');
             }
         }
-
+        
         function displayFileList() {
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = '<h3>Selected Files:</h3>';
+            const fileListDiv = document.getElementById('file-list');
+            fileListDiv.innerHTML = '<h3>Queued Files:</h3>';
             
             fileQueue.forEach((file, index) => {
                 const fileInfo = document.createElement('div');
                 fileInfo.className = 'file-info';
-                fileInfo.innerHTML = `
-                    <strong>${file.name}</strong><br>
-                    Size: ${formatFileSize(file.size)}<br>
-                    Type: ${file.type || 'Unknown'}
-                `;
-                fileList.appendChild(fileInfo);
+                fileInfo.innerHTML = `<strong>${file.name}</strong> (${formatFileSize(file.size)})`;
+                if (index < currentFileIndex) {
+                    fileInfo.style.opacity = '0.5';
+                    fileInfo.innerHTML += ' - Sent';
+                }
+                fileListDiv.appendChild(fileInfo);
             });
         }
 
         async function startFileTransfer() {
             if (currentFileIndex >= fileQueue.length) {
                 updateStatus('✅ All files sent successfully!', 'success');
+                document.getElementById('transfer-progress').style.display = 'none';
                 return;
             }
 
             const file = fileQueue[currentFileIndex];
             updateStatus(`📤 Sending: ${file.name}`, 'info');
+            document.getElementById('transfer-progress').style.display = 'block';
 
-            // Send file metadata
-            const metadata = {
-                type: 'file-start',
-                name: file.name,
-                size: file.size,
-                fileType: file.type
-            };
+            const metadata = { type: 'file-start', name: file.name, size: file.size };
             dataChannel.send(JSON.stringify(metadata));
 
-            // Send file in chunks
             const reader = new FileReader();
             let offset = 0;
 
             reader.onload = (event) => {
+                if (dataChannel.bufferedAmount > 16 * 1024 * 1024) { // 16MB buffer
+                    setTimeout(() => reader.onload(event), 100);
+                    return;
+                }
+                
                 dataChannel.send(event.target.result);
-                offset += CHUNK_SIZE;
+                offset += event.target.result.byteLength;
 
                 const progress = Math.min((offset / file.size) * 100, 100);
-                updateProgress(progress);
+                updateSenderProgress(progress, file.name);
 
                 if (offset < file.size) {
                     readNextChunk();
                 } else {
-                    // File transfer complete
-                    const endMessage = { type: 'file-end' };
-                    dataChannel.send(JSON.stringify(endMessage));
-                    
+                    dataChannel.send(JSON.stringify({ type: 'file-end' }));
                     currentFileIndex++;
-                    setTimeout(() => startFileTransfer(), 100);
+                    displayFileList(); 
+                    setTimeout(startFileTransfer, 500); 
                 }
             };
-
-            function readNextChunk() {
+            
+            const readNextChunk = () => {
                 const slice = file.slice(offset, offset + CHUNK_SIZE);
                 reader.readAsArrayBuffer(slice);
-            }
+            };
 
             readNextChunk();
         }
 
+        // --- File Receiving Logic ---
+
         function handleIncomingData(data) {
             if (typeof data === 'string') {
-                // Handle JSON messages
                 try {
                     const message = JSON.parse(data);
-                    
                     if (message.type === 'file-start') {
-                        currentFileName = message.name;
-                        expectedFileSize = message.size;
-                        receivedSize = 0;
+                        currentReceivingFile.id = `file-${Date.now()}`;
+                        currentReceivingFile.name = message.name;
+                        currentReceivingFile.size = message.size;
+                        currentReceivingFile.receivedSize = 0;
                         receivedChunks = [];
-                        updateStatus(`📥 Receiving: ${message.name}`, 'info');
                         
-                        const receivedFiles = document.getElementById('received-files');
-                        const fileDiv = document.createElement('div');
-                        fileDiv.className = 'file-info';
-                        fileDiv.innerHTML = `
-                            <strong>${message.name}</strong><br>
-                            Size: ${formatFileSize(message.size)}<br>
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="receive-progress-${Date.now()}">0%</div>
-                            </div>
-                        `;
-                        receivedFiles.appendChild(fileDiv);
+                        updateStatus(`📥 Receiving: ${message.name}`, 'info');
+                        createFileDisplay(currentReceivingFile);
+
                     } else if (message.type === 'file-end') {
-                        // Reconstruct and download file
                         const blob = new Blob(receivedChunks);
-                        downloadFile(blob, currentFileName);
-                        updateStatus(`✅ Received: ${currentFileName}`, 'success');
+                        receivedFileBlobs[currentReceivingFile.id] = blob;
+                        
+                        addDownloadButton(currentReceivingFile.id, currentReceivingFile.name);
+                        updateStatus(`✅ Received: ${currentReceivingFile.name}`, 'success');
                     }
-                } catch (e) {
-                    console.error('Error parsing message:', e);
-                }
+                } catch (e) { /* Not a JSON message, likely a chunk */ }
             } else {
-                // Handle binary data (file chunks)
                 receivedChunks.push(data);
-                receivedSize += data.byteLength;
+                currentReceivingFile.receivedSize += data.byteLength;
                 
-                const progress = (receivedSize / expectedFileSize) * 100;
-                const progressElements = document.querySelectorAll('.progress-fill');
-                const lastProgress = progressElements[progressElements.length - 1];
-                if (lastProgress) {
-                    lastProgress.style.width = `${progress}%`;
-                    lastProgress.textContent = `${Math.round(progress)}%`;
-                }
+                const progress = (currentReceivingFile.receivedSize / currentReceivingFile.size) * 100;
+                updateReceiverProgress(currentReceivingFile.id, progress);
             }
         }
 
-        function downloadFile(blob, filename) {
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = filename;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
+        function createFileDisplay({id, name, size}) {
+            const receivedFilesList = document.getElementById('received-files-list');
+            const fileDiv = document.createElement('div');
+            fileDiv.className = 'file-info';
+            fileDiv.id = id;
+            fileDiv.innerHTML = `
+                <strong>${name}</strong> (${formatFileSize(size)})
+                <div class="progress-bar">
+                    <div id="progress-${id}" class="progress-fill">0%</div>
+                </div>
+                <div class="download-container"></div>
+            `;
+            receivedFilesList.appendChild(fileDiv);
         }
 
-        function updateProgress(progress) {
+        function addDownloadButton(fileId, fileName) {
+            const fileDiv = document.getElementById(fileId);
+            if (!fileDiv) return;
+            
+            const container = fileDiv.querySelector('.download-container');
+            const button = document.createElement('button');
+            button.textContent = '📥 Download';
+            button.className = 'small';
+            button.onclick = () => {
+                const blob = receivedFileBlobs[fileId];
+                if (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = fileName;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    button.textContent = '✅ Downloaded';
+                    button.disabled = true;
+                }
+            };
+            container.innerHTML = '';
+            container.appendChild(button);
+        }
+
+        // --- UI & Utility Functions ---
+
+        function updateSenderProgress(progress, fileName) {
             const progressFill = document.getElementById('progress-fill');
+            const transferStatus = document.getElementById('transfer-status');
             if (progressFill) {
                 progressFill.style.width = `${progress}%`;
                 progressFill.textContent = `${Math.round(progress)}%`;
-                document.getElementById('transfer-progress').style.display = 'block';
+            }
+            if(transferStatus) {
+                transferStatus.textContent = `Sending ${fileName}...`;
             }
         }
 
+        function updateReceiverProgress(fileId, progress) {
+            const progressFill = document.getElementById(`progress-${fileId}`);
+            if (progressFill) {
+                progressFill.style.width = `${progress}%`;
+                progressFill.textContent = `${Math.round(progress)}%`;
+            }
+        }
+        
         function updateStatus(message, type = 'info') {
             const statusElement = currentRole === 'sender' ? 
                 document.getElementById('sender-status') : 
                 document.getElementById('receiver-status');
-            
             statusElement.textContent = message;
             statusElement.className = `status ${type}`;
         }
@@ -608,46 +643,33 @@
 
         function copyToClipboard(elementId) {
             const element = document.getElementById(elementId);
-            element.select();
-            document.execCommand('copy');
-            
-            const button = element.nextElementSibling;
-            const originalText = button.textContent;
-            button.textContent = '✅ Copied!';
-            setTimeout(() => {
-                button.textContent = originalText;
-            }, 2000);
+            navigator.clipboard.writeText(element.value).then(() => {
+                const button = element.nextElementSibling;
+                const originalText = button.textContent;
+                button.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
         }
 
         // Drag and drop functionality
         document.addEventListener('DOMContentLoaded', () => {
             const dropZone = document.querySelector('.file-drop-zone');
+            if (!dropZone) return;
             
-            if (dropZone) {
-                dropZone.addEventListener('dragover', (e) => {
-                    e.preventDefault();
-                    dropZone.classList.add('dragover');
-                });
-
-                dropZone.addEventListener('dragleave', () => {
-                    dropZone.classList.remove('dragover');
-                });
-
-                dropZone.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    dropZone.classList.remove('dragover');
-                    
-                    const files = Array.from(e.dataTransfer.files);
-                    if (files.length > 0) {
-                        fileQueue = files;
-                        displayFileList();
-                        
-                        if (dataChannel && dataChannel.readyState === 'open') {
-                            startFileTransfer();
-                        }
-                    }
-                });
-            }
+            dropZone.addEventListener('dragover', e => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+            dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+            dropZone.addEventListener('drop', e => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                if (e.dataTransfer.files.length > 0) {
+                    handleFileSelect({ target: { files: e.dataTransfer.files } });
+                }
+            });
         });
     </script>
 </body>
