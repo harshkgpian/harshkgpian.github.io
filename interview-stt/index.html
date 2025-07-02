@@ -7,48 +7,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="header">
-        <h1>Voice Interview Assistant</h1>
-    </div>
-    
-    <div class="setup">
-        <input type="password" id="apiKey" placeholder="Enter your OpenAI API key (or use config.js)" />
-    </div>
-    
-    <div class="cv-section">
-        <textarea id="cvContent" placeholder="Paste your CV content here...
-
-Education:
-- [Your education details]
-
-Work Experience:
-- [Your work experience]
-
-Projects:
-- [Your key projects]
-
-Skills:
-- [Your technical skills]
-
-etc..."></textarea>
-    </div>
-    
-    <div class="controls">
-        <button class="record-btn" id="recordMicBtn" disabled>
-            🎤 Record Mic
-        </button>
-        <button class="record-btn" id="recordTabBtn" disabled>
-            💻 Record Tab Audio
-        </button>
-        <div class="status" id="status">Enter CV to begin</div>
-    </div>
-    
-    <div class="conversation" id="conversation">
-        <!-- Messages will appear here, starting from the top -->
+    <!-- 1. The Teleprompter (Appears at the top) -->
+    <div id="teleprompter" style="display: none;">
+        <div id="teleprompterContent"></div>
+        <button id="teleprompterCloseBtn">×</button>
     </div>
 
-    <!-- Scripts are loaded at the end -->
+    <!-- 2. The Main Conversation Log -->
+    <div class="main-content" id="conversation">
+        <!-- Messages will appear here -->
+    </div>
+
+    <!-- 3. The Control Panel (Fixed at the bottom) -->
+    <div class="control-panel">
+        <div class="panel-header" id="panelToggle">
+            <span>Setup & Controls</span>
+            <span class="toggle-icon">▲</span>
+        </div>
+        
+        <div class="panel-content" id="setupSection">
+            <div class="input-group">
+                <label for="apiKey">OpenAI API Key</label>
+                <input type="password" id="apiKey" placeholder="Loaded from config.js or enter here" />
+            </div>
+            <div class="input-group">
+                <label for="additionalDetails">Context (Job Description, Company Info, etc.)</label>
+                <textarea id="additionalDetails" rows="3" placeholder="Paste the job description or any other key context here..."></textarea>
+            </div>
+            <div class="input-group">
+                <label for="cvContent">Your CV / Resume</label>
+                <textarea id="cvContent" rows="7" placeholder="Paste your full CV content here..."></textarea>
+            </div>
+        </div>
+
+        <div class="main-controls">
+            <button class="record-btn" id="recordMicBtn" disabled>🎤 Record Mic</button>
+            <button class="record-btn" id="recordTabBtn" disabled>💻 Record Tab</button>
+            <button class="record-btn" id="stopBtn" style="display: none;">🛑 Stop</button>
+            <div class="status" id="status">Enter details to begin</div>
+        </div>
+    </div>
+
     <script src="config.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
 </body>
 </html>
