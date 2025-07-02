@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>University:</strong> ${university}</p>
                 </div>
                 <div class="content">${contentParagraphs}</div>
-                <div class="signature"><p><strong>Regards,</p><p><strong></strong>${name}</strong></p></div>
+                <div class="signature"><p><strong>Regards</strong>,</p><p><strong>${name}</strong></p></div>
             </body></html>`;
 
         const filename = `SOP_${name.replace(/\s+/g, '_')}_${course.replace(/\s+/g, '_')}.doc`;
