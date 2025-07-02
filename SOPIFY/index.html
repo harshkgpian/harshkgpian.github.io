@@ -3,215 +3,110 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Humanizer Interface</title>
+  <title>SOP Humanizer & Exporter</title>
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIyIDJMMiAxMGwzLjY2IDUuMzRMMTkgMTBsLTcuMzcgOC4zNEwxNCAyMnoiIGZpbGw9IiMwMDdhZmYiLz48L3N2Zz4=">
-  
-  <!-- Embedded CSS -->
-  <style>
-    :root {
-      --primary-color: #4a6eb5;
-      --primary-dark: #3a5992;
-      --secondary-color: #6c757d;
-      --success-color: #28a745;
-      --light-color: #f8f9fa;
-      --dark-color: #343a40;
-      --border-color: #dee2e6;
-      --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: var(--dark-color);
-      background-color: #f5f7fa;
-    }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding: 20px;
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: var(--shadow);
-    }
-    header h1 {
-      color: var(--primary-color);
-      margin-bottom: 10px;
-    }
-    .humanizer-container {
-      background-color: white;
-      border-radius: 5px;
-      box-shadow: var(--shadow);
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-    h3 {
-      color: var(--primary-color);
-      margin-top: 20px;
-      margin-bottom: 10px;
-    }
-    textarea, #result {
-      width: 100%;
-      min-height: 250px;
-      padding: 15px;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-      margin-bottom: 15px;
-      font-size: 14px;
-      line-height: 1.5;
-      resize: vertical;
-    }
-    #result {
-      background-color: var(--light-color);
-      white-space: pre-wrap;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      background-color: var(--primary-color);
-      color: white;
-    }
-    button:hover {
-      background-color: var(--primary-dark);
-    }
-    .copy-btn {
-      background-color: var(--light-color);
-      color: var(--dark-color);
-      border: 1px solid var(--border-color);
-      padding: 8px 15px;
-      font-size: 14px;
-      margin-top: -10px;
-      float: right;
-    }
-    .copy-btn:hover {
-      background-color: var(--border-color);
-    }
-    #status {
-      margin: 15px 0;
-      padding: 10px;
-      font-style: italic;
-      background-color: var(--light-color);
-      border-radius: 4px;
-      border: 1px solid var(--border-color);
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: var(--secondary-color);
-      font-size: 14px;
-    }
-  </style>
 </head>
 <body>
   <div class="container">
     <header>
-      <h1>Text Humanizer</h1>
-      <p>Paste your AI-generated text below to humanize it using your browser extension.</p>
+      <h1>SOP Humanizer & Exporter</h1>
+      <p>A simple tool to format, humanize, and export your Statement of Purpose.</p>
     </header>
 
     <main>
-      <div class="humanizer-container">
-        <h3>Input Text</h3>
-        <p>Paste the text you want to humanize here:</p>
-        <textarea id="inputText" placeholder="Paste your text here..."></textarea>
-        <button id="generateButton">Humanize Text</button>
-        
-        <div id="status">Status: Waiting for input.</div>
-        
-        <h3>Humanized Result <button type="button" class="copy-btn" id="copy-humanized">Copy Result</button></h3>
-        <div id="result">The humanized text will appear here after processing...</div>
+      <!-- Stepper Navigation -->
+      <div class="stepper">
+        <div class="step active" data-step="1">
+          <div class="step-number">1</div>
+          <div class="step-title">Your Details</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-number">2</div>
+          <div class="step-title">Humanize Text</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-number">3</div>
+          <div class="step-title">Preview & Export</div>
+        </div>
       </div>
-    </main>
 
+      <!-- Step 1: User Details -->
+      <div class="step-content active" id="step1">
+        <h2>Step 1: Enter Your Details</h2>
+        <p>This information will be used in the document header. It will be saved in your browser for next time.</p>
+        <form id="details-form">
+          <div class="form-group">
+            <label for="userName">Your Full Name*</label>
+            <input type="text" id="userName" required placeholder="e.g., Sarah Johnson">
+          </div>
+          <div class="form-group">
+            <label for="courseName">Course / Program*</label>
+            <input type="text" id="courseName" required placeholder="e.g., Master of Science in Computer Science">
+          </div>
+          <div class="form-group">
+            <label for="universityName">University Name*</label>
+            <input type="text" id="universityName" required placeholder="e.g., Stanford University">
+          </div>
+        </form>
+        <div class="nav-buttons">
+          <button type="button" class="next-btn" id="go-to-step2">Next</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Humanizer -->
+      <div class="step-content" id="step2">
+        <h2>Step 2: Humanize Your SOP Text</h2>
+        <p>Paste your draft SOP below and use your browser extension to humanize it.</p>
+        <div class="humanizer-grid">
+            <div class="humanizer-box">
+                <h3>Paste Your Draft Here</h3>
+                <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+                <button id="humanizeButton">Humanize Text</button>
+            </div>
+            <div class="humanizer-box">
+                <h3>Humanized Result</h3>
+                <div id="humanizedResult" class="result-box">The result from your extension will appear here...</div>
+            </div>
+        </div>
+         <div id="status">Status: Waiting for input.</div>
+        <div class="nav-buttons">
+          <button type="button" class="back-btn" id="back-to-step1">Back</button>
+          <button type="button" class="next-btn" id="go-to-step3" disabled>Next</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Preview & Export -->
+      <div class="step-content" id="step3">
+        <h2>Step 3: Preview and Export</h2>
+        <p>Review the final document below. It is formatted for export.</p>
+        
+        <div class="preview-document" id="preview-container">
+          <h3 class="preview-title">STATEMENT OF PURPOSE</h3>
+          <div class="preview-info">
+            <p><strong>Name:</strong> <span id="preview-name"></span></p>
+            <p><strong>Course:</strong> <span id="preview-course"></span></p>
+            <p><strong>University:</strong> <span id="preview-university"></span></p>
+          </div>
+          <div class="preview-content" id="preview-content"></div>
+          <div class="preview-signature">
+            <p>Regards,</p>
+            <p><strong id="preview-signature-name"></strong></p>
+          </div>
+        </div>
+
+        <div class="nav-buttons">
+          <button type="button" class="back-btn" id="back-to-step2">Back</button>
+          <button type="button" class="export-btn" id="exportButton">Export as Word Document</button>
+        </div>
+      </div>
+
+    </main>
     <footer>
-      <p>© 2025 Text Humanizer Interface. All rights reserved.</p>
+      <p>© 2025 SOP Generator</p>
     </footer>
   </div>
 
-  <!-- Embedded JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- Part 1: Logic for communicating with the extension ---
-        const inputText = document.getElementById('inputText');
-        const generateButton = document.getElementById('generateButton');
-        const statusDiv = document.getElementById('status');
-        const resultDiv = document.getElementById('result');
-
-        const targetOrigin = (window.location.protocol === 'file:') ? '*' : window.origin;
-
-        generateButton.addEventListener('click', () => {
-            const text = inputText.value.trim();
-            if (!text) {
-                alert("Please enter some text to humanize.");
-                return;
-            }
-
-            statusDiv.textContent = 'Status: Sending text to extension...';
-            resultDiv.textContent = '';
-
-            window.postMessage({
-                type: 'DEMO_PAGE_PROCESS_TEXT',
-                text: text
-            }, targetOrigin);
-        });
-
-        window.addEventListener('message', (event) => {
-            if (event.source !== window || !event.data) {
-                return;
-            }
-
-            const { type, payload } = event.data;
-
-            if (type === 'EXTENSION_STATUS_UPDATE') {
-                statusDiv.textContent = `Status: ${payload.message}`;
-            } else if (type === 'EXTENSION_RESULT') {
-                statusDiv.textContent = 'Status: Processing complete!';
-                resultDiv.textContent = payload.humanizedText;
-            } else if (type === 'EXTENSION_ERROR') {
-                statusDiv.textContent = `Status: Error - ${payload.error}`;
-                resultDiv.textContent = '';
-            } else if (type === 'CONTENT_SCRIPT_READY') {
-                statusDiv.textContent = 'Status: Extension connected. Ready to humanize.';
-                generateButton.disabled = false;
-            }
-        });
-
-        statusDiv.textContent = "Status: Initializing... Waiting for extension connection.";
-        
-        if (window.location.protocol === 'file:') {
-            console.warn("Page is running via file://. This is expected for this local tool.");
-        }
-
-        // --- Part 2: Logic for the 'Copy' button ---
-        const copyBtn = document.getElementById('copy-humanized');
-        copyBtn.addEventListener('click', () => {
-            const textToCopy = resultDiv.textContent;
-            
-            if (textToCopy && textToCopy !== 'The humanized text will appear here after processing...') {
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    alert('Humanized text copied to clipboard!');
-                }).catch(err => {
-                    console.error('Failed to copy text: ', err);
-                    alert('Could not copy text. Please select and copy manually.');
-                });
-            } else {
-                alert('There is no result to copy.');
-            }
-        });
-    });
-  </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
