@@ -119,14 +119,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const fullHTML = `
             <!DOCTYPE html><html><head><meta charset="UTF-8"><style>${styles}</style></head>
             <body>
-                <div class="title">STATEMENT OF PURPOSE</div>
-                <div class="info">
-                    <p><strong>Name:</strong> ${name}</p>
-                    <p><strong>Course:</strong> ${course}</p>
-                    <p><strong>University:</strong> ${university}</p>
-                </div>
-                <div class="content">${contentParagraphs}</div>
-                <div class="signature"><p><strong>Regards</strong>,</p><p><strong>${name}</strong></p></div>
+            <div class="title">STATEMENT OF PURPOSE</div>
+            <div class="info">
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Course:</strong> ${course}</p>
+                <p><strong>University:</strong> ${university}</p>
+            </div>
+            <div class="content">${contentParagraphs}</div>
+            <div class="signature"><p><strong>Regards,</strong></p><p><strong>${name}</strong></p></div>
             </body></html>`;
 
         const filename = `SOP_${name.replace(/\s+/g, '_')}_${course.replace(/\s+/g, '_')}.doc`;
