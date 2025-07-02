@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const inputText = document.getElementById('inputText');
     const humanizeButton = document.getElementById('humanizeButton');
     const statusDiv = document.getElementById('status');
-    const humanizedResultDiv = document.getElementById('humanizedResult');
+    const humanizedResultTextarea = document.getElementById('humanizedResult');
     
     // Step 3 Elements
-    const previewContainer = document.getElementById('preview-container');
     const previewName = document.getElementById('preview-name');
     const previewCourse = document.getElementById('preview-course');
     const previewUniversity = document.getElementById('preview-university');
@@ -30,47 +29,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToStep2Btn = document.getElementById('back-to-step2');
     const exportButton = document.getElementById('exportButton');
 
-    // --- STATE & DATA ---
-    let humanizedText = '';
-
     // --- FUNCTIONS ---
+
+    // ** NEW: A dedicated function to check if the Step 2 "Next" button should be enabled. **
+    const checkStep2NextButtonState = () => {
+        // Enable the button if the humanized result textarea has content, disable it if not.
+        const hasContent = humanizedResultTextarea.value.trim() !== '';
+        goToStep3Btn.disabled = !hasContent;
+    };
 
     // Function to navigate between steps
     const goToStep = (stepNumber) => {
-        // Update step content visibility
         stepContents.forEach(content => content.classList.remove('active'));
         document.getElementById(`step${stepNumber}`).classList.add('active');
-
-        // Update stepper UI
         steps.forEach(step => {
             const stepData = parseInt(step.dataset.step, 10);
-            if (stepData <= stepNumber) {
-                step.classList.add('active');
-            } else {
-                step.classList.remove('active');
-            }
+            step.classList.toggle('active', stepData <= stepNumber);
         });
     };
 
-    // Save user details to localStorage
+    // Save/Load user details
     const saveUserData = () => {
-        const userData = {
+        localStorage.setItem('sopUserData', JSON.stringify({
             name: userNameInput.value,
             course: courseNameInput.value,
             university: universityNameInput.value
-        };
-        localStorage.setItem('sopUserData', JSON.stringify(userData));
+        }));
     };
 
-    // Load user details from localStorage
     const loadUserData = () => {
-        const savedData = localStorage.getItem('sopUserData');
-        if (savedData) {
-            const userData = JSON.parse(savedData);
-            userNameInput.value = userData.name || '';
-            courseNameInput.value = userData.course || '';
-            universityNameInput.value = userData.university || '';
-        }
+        const savedData = JSON.parse(localStorage.getItem('sopUserData') || '{}');
+        userNameInput.value = savedData.name || '';
+        courseNameInput.value = savedData.course || '';
+        universityNameInput.value = savedData.university || '';
     };
 
     // Update the preview pane in Step 3
@@ -78,13 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = userNameInput.value;
         const course = courseNameInput.value;
         const university = universityNameInput.value;
+        const humanizedText = humanizedResultTextarea.value;
 
         previewName.textContent = name;
         previewCourse.textContent = course;
         previewUniversity.textContent = university;
         previewSignatureName.textContent = name;
         
-        // Clear previous content and format new content with paragraphs
         previewContent.innerHTML = '';
         const paragraphs = humanizedText.split('\n').filter(p => p.trim() !== '');
         paragraphs.forEach(pText => {
@@ -99,14 +90,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = userNameInput.value;
         const course = courseNameInput.value;
         const university = universityNameInput.value;
-
-        // Create paragraphs from humanized text
-        const contentParagraphs = humanizedText.split('\n')
+        const contentParagraphs = humanizedResultTextarea.value.split('\n')
             .filter(p => p.trim() !== '')
             .map(p => `<p>${p.replace(/</g, "<").replace(/>/g, ">")}</p>`)
             .join('');
 
-        // Define the styles for the Word document
         const styles = `
             body { 
             font-family: 'Times New Roman', serif; 
@@ -128,14 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .signature { margin-top: 10pt; font-size: 12pt; }
         `;
         
-        // Construct the full HTML for the document
         const fullHTML = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <meta charset="UTF-8">
-                <style>${styles}</style>
-            </head>
+            <!DOCTYPE html><html><head><meta charset="UTF-8"><style>${styles}</style></head>
             <body>
                 <div class="title">STATEMENT OF PURPOSE</div>
                 <div class="info">
@@ -143,27 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>Course:</strong> ${course}</p>
                     <p><strong>University:</strong> ${university}</p>
                 </div>
-                <div class="content">
-                    ${contentParagraphs}
-                </div>
-                <div class="signature">
-                    <p>Regards,</p>
-                    <p><strong>${name}</strong></p>
-                </div>
-            </body>
-            </html>
-        `;
+                <div class="content">${contentParagraphs}</div>
+                <div class="signature"><p><strong>Regards,</p><p><strong></strong>${name}</strong></p></div>
+            </body></html>`;
+
+        const filename = `SOP_${name.replace(/\s+/g, '_')}_${course.replace(/\s+/g, '_')}.doc`;
 
         try {
             const blob = new Blob([fullHTML], { type: 'application/msword' });
-            const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.href = url;
-            link.download = `SOP_${name.replace(/\s+/g, '_')}.doc`;
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            URL.revokeObjectURL(link.href);
         } catch (error) {
             console.error('Export failed:', error);
             alert('Failed to export document. See console for details.');
@@ -172,26 +148,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- EVENT LISTENERS ---
 
+    // ** CHANGED: Check button state on manual input **
+    humanizedResultTextarea.addEventListener('input', checkStep2NextButtonState);
+
     // Navigation
     goToStep2Btn.addEventListener('click', () => {
         if (detailsForm.checkValidity()) {
             saveUserData();
             goToStep(2);
+            // ** ADDED: Check button state when arriving at Step 2 **
+            checkStep2NextButtonState(); 
         } else {
             detailsForm.reportValidity();
         }
     });
+
     backToStep1Btn.addEventListener('click', () => goToStep(1));
+
     goToStep3Btn.addEventListener('click', () => {
         updatePreview();
         goToStep(3);
     });
-    backToStep2Btn.addEventListener('click', () => goToStep(2));
+
+    backToStep2Btn.addEventListener('click', () => {
+        goToStep(2);
+        // ** ADDED: Check button state when coming back to Step 2 **
+        checkStep2NextButtonState(); 
+    });
 
     // Export button
     exportButton.addEventListener('click', exportToWord);
 
-    // --- EXTENSION COMMUNICATION LOGIC (from your previous code) ---
+    // --- EXTENSION COMMUNICATION LOGIC ---
     humanizeButton.addEventListener('click', () => {
         const text = inputText.value.trim();
         if (!text) {
@@ -199,9 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         statusDiv.textContent = 'Status: Sending text to extension...';
-        humanizedResultDiv.textContent = '';
-        goToStep3Btn.disabled = true; // Disable next until result is back
-
+        
         const targetOrigin = (window.location.protocol === 'file:') ? '*' : window.origin;
         window.postMessage({ type: 'DEMO_PAGE_PROCESS_TEXT', text: text }, targetOrigin);
     });
@@ -215,12 +201,11 @@ document.addEventListener('DOMContentLoaded', () => {
             statusDiv.textContent = `Status: ${payload.message}`;
         } else if (type === 'EXTENSION_RESULT') {
             statusDiv.textContent = 'Status: Processing complete! You can now proceed.';
-            humanizedText = payload.humanizedText; // Store result
-            humanizedResultDiv.textContent = humanizedText;
-            goToStep3Btn.disabled = false; // Enable the 'Next' button
+            humanizedResultTextarea.value = payload.humanizedText;
+            // ** CHANGED: This now correctly triggers the check **
+            checkStep2NextButtonState(); 
         } else if (type === 'EXTENSION_ERROR') {
-            statusDiv.textContent = `Status: Error - ${payload.error}`;
-            goToStep3Btn.disabled = true;
+            statusDiv.textContent = `Status: Error - ${payload.error}. You can paste text manually into the result box.`;
         } else if (type === 'CONTENT_SCRIPT_READY') {
             statusDiv.textContent = 'Status: Extension connected. Ready to humanize.';
         }
@@ -228,5 +213,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INITIALIZATION ---
     loadUserData();
-    goToStep(1); // Start at step 1
+    goToStep(1);
 });
