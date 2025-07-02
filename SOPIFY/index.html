@@ -1,47 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Demo Humanizer</title>
-    <style>
-      body {
-        font-family: sans-serif;
-        margin: 20px;
-      }
-      textarea {
-        width: 90%;
-        min-height: 150px;
-        margin-bottom: 10px;
-        padding: 10px;
-      }
-      button {
-        padding: 10px 15px;
-        cursor: pointer;
-      }
-      #status {
-        margin-top: 15px;
-        font-style: italic;
-      }
-      #result {
-        margin-top: 15px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-        white-space: pre-wrap;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Text Humanizer Demo</h1>
-    <p>Enter text to humanize using the Undetectable AI Pro extension.</p>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Humanizer Interface</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTIyIDJMMiAxMGwzLjY2IDUuMzRMMTkgMTBsLTcuMzcgOC4zNEwxNCAyMnoiIGZpbGw9IiMwMDdhZmYiLz48L3N2Zz4=">
+  
+  <!-- Embedded CSS -->
+  <style>
+    :root {
+      --primary-color: #4a6eb5;
+      --primary-dark: #3a5992;
+      --secondary-color: #6c757d;
+      --success-color: #28a745;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+      --border-color: #dee2e6;
+      --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: var(--dark-color);
+      background-color: #f5f7fa;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: var(--shadow);
+    }
+    header h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+    .humanizer-container {
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: var(--shadow);
+      padding: 30px;
+      margin-bottom: 30px;
+    }
+    h3 {
+      color: var(--primary-color);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    textarea, #result {
+      width: 100%;
+      min-height: 250px;
+      padding: 15px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+      resize: vertical;
+    }
+    #result {
+      background-color: var(--light-color);
+      white-space: pre-wrap;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background-color: var(--primary-color);
+      color: white;
+    }
+    button:hover {
+      background-color: var(--primary-dark);
+    }
+    .copy-btn {
+      background-color: var(--light-color);
+      color: var(--dark-color);
+      border: 1px solid var(--border-color);
+      padding: 8px 15px;
+      font-size: 14px;
+      margin-top: -10px;
+      float: right;
+    }
+    .copy-btn:hover {
+      background-color: var(--border-color);
+    }
+    #status {
+      margin: 15px 0;
+      padding: 10px;
+      font-style: italic;
+      background-color: var(--light-color);
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--secondary-color);
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Text Humanizer</h1>
+      <p>Paste your AI-generated text below to humanize it using your browser extension.</p>
+    </header>
 
-    <textarea id="inputText" placeholder="Enter text here..."></textarea>
-    <button id="generateButton">Generate Humanized Text</button>
+    <main>
+      <div class="humanizer-container">
+        <h3>Input Text</h3>
+        <p>Paste the text you want to humanize here:</p>
+        <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+        <button id="generateButton">Humanize Text</button>
+        
+        <div id="status">Status: Waiting for input.</div>
+        
+        <h3>Humanized Result <button type="button" class="copy-btn" id="copy-humanized">Copy Result</button></h3>
+        <div id="result">The humanized text will appear here after processing...</div>
+      </div>
+    </main>
 
-    <div id="status">Status: Idle</div>
-    <h2>Result:</h2>
-    <div id="result"></div>
+    <footer>
+      <p>© 2025 Text Humanizer Interface. All rights reserved.</p>
+    </footer>
+  </div>
 
-    <script src="demo.js"></script>
-  </body>
+  <!-- Embedded JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- Part 1: Logic for communicating with the extension ---
+        const inputText = document.getElementById('inputText');
+        const generateButton = document.getElementById('generateButton');
+        const statusDiv = document.getElementById('status');
+        const resultDiv = document.getElementById('result');
+
+        const targetOrigin = (window.location.protocol === 'file:') ? '*' : window.origin;
+
+        generateButton.addEventListener('click', () => {
+            const text = inputText.value.trim();
+            if (!text) {
+                alert("Please enter some text to humanize.");
+                return;
+            }
+
+            statusDiv.textContent = 'Status: Sending text to extension...';
+            resultDiv.textContent = '';
+
+            window.postMessage({
+                type: 'DEMO_PAGE_PROCESS_TEXT',
+                text: text
+            }, targetOrigin);
+        });
+
+        window.addEventListener('message', (event) => {
+            if (event.source !== window || !event.data) {
+                return;
+            }
+
+            const { type, payload } = event.data;
+
+            if (type === 'EXTENSION_STATUS_UPDATE') {
+                statusDiv.textContent = `Status: ${payload.message}`;
+            } else if (type === 'EXTENSION_RESULT') {
+                statusDiv.textContent = 'Status: Processing complete!';
+                resultDiv.textContent = payload.humanizedText;
+            } else if (type === 'EXTENSION_ERROR') {
+                statusDiv.textContent = `Status: Error - ${payload.error}`;
+                resultDiv.textContent = '';
+            } else if (type === 'CONTENT_SCRIPT_READY') {
+                statusDiv.textContent = 'Status: Extension connected. Ready to humanize.';
+                generateButton.disabled = false;
+            }
+        });
+
+        statusDiv.textContent = "Status: Initializing... Waiting for extension connection.";
+        
+        if (window.location.protocol === 'file:') {
+            console.warn("Page is running via file://. This is expected for this local tool.");
+        }
+
+        // --- Part 2: Logic for the 'Copy' button ---
+        const copyBtn = document.getElementById('copy-humanized');
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = resultDiv.textContent;
+            
+            if (textToCopy && textToCopy !== 'The humanized text will appear here after processing...') {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert('Humanized text copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    alert('Could not copy text. Please select and copy manually.');
+                });
+            } else {
+                alert('There is no result to copy.');
+            }
+        });
+    });
+  </script>
+</body>
 </html>
