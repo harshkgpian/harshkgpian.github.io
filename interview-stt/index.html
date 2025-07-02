@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Interview Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Voice Interview Assistant</h1>
+    </div>
+    
+    <div class="setup">
+        <input type="password" id="apiKey" placeholder="Enter your OpenAI API key (or use config.js)" />
+    </div>
+    
+    <div class="cv-section">
+        <textarea id="cvContent" placeholder="Paste your CV content here...
+
+Education:
+- [Your education details]
+
+Work Experience:
+- [Your work experience]
+
+Projects:
+- [Your key projects]
+
+Skills:
+- [Your technical skills]
+
+etc..."></textarea>
+    </div>
+    
+    <div class="controls">
+        <button class="record-btn" id="recordMicBtn" disabled>
+            🎤 Record Mic
+        </button>
+        <button class="record-btn" id="recordTabBtn" disabled>
+            💻 Record Tab Audio
+        </button>
+        <div class="status" id="status">Enter CV to begin</div>
+    </div>
+    
+    <div class="conversation" id="conversation">
+        <!-- Messages will appear here, starting from the top -->
+    </div>
+
+    <!-- Scripts are loaded at the end -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

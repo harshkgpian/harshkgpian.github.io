@@ -112,8 +112,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .bold { font-weight: bold; }
             .info-line { margin-bottom: 2pt; }
             .content { text-align: justify; margin: 8pt 0; }
-            .content p { margin-bottom: 6pt; font-size: 12pt; }
-            .signature { margin-top: 10pt; font-size: 12pt; }
+            .content p { margin-bottom: 6pt; font-size: 12pt;  }
+            .signature { margin-top: 10pt; font-size: 12pt;  }
         `;
         
         const fullHTML = `
