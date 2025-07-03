@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class="main-content" id="mainContent">
-        <!-- THE FIX IS HERE: This div now has the ID the JavaScript needs -->
         <div id="conversation">
             <!-- Messages appear here -->
         </div>
@@ -42,9 +41,10 @@
         </div>
 
         <div class="main-controls">
+            <!-- RESTORED a clear, stable button flow -->
             <button class="record-btn" id="recordMicBtn" disabled><i class="fas fa-microphone"></i> Record Mic</button>
-            <button class="record-btn" id="recordTabBtn" disabled><i class="fas fa-desktop"></i> Connect Tab</button>
-            <button class="record-btn" id="analyzeScreenshotBtn" style="display: none;"><i class="fas fa-camera-retro"></i> Analyze Screen</button>
+            <button class="record-btn" id="connectTabBtn" disabled><i class="fas fa-desktop"></i> Connect Tab</button>
+            <button class="record-btn" id="recordTabAudioBtn" style="display: none;"><i class="fas fa-volume-high"></i> Record Tab Audio</button>
             <button class="record-btn stop-btn" id="stopBtn" style="display: none;"><i class="fas fa-stop"></i> Stop Recording</button>
         </div>
 

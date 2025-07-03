@@ -6,9 +6,10 @@ const elements = {
     controlPanel: document.getElementById('controlPanel'),
     conversation: document.getElementById('conversation'),
     
+    // Updated button references
     recordMicBtn: document.getElementById('recordMicBtn'),
-    recordTabBtn: document.getElementById('recordTabBtn'),
-    analyzeScreenshotBtn: document.getElementById('analyzeScreenshotBtn'),
+    connectTabBtn: document.getElementById('connectTabBtn'),
+    recordTabAudioBtn: document.getElementById('recordTabAudioBtn'),
     stopBtn: document.getElementById('stopBtn'),
     
     teleprompter: document.getElementById('teleprompter'),
@@ -16,7 +17,6 @@ const elements = {
     teleprompterCloseBtn: document.getElementById('teleprompterCloseBtn'),
     
     panelToggle: document.getElementById('panelToggle'),
-    setupSection: document.getElementById('setupSection'),
     apiKeyInput: document.getElementById('apiKey'),
     cvInput: document.getElementById('cvContent'),
     additionalDetailsInput: document.getElementById('additionalDetails'),
@@ -31,25 +31,41 @@ export function updateButtonStates() {
     const { isRecording, isTabConnected, apiKey, cvContent } = state;
     const isReady = apiKey && cvContent;
 
-    elements.recordMicBtn.style.display = isRecording ? 'none' : 'inline-block';
-    elements.recordTabBtn.style.display = isRecording || isTabConnected ? 'none' : 'inline-block';
-    elements.analyzeScreenshotBtn.style.display = isRecording || !isTabConnected ? 'none' : 'inline-block';
-    elements.stopBtn.style.display = isRecording ? 'inline-block' : 'none';
+    if (isRecording) {
+        // Hide all action buttons when recording
+        elements.recordMicBtn.style.display = 'none';
+        elements.connectTabBtn.style.display = 'none';
+        elements.recordTabAudioBtn.style.display = 'none';
+        elements.stopBtn.style.display = 'inline-block';
+        setStatus(`Recording ${state.currentSource}...`, 'recording');
+    } else {
+        // Show action buttons, hide stop button
+        elements.stopBtn.style.display = 'none';
+        elements.recordMicBtn.style.display = 'inline-block';
+        
+        // Logic for tab buttons
+        if (isTabConnected) {
+            elements.connectTabBtn.style.display = 'none';
+            elements.recordTabAudioBtn.style.display = 'inline-block';
+        } else {
+            elements.connectTabBtn.style.display = 'inline-block';
+            elements.recordTabAudioBtn.style.display = 'none';
+        }
 
-    if (!isRecording) {
+        // Set disabled state
         elements.recordMicBtn.disabled = !isReady;
-        elements.recordTabBtn.disabled = !isReady;
-        elements.analyzeScreenshotBtn.disabled = !isReady;
+        elements.connectTabBtn.disabled = !isReady;
+        elements.recordTabAudioBtn.disabled = !isReady;
 
         if (!isReady) {
             setStatus('Enter details to begin', 'normal');
-        } else if (isTabConnected) {
-            setStatus('Ready. Record audio or analyze screen.', 'normal');
         } else {
-            setStatus('Ready to connect tab.', 'normal');
+            setStatus('Ready to record or connect tab.', 'normal');
         }
     }
 }
+
+
 
 export function updateTotalCostDisplay(totalCost) {
     elements.costTracker.textContent = `Cost: $${totalCost.toFixed(5)}`;

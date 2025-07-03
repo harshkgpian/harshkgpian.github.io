@@ -4,12 +4,12 @@ export const state = {
     cvContent: '',
     additionalDetails: '',
     isRecording: false,
+    // --- ADDED BACK for persistent connection ---
     isTabConnected: false,
     persistentTabStream: null,
-    // Add a dedicated video track property for screenshots
-    persistentVideoTrack: null, 
+    // ------------------------------------------
     mediaRecorder: null,
     audioChunks: [],
     currentSource: null,
-    totalCost: 0.0, // <-- NEW: Track session cost in USD
+    totalCost: 0.0,
 };
