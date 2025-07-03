@@ -2,27 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- This tag is crucial for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice Interview Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="main-content" id="mainContent">
+        <!-- THE FIX IS HERE: This div now has the ID the JavaScript needs -->
+        <div id="conversation">
+            <!-- Messages appear here -->
+        </div>
+    </div>
+    
     <div id="teleprompter" style="display: none;">
         <div id="teleprompterContent"></div>
         <button id="teleprompterCloseBtn">×</button>
     </div>
 
-    <div class="main-content" id="conversation">
-        <!-- Messages will appear here -->
-    </div>
-
-    <div class="control-panel">
+    <div class="control-panel" id="controlPanel">
         <div class="panel-header" id="panelToggle">
-            <span>Setup & Controls</span>
-            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-            </svg>
+            <span>Controls & Setup</span>
+            <i class="fas fa-chevron-left toggle-icon"></i>
         </div>
         
         <div class="panel-content" id="setupSection">
@@ -31,7 +32,7 @@
                 <input type="password" id="apiKey" placeholder="Loaded from config.js or enter here" />
             </div>
             <div class="input-group">
-                <label for="additionalDetails">Context (Job Description, Company Info, etc.)</label>
+                <label for="additionalDetails">Context (Job Description, Company Info)</label>
                 <textarea id="additionalDetails" rows="3" placeholder="Paste key context here..."></textarea>
             </div>
             <div class="input-group">
@@ -39,26 +40,20 @@
                 <textarea id="cvContent" rows="7" placeholder="Paste your full CV content here..."></textarea>
             </div>
         </div>
+
         <div class="main-controls">
-            <button class="record-btn" id="recordMicBtn" disabled>
-            <i class="fa-solid fa-microphone"></i>
-            <span>Record Mic</span>
-            </button>
-            <button class="record-btn" id="recordTabBtn" disabled>
-            <i class="fa-solid fa-desktop"></i>
-            <span>Record Tab</span>
-            </button>
-            <button class="record-btn stop-btn" id="stopBtn" style="display: none;">
-            <i class="fa-solid fa-stop"></i>
-            <span>Stop</span>
-            </button>
-            <div class="status" id="status">Enter details to begin</div>
+            <button class="record-btn" id="recordMicBtn" disabled><i class="fas fa-microphone"></i> Record Mic</button>
+            <button class="record-btn" id="recordTabBtn" disabled><i class="fas fa-desktop"></i> Connect Tab</button>
+            <button class="record-btn" id="analyzeScreenshotBtn" style="display: none;"><i class="fas fa-camera-retro"></i> Analyze Screen</button>
+            <button class="record-btn stop-btn" id="stopBtn" style="display: none;"><i class="fas fa-stop"></i> Stop Recording</button>
         </div>
-        <!-- Font Awesome CDN -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+        <div class="status-footer">
+             <div class="status" id="status">Enter details to begin</div>
+             <div class="cost-tracker" id="costTracker">Cost: $0.00000</div>
+        </div>
     </div>
 
-    <script src="config.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
