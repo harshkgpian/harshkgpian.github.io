@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- This tag is crucial for responsive design -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice Interview Assistant</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 1. The Teleprompter (Appears at the top) -->
     <div id="teleprompter" style="display: none;">
         <div id="teleprompterContent"></div>
         <button id="teleprompterCloseBtn">×</button>
     </div>
 
-    <!-- 2. The Main Conversation Log -->
     <div class="main-content" id="conversation">
         <!-- Messages will appear here -->
     </div>
 
-    <!-- 3. The Control Panel (Fixed at the bottom) -->
     <div class="control-panel">
         <div class="panel-header" id="panelToggle">
             <span>Setup & Controls</span>
-            <span class="toggle-icon">▲</span>
+            <svg class="toggle-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
         </div>
         
         <div class="panel-content" id="setupSection">
@@ -32,20 +32,30 @@
             </div>
             <div class="input-group">
                 <label for="additionalDetails">Context (Job Description, Company Info, etc.)</label>
-                <textarea id="additionalDetails" rows="3" placeholder="Paste the job description or any other key context here..."></textarea>
+                <textarea id="additionalDetails" rows="3" placeholder="Paste key context here..."></textarea>
             </div>
             <div class="input-group">
                 <label for="cvContent">Your CV / Resume</label>
                 <textarea id="cvContent" rows="7" placeholder="Paste your full CV content here..."></textarea>
             </div>
         </div>
-
         <div class="main-controls">
-            <button class="record-btn" id="recordMicBtn" disabled>🎤 Record Mic</button>
-            <button class="record-btn" id="recordTabBtn" disabled>💻 Record Tab</button>
-            <button class="record-btn" id="stopBtn" style="display: none;">🛑 Stop</button>
+            <button class="record-btn" id="recordMicBtn" disabled>
+            <i class="fa-solid fa-microphone"></i>
+            <span>Record Mic</span>
+            </button>
+            <button class="record-btn" id="recordTabBtn" disabled>
+            <i class="fa-solid fa-desktop"></i>
+            <span>Record Tab</span>
+            </button>
+            <button class="record-btn stop-btn" id="stopBtn" style="display: none;">
+            <i class="fa-solid fa-stop"></i>
+            <span>Stop</span>
+            </button>
             <div class="status" id="status">Enter details to begin</div>
         </div>
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     </div>
 
     <script src="config.js"></script>
