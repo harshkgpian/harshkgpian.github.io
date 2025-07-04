@@ -41,16 +41,17 @@
         </div>
 
         <div class="main-controls">
-            <!-- RESTORED a clear, stable button flow -->
             <button class="record-btn" id="recordMicBtn" disabled><i class="fas fa-microphone"></i> Record Mic</button>
             <button class="record-btn" id="connectTabBtn" disabled><i class="fas fa-desktop"></i> Connect Tab</button>
+            <!-- RENAMED this button for clarity -->
+            <button class="record-btn" id="analyzeScreenBtn" style="display: none;"><i class="fas fa-camera"></i> Analyze Screen</button>
             <button class="record-btn" id="recordTabAudioBtn" style="display: none;"><i class="fas fa-volume-high"></i> Record Tab Audio</button>
             <button class="record-btn stop-btn" id="stopBtn" style="display: none;"><i class="fas fa-stop"></i> Stop Recording</button>
         </div>
 
         <div class="status-footer">
              <div class="status" id="status">Enter details to begin</div>
-             <div class="cost-tracker" id="costTracker">Cost: $0.00000</div>
+             <div class="cost-tracker" id="costTracker" >Cost: $0.00000</div>
         </div>
     </div>
 

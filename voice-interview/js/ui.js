@@ -6,10 +6,11 @@ const elements = {
     controlPanel: document.getElementById('controlPanel'),
     conversation: document.getElementById('conversation'),
     
-    // Updated button references
     recordMicBtn: document.getElementById('recordMicBtn'),
     connectTabBtn: document.getElementById('connectTabBtn'),
     recordTabAudioBtn: document.getElementById('recordTabAudioBtn'),
+    // UPDATED button reference
+    analyzeScreenBtn: document.getElementById('analyzeScreenBtn'), 
     stopBtn: document.getElementById('stopBtn'),
     
     teleprompter: document.getElementById('teleprompter'),
@@ -28,34 +29,34 @@ const elements = {
 export function getElements() { return elements; }
 
 export function updateButtonStates() {
-    const { isRecording, isTabConnected, apiKey, cvContent } = state;
+    const { isRecording, isTabConnected, apiKey, cvContent, persistentVideoStream } = state;
     const isReady = apiKey && cvContent;
 
     if (isRecording) {
-        // Hide all action buttons when recording
         elements.recordMicBtn.style.display = 'none';
         elements.connectTabBtn.style.display = 'none';
         elements.recordTabAudioBtn.style.display = 'none';
+        elements.analyzeScreenBtn.style.display = 'none';
         elements.stopBtn.style.display = 'inline-block';
         setStatus(`Recording ${state.currentSource}...`, 'recording');
     } else {
-        // Show action buttons, hide stop button
         elements.stopBtn.style.display = 'none';
         elements.recordMicBtn.style.display = 'inline-block';
         
-        // Logic for tab buttons
         if (isTabConnected) {
             elements.connectTabBtn.style.display = 'none';
             elements.recordTabAudioBtn.style.display = 'inline-block';
+            elements.analyzeScreenBtn.style.display = persistentVideoStream ? 'inline-block' : 'none';
         } else {
             elements.connectTabBtn.style.display = 'inline-block';
             elements.recordTabAudioBtn.style.display = 'none';
+            elements.analyzeScreenBtn.style.display = 'none';
         }
 
-        // Set disabled state
         elements.recordMicBtn.disabled = !isReady;
         elements.connectTabBtn.disabled = !isReady;
         elements.recordTabAudioBtn.disabled = !isReady;
+        elements.analyzeScreenBtn.disabled = !isReady;
 
         if (!isReady) {
             setStatus('Enter details to begin', 'normal');
@@ -65,8 +66,6 @@ export function updateButtonStates() {
     }
 }
 
-
-
 export function updateTotalCostDisplay(totalCost) {
     elements.costTracker.textContent = `Cost: $${totalCost.toFixed(5)}`;
 }
@@ -75,7 +74,9 @@ export function addCostToMessage(messageElement, costData) {
     if (!messageElement || !costData) return;
     const costDiv = document.createElement('div');
     costDiv.className = 'message-timestamp';
-    costDiv.textContent = `Tokens: ${costData.inputTokens} | Cost: ~$${costData.cost.toFixed(5)}`;
+    // Handle vision vs text cost display
+    const inputTokenText = costData.outputTokens === 0 ? `Image Tokens: ${costData.inputTokens}` : `Tokens: ${costData.inputTokens}`;
+    costDiv.textContent = `${inputTokenText} | Cost: ~$${costData.cost.toFixed(5)}`;
     messageElement.appendChild(costDiv);
 }
 

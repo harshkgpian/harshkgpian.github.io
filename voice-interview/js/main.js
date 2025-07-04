@@ -33,6 +33,46 @@ async function processRecording(audioBlob) {
     }
 }
 
+async function handleScreenAnalysis() {
+    ui.setStatus('Analyzing screen...', 'processing');
+    try {
+        const image = await recorder.takeScreenshot();
+
+        // No separate prompt is needed. The main system prompt will guide the AI.
+        const textPrompt = ''; 
+        
+        ui.addMessage('[Analyzing image on screen...]', true);
+        let streamableMessageElement;
+        let imageInputTokens = 0;
+
+        // Pass an empty string for the text prompt.
+        await api.getVisionResponseStream(textPrompt, image, {
+            onStreamStart: (tokens) => {
+                imageInputTokens = tokens;
+                streamableMessageElement = ui.createStreamableMessage();
+                ui.showTeleprompter();
+            },
+            onStreamUpdate: (chunk) => {
+                ui.appendToMessage(streamableMessageElement, chunk);
+                ui.appendToTeleprompter(chunk);
+            },
+            onStreamEnd: (fullText) => {
+                // The only input tokens are from the image itself.
+                const outputTokens = Math.ceil(fullText.length / 4);
+                const costData = api.calculateCost(imageInputTokens, outputTokens);
+                
+                state.totalCost += costData.cost;
+                ui.updateTotalCostDisplay(state.totalCost);
+                ui.addCostToMessage(streamableMessageElement, costData);
+                ui.updateButtonStates();
+            }
+        });
+    } catch (error) {
+        ui.showError(`Screen analysis failed: ${error.message}`);
+        ui.updateButtonStates();
+    }
+}
+
 function handleSetupInput() {
     const elements = ui.getElements();
     if (!elements.apiKeyInput.disabled) { state.apiKey = elements.apiKeyInput.value.trim(); }
@@ -59,14 +99,14 @@ function initialize() {
     elements.cvInput.value = state.cvContent;
     elements.additionalDetailsInput.value = state.additionalDetails;
 
-    // --- UPDATED EVENT LISTENERS ---
     elements.apiKeyInput.addEventListener('input', handleSetupInput);
     elements.cvInput.addEventListener('input', handleSetupInput);
     elements.additionalDetailsInput.addEventListener('input', handleSetupInput);
     
     elements.recordMicBtn.addEventListener('click', () => recorder.startRecording('mic', processRecording));
-    elements.connectTabBtn.addEventListener('click', recorder.connectToTab); // Connects the tab
-    elements.recordTabAudioBtn.addEventListener('click', () => recorder.startRecording('tab-audio', processRecording)); // Records from connected tab
+    elements.connectTabBtn.addEventListener('click', recorder.connectToTab);
+    elements.recordTabAudioBtn.addEventListener('click', () => recorder.startRecording('tab-audio', processRecording));
+    elements.analyzeScreenBtn.addEventListener('click', handleScreenAnalysis); 
 
     elements.stopBtn.addEventListener('click', recorder.stopRecording);
     elements.panelToggle.addEventListener('click', ui.toggleSetupPanel);

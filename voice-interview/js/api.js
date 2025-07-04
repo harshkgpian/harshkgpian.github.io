@@ -56,7 +56,6 @@ export async function transcribeAudio(audioBlob) {
     }
 }
 
-// --- THIS FUNCTION IS NOW MORE ROBUST ---
 async function handleStream(response, onStreamStart, onStreamUpdate, onStreamEnd) {
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
@@ -74,7 +73,6 @@ async function handleStream(response, onStreamStart, onStreamUpdate, onStreamEnd
             if (line.startsWith('data: ')) {
                 const data = line.substring(6);
                 
-                // THE FIX IS HERE: Don't try to parse [DONE] or empty data chunks
                 if (data === '[DONE]') {
                     onStreamEnd(outputText);
                     return;
@@ -130,14 +128,22 @@ export async function getVisionResponseStream(textPrompt, image, { onStreamStart
     try {
         const imageInputTokens = calculateImageTokens(image.width, image.height);
         
+        const userContent = [];
+        if (textPrompt && textPrompt.trim()) {
+            userContent.push({ type: 'text', text: textPrompt });
+        }
+        userContent.push({ type: 'image_url', image_url: { url: image.base64, detail: 'high' } });
+
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
             headers: { 'Authorization': `Bearer ${state.apiKey}`, 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 model: CHAT_MODEL_CONFIG.name,
                 messages: [
-                    { role: 'system', content: APP_CONFIG.systemPrompt(state.additionalDetails, state.cvContent) },
-                    { role: 'user', content: [{ type: 'text', text: textPrompt }, { type: 'image_url', image_url: { url: image.base64, detail: 'high' } }] }
+                    // --- THIS IS THE KEY CHANGE ---
+                    // Use the dedicated vision prompt for image-based requests.
+                    { role: 'system', content: APP_CONFIG.visionSystemPrompt(state.additionalDetails, state.cvContent) },
+                    { role: 'user', content: userContent }
                 ],
                 max_tokens: 1024,
                 stream: true,

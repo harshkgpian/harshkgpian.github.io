@@ -4,10 +4,11 @@ export const state = {
     cvContent: '',
     additionalDetails: '',
     isRecording: false,
-    // --- ADDED BACK for persistent connection ---
     isTabConnected: false,
     persistentTabStream: null,
-    // ------------------------------------------
+    // --- ADDED for screenshot feature ---
+    persistentVideoStream: null, 
+    // ------------------------------------
     mediaRecorder: null,
     audioChunks: [],
     currentSource: null,
