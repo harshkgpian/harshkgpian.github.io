@@ -1,597 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=2.0">
-<title>Professional Drawing Canvas</title>
-<style>
-:root {
-  --primary-color: #2563eb;
-  --bg-color: #f8fafc;
-  --toolbar-bg: #ffffff;
-  --border-color: #e2e8f0;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Professional Drawing & Recording Canvas</title>
 
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-color);
-  overflow: hidden;
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-
-.toolbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 10px 20px;
-  background: var(--toolbar-bg);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  z-index: 100;
-}
-
-.tool-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 10px;
-  border-right: 1px solid var(--border-color);
-}
-
-.tool-group:last-child {
-  border-right: none;
-}
-
-button {
-  padding: 8px 16px;
-  border: 1px solid var(--border-color);
-  background: white;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-  transition: all 0.2s;
-  user-select: none;
-}
-
-button:hover {
-  background: #f1f5f9;
-}
-
-button.active {
-  background: var(--primary-color);
-  color: white;
-  border-color: var(--primary-color);
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.modal {
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.4);
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
-.modal-content {
-  background-color: #fefefe;
-  padding: 20px;
-  border-radius: 8px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-}
-
-.modal-content input, .modal-content input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 15px;
-}
-
-.modal-buttons button {
-  flex-grow: 1;
-  margin: 0 5px;
-}
-
-.canvas-container {
-  margin-top: 70px;
-  position: relative;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-}
-
-canvas {
-  border: 1px solid var(--border-color);
-  background: white;
-  border-radius: 4px;
-  touch-action: none;
-}
-
-select {
-  padding: 6px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  font-size: 14px;
-  background: white;
-}
-
-.page-controls {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-#pageInfo {
-  min-width: 80px;
-  text-align: center;
-  font-size: 14px;
-}
-
-#pdfUpload {
-  display: none;
-}
-
-#uploadPdfBtn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-</style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/toolbar.css">
+  <link rel="stylesheet" href="css/canvas.css">
+  <link rel="stylesheet" href="css/modal.css">
 </head>
 <body>
-<div class="toolbar">
-  <div class="tool-group">
-    <button id="pencil" class="active">✏️ Pencil</button>
-    <button id="eraser">⌫ Eraser</button>
-  </div>
-  <div class="tool-group">
-    <label for="size">Size:</label>
-    <select id="size">
-      <option value="2">Extra Fine</option>
-      <option value="4">Fine</option>
-      <option value="6" selected>Medium</option>
-      <option value="10">Thick</option>
-      <option value="16">Extra Thick</option>
-    </select>
-  </div>
-  <div class="tool-group">
-    <label for="color">Color:</label>
-    <select id="color">
-      <option value="#000000">Black</option>
-      <option value="#1e40af">Blue</option>
-      <option value="#dc2626">Red</option>
-      <option value="#047857">Green</option>
-    </select>
-  </div>
-  <div class="tool-group">
-    <button id="undo">↩️ Undo</button>
-    <button id="redo">↪️ Redo</button>
-    <button id="clear">🗑️ Clear</button>
-  </div>
-  <div class="tool-group">
-    <button id="uploadPdfBtn">📤 Upload PDF</button>
-    <input type="file" id="pdfUpload" accept=".pdf">
-    <button id="savePdf">📑 Save PDF</button>
-  </div>
-</div>
 
-<div class="canvas-container">
-  <canvas id="drawingCanvas" width="1500" height="700"></canvas>
-</div>
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="tool-group">
+      <button id="pencil" class="active" title="Pencil (B)">✏️ Pencil</button>
+      <button id="eraser" title="Eraser (E)">⌫ Eraser</button>
+    </div>
+    <div class="tool-group">
+      <label for="size">Size:</label>
+      <select id="size">
+        <option value="2">Extra Fine</option>
+        <option value="4">Fine</option>
+        <option value="6" selected>Medium</option>
+        <option value="10">Thick</option>
+        <option value="16">Extra Thick</option>
+      </select>
+    </div>
+    <div class="tool-group">
+      <label for="color">Color:</label>
+      <select id="color">
+        <option value="#000000">Black</option>
+        <option value="#1e40af">Blue</option>
+        <option value="#dc2626">Red</option>
+        <option value="#047857">Green</option>
+      </select>
+    </div>
+    <div class="tool-group">
+      <button id="undo" title="Undo (Ctrl+Z)">↩️ Undo</button>
+      <button id="redo" title="Redo (Ctrl+Y)">↪️ Redo</button>
+      <button id="clear" title="Clear Page">🗑️ Clear</button>
+    </div>
+        <div class="tool-group">
+      <button id="addBackgroundBtn">🖼️ Add Background</button>
+      <input type="file" id="backgroundInput" accept="image/*" style="display:none;">
+      <button id="removeBackgroundBtn">🚫 Remove BG</button>
+    </div>
 
-<div class="page-controls">
-  <button id="prevPage">← Previous</button>
-  <span id="pageInfo">Page 1</span>
-  <button id="nextPage">Next →</button>
-</div>
-
-<!-- Filename Modal -->
-<div id="filenameModal" class="modal">
-  <div class="modal-content">
-    <h3>Save Drawing</h3>
-    <input type="text" id="filenameInput" placeholder="Enter filename">
-    <div class="modal-buttons">
-      <button id="cancelSave">Cancel</button>
-      <button id="confirmSave">Save</button>
+    <div class="tool-group">
+      <button id="recordBtn">🎤 Start Recording</button>
+      <canvas id="waveformCanvas" width="150" height="30"></canvas>
+    </div>
+    <div class="tool-group">
+      <button id="savePdf" title="Save as PDF (Ctrl+S)">📑 Save as PDF</button>
+      <button id="customCanvasBtn">📐 Custom Size</button>
     </div>
   </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-<script>
-document.addEventListener('selectstart', (e) => {
-  if (e.target.tagName === 'BUTTON' || e.target.closest('.page-controls')) {
-      e.preventDefault();
-  }
-});
+  <!-- Canvas -->
+  <div class="canvas-container">
+    <canvas id="drawingCanvas"></canvas>
+  </div>
 
-// Canvas and Context Setup
-const canvas = document.getElementById("drawingCanvas");
-const ctx = canvas.getContext("2d");
+  <!-- Page Controls -->
+  <div class="page-controls">
+    <button id="prevPage">← Previous</button>
+    <span id="pageInfo">Page 1</span>
+    <button id="nextPage">Next →</button>
+  </div>
 
-// Initialize canvas with white background
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+  <!-- Modals -->
+  <div id="canvasSizeModal" class="modal">
+    <div class="modal-content">
+      <h3>Custom Canvas Size</h3>
+      <div>
+        <label for="canvasWidth">Width (px):</label>
+        <input type="number" id="canvasWidth" min="100" max="4000">
+      </div>
+      <div>
+        <label for="canvasHeight">Height (px):</label>
+        <input type="number" id="canvasHeight" min="100" max="4000">
+      </div>
+      <button id="setBrowserSize" style="width: 100%; margin: 10px 0;">Set to Browser Size</button>
+      <p>Note: Changing canvas size will clear the current drawing.</p>
+      <div class="modal-buttons">
+        <button id="cancelCanvasSize" class="btn-secondary">Cancel</button>
+        <button id="confirmCanvasSize">Apply</button>
+      </div>
+    </div>
+  </div>
 
-// Drawing state variables
-let isDrawing = false;
-let currentStroke = null;
-let isEraserMode = false;
-let currentPage = 1;
-let lastSelectedColor = '#000000';
-let lastSelectedSize = 4;
-let isRightMouseDown = false;
+  <div id="filenameModal" class="modal">
+    <div class="modal-content">
+      <h3>Save Drawing as PDF</h3>
+      <div>
+        <label for="filenameInput">Filename:</label>
+        <input type="text" id="filenameInput" placeholder="drawing.pdf">
+      </div>
+      <div class="modal-buttons">
+        <button id="cancelSave" class="btn-secondary">Cancel</button>
+        <button id="confirmSave">Save</button>
+      </div>
+    </div>
+  </div>
 
-// Vector data structure
-let pages = [[]]; // Array of pages, each containing array of strokes
-let undoStack = [[]];
-let redoStack = [[]];
-let pdfPages = []; // Store PDF page renders
-
-// Get all UI elements
-const pencilBtn = document.getElementById('pencil');
-const eraserBtn = document.getElementById('eraser');
-const undoBtn = document.getElementById('undo');
-const redoBtn = document.getElementById('redo');
-const clearBtn = document.getElementById('clear');
-const savePdfBtn = document.getElementById('savePdf');
-const prevPageBtn = document.getElementById('prevPage');
-const nextPageBtn = document.getElementById('nextPage');
-const pageInfo = document.getElementById('pageInfo');
-const pdfUploadBtn = document.getElementById('uploadPdfBtn');
-const pdfUploadInput = document.getElementById('pdfUpload');
-
-// Drawing functions
-function startDrawing(e) {
-  isDrawing = true;
-  const point = getCoordinates(e);
-  currentStroke = {
-      points: [point],
-      color: isEraserMode ? 'white' : document.getElementById("color").value,
-      width: isEraserMode ?
-          Math.max(parseInt(document.getElementById("size").value, 10) * 6, 24) :
-          parseInt(document.getElementById("size").value, 10),
-      type: isEraserMode ? 'eraser' : 'pen'
-  };
-}
-
-function stopDrawing() {
-  if (isDrawing && currentStroke) {
-      pages[currentPage - 1].push(currentStroke);
-      saveState();
-  }
-  isDrawing = false;
-  currentStroke = null;
-}
-
-function draw(e) {
-  if (!isDrawing || !currentStroke) return;
-
-  const point = getCoordinates(e);
-  currentStroke.points.push(point);
-
-  clearCanvas();
-  renderPage();
-  drawStroke(currentStroke);
-}
-
-function drawStroke(stroke) {
-  if (stroke.points.length < 2) return;
-
-  ctx.beginPath();
-  ctx.strokeStyle = stroke.color;
-  ctx.lineWidth = stroke.width;
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-
-  ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
-
-  for (let i = 1; i < stroke.points.length - 1; i++) {
-      const midPoint = midPointBetween(stroke.points[i], stroke.points[i + 1]);
-      ctx.quadraticCurveTo(
-          stroke.points[i].x,
-          stroke.points[i].y,
-          midPoint.x,
-          midPoint.y
-      );
-  }
-
-  if (stroke.points.length > 1) {
-      const lastPoint = stroke.points[stroke.points.length - 1];
-      ctx.lineTo(lastPoint.x, lastPoint.y);
-  }
-
-  ctx.stroke();
-}
-
-function renderStrokes() {
-  pages[currentPage - 1].forEach(drawStroke);
-}
-
-function renderPage() {
-  // First render PDF page if it exists
-  if (pdfPages[currentPage - 1]) {
-      ctx.drawImage(pdfPages[currentPage - 1], 0, 0);
-  }
-  // Then render strokes on top
-  renderStrokes();
-}
-
-function clearCanvas() {
-  ctx.fillStyle = "white";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-function midPointBetween(p1, p2) {
-  return {
-      x: (p1.x + p2.x) / 2,
-      y: (p1.y + p2.y) / 2
-  };
-}
-
-function getCoordinates(e) {
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width / rect.width;
-  const scaleY = canvas.height / rect.height;
-
-  return {
-      x: (e.clientX - rect.left) * scaleX,
-      y: (e.clientY - rect.top) * scaleY
-  };
-}
-
-// State management
-function saveState() {
-  undoStack[currentPage - 1].push([...pages[currentPage - 1]]);
-  redoStack[currentPage - 1] = [];
-}
-
-// Tool selection
-pencilBtn.addEventListener('click', () => {
-  isEraserMode = false;
-  pencilBtn.classList.add('active');
-  eraserBtn.classList.remove('active');
-});
-
-eraserBtn.addEventListener('click', () => {
-  isEraserMode = true;
-  eraserBtn.classList.add('active');
-  pencilBtn.classList.remove('active');
-});
-
-// Undo/Redo
-undoBtn.addEventListener('click', () => {
-  if (undoStack[currentPage - 1].length > 0) {
-      const previousState = undoStack[currentPage - 1].pop();
-      redoStack[currentPage - 1].push([...pages[currentPage - 1]]);
-      pages[currentPage - 1] = previousState;
-      clearCanvas();
-      renderPage();
-  }
-});
-
-redoBtn.addEventListener('click', () => {
-  if (redoStack[currentPage - 1].length > 0) {
-      const nextState = redoStack[currentPage - 1].pop();
-      undoStack[currentPage - 1].push([...pages[currentPage - 1]]);
-      pages[currentPage - 1] = nextState;
-      clearCanvas();
-      renderPage();
-  }
-});
-
-// Clear canvas
-clearBtn.addEventListener('click', () => {
-  saveState();
-  pages[currentPage - 1] = [];
-  clearCanvas();
-  if (pdfPages[currentPage - 1]) {
-      renderPage();
-  }
-});
-
-// Page navigation
-function updatePageInfo() {
-  pageInfo.textContent = `Page ${currentPage} of ${Math.max(pages.length, pdfPages.length)}`;
-  prevPageBtn.disabled = currentPage === 1;
-}
-
-prevPageBtn.addEventListener('click', () => {
-  if (currentPage > 1) {
-      currentPage--;
-      clearCanvas();
-      renderPage();
-      updatePageInfo();
-  }
-});
-
-nextPageBtn.addEventListener('click', () => {
-  currentPage++;
-  if (currentPage > pages.length) {
-      pages.push([]);
-      undoStack.push([]);
-      redoStack.push([]);
-  }
-  clearCanvas();
-  renderPage();
-  updatePageInfo();
-});
-
-// PDF handling
-pdfUploadBtn.addEventListener('click', () => {
-  pdfUploadInput.click();
-});
-
-pdfUploadInput.addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  try {
-      // Reset everything
-      pdfPages = [];
-      pages = [[]];
-      undoStack = [[]];
-      redoStack = [[]];
-      currentPage = 1;
-
-      const loadingTask = pdfjsLib.getDocument(URL.createObjectURL(file));
-      const pdf = await loadingTask.promise;
-
-      // Create temporary canvas for PDF rendering
-      const tempCanvas = document.createElement('canvas');
-      const tempCtx = tempCanvas.getContext('2d');
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-
-      // Load all PDF pages
-      for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-          if (pageNum > 1) {
-              pages.push([]);
-              undoStack.push([]);
-              redoStack.push([]);
-          }
-
-          const page = await pdf.getPage(pageNum);
-          const viewport = page.getViewport({ scale: 1 });
-          const scale = Math.min(
-              canvas.width / viewport.width,
-              canvas.height / viewport.height
-          );
-          const scaledViewport = page.getViewport({ scale });
-
-          tempCanvas.width = canvas.width;
-          tempCanvas.height = canvas.height;
-
-          // Clear temp canvas
-          tempCtx.fillStyle = "white";
-          tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
-
-          const renderContext = {
-              canvasContext: tempCtx,
-              viewport: scaledViewport
-          };
-
-          await page.render(renderContext).promise;
-
-          // Store the PDF page as an image
-          const pageImage = new Image();
-          pageImage.src = tempCanvas.toDataURL('image/png');
-          await new Promise((resolve) => {
-              pageImage.onload = resolve;
-          });
-          pdfPages.push(pageImage);
-      }
-
-      // Render first page
-      clearCanvas();
-      renderPage();
-      updatePageInfo();
-
-  } catch (error) {
-      console.error('Error loading PDF:', error);
-      alert('Failed to load PDF. Please try again.');
-  }
-});
-
-// Save PDF functionality
-savePdfBtn.addEventListener('click', () => {
-  const fileName = prompt("Enter a name for your PDF file:", "drawing.pdf");
-  if (!fileName) return;
-
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF({
-      orientation: canvas.width > canvas.height ? 'l' : 'p',
-      unit: 'px',
-      format: [canvas.width, canvas.height]
-  });
-
-  const totalPages = Math.max(pages.length, pdfPages.length);
-
-  for (let i = 0; i < totalPages; i++) {
-      if (i > 0) {
-          pdf.addPage([canvas.width, canvas.height]);
-      }
-
-      clearCanvas();
-      if (pdfPages[i]) {
-          ctx.drawImage(pdfPages[i], 0, 0);
-      }
-      if (pages[i]) {
-          pages[i].forEach(drawStroke);
-      }
-
-      const imgData = canvas.toDataURL('image/jpeg', 1.0);
-      pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
-  }
-
-  // Restore current page view
-  clearCanvas();
-  renderPage();
-  pdf.save(fileName);
-});
-
-// Canvas event listeners
-canvas.addEventListener('pointerdown', (e) => {
-  if (e.button === 2) {
-      isRightMouseDown = true;
-      isEraserMode = true;
-      eraserBtn.classList.add('active');
-      pencilBtn.classList.remove('active');
-  } else {
-      isRightMouseDown = false;
-  }
-  startDrawing(e);
-});
-
-canvas.addEventListener('pointermove', draw);
-canvas.addEventListener('pointerup', (e) => {
-  if (isRightMouseDown) {
-      isRightMouseDown = false;
-      isEraserMode = false;
-      eraserBtn.classList.remove('active');
-      pencilBtn.classList.add('active');
-  }
-  stopDrawing();
-});
-
-canvas.addEventListener('pointerout', stopDrawing);
-canvas.addEventListener('contextmenu', (e) => e.preventDefault());
-
-// Initialize
-function initCanvas() {
-  clearCanvas();
-  updatePageInfo();
-}
-
-initCanvas();
-
-</script>
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <!-- Main Application Script -->
+  <script src="js/main.js" type="module"></script>
 </body>
 </html>

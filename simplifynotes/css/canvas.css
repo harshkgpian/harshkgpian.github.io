@@ -1,0 +1,15 @@
+.canvas-container {
+  margin-top: 80px; /* Adjust based on toolbar height */
+  margin-bottom: 70px; /* Adjust based on page controls height */
+  position: relative;
+  box-shadow: 0 4px 12px -1px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+canvas {
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 4px;
+  touch-action: none;
+  display: block; /* Removes extra space below the canvas */
+}

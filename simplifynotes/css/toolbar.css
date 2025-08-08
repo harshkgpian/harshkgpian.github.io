@@ -1,0 +1,78 @@
+.toolbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 10px 20px;
+  background: var(--toolbar-bg);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  z-index: 100;
+}
+
+.tool-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border-right: 1px solid var(--border-color);
+}
+
+.tool-group:last-child {
+  border-right: none;
+}
+
+.tool-group label {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+button, select {
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+  user-select: none;
+}
+
+button:hover, select:hover {
+  background: var(--button-hover-bg);
+}
+
+button.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: white;
+}
+
+button.recording {
+  background-color: #dc2626;
+  color: white;
+  border-color: #b91c1c;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
+/* Waveform canvas styles */
+#waveformCanvas {
+  display: none; /* Hidden by default */
+  background-color: #f1f5f9;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}

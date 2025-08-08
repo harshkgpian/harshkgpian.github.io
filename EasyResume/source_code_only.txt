@@ -1,0 +1,4291 @@
+
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\index.html  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\index.html" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\index.html
+======================================================
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Resume Builder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%234CAF50' d='M14,2H6C4.9,2,4,2.9,4,4v16c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2V8L14,2z M6,20V4h7v5h5v11H6z'/><path fill='%234CAF50' d='M10,13.5l-2.5,1.3l0.5-2.8l-2-2l2.8-0.4L10,7l1.2,2.5l2.8,0.4l-2,2l0.5,2.8L10,13.5z'/><path fill='%234CAF50' d='M15,16.5l-1.5,0.8l0.3-1.7l-1.2-1.2l1.7-0.2L15,13l0.7,1.5l1.7,0.2l-1.2,1.2l0.3,1.7L15,16.5z'/></svg>" type="image/svg+xml">
+
+</head>
+<!-- Rest of your HTML remains unchanged -->
+<body>
+    <div class="app-container">
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="action-buttons">
+                    <h3>Add Sections</h3>
+                    <button onclick="addSection('personal')" class="add-btn">
+                        Add Personal Info
+                    </button>   
+                    <button onclick="addSection('summary')" class="add-btn">
+                        Add Summary
+                    </button>   
+                    <button onclick="addSection('education')" class="add-btn">
+                        Add Education
+                    </button>
+                    <button onclick="addSection('experience')" class="add-btn">
+                        Add Experience
+                    </button>
+                    <button onclick="addSection('skills')" class="add-btn">
+                        Add Skills
+                    </button>
+                    <button onclick="addSection('projects')"  class="add-btn">
+                        Add Project
+                    </button>
+                    <!-- <button onclick="addSection('competitions')" class="add-btn">
+                        Add Competition
+                    </button> -->
+                    
+
+                </div>
+                
+                <div class="generate-buttons">
+                    <button onclick="addCustomSection()" class="btn-btn">
+                        Custom Section
+                    </button>
+                    
+                    <button onclick="openConfigModal()" class="btn-btn">
+                        Set Layout
+                    </button>
+                    <button onclick="generateResume()" class="btn-btn">
+                        Preview
+                    </button>
+                    <button onclick="downloadPDF()" class="btn-btn">
+                        Download PDF
+                    </button>
+                    <button onclick="loadDefaultData()" class="btn-btn">
+                        Demo Resume
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-area">
+                <div class="form-container" id="formContainer">
+                    <!-- Forms will be dynamically added here -->
+                </div>
+            </div>
+
+            <div class="preview-container">
+                <div class="preview-frame">
+                    <iframe 
+                        id="pdfPreview"
+                        type="application/pdf"
+                        width="100%"
+                        height="100%"
+                        frameborder="0"
+                        scrolling="auto"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Configuration Modal -->
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <h3>Resume Configuration</h3>
+            
+            <div class="config-section">
+                <h4>Page Settings</h4>
+                <div class="config-group">
+                    <label>Format:</label>
+                    <select id="pageFormat">
+                        <option value="a4">A4</option>
+                        <option value="letter">Letter</option>
+                    </select>
+                </div>
+                <div class="config-group">
+                    <label>Left Margin:</label>
+                    <input type="number" id="marginLeft" value="20" step="1">
+                    <label>Right Margin:</label>
+                    <input type="number" id="marginRight" value="20" step="1">
+                </div>
+            </div>
+            <!-- Add this inside the config-section for Header Settings -->
+            <div class="config-section">
+                <h4>Contact Icons</h4>
+                <div class="config-group">
+                    <label>Icon Size:</label>
+                    <input type="number" id="iconSize" value="3" step="0.5">
+                    <label>Icon Spacing:</label>
+                    <input type="number" id="iconSpacing" value="1" step="0.5">
+                </div>
+                <div class="config-group">
+                    <label>Contact Spacing:</label>
+                    <input type="number" id="contactSpacing" value="2" step="0.5">
+                    <label>Vertical Offset:</label>
+                    <input type="number" id="iconVerticalOffset" value="0.75" step="0.05">
+                </div>
+
+            </div>
+
+            <div class="config-section">
+                <h4>Font Settings</h4>
+                <div class="config-group">
+                    <label>Header Font:</label>
+                    <select id="headerFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                        <option value="courier">Courier</option>
+                        
+                    </select>
+                    <select id="headerWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                        <option value="italic">Italic</option>
+                        <option value="bolditalic">Bold and Italic</option>
+
+
+                    </select>
+                    <input type="number" id="headerSize" placeholder="Size" value="20">
+                    <input type="color" id="headerColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Section Title:</label>
+                    <select id="sectionTitleFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                        <option value="courier">Courier</option>
+                        
+                    </select>
+                    <select id="sectionTitleWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                        <option value="italic">Italic</option>
+                        <option value="bolditalic">Bold and Italic</option>
+
+
+                    </select>
+                    <input type="number" id="sectionTitleSize" placeholder="Size" value="14">
+                    <input type="color" id="sectionTitleColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Section Headers:</label>
+                    <select id="sectionHeaderFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                        <option value="courier">Courier</option>
+                        
+                    </select>
+                    <select id="sectionHeaderWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                        <option value="italic">Italic</option>
+                        <option value="bolditalic">Bold and Italic</option>
+
+
+                    </select>
+                    <input type="number" id="sectionHeaderSize" placeholder="Size" value="12">
+                    <input type="color" id="sectionHeaderColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Normal Text:</label>
+                    <select id="normalFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                        <option value="courier">Courier</option>
+                        
+                    </select>
+                    <select id="normalWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                        <option value="italic">Italic</option>
+                        <option value="bolditalic">Bold and Italic</option>
+
+
+                    </select>
+                    <input type="number" id="normalSize" placeholder="Size" value="11">
+                    <input type="color" id="normalColor" value="#000000">
+                </div>
+                <div class="config-group">
+                    <label>Small Text:</label>
+                    <select id="smallFont">
+                        <option value="times">Times</option>
+                        <option value="helvetica">Helvetica</option>
+                        <option value="arial">Arial</option>
+                        <option value="courier">Courier</option>
+                        
+                    </select>
+                    <select id="smallWeight">
+                        <option value="normal">Normal</option>
+                        <option value="bold">Bold</option>
+                        <option value="italic">Italic</option>
+                        <option value="bolditalic">Bold and Italic</option>
+
+
+                    </select>
+                    <input type="number" id="smallSize" placeholder="Size" value="9">
+                    <input type="color" id="smallColor" value="#666666">
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h4>Spacing</h4>
+                <div class="config-group">
+                    <label>Section Gap:</label>
+                    <input type="number" id="sectionGap" value="2">
+                    <label>Header Gap:</label>
+                    <input type="number" id="headerGap" value="2">
+                </div>
+                <div class="config-group">
+                    <label>Line Gap:</label>
+                    <input type="number" id="lineGap" value="4">
+                    <label>Paragraph Gap:</label>
+                    <input type="number" id="paragraphGap" value="2">
+                </div>
+                <div class="config-group">
+                    <label>Indentation:</label>
+                    <input type="number" id="indentation" value="3">
+                    <label>Skill Indentation:</label>
+                    <input type="number" id="skillIndentation" value="40">
+                </div>
+
+            </div>
+
+            <div class="config-section">
+                <h4>Formatting</h4>
+                <div class="config-group">
+                    <label>Header Alignment:</label>
+                    <select id="headerAlign">
+                        <option value="center">Center</option>
+                        <option value="left">Left</option>
+                    </select>
+                </div>
+                <div class="config-group">
+                    <label>Section Alignment:</label>
+                    <select id="sectionAlign">
+                        <option value="left">Left</option>
+                        <option value="center">Center</option>
+                    </select>
+                </div>
+                <div class="config-group">
+                    <label>Bullet Style:</label>
+                    <input type="text" id="bulletStyle" value="•">
+                </div>
+            </div>
+
+            <div class="config-section">
+                <h4>Divider Settings</h4>
+                <div class="config-group">
+                    <label>Style:</label>
+                    <select id="dividerStyle">
+                        <option value="line">Line</option>
+                        <option value="none">None</option>
+                    </select>
+                    <input type="color" id="dividerColor" value="#000000">
+                    <label>Width:</label>
+                    <input type="number" id="dividerWidth" value="0.2" step="0.1">
+                </div>
+            </div>
+
+            <button onclick="saveConfig()" class="save-btn">Save Configuration</button>
+            <button onclick="resetConfig()" class="add-btn">Reset Configuration</button>
+
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    <script src="dragdrop.js"></script>
+    <script src="section.js"></script>
+    <script src="template.js"></script>
+    <script src="autofill.js"></script>
+</body>
+</html>
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\styles.css  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\styles.css" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\styles.css
+======================================================
+
+/* Base reset and global styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #0ea5e9;
+  --primary-hover: #0284c7;
+  --success: #44ef5e;
+  --success-hover: #3ce051;
+  --danger: #ef4444;
+  --danger-hover: #dc2626;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-500: #6b7280;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+  --shadow-md: 0 1px 3px rgba(16, 24, 40, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --font-sm: 0.7em;
+  --font-md: 0.8em;
+  --font-lg: 1em;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.6;
+  background-color: var(--gray-50);
+  color: var(--gray-900);
+}
+
+/* Layout */
+.app-container {
+  padding: var(--spacing-md);
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.main-content {
+  display: grid;
+  grid-template-columns: 135px minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: var(--spacing-md);
+  min-height: calc(100vh - 40px);
+}
+
+/* Sidebar */
+.sidebar {
+  background: white;
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  height: calc(100vh - 40px);
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.sidebar h3 {
+  color: var(--gray-900);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.add-btn {
+  padding: var(--spacing-sm) var(--spacing-sm);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  background: white;
+  color: var(--gray-700);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.add-btn:hover {
+  background: var(--gray-200);
+  transform: translateY(-1px);
+}
+
+.generate-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-top: auto;
+}
+
+.btn-btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--success);
+  color: black;
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-btn:hover {
+  background: var(--success-hover);
+  transform: translateY(-1px);
+}
+
+/* Content Area */
+.content-area {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+}
+
+.section-form {
+  background: white;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--gray-50);
+  border-bottom: 1px solid var(--gray-200);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: var(--radius-md);
+}
+
+.section-content {
+  padding: var(--spacing-md);
+  display: none;
+  background-color: var(--gray-50);
+}
+
+.section-content.expanded {
+  display: block;
+}
+
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: var(--spacing-xs);
+  color: var(--gray-700);
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.form-group input, 
+.form-group textarea, 
+.skill-item {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-md);
+  transition: all 0.2s ease;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.remove-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  padding: var(--spacing-sm) var(--spacing-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+  background: var(--danger-hover);
+}
+
+/* Preview Container */
+.preview-container {
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  height: calc(100vh - 40px);
+  overflow: hidden;
+}
+
+.preview-frame {
+  width: 100%;
+  height: 100%;
+}
+
+#pdfPreview {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5% auto;
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  width: 90%;
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.config-section {
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.config-group {
+  margin: var(--spacing-sm) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.config-group label {
+  min-width: 120px;
+  font-size: var(--font-md);
+  color: var(--gray-700);
+}
+
+.config-group input, 
+.config-group select {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-md);
+}
+
+.save-btn {
+  background: var(--primary);
+  color: white;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-md);
+  font-weight: 500;
+  float: right;
+  transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .main-content {
+    grid-template-columns: 180px 1fr;
+  }
+  
+  .preview-container {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: auto;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .action-buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .add-btn {
+    flex: 1 1 calc(50% - 4px);
+  }
+}
+
+/* Drag and Drop */
+.drag-handle {
+  cursor: move;
+  color: var(--gray-500);
+  font-size: var(--font-lg);
+  padding-right: var(--spacing-xs);
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.drag-over {
+  border: 2px dashed var(--gray-500);
+}
+
+/* Groups */
+.section-group {
+  margin-bottom: var(--spacing-md);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm);
+}
+
+.group-header {
+  cursor: move;
+  padding: var(--spacing-sm);
+  background-color: var(--gray-200);
+  color: var(--gray-900);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-sm);
+  display: flex;
+  font-size: var(--font-sm);
+  justify-content: space-between;
+  align-items: center;
+}
+
+.group-content.collapsed {
+  max-height: 0;
+  overflow: hidden;
+}
+
+/* Skills Section */
+.section-content h3 {
+  font-size: var(--font-sm);
+  color: var(--gray-900);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.skills-container {
+  display: grid;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.skill-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.skill-item input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  font-size: var(--font-md);
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.skill-item input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.add-skill-btn {
+  background: var(--gray-100);
+  color: var(--gray-700);
+  border: 1px solid var(--gray-300);
+  padding: var(--spacing-sm);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-size: var(--font-sm);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  margin-bottom: var(--spacing-md);
+}
+
+.add-skill-btn:hover {
+  background: var(--gray-200);
+}
+
+/* Responsive skills grid */
+@media (min-width: 640px) {
+  .skills-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .skills-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Custom modal */
+.custom-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  z-index: 1000;
+}
+
+.custom-modal .modal-content {
+  background-color: white;
+  margin-top: 50px;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  width: 90%;
+  max-width: 500px;
+}
+
+.custom-modal h3 {
+  margin-top: 0;
+  color: var(--gray-900);
+  font-size: 1.4rem;
+}
+
+.custom-modal input[type="text"] {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin: 15px 0;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+}
+
+.custom-modal .modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+  margin-top: 15px;
+}
+
+.custom-modal button {
+  padding: var(--spacing-xs) var(--spacing-md);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.custom-modal #cancelBtn {
+  background-color: var(--gray-100);
+  color: var(--gray-900);
+}
+
+.custom-modal #submitBtn {
+  background-color: var(--success);
+  color: white;
+}
+
+.custom-modal #cancelBtn:hover {
+  background-color: var(--gray-200);
+}
+
+.custom-modal #submitBtn:hover {
+  background-color: var(--success-hover);
+}
+
+/* Bullets */
+.bullets-container {
+  margin-bottom: var(--spacing-sm);
+  width: 100%;
+}
+
+.bullet-item {
+  margin-bottom: var(--spacing-sm);
+}
+
+.bullet-input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+.bullet-input {
+  flex-grow: 1;
+  padding: var(--spacing-sm);
+  font-size: var(--font-md);
+  min-height: 40px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+}
+
+.bullet-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.remove-bullet-btn {
+  background: var(--danger);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-bullet-btn::after {
+  content: none;
+}
+
+.add-bullet-btn {
+  background: var(--success);
+  color: white;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-sm);
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.add-bullet-btn:hover {
+  background: var(--success-hover);
+}
+
+.bullet-width-info {
+  margin: 0 var(--spacing-sm);
+  font-size: var(--font-md);
+  min-width: 45px;
+  color: var(--gray-500);
+}
+
+/* Maximized section */
+.maximized-section {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-height: 90vh;
+  overflow-y: auto;
+  z-index: 1000;
+  background: white;
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.blurred-background {
+  position: relative;
+}
+
+.blurred-background::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+.hidden-section {
+  display: none !important;
+}
+
+.section-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.maximize-btn {
+  background-color: var(--danger);
+  border: none;
+  cursor: pointer;
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.2s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.maximize-btn i, 
+.maximize-btn svg,
+.maximize-btn img,
+.maximize-btn span {
+  display: none;
+}
+
+.maximize-btn::after {
+  content: "↗";
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.maximize-btn:hover {
+  background-color: var(--danger-hover);
+  transform: scale(1.05);
+}
+
+.maximized-section .maximize-btn {
+  display: none;
+}
+
+.maximized-section::after {
+  content: "Press ESC or ENTER to minimize";
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  font-size: 12px;
+  color: var(--gray-500);
+}
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\autofill.js  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\autofill.js" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\autofill.js
+======================================================
+
+// jsonVersion.js
+
+let defaultJson = {
+  "personal": [
+    {
+      "name": "Harsh Raj",
+      "email": "harshrjto@gmail.com",
+      "phone": "+91 8750798260",
+      "github": "github.com/harshkgpian",
+      "linkedin": "linkedin.com/in/harsh-raj",
+      "website": "LinkedInAutoApply.com"
+    }
+  ],
+  "education": [
+    {
+      "school": "Indian Institute of Technology, Kharagpur",
+      "degree": "Master of Technology in Aerospace Engineering",
+      "duration": "November 2020 - Present",
+      "location": "West Bengal, India",
+      "scoreType": "CGPA",
+      "gpa": "8.64/10"
+    },
+    {
+      "school": "Bharat National Public School",
+      "degree": "Class XII - Central Board of Secondary Education",
+      "duration": "May 2019",
+      "location": "Delhi, India",
+      "scoreType": "Percentage",
+      "gpa": "90%"
+    }
+  ],
+  "experience": [
+    {
+      "title": "Full-Stack Founder & Developer",
+      "company": "LinkedInAutoApply.com",
+      "duration": "January 2024 - Present",
+      "location": "Remote",
+      "bullets": [
+        "Engineered and launched LinkedInAutoApply.com, a full-stack platform using Node.js and React for automated job applications.",
+        "Integrated a secure Razorpay payment gateway to efficiently manage user subscriptions and transactions.",
+        "Architected a scalable backend with Firebase for robust data storage and real-time application updates.",
+        "Leveraged Python and Generative AI for intelligent resume parsing and personalized application message generation."
+      ],
+      "tags": [
+        "Node.js",
+        "React",
+        "Razorpay API",
+        "Firebase",
+        "Python",
+        "Generative AI",
+        "Full-Stack Development",
+        "SaaS",
+        "Automated Solutions"
+      ]
+    },
+    {
+      "title": "Data Science Intern / AI Engineering Intern",
+      "company": "GradStem",
+      "duration": "May 2023 - June 2023",
+      "location": "Remote",
+      "bullets": [
+        "Developed Python scripts for Indeed API integration, classifying thousands of job listings efficiently.",
+        "Applied Artificial Intelligence techniques for precise technical and non-technical job classification.",
+        "Utilized OpenAI GPT-4o API for resume personalization, improving Applicant Tracking System (ATS) compatibility.",
+        "Automated job applications on Greenhouse/Workday using JavaScript, Selenium, Python, and Generative AI."
+      ],
+      "tags": [
+        "Python",
+        "Artificial Intelligence",
+        "OpenAI GPT-4o",
+        "ATS Optimization",
+        "JavaScript",
+        "Selenium",
+        "Generative AI",
+        "Data Science",
+        "API Integration"
+      ]
+    },
+    {
+      "title": "Deep Learning / Computer Vision Intern",
+      "company": "Artenal Robotics",
+      "duration": "May 2022 - August 2022",
+      "location": "Vancouver, Canada",
+      "bullets": [
+        "Applied TensorFlow for object detection, recognition, and developing new orientation detection algorithms.",
+        "Custom trained Convolutional Neural Network (CNN) models like YOLO v5/v6 using Python.",
+        "Utilized advanced transfer learning techniques for enhanced AI software development and efficiency.",
+        "Created an efficient image annotation app with Python's Tkinter library, streamlining project workflows."
+      ],
+      "tags": [
+        "TensorFlow",
+        "Object Detection",
+        "Artificial Intelligence",
+        "Python",
+        "CNN",
+        "YOLO",
+        "Deep Learning",
+        "Computer Vision",
+        "Transfer Learning"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Nexus - Smart Scheduler (Voice Agent)",
+      "subtitle": "Self Project",
+      "duration": "July 2024",
+      "location": "Personal",
+      "bullets": [
+        "Developed a conversational AI scheduling assistant with text and real-time voice modes, integrating Google Calendar.",
+        "Implemented 'See, Then Act' logic ensuring no conflicting schedule suggestions for optimal planning.",
+        "Utilized OpenAI Realtime API for low-latency, conversational voice interactions with server-side turn detection.",
+        "Built with Node.js, Express.js, Vanilla HTML, CSS, JavaScript, and OpenAI Chat API (gpt-4.1-nano)."
+      ],
+      "tags": [
+        "Node.js",
+        "Express.js",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "OpenAI API",
+        "Google Calendar API",
+        "Artificial Intelligence",
+        "Generative AI",
+        "Voice AI",
+        "API Integration"
+      ]
+    },
+    {
+      "title": "WhatsApp Automation Tool",
+      "subtitle": "Independent Software Development Project",
+      "duration": "January 2024 - Present",
+      "location": "Remote",
+      "bullets": [
+        "Developed an Electron desktop app with `whatsapp-web.js` for end-to-end WhatsApp messaging automation.",
+        "Implemented bulk messaging, auto-responders, contact scraping, and scheduling using JavaScript for lead outreach.",
+        "Engineered CLI and REST API hooks for seamless integration into existing business workflows efficiently.",
+        "Packaged the application with an auto-updating installer feature for enhanced user experience."
+      ],
+      "tags": [
+        "Electron",
+        "JavaScript",
+        "Node.js",
+        "Automation",
+        "REST API",
+        "Software Development",
+        "CLI Tools"
+      ]
+    },
+    {
+      "title": "Virtual AI Girlfriend",
+      "subtitle": "Self Project",
+      "duration": "July 2024",
+      "location": "Personal",
+      "bullets": [
+        "Developed a web app (HTML, JS, CSS, Node.js) simulating interactive virtual partner conversations.",
+        "Integrated Groq API with LLAMA 3 models for dynamic, context-aware conversational responses.",
+        "Ensured multi-language support and created a visually appealing chat interface with customizable partner personalities.",
+        "Conducted thorough unit testing for critical components of the Generative AI system."
+      ],
+      "tags": [
+        "HTML",
+        "JavaScript",
+        "Node.js",
+        "Generative AI",
+        "Groq API",
+        "LLAMA 3",
+        "Artificial Intelligence",
+        "Unit Testing",
+        "Conversational AI"
+      ]
+    },
+    {
+      "title": "Perplexity AI-Like System",
+      "subtitle": "Self Project",
+      "duration": "July 2024",
+      "location": "Personal",
+      "bullets": [
+        "Developed a Python system where an LLM uses Google Search API to find and scrape web content.",
+        "Utilized BeautifulSoup for efficient and precise web scraping and data extraction.",
+        "Implemented Retrieval-Augmented Generation (RAG) for synthesizing scraped, up-to-date information.",
+        "Utilized Groq API for faster LLM inference, significantly improving system performance and efficiency."
+      ],
+      "tags": [
+        "Python",
+        "LLM",
+        "BeautifulSoup",
+        "Artificial Intelligence",
+        "RAG",
+        "Generative AI",
+        "Groq API",
+        "Web Scraping",
+        "Information Retrieval"
+      ]
+    },
+    {
+      "title": "Aerial Image Segmentation with PyTorch",
+      "subtitle": "Self Project",
+      "duration": "July 2022",
+      "location": "Personal",
+      "bullets": [
+        "Developed a custom Python dataset class, applying image-mask augmentation via Albumentations for road segmentation.",
+        "Harnessed a pre-trained U-Net model from the PyTorch Segmentation Model library effectively.",
+        "Streamlined model training with efficient training/evaluation functions in this software development initiative.",
+        "Conducted comprehensive unit testing to ensure the reliability of segmentation model components."
+      ],
+      "tags": [
+        "Python",
+        "PyTorch",
+        "U-Net",
+        "Albumentations",
+        "Unit Testing",
+        "Deep Learning",
+        "Image Segmentation",
+        "Computer Vision"
+      ]
+    },
+    {
+      "title": "Rock Paper Scissors Game",
+      "subtitle": "Self Project",
+      "duration": "May 2023 - June 2023",
+      "location": "Personal",
+      "bullets": [
+        "Built a real-time 'Rock, Paper, Scissors' web app, training deep learning models using Python.",
+        "Utilized webcam images with JavaScript and TensorFlow.js for real-time AI integration.",
+        "Leveraged TensorFlow and transfer learning for user-driven model training with real-time predictions.",
+        "Enabled model download for user convenience, extending utility of the trained deep learning model."
+      ],
+      "tags": [
+        "Python",
+        "JavaScript",
+        "TensorFlow.js",
+        "Deep Learning",
+        "Artificial Intelligence",
+        "Web Development",
+        "Real-time Applications"
+      ]
+    },
+    {
+      "title": "VTOL and Fixed Wing Hybrid Drone Design",
+      "subtitle": "Flight Testing Lab Project",
+      "duration": "August 2022 - November 2022",
+      "location": "IIT Kharagpur",
+      "bullets": [
+        "Designed and simulated a hybrid VTOL and fixed-wing drone using MATLAB/SIMULINK and Simscape library.",
+        "Conducted comprehensive analysis of drone’s flight characteristics and aerodynamic performance in OpenVSP.",
+        "Designed and implemented PID control systems for transitions between hover and horizontal flight."
+      ],
+      "tags": [
+        "MATLAB",
+        "SIMULINK",
+        "Simscape",
+        "OpenVSP",
+        "PID Control",
+        "Aerospace Engineering",
+        "Drone Design",
+        "Simulation"
+      ]
+    }
+  ],
+  "leadership": [
+    {
+      "title": "Physics Olympiad Mentor",
+      "organization": "IIT Kharagpur (Extended Online)",
+      "duration": "August 2022 - Present",
+      "location": "IIT Kharagpur",
+      "bullets": [
+        "Recorded and delivered comprehensive physics lectures to prepare students for national Physics Olympiads.",
+        "Provided expert guidance and mentorship, improving understanding of complex physics concepts effectively."
+      ],
+      "tags": [
+        "Mentorship",
+        "Teaching",
+        "Physics Education",
+        "Academic Support"
+      ]
+    },
+    {
+      "title": "Football Team Player & Training Organizer",
+      "organization": "Inter IIT Sports Competition",
+      "duration": "November 2020 - May 2023",
+      "location": "IIT Kharagpur",
+      "bullets": [
+        "Represented IIT Kharagpur as a football player in the prestigious Inter IIT sports competition.",
+        "Organized and conducted rigorous training sessions for over 30 players, enhancing team skills."
+      ],
+      "tags": [
+        "Leadership",
+        "Teamwork",
+        "Sports Coaching",
+        "Event Organization",
+        "Athletics"
+      ]
+    }
+  ],
+  "skills": [
+    {
+      "category": "Languages and Tools",
+      "skills": [
+        "Python",
+        "Java",
+        "C/C++",
+        "JavaScript",
+        "Node.js",
+        "Electron",
+        "TensorFlow",
+        "PyTorch",
+        "Keras",
+        "Scikit-learn",
+        "OpenCV",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Seaborn",
+        "SQL",
+        "BeautifulSoup",
+        "Selenium",
+        "Firebase",
+        "Razorpay API",
+        "Groq API",
+        "OpenAI API",
+        "MATLAB",
+        "SIMULINK",
+        "Simscape",
+        "OpenVSP",
+        "Tkinter"
+      ]
+    },
+    {
+      "category": "AI & Data Analysis",
+      "skills": [
+        "Generative AI",
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Deep Learning",
+        "Natural Language Processing (NLP)",
+        "Data Visualization",
+        "Web Scraping",
+        "Retrieval-Augmented Generation (RAG)",
+        "Transformers",
+        "Computer Vision",
+        "Object Detection",
+        "Image Segmentation",
+        "Transfer Learning",
+        "Conversational AI"
+      ]
+    },
+    {
+      "category": "Software Development Practices",
+      "skills": [
+        "Software Development",
+        "Unit Testing",
+        "Code Reviews",
+        "Documentation",
+        "REST API Development",
+        "Agile Methodologies",
+        "Full-Stack Development",
+        "System Design",
+        "API Integration"
+      ]
+    }
+  ]
+}
+
+
+let demoJSON = defaultJson;
+
+
+// Helper function to detect and register custom sections
+function detectCustomSections() {
+    // Look through the JSON for sections that might not be in the default config
+    const standardSections = ['personal', 'summary', 'education', 'experience', 'projects', 'skills'];
+    
+    // Find custom sections in the demo JSON
+    const customSections = Object.keys(demoJSON).filter(key => !standardSections.includes(key));
+    
+    // Register each custom section
+    customSections.forEach(sectionKey => {
+        // Format section name for display (capitalize first letter)
+        const sectionTitle = sectionKey.charAt(0).toUpperCase() + sectionKey.slice(1);
+        
+        // Check if we need to add to sectionCounter
+        if (typeof sectionCounter !== 'undefined' && sectionCounter[sectionKey] === undefined) {
+            sectionCounter[sectionKey] = 0;
+        }
+        
+        // Check if we need to add to formData
+        if (typeof formData !== 'undefined' && formData[sectionKey] === undefined) {
+            formData[sectionKey] = [];
+        }
+        
+        // Register the custom section in the config
+        if (typeof updateConfigWithCustomSection === 'function') {
+            updateConfigWithCustomSection(sectionKey, sectionTitle);
+        } else {
+            console.warn('updateConfigWithCustomSection function not found');
+        }
+        
+        // Add button for the custom section if it doesn't exist
+        createSectionButton(sectionKey, sectionTitle);
+    });
+    
+    return customSections;
+}
+
+// Function to create buttons for custom sections
+function createSectionButton(sectionKey, sectionTitle) {
+    console.log('Creating button for custom section:', sectionKey);
+    // Check if button already exists
+    const existingButton = document.querySelector(`.add-btn[data-section="${sectionKey}"]`);
+    if (existingButton) {
+        return; // Don't create duplicates
+    }
+    
+    // Create a new button and add it to the sidebar
+    const sidebar = document.querySelector(".action-buttons");
+    if (sidebar) {
+        const newButton = document.createElement("button");
+        newButton.className = "add-btn";
+        newButton.setAttribute('data-section', sectionKey); // Mark with section type
+        newButton.textContent = `Add ${sectionTitle}`;
+        newButton.onclick = function() {
+            if (typeof addSection === 'function') {
+                addSection(sectionKey);
+            } else {
+                console.warn('addSection function not found');
+            }
+        };
+        
+        sidebar.appendChild(newButton);
+    } else {
+        console.warn('Sidebar element not found');
+    }
+}
+
+// Function to clear all existing data before loading demo
+function clearAllData() {
+    // Get form container element and check if it exists
+    const formContainer = document.getElementById('formContainer');
+    if (formContainer) {
+        formContainer.innerHTML = '';
+    } else {
+        console.warn('Form container element not found');
+    }
+    
+    // Clear resume preview if it exists
+    const resumeElement = document.getElementById('resume');
+    if (resumeElement) {
+        resumeElement.innerHTML = '';
+    } else {
+        console.warn('Resume element not found');
+    }
+    
+    // Get all section types from the JSON
+    const allSectionTypes = Object.keys(demoJSON);
+    
+    // Clear formData object
+    if (typeof formData !== 'undefined') {
+        // Reset formData with all section types
+        formData = {
+            personal: [],
+            education: [],
+            experience: [],
+            projects: [],
+            competitions: [],
+            skills: []
+        };
+        
+        // Add custom section types from JSON
+        allSectionTypes.forEach(type => {
+            if (!formData[type]) {
+                formData[type] = [];
+            }
+        });
+    } else {
+        console.warn('formData variable not defined yet');
+    }
+    
+    // Reset section counters
+    if (typeof sectionCounter !== 'undefined') {
+        sectionCounter = {
+            personal: 0,
+            education: 0,
+            experience: 0,
+            projects: 0,
+            skills: 0,
+            competitions: 0
+        };
+        
+        // Add custom section types from JSON
+        allSectionTypes.forEach(type => {
+            if (!sectionCounter[type]) {
+                sectionCounter[type] = 0;
+            }
+        });
+    } else {
+        console.warn('sectionCounter variable not defined yet');
+    }
+}
+
+function populateSection(sectionType, sectionData) {
+    if (!sectionData || !Array.isArray(sectionData) || sectionData.length === 0) {
+        return;
+    }
+
+    sectionData.forEach(itemData => {
+        addSection(sectionType);
+        const sectionId = `${sectionType}-${sectionCounter[sectionType] - 1}`;
+        const section = document.getElementById(sectionId);
+        
+        if (section) {
+            Object.entries(itemData).forEach(([key, value]) => {
+                if (key === 'bullets') {
+                    // Find the bullets container
+                    const bulletsContainer = section.querySelector(`#bullets-${sectionId}`);
+                    if (bulletsContainer) {
+                        // Clear any default bullet points
+                        bulletsContainer.innerHTML = '';
+                        
+                        // Add each bullet point as a separate field
+                        value.forEach(bulletText => {
+                            addBulletField(sectionId, bulletsContainer, bulletText);
+                        });
+                    }
+                } else if (key === 'tags') {
+                    const input = section.querySelector('input[name="tags"]');
+                    if (input) {
+                        input.value = Array.isArray(value) ? value.join(', ') : value;
+                    }
+                } else if (key === 'skills') {
+                    // Handle skills array for skills section
+                    const skillsContainer = section.querySelector('.skills-container');
+                    if (skillsContainer) {
+                        value.forEach((skill, index) => {
+                            if (index === 0) {
+                                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
+                                if (firstSkillInput) {
+                                    firstSkillInput.value = skill;
+                                }
+                            } else {
+                                addSkillField(sectionId);
+                                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
+                                inputs[inputs.length - 1].value = skill;
+                            }
+                        });
+                    }
+                } else if (key === 'summary' && sectionType === 'summary') {
+                    // Special handling for summary text
+                    const textarea = section.querySelector('textarea[name="summary"]');
+                    if (textarea) {
+                        textarea.value = value;
+                    }
+                } else {
+                    const input = section.querySelector(`input[name="${key}"]`);
+                    const textarea = section.querySelector(`textarea[name="${key}"]`);
+                    if (input) {
+                        input.value = value;
+                    } else if (textarea) {
+                        textarea.value = value;
+                    }
+                }
+            });
+            updateFormData(sectionId);
+            
+            // Update section title
+            let titleField = null;
+            if (sectionType === 'education') {
+                titleField = section.querySelector('input[name="school"]');
+            } else if (sectionType === 'summary') {
+                titleField = { value: 'Professional Summary' }; // Static title for summary
+            } else if (sectionType === 'skills') {
+                titleField = section.querySelector('input[name="category"]');
+            } else if (sectionType === 'personal') {
+                titleField = section.querySelector('input[name="name"]');
+            }  else {
+                titleField = section.querySelector('input[name="title"]');
+            }
+            
+            if (titleField && titleField.value) {
+                updateSectionTitle(sectionId, sectionType, titleField.value);
+            }
+        }
+    });
+}
+
+
+function populateFromDemoJSON() {
+    try {
+        // First, detect and register any custom sections from the JSON
+        const customSections = detectCustomSections();
+        console.log('Detected custom sections:', customSections);
+        
+        // Update section order to include custom sections
+        if (typeof sectionOrder !== 'undefined') {
+            customSections.forEach(section => {
+                if (!sectionOrder.includes(section)) {
+                    sectionOrder.push(section);
+                }
+            });
+            console.log('Updated section order:', sectionOrder);
+        }
+        
+        // Populate all sections using our helper function
+        Object.entries(demoJSON).forEach(([sectionType, sectionData]) => {
+            if (sectionType !== 'skills') { // Skills needs special handling
+                populateSection(sectionType, sectionData);
+            }
+        });
+        
+        // Special handling for Skills section
+        if (demoJSON.skills && Array.isArray(demoJSON.skills)) {
+            demoJSON.skills.forEach(skillCategory => {
+                addSection('skills');
+                const sectionId = `skills-${sectionCounter.skills - 1}`;
+                const section = document.getElementById(sectionId);
+                
+                if (section) {
+                    // Set category
+                    const categoryInput = section.querySelector('input[name="category"]');
+                    if (categoryInput) {
+                        categoryInput.value = skillCategory.category;
+                    }
+
+                    // Add skills
+                    const skillsContainer = section.querySelector('.skills-container');
+                    if (skillsContainer) {
+                        skillCategory.skills.forEach((skill, index) => {
+                            if (index === 0) {
+                                // Use existing first skill input
+                                const firstSkillInput = skillsContainer.querySelector('input[name="skill"]');
+                                if (firstSkillInput) {
+                                    firstSkillInput.value = skill;
+                                }
+                            } else {
+                                // Add new skill input for remaining skills
+                                addSkillField(sectionId);
+                                const inputs = skillsContainer.querySelectorAll('input[name="skill"]');
+                                inputs[inputs.length - 1].value = skill;
+                            }
+                        });
+                    }
+                    updateFormData(sectionId);
+                }
+            });
+        }
+
+        // Generate resume preview
+        console.log('Demo data loaded', sectionOrder);
+        if (typeof generateResume === 'function' && typeof sectionOrder !== 'undefined') {
+            generateResume(sectionOrder);
+        } else {
+            console.warn('generateResume function or sectionOrder not found');
+        }
+    } catch (error) {
+        console.error('Error loading demo data:', error);
+    }
+}
+
+
+
+// Function to load demo data
+function loadDemoData() {
+    try {
+        // Clear any existing data before loading demo
+        clearAllData();
+        
+        // Populate with demo data
+        populateFromDemoJSON();
+    } catch (error) {
+        console.error('Error in loadDemoData:', error);
+    }
+}
+
+function loadDefaultData() {
+    try {
+        // Clear any existing data before loading demo
+        clearAllData();
+        
+        // Populate with demo data
+        demoJSON = defaultJson;
+        populateFromDemoJSON();
+    } catch (error) {
+        console.error('Error in loadDemoData:', error);
+    }
+}
+
+// Function to create updated JSON from all form data
+function createUpdatedJSON() {
+    // Initialize the JSON structure with the same format as demoJSON
+    const updatedJSON = {};
+    
+    // Collect data from all section types defined in sectionCounter
+    Object.keys(sectionCounter).forEach(sectionType => {
+      if (!updatedJSON[sectionType]) {
+        updatedJSON[sectionType] = [];
+      }
+      
+      // Skip if no data exists for this section type
+      if (!formData[sectionType] || formData[sectionType].length === 0) {
+        return;
+      }
+      
+      // Process each item in this section type
+      formData[sectionType].forEach(item => {
+        const sectionData = {};
+        
+        // Handle special case for summary
+        if (sectionType === 'summary') {
+          if (item.fields.summary) {
+            sectionData.summary = item.fields.summary;
+          }
+        } 
+        // Handle special case for skills
+        else if (sectionType === 'skills') {
+          sectionData.category = item.fields.category || '';
+          sectionData.skills = item.fields.skills || [];
+        } 
+        // Handle all other fields for standard and custom sections
+        else {
+          // Copy all fields except bullets and tags which need special handling
+          Object.keys(item.fields).forEach(fieldName => {
+            if (fieldName !== 'bullets' && fieldName !== 'tags' && fieldName !== 'skills') {
+              sectionData[fieldName] = item.fields[fieldName] || '';
+            }
+          });
+          
+          // Handle bullets
+          if (item.fields.bullets) {
+            sectionData.bullets = Array.isArray(item.fields.bullets) ? 
+              item.fields.bullets : 
+              (typeof item.fields.bullets === 'string' ? 
+                item.fields.bullets.split('\n').filter(b => b.trim() !== '') : []);
+          }
+          
+          // Handle tags
+          if (item.fields.tags) {
+            sectionData.tags = typeof item.fields.tags === 'string' ? 
+              item.fields.tags.split(',').map(tag => tag.trim()).filter(tag => tag !== '') : 
+              (Array.isArray(item.fields.tags) ? item.fields.tags : []);
+          }
+        }
+        
+        // Only add non-empty section data
+        if (Object.keys(sectionData).length > 0) {
+          updatedJSON[sectionType].push(sectionData);
+        }
+      });
+      
+      // Remove empty arrays
+      if (updatedJSON[sectionType].length === 0) {
+        delete updatedJSON[sectionType];
+      }
+    });
+    
+    return updatedJSON;
+  }
+  
+  // Function to log the updated JSON to console
+  function logUpdatedJSON() {
+    const updatedJSON = createUpdatedJSON();
+    console.log('Updated Resume JSON:');
+    console.log(JSON.stringify(updatedJSON, null, 2));
+        
+    return updatedJSON;
+  }
+  
+  
+// Remove the JSON buttons function completely
+function addJSONButtons() {
+    // This function is now empty - we're removing the buttons
+  }
+  
+  // Save to localStorage when JSON is updated
+  function saveToLocalStorage() {
+    const updatedJSON = createUpdatedJSON();
+    const updatedsectionOrder = getSectionOrder();
+    localStorage.setItem('sectionOrder', updatedsectionOrder);
+    localStorage.setItem('resumeData', JSON.stringify(updatedJSON));
+  }
+  
+  // Modified window.onload function
+  window.onload = function() {
+    try {
+      // Check if there's data in localStorage
+      const savedData = localStorage.getItem('resumeData');
+      const savedOrder = localStorage.getItem('sectionOrder');
+      
+      if (savedData && savedOrder) {
+        // Use the saved data
+        demoJSON = JSON.parse(savedData);
+        sectionOrder = savedOrder.split(',');
+        console.log('sectionOrder from localStorage:', sectionOrder);
+        console.log('Loaded data from localStorage');
+      }
+      
+      // Load data (either from localStorage or the default demo)
+      loadDemoData();
+      
+      // Setup event listener to save on form changes
+      document.addEventListener('change', saveToLocalStorage);
+      
+      // Initialize collapsed sections if the function exists
+      if (typeof initializeCollapsedGroups === 'function') {
+        initializeCollapsedGroups();
+      }
+    } catch (error) {
+      console.error('Error in window.onload:', error);
+    }
+  };
+
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\config.js  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\config.js" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\config.js
+======================================================
+
+// config.js
+const RESUME_CONFIG = {
+    page: {
+        unit: 'mm',
+        format: 'a4',
+        orientation: 'portrait',
+        margins: {
+            top: 15,
+            right: 7,
+            bottom: 15,
+            left: 7
+        }
+    },
+    fonts: {
+        header: {
+            style: 'times',
+            weight: 'bold',
+            size: 20,
+            color: '#000000'
+        },
+        sectionHeader: {
+            style: 'times',
+            weight: 'bold',
+            size: 12,
+            color: '#000000'
+        },
+        sectionTitle: {
+            style: 'times',
+            weight: 'bold',
+            size: 11,
+            color: '#000000'
+        },
+        normal: {
+            style: 'times',
+            weight: 'normal',
+            size: 11,
+            color: '#000000'
+        },
+        small: {
+            style: 'times',
+            weight: 'bolditalic',
+            size: 9,
+            color: '#000000'
+        }
+    },
+    spacing: {
+        sectionGap: 3,
+        headerGap: 6,
+        lineGap: 5,
+        paragraphGap: 2,
+        indentation: 2,
+        skillIndentation: 42
+    },
+    formatting: {
+        textAlign: {
+            header: 'center',
+            section: 'left'
+        },
+        maxLineWidth: 180,
+        dateAlignment: 'right',
+        bulletStyle: '•'
+    },
+    divider: {
+        style: 'line',
+        color: '#000000',
+        width: 0.2,
+        spacing: 3
+    },
+    sections: {
+        header: {
+            contactSeparator: ' | ',
+            icons: {
+                size: 3,
+                spacing: 1,
+                contactSpacing: 4,
+                verticalOffset: 0.75,
+                urls: {
+                    email: "https://cdn-icons-png.flaticon.com/128/712/712040.png",
+                    phone: "https://cdn-icons-png.flaticon.com/128/25/25377.png",
+                    linkedin: "https://cdn-icons-png.flaticon.com/128/61/61109.png",
+                    github: "https://cdn-icons-png.flaticon.com/128/733/733609.png"
+                }
+            }
+        },
+    },
+    limits: {
+        maxBulletPoints: 6
+    }
+};
+
+// Load config from localStorage if available, otherwise use default
+let currentConfig = loadConfigFromLocalStorage() || RESUME_CONFIG;
+
+// Function to load configuration from localStorage
+function loadConfigFromLocalStorage() {
+    const savedConfig = localStorage.getItem('resumeConfig');
+    if (savedConfig) {
+        try {
+            return JSON.parse(savedConfig);
+        } catch (e) {
+            console.error('Error parsing saved config:', e);
+            return null;
+        }
+    }
+    return null;
+}
+
+// Function to save configuration to localStorage
+function saveConfigToLocalStorage() {
+    try {
+        localStorage.setItem('resumeConfig', JSON.stringify(currentConfig));
+        console.log('Configuration saved to localStorage');
+    } catch (e) {
+        console.error('Error saving config to localStorage:', e);
+    }
+}
+
+function openConfigModal() {
+    const modal = document.getElementById('configModal');
+    modal.style.display = 'block';
+    loadCurrentConfig();
+    window.addEventListener('keypress', function(e) {    
+        if (e.key === 'Enter') {
+            saveConfig();
+        }
+    });
+}
+
+function closeConfigModal() {
+    document.getElementById('configModal').style.display = 'none';
+}
+
+function loadCurrentConfig() {
+    document.getElementById('pageFormat').value = currentConfig.page.format;
+
+    // Margin Settings
+    document.getElementById('marginRight').value = currentConfig.page.margins.right;
+    document.getElementById('marginLeft').value = currentConfig.page.margins.left;
+    // Font Settings
+    document.getElementById('headerFont').value = currentConfig.fonts.header.style;
+    document.getElementById('headerWeight').value = currentConfig.fonts.header.weight;
+    document.getElementById('headerSize').value = currentConfig.fonts.header.size;
+    document.getElementById('headerColor').value = currentConfig.fonts.header.color;
+    
+    document.getElementById('sectionTitleFont').value = currentConfig.fonts.sectionTitle.style;
+    document.getElementById('sectionTitleWeight').value = currentConfig.fonts.sectionTitle.weight;
+    document.getElementById('sectionTitleSize').value = currentConfig.fonts.sectionTitle.size;
+    document.getElementById('sectionTitleColor').value = currentConfig.fonts.sectionTitle.color;
+    
+    document.getElementById('sectionHeaderFont').value = currentConfig.fonts.sectionHeader.style;
+    document.getElementById('sectionHeaderWeight').value = currentConfig.fonts.sectionHeader.weight;
+    document.getElementById('sectionHeaderSize').value = currentConfig.fonts.sectionHeader.size;
+    document.getElementById('sectionHeaderColor').value = currentConfig.fonts.sectionHeader.color;
+    
+    document.getElementById('normalFont').value = currentConfig.fonts.normal.style;
+    document.getElementById('normalWeight').value = currentConfig.fonts.normal.weight;
+    document.getElementById('normalSize').value = currentConfig.fonts.normal.size;
+    document.getElementById('normalColor').value = currentConfig.fonts.normal.color;
+    
+    document.getElementById('smallFont').value = currentConfig.fonts.small.style;
+    document.getElementById('smallWeight').value = currentConfig.fonts.small.weight;
+    document.getElementById('smallSize').value = currentConfig.fonts.small.size;
+    document.getElementById('smallColor').value = currentConfig.fonts.small.color;
+    
+    // Spacing Settings
+    document.getElementById('sectionGap').value = currentConfig.spacing.sectionGap;
+    document.getElementById('headerGap').value = currentConfig.spacing.headerGap;
+    document.getElementById('lineGap').value = currentConfig.spacing.lineGap;
+    document.getElementById('paragraphGap').value = currentConfig.spacing.paragraphGap;
+    document.getElementById('indentation').value = currentConfig.spacing.indentation;
+    document.getElementById('skillIndentation').value = currentConfig.spacing.skillIndentation;
+    
+    // Formatting Settings
+    document.getElementById('headerAlign').value = currentConfig.formatting.textAlign.header;
+    document.getElementById('sectionAlign').value = currentConfig.formatting.textAlign.section;
+    document.getElementById('bulletStyle').value = currentConfig.formatting.bulletStyle;
+    
+    // Divider Settings
+    document.getElementById('dividerStyle').value = currentConfig.divider.style;
+    document.getElementById('dividerColor').value = currentConfig.divider.color;
+    document.getElementById('dividerWidth').value = currentConfig.divider.width;
+    document.getElementById('iconSize').value = currentConfig.sections.header.icons.size;
+    document.getElementById('iconSpacing').value = currentConfig.sections.header.icons.spacing;
+    document.getElementById('contactSpacing').value = currentConfig.sections.header.icons.contactSpacing;
+    document.getElementById('iconVerticalOffset').value = currentConfig.sections.header.icons.verticalOffset;
+}
+
+function saveConfig() {
+    currentConfig = {
+        page: {
+            unit: 'mm',
+            format: document.getElementById('pageFormat').value,
+            orientation: 'portrait',
+            margins: {
+                top: 15,
+                right: Number(document.getElementById('marginRight').value),
+                bottom: 15,
+                left: Number(document.getElementById('marginLeft').value)
+            }
+        },
+        fonts: {
+            header: {
+                style: document.getElementById('headerFont').value,
+                weight: document.getElementById('headerWeight').value,
+                size: Number(document.getElementById('headerSize').value),
+                color: document.getElementById('headerColor').value
+            },
+            sectionHeader: {
+                style: document.getElementById('sectionHeaderFont').value,
+                weight: document.getElementById('sectionHeaderWeight').value,
+                size: Number(document.getElementById('sectionHeaderSize').value),
+                color: document.getElementById('sectionHeaderColor').value
+            },
+            sectionTitle: {
+                style: document.getElementById('sectionTitleFont').value,
+                weight: document.getElementById('sectionTitleWeight').value,
+                size: Number(document.getElementById('sectionTitleSize').value),
+                color: document.getElementById('sectionTitleColor').value
+            },
+            normal: {
+                style: document.getElementById('normalFont').value,
+                weight: document.getElementById('normalWeight').value,
+                size: Number(document.getElementById('normalSize').value),
+                color: document.getElementById('normalColor').value
+            },
+            small: {
+                style: document.getElementById('smallFont').value,
+                weight: document.getElementById('smallWeight').value,
+                size: Number(document.getElementById('smallSize').value),
+                color: document.getElementById('smallColor').value
+            }
+        },
+        spacing: {
+            sectionGap: Number(document.getElementById('sectionGap').value),
+            headerGap: Number(document.getElementById('headerGap').value),
+            lineGap: Number(document.getElementById('lineGap').value),
+            paragraphGap: Number(document.getElementById('paragraphGap').value),
+            indentation: Number(document.getElementById('indentation').value),
+            skillIndentation: Number(document.getElementById('skillIndentation').value)
+        },
+        formatting: {
+            textAlign: {
+                header: document.getElementById('headerAlign').value,
+                section: document.getElementById('sectionAlign').value
+            },
+            maxLineWidth: 180,
+            dateAlignment: 'right',
+            bulletStyle: document.getElementById('bulletStyle').value
+        },
+        divider: {
+            style: document.getElementById('dividerStyle').value,
+            color: document.getElementById('dividerColor').value,
+            width: Number(document.getElementById('dividerWidth').value),
+            spacing: 3
+        },
+        sections: {
+            header: {
+                contactSeparator: ' | ',
+                icons: {
+                    size: Number(document.getElementById('iconSize').value),
+                    spacing: Number(document.getElementById('iconSpacing').value),
+                    contactSpacing: Number(document.getElementById('contactSpacing').value),
+                    verticalOffset: Number(document.getElementById('iconVerticalOffset').value),
+                    urls: {
+                        email: "https://cdn-icons-png.flaticon.com/128/712/712040.png",
+                        phone: "https://cdn-icons-png.flaticon.com/128/25/25377.png",
+                        linkedin: "https://cdn-icons-png.flaticon.com/128/61/61109.png",
+                        github: "https://cdn-icons-png.flaticon.com/128/733/733609.png"
+                    }
+                }
+            },
+        },
+        limits: {
+            maxBulletPoints: 6
+        }
+    };
+
+    // Save to localStorage
+    saveConfigToLocalStorage();
+
+    // Close modal
+    document.getElementById('configModal').style.display = 'none';
+    
+    // Regenerate resume with new configuration
+    generateResume();
+    setTimeout(updateAllBulletWidthInfo, 100); 
+}
+
+// Add a function to reset config to defaults
+function resetConfig() {
+    if (confirm('Are you sure you want to reset all configuration to defaults?')) {
+        localStorage.removeItem('resumeConfig');
+        currentConfig = RESUME_CONFIG;
+        loadCurrentConfig();
+        generateResume();
+        setTimeout(updateAllBulletWidthInfo, 100);
+    }
+}
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\dragdrop.js  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\dragdrop.js" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\dragdrop.js
+======================================================
+
+// dragdrop.js
+let dragSrcEl = null;
+let dragSrcGroup = null;
+
+function makeDraggable() {
+    const sections = document.querySelectorAll('.section-form');
+    sections.forEach(section => {
+        const dragHandle = section.querySelector('.drag-handle');
+        if (dragHandle) {
+            section.setAttribute('draggable', true);
+            
+            // Only attach dragstart to the handle
+            dragHandle.addEventListener('mousedown', (e) => {
+                section.draggable = true;
+            });
+            
+            // Prevent text selection when dragging
+            dragHandle.addEventListener('selectstart', (e) => {
+                e.preventDefault();
+            });
+
+            // Make section not draggable when clicking elsewhere
+            section.addEventListener('mousedown', (e) => {
+                if (!e.target.classList.contains('drag-handle')) {
+                    section.draggable = false;
+                }
+            });
+
+            section.addEventListener('dragstart', handleDragStart);
+            section.addEventListener('dragover', handleDragOver);
+            section.addEventListener('dragenter', handleDragEnter);
+            section.addEventListener('dragleave', handleDragLeave);
+            section.addEventListener('drop', handleDrop);
+            section.addEventListener('dragend', handleDragEnd);
+            
+            // Reset draggable state after drag ends
+            section.addEventListener('mouseup', () => {
+                section.draggable = false;
+            });
+        }
+    });
+}
+
+function handleDragStart(e) {
+    dragSrcEl = this;
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    this.classList.add('dragging');
+}
+
+function handleDragOver(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+}
+
+function handleDragEnter(e) {
+    this.classList.add('drag-over');
+}
+
+function handleDragLeave(e) {
+    this.classList.remove('drag-over');
+}
+
+function handleDrop(e) {
+    if (e.stopPropagation) {
+        e.stopPropagation();
+    }
+
+    if (dragSrcEl !== this) {
+        const srcType = dragSrcEl.id.split('-')[0];
+        const destType = this.id.split('-')[0];
+
+        if (srcType === destType) {
+            // Swap the sections
+            const allSections = Array.from(document.querySelectorAll(`.section-form[id^="${srcType}"]`));
+            const srcIndex = allSections.indexOf(dragSrcEl);
+            const destIndex = allSections.indexOf(this);
+
+            // Update the DOM
+            if (destIndex > srcIndex) {
+                this.parentNode.insertBefore(dragSrcEl, this.nextSibling);
+            } else {
+                this.parentNode.insertBefore(dragSrcEl, this);
+            }
+
+            // Update the formData array
+            const temp = formData[srcType][srcIndex];
+            formData[srcType][srcIndex] = formData[srcType][destIndex];
+            formData[srcType][destIndex] = temp;
+
+            generateResume(sectionOrder);
+        }
+    }
+    return false;
+}
+
+function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    document.querySelectorAll('.section-form').forEach(section => {
+        section.classList.remove('drag-over');
+    });
+}
+
+// Add these variables at the top
+function makeGroupsDraggable() {
+    const groups = document.querySelectorAll('.section-group');
+    groups.forEach(group => {
+        const header = group.querySelector('.group-header');
+        header.setAttribute('draggable', true);
+        header.addEventListener('dragstart', handleGroupDragStart);
+        header.addEventListener('dragover', handleGroupDragOver);
+        header.addEventListener('dragenter', handleGroupDragEnter);
+        header.addEventListener('dragleave', handleGroupDragLeave);
+        header.addEventListener('drop', handleGroupDrop);
+        header.addEventListener('dragend', handleGroupDragEnd);
+    });
+}
+
+function handleGroupDragStart(e) {
+    dragSrcGroup = this.closest('.section-group');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.innerHTML);
+    dragSrcGroup.classList.add('group-dragging');
+}
+
+function handleGroupDragOver(e) {
+    if (e.preventDefault) {
+        e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+}
+
+function handleGroupDragEnter(e) {
+    this.closest('.section-group').classList.add('group-drag-over');
+}
+
+function handleGroupDragLeave(e) {
+    this.closest('.section-group').classList.remove('group-drag-over');
+}
+
+function handleGroupDrop(e) {
+    e.stopPropagation();
+    
+    const destGroup = this.closest('.section-group');
+    if (dragSrcGroup !== destGroup) {
+        const formContainer = document.getElementById('formContainer');
+        const groups = Array.from(formContainer.querySelectorAll('.section-group'));
+        
+        const srcIndex = groups.indexOf(dragSrcGroup);
+        const destIndex = groups.indexOf(destGroup);
+        
+        // Update DOM
+        if (destIndex > srcIndex) {
+            destGroup.parentNode.insertBefore(dragSrcGroup, destGroup.nextSibling);
+        } else {
+            destGroup.parentNode.insertBefore(dragSrcGroup, destGroup);
+        }
+        
+        // Update section order
+        updateSectionOrder();
+    }
+    
+    return false;
+}
+
+function handleGroupDragEnd(e) {
+    dragSrcGroup.classList.remove('group-dragging');
+    document.querySelectorAll('.section-group').forEach(group => {
+        group.classList.remove('group-drag-over');
+    });
+    getSectionOrder(); // Add this line to see the order after each drag
+}
+
+function updateSectionOrder() {
+    const groups = document.querySelectorAll('.section-group');
+    sectionOrder = Array.from(groups).map(group => {
+        const type = group.className.split(' ')[1].replace('-group', '');
+        return type === 'personal' ? 'header' : type;
+    });
+    
+    // Regenerate resume with new order
+    generateResume(sectionOrder);
+}
+
+function toggleGroup(type) {
+    const groupContent = document.getElementById(`group-content-${type}`);
+    const groupHeader = groupContent.previousElementSibling;
+    const icon = groupHeader.querySelector('.group-toggle-icon');
+    
+    groupContent.classList.toggle('collapsed');
+    icon.textContent = groupContent.classList.contains('collapsed') ? '▶' : '▼';
+}
+
+function getSectionOrder() {
+    const groups = document.querySelectorAll('.section-group');
+    const currentOrder = Array.from(groups).map(group => {
+        const type = group.className.split(' ')[1].replace('-group', '');
+        // Convert 'personal' to 'header' to maintain consistency
+        return type === 'personal' ? 'header' : type;
+    });
+    
+    console.log('Current Section Order:', currentOrder);
+    return currentOrder;
+}
+
+// Initialize groups to be collapsed by default
+function initializeCollapsedGroups() {
+    const groupContents = document.querySelectorAll('[id^="group-content-"]');
+    groupContents.forEach(groupContent => {
+        // Add collapsed class
+        groupContent.classList.add('collapsed');
+        
+        // Update the toggle icon
+        const groupHeader = groupContent.previousElementSibling;
+        const icon = groupHeader.querySelector('.group-toggle-icon');
+        if (icon) {
+            icon.textContent = '▶';
+        }
+    });
+}
+
+window.onload = () => {
+    // Initialize all groups as collapsed
+    initializeCollapsedGroups();
+    
+    // Make elements draggable
+    makeDraggable();
+    makeGroupsDraggable();
+    
+    // Get initial section order
+    getSectionOrder();
+};
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\script.js  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\script.js" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\script.js
+======================================================
+
+let sectionCounter = {
+    personal: 0,
+    education: 0,
+    experience: 0,
+    projects: 0,
+    competitions: 0,
+    skills: 0,
+    summary: 0,  // Add this if missing
+    general: 0
+};
+
+let formData = {
+    personal: [],
+    education: [],
+    experience: [],
+    projects: [],
+    competitions: [],
+    skills: [],
+    summary: [],  // Add this if missing
+    general: []
+};
+
+let sectionOrder = ['header', 'summary', 'education', 'experience', 'projects', 'competitions', 'skills'];
+
+let sectionConfigs = {
+    'personal': { title: 'Personal Information', fields: [ 
+        { name: 'name', label: 'Full Name', type: 'text' }, 
+        { name: 'email', label: 'Email', type: 'email' },
+        { name: 'phone', label: 'Phone', type: 'tel' },
+        { name: 'github', label: 'GitHub', type: 'text' },
+        { name: 'linkedin', label: 'LinkedIn', type: 'text' }
+    ]},
+    'summary': { title: 'Summary', fields: [ 
+        { name: 'summary', label: 'Professional Summary', type: 'textarea', rows: 4 }
+    ]},
+    'education': { title: 'Education', fields: [ 
+        { name: 'school', label: 'School/University', type: 'text' },
+        { name: 'degree', label: 'Degree', type: 'text' },
+        { name: 'duration', label: 'Duration', type: 'text' },
+        { name: 'location', label: 'Location', type: 'text' },
+        { name: 'scoreType', label: 'Score Type', type: 'text' },
+        { name: 'gpa', label: 'Score', type: 'text' }
+    ]},
+    'experience': { title: 'Work Experience', fields: [ 
+        { name: 'title', label: 'Company', type: 'text' },
+        { name: 'titleLink', label: 'Position Related URL', type: 'text' },
+        { name: 'subtitle', label: 'Position', type: 'text' },
+        { name: 'duration', label: 'Duration', type: 'text' },
+        { name: 'location', label: 'Location', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+        { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+        { name: 'tags', label: 'Technologies Used (comma-separated)', type: 'text' }
+    ]},
+    'projects': { title: 'Project Details', fields: [ 
+        { name: 'title', label: 'Project Title', type: 'text' },
+        { name: 'titleLink', label: 'Project URL', type: 'text' },
+        { name: 'subtitle', label: 'Role/Position', type: 'text' },
+        { name: 'duration', label: 'Duration', type: 'text' },
+        { name: 'location', label: 'Location/Context', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+        { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+        { name: 'tags', label: 'Technologies Used (comma-separated)', type: 'text' }
+    ]},
+    'competitions': { title: 'Competition Details', fields: [ 
+        { name: 'title', label: 'Competition Name', type: 'text' },
+        { name: 'titleLink', label: 'Competition URL', type: 'text' },
+        { name: 'subtitle', label: 'Achievement/Position', type: 'text' },
+        { name: 'duration', label: 'Date/Duration', type: 'text' },
+        { name: 'location', label: 'Location/Platform', type: 'text' },
+        { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+        { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+        { name: 'tags', label: 'Technologies/Skills Used (comma-separated)', type: 'text' }
+    ]},
+    'skills': { title: 'Skills', custom: true }
+};
+
+
+// History tracking for undo operations
+let actionHistory = [];
+const MAX_HISTORY_LENGTH = 50; 
+
+// Function to update sectionConfigs with a new custom section
+function updateConfigWithCustomSection(sectionKey, sectionTitle) {
+    if (!sectionKey || !sectionTitle) {
+        console.error("Invalid section key or title.");
+        return;
+    }
+
+    // Add the new section to formData if it doesn't exist
+    if (!formData[sectionKey]) {
+        formData[sectionKey] = [];
+    }
+
+    // Add the new section to sectionCounter if it doesn't exist
+    if (sectionCounter[sectionKey] === undefined) {
+        sectionCounter[sectionKey] = 0;
+    }
+
+    // Add the new section to sectionConfigs with default fields
+    sectionConfigs[sectionKey] = {
+        title: sectionTitle,
+        fields: [
+            { name: 'title', label: `${sectionTitle} Title`, type: 'text' },
+            { name: 'titleLink', label: 'Title URL', type: 'text'},
+            { name: 'subtitle', label: 'Subtitle', type: 'text' },
+            { name: 'duration', label: 'Duration', type: 'text' },
+            { name: 'location', label: 'Location', type: 'text' },
+            { name: 'description', label: 'Description', type: 'textarea', rows: 2 },
+            { name: 'bullets', label: 'Bullet Points (one per line)', type: 'textarea', rows: 4 },
+            { name: 'tags', label: 'Tags (comma-separated)', type: 'text' }
+        ]
+    };
+
+    // Update the section order to include the new section
+    if (!sectionOrder.includes(sectionKey)) {
+        sectionOrder.push(sectionKey);
+    }
+
+    console.log(`Added new section type: ${sectionKey}`);
+    console.log(sectionConfigs);
+}
+
+
+
+// Function to push an action to history
+function pushToHistory(action) {
+    actionHistory.push(action);
+    if (actionHistory.length > MAX_HISTORY_LENGTH) {
+        actionHistory.shift(); // Remove oldest action if we exceed the limit
+    }
+}
+
+
+
+
+// New function to handle undo operations
+function undoLastAction() {
+    if (actionHistory.length === 0) return;
+    
+    const lastAction = actionHistory.pop();
+    
+    switch (lastAction.type) {
+        case 'removeBullet':
+            // Re-add the bullet at the same position
+            const container = lastAction.container;
+            const children = container.children;
+            
+            if (lastAction.index >= children.length) {
+                // If the position is beyond current children, just append
+                addBulletField(lastAction.sectionId, container, lastAction.bulletText);
+            } else {
+                // Insert at the original position
+                const tempBullet = document.createElement('div');
+                addBulletField(lastAction.sectionId, tempBullet, lastAction.bulletText);
+                container.insertBefore(tempBullet.firstChild, children[lastAction.index]);
+            }
+            
+            // Update form data and regenerate resume
+            updateFormData(lastAction.sectionId);
+            break;
+            
+        case 'removeSection':
+            // Check if the group container still exists
+            let groupContainer = lastAction.groupContainer;
+            let groupContent = groupContainer.querySelector('.group-content');
+            
+            // If group container was removed, recreate it
+            if (!document.body.contains(groupContainer)) {
+                const formContainer = document.getElementById('formContainer');
+                const type = lastAction.sectionType;
+                
+                groupContainer = document.createElement('div');
+                groupContainer.className = `section-group ${type}-group`;
+                groupContainer.innerHTML = `
+                    <div class="group-header" onclick="toggleGroup('${type}')">
+                        <h3>${type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                        <span class="group-toggle-icon">▼</span>
+                    </div>
+                    <div class="group-content" id="group-content-${type}">
+                    </div>
+                `;
+                formContainer.appendChild(groupContainer);
+                groupContent = groupContainer.querySelector('.group-content');
+            }
+            
+            // Create the section
+            const form = document.createElement('div');
+            form.className = 'section-form';
+            form.id = lastAction.sectionId;
+            form.innerHTML = lastAction.sectionContent;
+            
+            // Add it at the correct position
+            if (lastAction.sectionIndex >= groupContent.children.length) {
+                groupContent.appendChild(form);
+            } else {
+                groupContent.insertBefore(form, groupContent.children[lastAction.sectionIndex]);
+            }
+            
+            // Restore the data
+            if (!formData[lastAction.sectionType]) {
+                formData[lastAction.sectionType] = [];
+            }
+            formData[lastAction.sectionType].push(lastAction.sectionData);
+            
+            // Reattach event listeners
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    updateFormData(lastAction.sectionId);
+                    generateResume();
+                });
+                
+                // Store initial value for tracking changes
+                input.dataset.initialValue = input.value;
+                
+                input.addEventListener('focus', function() {
+                    this.dataset.initialValue = this.value;
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (this.dataset.initialValue !== this.value) {
+                        pushToHistory({
+                            type: 'fieldChange',
+                            sectionId: lastAction.sectionId,
+                            fieldName: this.name,
+                            oldValue: this.dataset.initialValue,
+                            newValue: this.value,
+                            inputElement: this
+                        });
+                        this.dataset.initialValue = this.value;
+                    }
+                });
+            });
+            
+            makeGroupsDraggable();
+            makeDraggable();
+            break;
+            
+        case 'addSection':
+            // Simply remove the section that was added
+            const section = document.getElementById(lastAction.sectionId);
+            if (section) {
+                const type = lastAction.sectionType;
+                const parentGroup = section.parentElement.parentElement;
+                
+                // Remove the section
+                section.remove();
+                
+                // Remove from formData
+                formData[type] = formData[type].filter(item => item.id !== lastAction.sectionId);
+                
+                // If this was the last section in the group, remove the group container too
+                const remainingSections = parentGroup.querySelectorAll('.section-form');
+                if (remainingSections.length === 0) {
+                    parentGroup.remove();
+                }
+                
+                // Decrement the counter
+                if (sectionCounter[type] > 0) {
+                    sectionCounter[type]--;
+                }
+            }
+            break;
+            
+        case 'fieldChange':
+            // Restore the previous field value
+            if (lastAction.inputElement && document.body.contains(lastAction.inputElement)) {
+                lastAction.inputElement.value = lastAction.oldValue;
+                lastAction.inputElement.dataset.initialValue = lastAction.oldValue;
+                
+                // Update the form data and section title if needed
+                updateFormData(lastAction.sectionId);
+                
+                // If this is a field that affects the section title, update it
+                const section = document.getElementById(lastAction.sectionId);
+                if (section) {
+                    const type = lastAction.sectionId.split('-')[0];
+                    if ((lastAction.fieldName === 'title' && (type === 'experience' || type === 'projects' || type === 'competitions')) ||
+                        (lastAction.fieldName === 'school' && type === 'education') ||
+                        (lastAction.fieldName === 'category' && type === 'skills') ||
+                        (lastAction.fieldName === 'name' && type === 'personal')) {
+                        updateSectionTitle(lastAction.sectionId, type, lastAction.oldValue);
+                    }
+                }
+            }
+            break;
+    }
+    
+    // Regenerate the resume after any undo operation
+    generateResume();
+}
+
+
+
+
+
+
+// Modify the getFormContent function to add a maximize button to each section
+function getFormContent(type, sectionId, sectionTitle = "Custom Section") {
+    // If the section type doesn't exist in the config, create it
+    if (!sectionConfigs[type]) {
+        updateConfigWithCustomSection(type, sectionTitle);
+    }
+
+    const config = sectionConfigs[type];
+
+    // Handle the special case for skills
+    if (config.custom) {
+        // Skills section code with maximize button
+        return `
+            <div class="section-actions">
+                <h3>Skills</h3>
+                <button type="button" class="maximize-btn" onclick="maximizeSection('${sectionId}')">
+                    <svg viewBox="0 0 24 24" width="16" height="16">
+                        <path d="M4 4h6v2H6v10h10v-4h2v6H4z"></path>
+                        <path d="M14 4h6v6h-2V6h-4z"></path>
+                        <path d="M14 14l7-7-1.4-1.4-7 7z"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" name="category" onchange="updateFormData('${sectionId}'); generateResume();">
+            </div>
+            <div class="skills-container" id="skills-${sectionId}">
+                <div class="skill-item">
+                    <input type="text" name="skill" placeholder="Enter skill" onchange="updateFormData('${sectionId}'); generateResume();">
+                </div>
+            </div>
+            <button class="add-skill-btn" onclick="addSkillField('${sectionId}')">Add Skill</button>
+        `;
+    }
+
+    // Generate form for standard sections with maximize button
+    let formContent = `
+        <div class="section-actions">
+            <h3>${config.title}</h3>
+            <button type="button" class="maximize-btn" onclick="maximizeSection('${sectionId}')">
+                <svg viewBox="0 0 24 24" width="16" height="16">
+                    <path d="M4 4h6v2H6v10h10v-4h2v6H4z"></path>
+                    <path d="M14 4h6v6h-2V6h-4z"></path>
+                    <path d="M14 14l7-7-1.4-1.4-7 7z"></path>
+                </svg>
+            </button>
+        </div>
+    `;
+
+    config.fields.forEach(field => {
+        if (field.name === 'bullets') {
+            // Replace textarea with container for individual bullet points
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <div class="bullets-container" id="bullets-${sectionId}">
+                        <!-- Bullet points will be added here -->
+                    </div>
+                    <button type="button" class="add-bullet-btn" onclick="addBulletField('${sectionId}', document.getElementById('bullets-${sectionId}'))">Add Bullet Point</button>
+                </div>
+            `;
+        } else if (field.type === 'textarea') {
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <textarea name="${field.name}" rows="${field.rows}" onchange="updateFormData('${sectionId}'); generateResume();"></textarea>
+                </div>
+            `;
+        } else {
+            formContent += `
+                <div class="form-group">
+                    <label>${field.label}</label>
+                    <input type="${field.type}" name="${field.name}" onchange="updateFormData('${sectionId}'); generateResume();">
+                </div>
+            `;
+        }
+    });
+
+    return formContent;
+}
+
+
+
+
+function updateFormData(sectionId) {
+    const section = document.getElementById(sectionId);
+    const [type] = sectionId.split('-');
+    
+    // Ensure the section type exists in formData
+    if (!formData[type]) {
+        formData[type] = [];
+        console.warn(`Created missing formData section for ${type}`);
+    }
+    
+    const data = {
+        id: sectionId,
+        fields: {}
+    };
+    
+    // Process all inputs except bullets
+    const inputs = section.querySelectorAll('input:not([name="bullet"]), textarea');
+    inputs.forEach(input => {
+        if (input.name === 'skill') {
+            if (!data.fields.skills) data.fields.skills = [];
+            if (input.value) data.fields.skills.push(input.value);
+        } else {
+            data.fields[input.name] = input.value;
+            
+            // Add debug log for summary field
+            if (type === 'summary' && input.name === 'summary') {
+                console.log("Captured summary text:", input.value);
+            }
+            
+            // Update section title when relevant fields are changed
+            if ((input.name === 'title' && (type === 'experience' || type === 'projects' || type === 'competitions')) ||
+                (input.name === 'school' && type === 'education') ||
+                (input.name === 'category' && type === 'skills') ||
+                (input.name === 'name' && type === 'personal')) {
+                updateSectionTitle(sectionId, type, input.value);
+            }
+        }
+    });
+    
+    // Process bullet points separately
+    const bulletInputs = section.querySelectorAll('input[name="bullet"]');
+    if (bulletInputs.length > 0) {
+        data.fields.bullets = Array.from(bulletInputs)
+            .map(input => input.value)
+            .filter(value => value.trim() !== '');
+    }
+    
+    const existingIndex = formData[type].findIndex(item => item.id === sectionId);
+    if (existingIndex !== -1) {
+        formData[type][existingIndex] = data;
+    } else {
+        formData[type].push(data);
+    }
+}
+
+
+
+
+// Modify generateResume to handle custom sections
+function generateResume(order = sectionOrder) {
+    order = getSectionOrder();
+
+    const builder = new ResumeBuilder(currentConfig);
+    
+    // Create a dynamic content object based on the sectionOrder
+    const content = {
+        header: null,
+        summary: ''  // Initialize summary as empty string
+    };
+    
+    // Initialize section arrays based on sectionConfigs
+    Object.keys(sectionConfigs).forEach(sectionKey => {
+        if (sectionKey !== 'personal' && sectionKey !== 'skills' && sectionKey !== 'summary') {
+            content[sectionKey] = [];
+        }
+    });
+    
+    // Initialize skills as an object
+    content.skills = {};
+
+    // Handle header (personal) section
+    if (formData.personal && formData.personal.length > 0) {
+        const personal = formData.personal[0].fields;
+        content.header = {
+            name: personal.name || '',
+            contacts: [
+                personal.email,
+                personal.phone,
+                personal.github,
+                personal.linkedin
+            ].filter(Boolean)
+        };
+    }
+
+    // Handle summary section with safety checks
+    if (formData.summary && formData.summary.length > 0) {
+        const summaryData = formData.summary[0].fields;
+        if (summaryData && summaryData.summary) {
+            content.summary = summaryData.summary;
+            console.log("Summary content set to:", content.summary);
+        }
+    }
+
+    // Rest of your code remains the same...
+
+    // Process all section types including custom ones
+    Object.keys(formData).forEach(sectionType => {
+        if (sectionType === 'personal' || sectionType === 'summary') return; // Already handled above
+        
+        if (sectionType === 'skills') {
+            if (formData.skills.length > 0) {
+                content.skills = formData.skills.reduce((acc, skillSection) => {
+                    if (skillSection.fields.category && skillSection.fields.skills) {
+                        acc[skillSection.fields.category] = skillSection.fields.skills;
+                    }
+                    return acc;
+                }, {});
+            }
+            return;
+        }
+        
+        if (sectionType === 'education') {
+            if (formData.education.length > 0) {
+                content.education = formData.education.map(edu => ({
+                    school: edu.fields.school || '',
+                    degree: edu.fields.degree || '',
+                    duration: edu.fields.duration || '',
+                    location: edu.fields.location || '',
+                    gpa: edu.fields.gpa || '',
+                    scoreType: edu.fields.scoreType || ''
+                }));
+            }
+            return;
+        }
+        
+        // Handle all other sections (standard and custom)
+        if (formData[sectionType] && formData[sectionType].length > 0 && sectionType !== 'education') {
+            content[sectionType] = formData[sectionType].map(item => ({
+                title: item.fields.title || '',
+                titleLink: item.fields.titleLink || '',
+                subtitle: item.fields.subtitle || '',
+                subtitleLink: item.fields.subtitleLink || '',
+                duration: item.fields.duration || '',
+                location: item.fields.location || '',
+                description: item.fields.description || '',
+                bullets: Array.isArray(item.fields.bullets) ? item.fields.bullets : 
+                         (typeof item.fields.bullets === 'string' ? item.fields.bullets.split('\n').filter(b => b.trim() !== '') : []),
+                tags: item.fields.tags ? (typeof item.fields.tags === 'string' ? 
+                     item.fields.tags.split(',').map(tag => tag.trim()) : item.fields.tags) : []
+            }));
+        }
+    });
+
+    // Ensure all required properties exist in content to prevent jsPDF errors
+    if (!content.summary) content.summary = '';
+    if (!content.education) content.education = [];
+    if (!content.experience) content.experience = [];
+    if (!content.projects) content.projects = [];
+    if (!content.competitions) content.competitions = [];
+    
+    // Check for any custom sections in sectionOrder and ensure they exist in content
+    order.forEach(section => {
+        if (!content[section] && section !== 'header' && section !== 'skills') {
+            content[section] = [];
+        }
+    });
+
+    try {
+        // Render all content at once
+        builder.renderContent(content, order);
+        
+        const dataUrl = builder.getDataUrl();
+        
+        // Create a modified URL with zoom and fit parameters
+        const enhancedUrl = dataUrl + "#view=FitH&toolbar=0";
+        
+        // Set the iframe source
+        const pdfPreview = document.getElementById('pdfPreview');
+        pdfPreview.src = enhancedUrl;
+        
+        // Add a script to handle resizing after the PDF loads
+        pdfPreview.onload = function() {
+            // Create a resize observer to dynamically adjust the PDF view
+            const resizeObserver = new ResizeObserver(entries => {
+                try {
+                    // Try to access the iframe and adjust its content
+                    if (pdfPreview.contentWindow && pdfPreview.contentWindow.PDFViewerApplication) {
+                        pdfPreview.contentWindow.PDFViewerApplication.pdfViewer.currentScaleValue = 'page-width';
+                    }
+                } catch (e) {
+                    console.log("Cannot access PDF viewer application");
+                }
+            });
+            
+            // Observe the preview container for size changes
+            resizeObserver.observe(document.querySelector('.preview-container'));
+        };
+
+        updateAllBulletWidthInfo();
+    } catch (error) {
+        console.error("Error generating resume:", error);
+        alert("There was an error generating the resume. Please check the console for details.");
+    }
+    
+    return builder;
+}
+
+function downloadPDF() {
+    const builder = generateResume();
+    builder.save('resume.pdf');
+}
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('configModal');
+    const span = document.getElementsByClassName('close')[0];
+    
+    span.onclick = function() {
+        modal.style.display = 'none';
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+});
+// Add click event listener to minimize section when clicking outside
+document.addEventListener('click', function(event) {
+    const maximizedSection = document.querySelector('.maximized-section');
+    const modalContent = event.target.closest('.modal-content');
+    const maximizeBtn = event.target.closest('.maximize-btn');
+    
+    if (maximizedSection && !maximizedSection.contains(event.target) && 
+        !maximizeBtn && !modalContent) {
+        minimizeSection();
+    }
+});
+
+// Add a key event listener for Ctrl+Z to trigger undo
+document.addEventListener('keydown', function(event) {
+    // Check for Ctrl+Z (Windows/Linux) or Command+Z (Mac)
+    if ((event.ctrlKey || event.metaKey) && event.key === 'z') {
+        event.preventDefault(); // Prevent browser's default undo
+        undoLastAction();
+    }
+});
+
+
+
+
+
+window.onload = function() {
+    addSection('personal');
+    addSection('education');
+    addGeneralSection('EXPERIENCE');
+    generateResume(sectionOrder);
+};
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\section.js  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\section.js" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\section.js
+======================================================
+
+// Modified removeSection function to track section removals
+function removeSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const groupContainer = section.parentElement.parentElement; // Get the main group container
+    const type = sectionId.split('-')[0]; // Get section type
+    
+    // Store all section data before removal
+    const sectionContent = section.innerHTML;
+    const sectionData = formData[type].find(item => item.id === sectionId);
+    const groupContent = groupContainer.querySelector('.group-content');
+    const sectionIndex = Array.from(groupContent.children).indexOf(section);
+    
+    // Push to history
+    pushToHistory({
+        type: 'removeSection',
+        sectionId: sectionId,
+        sectionType: type,
+        sectionContent: sectionContent,
+        sectionData: JSON.parse(JSON.stringify(sectionData)), // Deep copy
+        groupContainer: groupContainer,
+        sectionIndex: sectionIndex
+    });
+    
+    // Remove from DOM
+    section.remove();
+    
+    // Remove from formData
+    formData[type] = formData[type].filter(item => item.id !== sectionId);
+    
+    // Check if group content is empty
+    if (groupContent && groupContent.querySelectorAll('.section-form').length === 0) {
+        groupContainer.remove(); // Remove the entire group container
+    }
+    
+    generateResume();
+}
+
+// Modified addSection function to track section additions
+function addSection(type) {
+    const formContainer = document.getElementById('formContainer');
+    const sectionId = `${type}-${sectionCounter[type]++}`;
+    
+    // First, check if group container exists
+    let groupContainer = document.querySelector(`.${type}-group`);
+    
+    // If group container doesn't exist, create it
+    if (!groupContainer) {
+        groupContainer = document.createElement('div');
+        groupContainer.className = `section-group ${type}-group`;
+        groupContainer.innerHTML = `
+            <div class="group-header" onclick="toggleGroup('${type}')">
+                <h3>${type.charAt(0).toUpperCase() + type.slice(1)}</h3>
+                <span class="group-toggle-icon">▼</span>
+            </div>
+            <div class="group-content" id="group-content-${type}">
+            </div>
+        `;
+        formContainer.appendChild(groupContainer);
+    }
+    
+    // Get the group content
+    const groupContent = groupContainer.querySelector('.group-content');
+    
+    const form = document.createElement('div');
+    form.className = 'section-form';
+    form.id = sectionId;
+    
+    let formContent = getFormContent(type, sectionId);
+    
+    form.innerHTML = `
+        <div class="section-header" onclick="toggleSection('${sectionId}')">
+            <span class="drag-handle">⋮⋮</span>
+            <span class="section-title">${type.charAt(0).toUpperCase() + type.slice(1)} ${sectionCounter[type]}</span>
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="section-content" id="content-${sectionId}">
+            ${formContent}
+            <button class="remove-btn" onclick="removeSection('${sectionId}')">Remove Section</button>
+        </div>
+    `;
+    
+    groupContent.appendChild(form);
+    
+    // Store the action for potential undo
+    pushToHistory({
+        type: 'addSection',
+        sectionId: sectionId,
+        sectionType: type
+    });
+    
+    makeGroupsDraggable();
+    makeDraggable();
+    generateResume(sectionOrder);
+
+    // Add input event listeners for dynamic title updates
+    const titleInput = form.querySelector('input[name="title"]');
+    const schoolInput = form.querySelector('input[name="school"]');
+    const categoryInput = form.querySelector('input[name="category"]');
+    const nameInput = form.querySelector('input[name="name"]');
+
+    // Track field changes
+    const trackFieldChange = (input) => {
+        if (!input) return;
+        
+        // Add the initial value tracker
+        input.dataset.initialValue = input.value;
+        
+        input.addEventListener('focus', function() {
+            // Store the starting value when focus begins
+            this.dataset.initialValue = this.value;
+        });
+        
+        input.addEventListener('blur', function() {
+            // If value changed, store the change
+            if (this.dataset.initialValue !== this.value) {
+                pushToHistory({
+                    type: 'fieldChange',
+                    sectionId: sectionId,
+                    fieldName: this.name,
+                    oldValue: this.dataset.initialValue,
+                    newValue: this.value,
+                    inputElement: this
+                });
+                // Update the stored value
+                this.dataset.initialValue = this.value;
+            }
+        });
+    };
+
+    // Apply field change tracking to all inputs and textareas in the section
+    form.querySelectorAll('input, textarea').forEach(input => {
+        trackFieldChange(input);
+    });
+
+    if (titleInput) {
+        titleInput.addEventListener('input', () => updateSectionTitle(sectionId, type, titleInput.value));
+    }
+    if (schoolInput) {
+        schoolInput.addEventListener('input', () => updateSectionTitle(sectionId, type, schoolInput.value));
+    }
+    if (categoryInput) {
+        categoryInput.addEventListener('input', () => updateSectionTitle(sectionId, type, categoryInput.value));
+    }
+    if (nameInput) {
+        nameInput.addEventListener('input', () => updateSectionTitle(sectionId, type, nameInput.value));
+    }
+}
+
+
+function addCustomSection() {
+    // Create a modal dialog instead of using prompt
+    const modal = document.createElement("div");
+    modal.className = "custom-modal";
+    modal.style.position = "fixed";
+    modal.style.top = "0";
+    modal.style.left = "0";
+    modal.style.width = "100%";
+    modal.style.zIndex = "1000";
+    
+    modal.innerHTML = `
+        <div class="modal-content" style="margin: 20px auto; max-width: 500px;">
+            <h3>Add New Section</h3>
+            <input type="text" id="sectionNameInput" placeholder="Enter section name">
+            <div class="modal-buttons">
+                <button id="cancelBtn">Cancel</button>
+                <button id="submitBtn">Add Section</button>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Focus the input field
+    const inputField = document.getElementById("sectionNameInput");
+    inputField.focus();
+    
+    // Handle submit button click
+    document.getElementById("submitBtn").addEventListener("click", function() {
+        const sectionName = inputField.value;
+        if (sectionName && sectionName.trim() !== "") {
+            const formattedName = sectionName.toLowerCase().replace(/\s+/g, '_');
+            
+            // Create a new button and add it to the sidebar
+            const sidebar = document.querySelector(".action-buttons");
+            const newButton = document.createElement("button");
+            newButton.className = "add-btn";
+            newButton.textContent = `Add ${sectionName}`;
+            newButton.onclick = function() {
+                addSection(formattedName);
+            };
+            
+            sidebar.appendChild(newButton);
+            
+            // Update the config
+            updateConfigWithCustomSection(formattedName, sectionName);
+            
+            // Remove the modal
+            document.body.removeChild(modal);
+        }
+    });
+    
+    // Handle cancel button click
+    document.getElementById("cancelBtn").addEventListener("click", function() {
+        document.body.removeChild(modal);
+    });
+    
+    // Close modal if user clicks outside of it
+    modal.addEventListener("click", function(event) {
+        if (event.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+}
+
+// Helper function to update section name in the UI
+function updateSectionName(sectionId, newName) {
+    const sectionHeader = document.querySelector(`#section-${sectionId} .section-header h2`);
+    if (sectionHeader && newName) {
+        sectionHeader.textContent = newName;
+    }
+}
+
+function toggleSection(sectionId) {
+    const content = document.getElementById(`content-${sectionId}`);
+    const header = content.previousElementSibling;
+    const icon = header.querySelector('.toggle-icon');
+    
+    content.classList.toggle('expanded');
+    icon.textContent = content.classList.contains('expanded') ? '▼' : '▶';
+}
+
+function addSkillField(sectionId) {
+    const skillsContainer = document.getElementById(`skills-${sectionId}`);
+    const skillItem = document.createElement('div');
+    skillItem.className = 'skill-item';
+    skillItem.innerHTML = `
+        <input type="text" name="skill" placeholder="Enter skill" onchange="updateFormData('${sectionId}'); generateResume();">
+    `;
+    skillsContainer.appendChild(skillItem);
+}
+
+
+// Modify updateSectionTitle function to include skills and personal sections
+function updateSectionTitle(sectionId, type, value, additionalValue = '') {
+    const section = document.getElementById(sectionId);
+    const titleElement = section.querySelector('.section-title');
+    
+    if (value && value.trim() !== '') {
+        switch(type) {
+            case 'experience':
+                titleElement.textContent = `Experience - ${value}`;
+                break;
+            case 'projects':
+                titleElement.textContent = `Project - ${value}`;
+                break;
+            case 'education':
+                titleElement.textContent = `Education - ${value}`;
+                break;
+            case 'competitions':
+                titleElement.textContent = `Competition - ${value}`;
+                break;
+            case 'skills':
+                titleElement.textContent = `Skills - ${value}`;
+                break;
+            case 'personal':
+                titleElement.textContent = `Personal - ${value}`;
+                break;
+            default:
+                titleElement.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} - ${value}`;
+        }
+    } else {
+        titleElement.textContent = `${type.charAt(0).toUpperCase() + type.slice(1)} ${sectionId.split('-')[1]}`;
+    }
+}
+
+// Function to maximize a section (expand it and blur everything else)
+function maximizeSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    const formContainer = document.getElementById('formContainer');
+    
+    // Add classes for styling
+    section.classList.add('maximized-section');
+    formContainer.classList.add('blurred-background');
+    
+    // Hide all other sections
+    const allSections = document.querySelectorAll('.section-form');
+    allSections.forEach(s => {
+        if (s.id !== sectionId) {
+            s.classList.add('hidden-section');
+        }
+    });
+    
+    // Hide all group headers
+    const groupHeaders = document.querySelectorAll('.group-header');
+    groupHeaders.forEach(header => {
+        header.classList.add('hidden-section');
+    });
+    
+    // Focus on the first input field in the section
+    const firstInput = section.querySelector('input, textarea');
+    if (firstInput) {
+        firstInput.focus();
+    }
+    
+    // Add event listeners for escape and enter keys
+    document.addEventListener('keydown', minimizeOnKeypress);
+}
+
+// Function to minimize the section on keypress (Escape or Enter)
+function minimizeOnKeypress(event) {
+    if (event.key === 'Escape' || event.key === 'Enter') {
+        minimizeSection();
+        // Remove the event listener
+        document.removeEventListener('keydown', minimizeOnKeypress);
+    }
+}
+
+// Function to minimize the section
+function minimizeSection() {
+    // Remove maximized class from all sections
+    const maximizedSection = document.querySelector('.maximized-section');
+    if (maximizedSection) {
+        maximizedSection.classList.remove('maximized-section');
+    }
+    
+    // Remove the blurred background
+    const formContainer = document.getElementById('formContainer');
+    formContainer.classList.remove('blurred-background');
+    
+    // Show all sections again
+    const hiddenSections = document.querySelectorAll('.hidden-section');
+    hiddenSections.forEach(section => {
+        section.classList.remove('hidden-section');
+    });
+}
+
+function updateBulletWidthInfo(inputElement) {
+    // Get the relevant elements
+    const bulletItem = inputElement.closest('.bullet-item');
+    const widthInfoSpan = bulletItem.querySelector('.bullet-width-info');
+    
+    // Create a temporary ResumeBuilder instance with the CURRENT config
+    const tempBuilder = new ResumeBuilder(currentConfig);
+    
+    // Set font to normal as used for bullets
+    tempBuilder.setFont('normal');
+    
+    // Calculate available width for bullet text using current config
+    const availableWidth = tempBuilder.contentWidth - tempBuilder.config.spacing.indentation;
+    
+    // Calculate actual width of the text
+    const actualTextWidth = tempBuilder.doc.getTextWidth(inputElement.value.trim());
+    
+    // Calculate percentage and round to nearest integer
+    const percentageUsed = Math.round((actualTextWidth / availableWidth) * 100);
+    
+    // Calculate word count
+    const words = inputElement.value.trim().split(/\s+/).length;
+    
+    // Calculate average width per word
+    const avgWidthPerWord = words > 0 ? actualTextWidth / words : 0;
+    
+    // Calculate words to add/remove
+    let wordsToAdd = 0;
+    if (percentageUsed < 100) {
+        // Calculate how many words to add to reach optimal length (90-95%)
+        const targetPercentage = 99; // Aim for 95% of available width
+        const additionalWidthNeeded = (targetPercentage / 100 * availableWidth) - actualTextWidth;
+        wordsToAdd = Math.round(additionalWidthNeeded / avgWidthPerWord);
+    } else if (percentageUsed > 100) {
+        // Calculate how many words to remove to fit
+        const excessWidth = actualTextWidth - availableWidth;
+        wordsToAdd = -Math.ceil(excessWidth / avgWidthPerWord); // Negative value = words to remove
+    }
+    
+    // Update the display
+    widthInfoSpan.textContent = `${percentageUsed}%`;
+    
+    // Add visual indicator for width and suggestion
+    if (percentageUsed > 99) {
+        widthInfoSpan.style.color = 'red';
+        widthInfoSpan.textContent = `${percentageUsed}% (remove ~${Math.abs(wordsToAdd)} words)`;
+    } else if (percentageUsed > 95) {
+        widthInfoSpan.style.color = 'green';
+        widthInfoSpan.textContent = `${percentageUsed}% (perfect length)`;
+    } else {
+        widthInfoSpan.style.color = 'orange';
+        widthInfoSpan.textContent = `${percentageUsed}% (add ~${wordsToAdd} words)`;
+    }
+}
+
+
+// Modify the addBulletField function to track bullet addition
+function addBulletField(sectionId, container, existingText = '') {
+    const bulletItem = document.createElement('div');
+    bulletItem.className = 'bullet-item';
+    bulletItem.innerHTML = `
+        <div class="bullet-input-container">
+            <input type="text" name="bullet" class="bullet-input" value="${existingText}" 
+                   placeholder="Enter bullet point" 
+                   oninput="updateBulletWidthInfo(this); updateFormData('${sectionId}');" 
+                   onchange="generateResume();">
+            <span class="bullet-width-info">0%</span>
+            <button type="button" class="remove-bullet-btn" onclick="removeBullet(this)">×</button>
+        </div>
+    `;
+    container.appendChild(bulletItem);
+    
+    // Track field changes for the newly added bullet
+    const bulletInput = bulletItem.querySelector('.bullet-input');
+    
+    // Initialize width info if there's existing text
+    if (existingText) {
+        updateBulletWidthInfo(bulletInput);
+    }
+    
+    // Track the addition for undo
+    if (existingText === '') {  // Only track new bullets, not ones being restored
+        pushToHistory({
+            type: 'addBullet',
+            sectionId: sectionId,
+            bulletItem: bulletItem
+        });
+    }
+    
+    // Add change tracking
+    bulletInput.dataset.initialValue = existingText;
+    
+    bulletInput.addEventListener('focus', function() {
+        this.dataset.initialValue = this.value;
+    });
+    
+    bulletInput.addEventListener('blur', function() {
+        if (this.dataset.initialValue !== this.value) {
+            pushToHistory({
+                type: 'fieldChange',
+                sectionId: sectionId,
+                fieldName: 'bullet',
+                oldValue: this.dataset.initialValue,
+                newValue: this.value,
+                inputElement: this
+            });
+            this.dataset.initialValue = this.value;
+        }
+    });
+    
+    return bulletItem;
+}
+
+// Modified removeBullet function to track removals
+function removeBullet(button) {
+    const bulletItem = button.parentElement.parentElement;
+    const sectionId = bulletItem.closest('.section-content').id.replace('content-', '');
+    const bulletInput = bulletItem.querySelector('.bullet-input');
+    const bulletText = bulletInput.value;
+    const bulletContainer = bulletItem.parentElement;
+    const bulletIndex = Array.from(bulletContainer.children).indexOf(bulletItem);
+    
+    // Store the action for potential undo
+    pushToHistory({
+        type: 'removeBullet',
+        sectionId: sectionId,
+        bulletText: bulletText,
+        container: bulletContainer,
+        index: bulletIndex
+    });
+    
+    // Remove the bullet
+    bulletItem.remove();
+    updateFormData(sectionId);
+    generateResume();
+}
+
+
+// Add this at the end of the generateResume function
+function updateAllBulletWidthInfo() {
+    const bulletInputs = document.querySelectorAll('.bullet-input');
+    bulletInputs.forEach(input => {
+        updateBulletWidthInfo(input);
+    });
+}
+ 
+C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume>(
+echo. 
+ echo ======================================================  
+ echo FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\template.js  
+ echo ======================================================  
+ echo. 
+ type "C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\template.js" 
+) 
+
+======================================================
+FILE: C:\Users\MSI\Desktop\harsh\harshkgpian.github.io\EasyResume\template.js
+======================================================
+
+class ResumeBuilder {
+    constructor(config = RESUME_CONFIG) {
+        this.config = config;
+        this.content = {};
+        this.initDocument();
+    }
+
+    initDocument() {
+        this.doc = new window.jspdf.jsPDF({
+            unit: this.config.page.unit,
+            format: this.config.page.format,
+            orientation: this.config.page.orientation
+        });
+        this.currentY = this.config.page.margins.top;
+        this.pageWidth = this.doc.internal.pageSize.width;
+        this.contentWidth = this.pageWidth - (this.config.page.margins.left + this.config.page.margins.right);
+    }
+
+    // Modify the renderContent method to include skills
+    
+    addProfessionalSummary(summary) {
+        // Check if summary is a string, otherwise convert it
+        const summaryText = typeof summary === 'string' ? summary : 
+                            (summary && summary.toString ? summary.toString() : '');
+        
+        if (!summaryText || summaryText.trim() === '') return;
+        
+        this.checkAndAddPage();
+        
+        // Add section header
+        this.addSection('PROFESSIONAL SUMMARY', null);
+        
+        // Render the summary text with proper wrapping
+        this.setFont('normal');
+        const summaryLines = this.doc.splitTextToSize(
+            summaryText,
+            this.contentWidth
+        );
+        
+        summaryLines.forEach(line => {
+            this.checkAndAddPage();
+            this.doc.text(line, this.config.page.margins.left, this.currentY);
+            this.currentY += this.config.spacing.lineGap;
+        });
+        
+        this.currentY += this.config.spacing.paragraphGap;
+    }
+
+    // Update the renderContent method to include the professional summary section
+    renderContent(content, sectionOrder = ['header', 'summary', 'education', 'experience', 'projects', 'competitions', 'skills']) {
+        console.log("Content received:", content);
+        this.content = content;
+        
+        this.doc = new window.jspdf.jsPDF({
+            unit: this.config.page.unit,
+            format: this.config.page.format,
+            orientation: this.config.page.orientation
+        });
+        
+        this.currentY = this.config.page.margins.top;
+
+        // Iterate through the section order and render each section if it exists
+        sectionOrder.forEach(section => {
+            switch(section.toLowerCase()) {
+                case 'header':
+                    if (content.header) {
+                        this.addHeader(content.header.name, content.header.contacts);
+                    }
+                    break;
+
+                case 'summary':
+                    // Safely handle summary data, even if it's an object
+                    if (content.summary) {
+                        const summaryText = typeof content.summary === 'string' ? 
+                            content.summary : 
+                            (content.summary.toString ? content.summary.toString() : '');
+                        
+                        if (summaryText.trim() !== '') {
+                            this.addProfessionalSummary(summaryText);
+                        }
+                    }
+                    break;
+
+                case 'education':
+                    // Rest of cases remain the same
+                    // ...
+                    if (content.education && content.education.length > 0) {
+                        this.addSection('EDUCATION', null);
+                        content.education.forEach(edu => {
+                            this.addEducation(
+                                edu.school,
+                                edu.degree,
+                                edu.duration,
+                                edu.location,
+                                edu.gpa,
+                                edu.scoreType
+                            );
+                        });
+                    }
+                    break;
+
+                case 'skills':
+                    if (content.skills && Object.keys(content.skills).length > 0) {
+                        this.addSkills(content.skills);
+                    }
+                    break;
+
+                default:
+                    // Handle experience, projects, competitions, and any other sections
+                    if (content[section] && Array.isArray(content[section])) {
+                        this.addGeneralSection(section.toUpperCase(), content[section]);
+                    }
+                    break;
+            }
+        });
+    }
+
+    setFont(type) {
+        const font = this.config.fonts[type];
+        this.doc.setFont(font.style, font.weight);
+        this.doc.setFontSize(font.size);
+        this.doc.setTextColor(font.color);
+    }
+
+    checkAndAddPage() {
+        const pageHeight = this.doc.internal.pageSize.height;
+        if (this.currentY + this.config.page.margins.bottom > pageHeight) {
+            this.doc.addPage();
+            this.currentY = this.config.page.margins.top;
+        }
+    }
+    
+    addHeader(name, contacts) {
+        const headerConfig = this.config.sections.header;
+        const iconConfig = headerConfig.icons;
+        
+        this.setFont('header');
+        this.checkAndAddPage();
+        if (this.config.formatting.textAlign.header === 'center') {
+            this.doc.text(name, this.pageWidth / 2, this.currentY, { align: 'center' });
+        } else {
+            this.doc.text(name, this.config.page.margins.left, this.currentY);
+        }
+        this.currentY += this.config.spacing.headerGap;
+
+        if (contacts && contacts.length > 0) {
+            this.checkAndAddPage();
+            this.setFont('small');
+            
+            // Find different types of contacts
+            const emailContact = contacts.find(contact => contact.includes('@'));
+            const phoneContact = contacts.find(contact => /[\d-+()]{7,}/.test(contact));
+            const linkedinContact = contacts.find(contact => contact.includes('linkedin'));
+            const githubContact = contacts.find(contact => contact.includes('github'));
+            const otherContacts = contacts.filter(contact => 
+                !contact.includes('@') && 
+                !/[\d-+()]{7,}/.test(contact) && 
+                !contact.includes('linkedin') && 
+                !contact.includes('github')
+            );
+
+            try {
+                // Calculate total width first
+                let totalWidth = 0;
+                const contactsToAdd = [
+                    { contact: emailContact, key: 'email' },
+                    { contact: phoneContact, key: 'phone' },
+                    { contact: linkedinContact, key: 'linkedin' },
+                    { contact: githubContact, key: 'github' }
+                ].filter(item => item.contact);
+
+                // Format the display text for each contact type
+                contactsToAdd.forEach(item => {
+                    if (item.contact) {
+                        // Create display versions of contacts
+                        if (item.key === 'linkedin') {
+                            // Extract username from LinkedIn URL
+                            item.displayText = item.contact.replace(/https?:\/\/(www\.)?linkedin\.com\/in\//, '')
+                                .replace(/\/$/, ''); // Remove trailing slash if present
+                        } else if (item.key === 'github') {
+                            // Extract username from GitHub URL
+                            item.displayText = item.contact.replace(/https?:\/\/(www\.)?github\.com\//, '')
+                                .replace(/\/$/, ''); // Remove trailing slash if present
+                        } else if (item.key === 'phone') {
+                            // Remove spaces from phone numbers
+                            item.displayText = item.contact.replace(/\s+/g, '');
+                        } else {
+                            item.displayText = item.contact;
+                        }
+                        
+                        // Calculate width for this contact
+                        totalWidth += iconConfig.size + iconConfig.spacing; // Icon width + spacing
+                        totalWidth += this.doc.getTextWidth(item.displayText) + iconConfig.contactSpacing; // Text width + spacing
+                    }
+                });
+
+                // Calculate width for other contacts
+                if (otherContacts.length > 0) {
+                    const otherContactsText = otherContacts.join(headerConfig.contactSeparator);
+                    totalWidth += this.doc.getTextWidth(otherContactsText);
+                }
+
+                // Calculate starting X position to center everything
+                let currentX = this.config.formatting.textAlign.header === 'center'
+                    ? (this.pageWidth / 2) - (totalWidth / 2)
+                    : this.config.page.margins.left;
+
+                const addContactWithIcon = (contactObj) => {
+                    if (contactObj.contact) {
+                        // Add icon
+                        this.doc.addImage(
+                            iconConfig.urls[contactObj.key],
+                            'PNG',
+                            currentX,
+                            this.currentY - (iconConfig.size * iconConfig.verticalOffset),
+                            iconConfig.size,
+                            iconConfig.size
+                        );
+                        currentX += iconConfig.size + iconConfig.spacing;
+                        
+                        // Display the formatted text version
+                        const displayText = contactObj.displayText;
+                        
+                        // Create appropriate links
+                        if (contactObj.key === 'linkedin') {
+                            // Create LinkedIn hyperlink
+                            const url = contactObj.contact.startsWith('http') ? contactObj.contact : 
+                                    `https://linkedin.com/in/${displayText}`;
+                            
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url });
+                        } 
+                        else if (contactObj.key === 'github') {
+                            // Create GitHub hyperlink
+                            const url = contactObj.contact.startsWith('http') ? contactObj.contact : 
+                                    `https://github.com/${displayText}`;
+                            
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url });
+                        } 
+                        else if (contactObj.key === 'email') {
+                            // Create mailto link for email
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url: `mailto:${contactObj.contact}` });
+                        }
+                        else if (contactObj.key === 'phone') {
+                            // Create tel link for phone
+                            const linkWidth = this.doc.getTextWidth(displayText);
+                            this.doc.text(displayText, currentX, this.currentY);
+                            this.doc.link(currentX, this.currentY - 5, linkWidth, 10, { url: `tel:${contactObj.contact.replace(/\s+/g, '')}` });
+                        }  
+                        else {
+                            this.doc.text(displayText, currentX, this.currentY);
+                        }
+                        
+                        currentX += this.doc.getTextWidth(displayText) + iconConfig.contactSpacing;
+                    }
+                };
+
+                // Add contacts with their respective icons
+                contactsToAdd.forEach(item => addContactWithIcon(item));
+
+                // Add remaining contacts if any
+                if (otherContacts.length > 0) {
+                    const otherContactsText = otherContacts.join(headerConfig.contactSeparator);
+                    this.doc.text(otherContactsText, currentX, this.currentY);
+                }
+
+            } catch (error) {
+                console.error('Error loading icons:', error);
+                // Fallback: show all contacts without icons
+                if (this.config.formatting.textAlign.header === 'center') {
+                    this.doc.text(contacts.join(headerConfig.contactSeparator), 
+                        this.pageWidth / 2, this.currentY, { align: 'center' });
+                } else {
+                    this.doc.text(contacts.join(headerConfig.contactSeparator), 
+                        this.config.page.margins.left, this.currentY);
+                }
+            }
+            
+            this.currentY += this.config.spacing.headerGap;
+        }
+    }
+    
+    addSection(title, content) {
+        this.checkAndAddPage();
+        this.setFont('sectionHeader');
+        this.doc.text(title.toUpperCase(), this.config.page.margins.left, this.currentY);
+        this.currentY += this.config.spacing.sectionGap;
+
+        if (this.config.divider.style === 'line') {
+            this.addDivider();
+        }
+
+        if (content) {
+            this.setFont('normal');
+            const lines = this.doc.splitTextToSize(content, this.config.formatting.maxLineWidth);
+            lines.forEach(line => {
+                this.checkAndAddPage();
+                this.doc.text(line, this.config.page.margins.left, this.currentY);
+                this.currentY += this.config.spacing.lineGap;
+            });
+        }
+        
+        this.currentY += this.config.spacing.sectionGap;
+    }
+
+
+    addEducation(school, degree, duration, location, gpa = null, scoreType) {
+        console.log('Adding education:', school, degree, duration, location, gpa, scoreType);
+
+        this.checkAndAddPage();
+        
+        // Render school name
+        this.setFont('sectionTitle');
+        this.doc.text(school, this.config.page.margins.left, this.currentY);
+        
+        // Render duration if available
+        if (duration && this.config.formatting.dateAlignment === 'right') {
+            this.setFont('sectionTitle');
+            this.doc.text(duration, 
+                this.pageWidth - this.config.page.margins.right - this.doc.getTextWidth(duration), 
+                this.currentY
+            );
+        }
+        
+        this.currentY += this.config.spacing.lineGap;
+
+        // Render degree and GPA
+        this.checkAndAddPage();
+        this.setFont('small');
+        this.doc.text(degree, this.config.page.margins.left, this.currentY);
+        
+        // Add GPA/score if available
+        if (gpa !== null) {
+            const degreeWidth = this.doc.getTextWidth(degree);
+            const scoreLabel = scoreType ? `${scoreType}: ` : 'CGPA: ';
+            console.log(scoreLabel, scoreType, "Hi");
+            const gpaText = ` | ${scoreLabel}${gpa}`;
+            
+            // Switch to bold font for GPA
+            this.setFont('small');
+            this.doc.text(
+                gpaText,
+                this.config.page.margins.left + degreeWidth,
+                this.currentY
+            );
+        }
+        
+        // Render location
+        if (location) {
+            this.setFont('small');
+            this.doc.text(location, 
+                this.pageWidth - this.config.page.margins.right - this.doc.getTextWidth(location), 
+                this.currentY
+            );
+        }
+        
+        this.currentY += this.config.spacing.lineGap;
+
+        // Render honors if available
+
+        this.currentY += this.config.spacing.paragraphGap;
+    }
+
+    addSkills(skillsObject) {
+        if (!skillsObject || Object.keys(skillsObject).length === 0) return;
+    
+        // Add SKILLS header
+        this.addSection('SKILLS', null);
+        
+        // Calculate max category width to find the consistent starting position for skills
+        const categoryWidth = this.config.spacing.skillIndentation; // Fixed width for all categories (in points)
+        const skillStartX = this.config.page.margins.left + categoryWidth;
+        
+        Object.entries(skillsObject).forEach(([category, skills], index) => {
+            if (!skills || skills.length === 0) return;
+    
+            this.checkAndAddPage();
+            
+            // Store current font properties
+            this.setFont('normal');
+            const currentFont = this.doc.getFont();
+            const currentFontSize = this.doc.getFontSize();
+            
+            // Add category in bold using the same font
+            this.doc.setFont(currentFont.fontName, 'bold');
+            const categoryText = `${category}: `;
+            
+            // Check if category width exceeds the allowed indentation
+            const categoryTextWidth = this.doc.getTextWidth(categoryText);
+            
+            if (categoryTextWidth > categoryWidth) {
+                // For long categories, wrap within the category column
+                const wrappedCategory = this.doc.splitTextToSize(categoryText, categoryWidth);
+                
+                // Draw the first line of the category
+                this.doc.text(
+                    wrappedCategory[0],
+                    this.config.page.margins.left,
+                    this.currentY
+                );
+                
+                // Draw the skills at the fixed position on the first line
+                this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                const skillsText = skills.join(', ');
+                const availableWidth = this.contentWidth - categoryWidth;
+                const wrappedSkills = this.doc.splitTextToSize(skillsText, availableWidth);
+                
+                this.doc.text(
+                    wrappedSkills[0],
+                    skillStartX,
+                    this.currentY
+                );
+                
+                // Draw the remaining category lines (if any)
+                if (wrappedCategory.length > 1) {
+                    for (let i = 1; i < wrappedCategory.length; i++) {
+                        this.currentY += this.config.spacing.lineGap;
+                        this.checkAndAddPage();
+                        this.doc.setFont(currentFont.fontName, 'bold');
+                        this.doc.text(
+                            wrappedCategory[i],
+                            this.config.page.margins.left,
+                            this.currentY
+                        );
+                    }
+                }
+                
+                // Draw the remaining skill lines (if any)
+                if (wrappedSkills.length > 1) {
+                    // Only add line gap if we haven't already due to category wrapping
+                    if (wrappedCategory.length <= 1) {
+                        this.currentY += this.config.spacing.lineGap;
+                    }
+                    
+                    for (let i = 1; i < wrappedSkills.length; i++) {
+                        if (i > 1 || wrappedCategory.length <= 1) {
+                            this.currentY += this.config.spacing.lineGap;
+                        }
+                        this.checkAndAddPage();
+                        this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                        this.doc.text(
+                            wrappedSkills[i],
+                            skillStartX,
+                            this.currentY
+                        );
+                    }
+                }
+            } else {
+                // Original behavior when category fits within indentation
+                this.doc.text(
+                    categoryText,
+                    this.config.page.margins.left,
+                    this.currentY
+                );
+                
+                // Switch back to normal weight for skills
+                this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                
+                // Add skills with fixed starting position
+                const skillsText = skills.join(', ');
+                const availableWidth = this.contentWidth - categoryWidth;
+                const wrappedSkills = this.doc.splitTextToSize(skillsText, availableWidth);
+                
+                // Position for first line of skills (same line as category)
+                this.doc.text(
+                    wrappedSkills[0],
+                    skillStartX,
+                    this.currentY
+                );
+                
+                // If there are additional wrapped lines
+                if (wrappedSkills.length > 1) {
+                    wrappedSkills.slice(1).forEach(line => {
+                        this.currentY += this.config.spacing.lineGap;
+                        this.checkAndAddPage();
+                        this.doc.text(
+                            line,
+                            skillStartX,
+                            this.currentY
+                        );
+                    });
+                }
+            }
+    
+            // Add more space between skill categories
+            this.currentY += this.config.spacing.lineGap;
+        });
+    
+        // Add final spacing after skills section
+        this.currentY += this.config.spacing.sectionGap-1;
+    }
+
+        addGeneralSection(sectionTitle, entries) {
+        if (!entries || entries.length === 0) return;
+    
+        // Add section header
+        this.addSection(sectionTitle.toUpperCase(), null);
+    
+        entries.forEach(entry => {
+            const {
+                title,
+                titleLink,
+                subtitle,
+                subtitleLink,
+                duration,
+                location,
+                description,
+                bullets,
+                tags
+            } = entry;
+    
+            this.checkAndAddPage();
+    
+            // Render title with hyperlink if available
+            this.setFont('sectionTitle');
+            
+            // Fix for title hyperlink
+            // Render title with hyperlink if available
+            this.setFont('sectionTitle');
+
+            if (titleLink) {
+                // Save current text color
+                const currentTextColor = this.doc.getTextColor();
+                
+                // Change text color for links (use blue or any color you prefer)
+                // this.doc.setTextColor(0, 0, 255); // RGB for blue
+                
+                // Optional: add underline
+                this.doc.setLineWidth(0.05);
+                const titleWidth = this.doc.getTextWidth(title);
+                
+                // Render text
+                this.doc.text(title, this.config.page.margins.left, this.currentY);
+                
+                // Add underline
+                this.doc.line(
+                    this.config.page.margins.left,
+                    this.currentY + 1, // Position slightly below text
+                    this.config.page.margins.left + titleWidth,
+                    this.currentY + 1
+                );
+                
+                // Add clickable link
+                this.doc.link(
+                    this.config.page.margins.left, 
+                    this.currentY - 10,
+                    titleWidth, 
+                    15,
+                    { url: titleLink }
+                );
+                
+                // Restore original text color
+                this.doc.setTextColor(currentTextColor);
+            } else {
+                this.doc.text(title, this.config.page.margins.left, this.currentY);
+            }
+    
+            // Render duration on the right if available
+            if (duration && this.config.formatting.dateAlignment === 'right') {
+                this.doc.text(
+                    duration,
+                    this.pageWidth - this.config.page.margins.right - this.doc.getTextWidth(duration),
+                    this.currentY
+                );
+            }
+            this.currentY += this.config.spacing.lineGap;
+    
+            // Render subtitle and location
+            if (subtitle || location) {
+                this.checkAndAddPage();
+                if (subtitle) {
+                    this.setFont('small');
+                    // Fix for subtitle hyperlink
+                    if (subtitleLink) {
+                        // First render the text
+                        this.doc.text(subtitle, this.config.page.margins.left, this.currentY);
+                        
+                        // Then add a clickable link area over the text
+                        const subtitleWidth = this.doc.getTextWidth(subtitle);
+                        this.doc.link(
+                            this.config.page.margins.left, 
+                            this.currentY - 5, // Position link slightly above text
+                            subtitleWidth, 
+                            10, // Make link area tall enough to be clickable
+                            { url: subtitleLink }
+                        );
+                    } else {
+                        this.doc.text(subtitle, this.config.page.margins.left, this.currentY);
+                    }
+                }
+                if (location) {
+                    this.setFont('small');
+                    this.doc.text(
+                        location,
+                        this.pageWidth - this.config.page.margins.right - this.doc.getTextWidth(location),
+                        this.currentY
+                    );
+                }
+                this.currentY += this.config.spacing.lineGap;
+            }
+    
+            // Helper function to render text with bold tags
+            const renderTextWithBoldTags = (text, xPos, tags) => {
+                if (!tags || tags.length === 0) {
+                    this.doc.text(text, xPos, this.currentY);
+                    return;
+                }
+    
+                // Store current font properties
+                const currentFont = this.doc.getFont();
+                const currentFontSize = this.doc.getFontSize();
+    
+                // Create regex pattern from tags
+                const tagPattern = new RegExp(`(${tags.join('|')})`, 'gi');
+                const parts = text.split(tagPattern);
+    
+                let currentX = xPos;
+                parts.forEach(part => {
+                    const matchesTag = tags.some(tag => 
+                        part.toLowerCase() === tag.toLowerCase()
+                    );
+    
+                    if (matchesTag) {
+                        // Apply bold style while maintaining font size
+                        this.doc.setFont(currentFont.fontName, 'bold');
+                        this.doc.setFontSize(currentFontSize);
+                    } else {
+                        // Restore original font style
+                        this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                        this.doc.setFontSize(currentFontSize);
+                    }
+    
+                    this.doc.text(part, currentX, this.currentY);
+                    currentX += this.doc.getTextWidth(part);
+                });
+    
+                // Restore original font settings
+                this.doc.setFont(currentFont.fontName, currentFont.fontStyle);
+                this.doc.setFontSize(currentFontSize);
+            };
+    
+            // Render description if available
+            if (description) {
+                this.checkAndAddPage();
+                this.setFont('normal');
+                const descriptionLines = this.doc.splitTextToSize(
+                    description,
+                    this.contentWidth
+                );
+                descriptionLines.forEach(line => {
+                    renderTextWithBoldTags(line, this.config.page.margins.left, tags);
+                    this.currentY += this.config.spacing.lineGap;
+                });
+            }
+    
+            // Render bullet points if available
+            if (bullets && bullets.length > 0) {
+                this.setFont('normal');
+                bullets.forEach(bullet => {
+                    // Get total available width for bullet text
+                    const availableWidth = this.contentWidth - this.config.spacing.indentation;
+                    
+                    // Calculate the actual width of the bullet text with current font
+                    this.setFont('normal'); // Ensure we're using the correct font for measurement
+                    
+                    // Split bullet text to fit available width
+                    const bulletText = this.doc.splitTextToSize(
+                        bullet.trim(),
+                        availableWidth
+                    );
+
+                    bulletText.forEach((line, index) => {
+                        this.checkAndAddPage();
+                        if (index === 0) {
+                            this.doc.text(
+                                this.config.formatting.bulletStyle,
+                                this.config.page.margins.left,
+                                this.currentY
+                            );
+                        }
+                        renderTextWithBoldTags(
+                            line,
+                            this.config.page.margins.left + this.config.spacing.indentation,
+                            tags
+                        );
+                        this.currentY += this.config.spacing.lineGap;
+                    });
+                });
+            }
+    
+            this.currentY += this.config.spacing.paragraphGap;
+        });
+    }
+
+    addDivider() {
+        this.checkAndAddPage();
+        this.doc.setDrawColor(this.config.divider.color);
+        this.doc.setLineWidth(this.config.divider.width);
+        this.doc.line(
+            this.config.page.margins.left,
+            this.currentY,
+            this.pageWidth - this.config.page.margins.right,
+            this.currentY
+        );
+        this.currentY += this.config.divider.spacing;
+    }
+
+    getDataUrl() {
+        return this.doc.output('dataurlstring');
+    }
+
+    save(filename) {
+        this.doc.save(filename);
+    }
+}
+
+
+
+
