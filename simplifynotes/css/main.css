@@ -6,12 +6,11 @@
   --text-color: #334155;
   --text-light: #64748b;
   --button-hover-bg: #f1f5f9;
+  --sidebar-width: 150px;
 }
 
 body {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
   background-color: var(--bg-color);
@@ -23,21 +22,17 @@ body {
   -ms-user-select: none;
 }
 
-.page-controls {
-  position: fixed;
-  bottom: 10px;
+.main-content {
+  margin-left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width));
+  height: 100vh;
+  /* MODIFIED: Center the canvas container */
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 15px;
-  background-color: var(--toolbar-bg);
-  padding: 8px 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  /* REMOVED: overflow-y: auto to prevent scrollbars */
 }
 
-#pageInfo {
-  min-width: 80px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-}
+/* DELETED: The .page-controls styles are no longer needed */

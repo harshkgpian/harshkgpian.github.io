@@ -1,6 +1,7 @@
 // js/fileHandler.js
 import { elements } from './config.js';
-import { getState, getCanvasContext, renderPage, renderPageForExport } from './canvas.js';
+// MODIFIED: Corrected the import path to point to the new canvas module
+import { getState, getCanvasContext, renderPage, renderPageForExport } from './canvas/index.js';
 
 let fileHandle = null;
 
@@ -31,7 +32,7 @@ export const saveDrawing = async (forceSaveAs = false) => {
 
     try {
       if ('showSaveFilePicker' in window && (!fileHandle || forceSaveAs)) {
-        fileHandle = await window.showSaveFilePicker({
+        fileHandle = await window.showSaveFileFilePicker({
           suggestedName: fileName,
           types: [{ description: 'PDF Files', accept: { 'application/pdf': ['.pdf'] } }],
         });

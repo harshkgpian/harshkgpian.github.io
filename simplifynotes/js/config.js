@@ -5,21 +5,22 @@ export const elements = {
   canvas: document.getElementById("drawingCanvas"),
 
   // Toolbar
+  selectToolBtn: document.getElementById('selectTool'),
   pencilBtn: document.getElementById('pencil'),
   eraserBtn: document.getElementById('eraser'),
   sizeSelect: document.getElementById('size'),
   colorSelect: document.getElementById('color'),
-  undoBtn: document.getElementById('undo'),
-  redoBtn: document.getElementById('redo'),
-  clearBtn: document.getElementById('clear'),
   
-  // Background Controls
+  // Object Controls
+  addImageBtn: document.getElementById('addImageBtn'),
+  imageInput: document.getElementById('imageInput'),
   addBackgroundBtn: document.getElementById('addBackgroundBtn'),
   backgroundInput: document.getElementById('backgroundInput'),
   removeBackgroundBtn: document.getElementById('removeBackgroundBtn'),
 
   // Recording
   recordBtn: document.getElementById('recordBtn'),
+  stopBtn: document.getElementById('stopBtn'),
   waveformCanvas: document.getElementById('waveformCanvas'),
   
   // File Operations
@@ -44,4 +45,10 @@ export const elements = {
   filenameInput: document.getElementById('filenameInput'),
   cancelSaveBtn: document.getElementById('cancelSave'),
   confirmSaveBtn: document.getElementById('confirmSave'),
+
+  // NEW: Recording Save Modal
+  recordingNameModal: document.getElementById('recordingNameModal'),
+  recordingNameInput: document.getElementById('recordingNameInput'),
+  confirmRecordingSaveBtn: document.getElementById('confirmRecordingSave'),
+  cancelRecordingSaveBtn: document.getElementById('cancelRecordingSave'),
 };

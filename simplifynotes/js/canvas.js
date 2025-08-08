@@ -17,6 +17,7 @@ let state = {
   undoStack: [[]],
   redoStack: [[]],
   backgroundImage: null,
+  erasedStrokes: new Set(), // Track strokes to be erased
 };
 
 const setupCanvasScaling = () => {
@@ -43,27 +44,73 @@ const getSmoothedCoordinates = (e) => {
     return { x: smoothedX, y: smoothedY };
 };
 
+/**
+ * Check if a point is on a stroke path within tolerance
+ */
+const isPointOnStroke = (point, stroke, tolerance = 10) => {
+  if (!stroke || !stroke.points || stroke.points.length < 2) return false;
+  
+  for (let i = 0; i < stroke.points.length - 1; i++) {
+    const p1 = stroke.points[i];
+    const p2 = stroke.points[i + 1];
+    
+    // Calculate distance from point to line segment
+    const A = point.x - p1.x;
+    const B = point.y - p1.y;
+    const C = p2.x - p1.x;
+    const D = p2.y - p1.y;
+    
+    const dot = A * C + B * D;
+    const lenSq = C * C + D * D;
+    let param = -1;
+    
+    if (lenSq !== 0) {
+      param = dot / lenSq;
+    }
+    
+    let xx, yy;
+    
+    if (param < 0) {
+      xx = p1.x;
+      yy = p1.y;
+    } else if (param > 1) {
+      xx = p2.x;
+      yy = p2.y;
+    } else {
+      xx = p1.x + param * C;
+      yy = p1.y + param * D;
+    }
+    
+    const dx = point.x - xx;
+    const dy = point.y - yy;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    
+    // Consider stroke width for better hit detection
+    const effectiveTolerance = Math.max(tolerance, stroke.width / 2 + 5);
+    
+    if (distance <= effectiveTolerance) {
+      return true;
+    }
+  }
+  
+  return false;
+};
 
 /**
- * Draws a single stroke on the canvas. Now handles composite operations.
- * @param {object} stroke The stroke object to draw.
+ * Draws a single stroke on the canvas
  */
 const drawStroke = (stroke) => {
-  if (!stroke || stroke.points.length < 2) return;
+  if (!stroke || stroke.points.length < 2 || stroke.isErased) return;
 
-  // === MODIFIED: Set the correct composite operation ===
-  // 'source-over' is the default: new drawings go on top.
-  // 'destination-out' erases, revealing what's underneath.
-  ctx.globalCompositeOperation = stroke.isEraser ? 'destination-out' : 'source-over';
-  
-  ctx.beginPath();
-  // For the eraser, the color doesn't matter, but we set it for the pencil.
-  ctx.strokeStyle = stroke.isEraser ? 'rgba(0,0,0,1)' : stroke.color;
+  ctx.globalCompositeOperation = 'source-over';
+  ctx.strokeStyle = stroke.color;
   ctx.lineWidth = stroke.width;
   ctx.lineCap = 'round';
   ctx.lineJoin = 'round';
   
+  ctx.beginPath();
   ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
+  
   for (let i = 1; i < stroke.points.length - 1; i++) {
     const midPoint = {
       x: (stroke.points[i].x + stroke.points[i + 1].x) / 2,
@@ -71,11 +118,61 @@ const drawStroke = (stroke) => {
     };
     ctx.quadraticCurveTo(stroke.points[i].x, stroke.points[i].y, midPoint.x, midPoint.y);
   }
+  
   ctx.lineTo(stroke.points[stroke.points.length - 1].x, stroke.points[stroke.points.length - 1].y);
   ctx.stroke();
+};
 
-  // IMPORTANT: Reset to default after drawing the stroke
+/**
+ * Draw eraser preview - shows what will be erased
+ */
+const drawEraserPreview = (point) => {
+  if (!state.isEraser) return;
+  
+  const pageIndex = state.currentPage - 1;
+  if (!state.pages[pageIndex]) return;
+  
+  // Find strokes that would be erased
+  const strokesToHighlight = state.pages[pageIndex].filter(stroke => 
+    !stroke.isErased && isPointOnStroke(point, stroke)
+  );
+  
+  // Draw highlighted strokes in red to show what will be erased
+  strokesToHighlight.forEach(stroke => {
+    ctx.globalCompositeOperation = 'source-over';
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.lineWidth = stroke.width + 2;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    
+    ctx.beginPath();
+    ctx.moveTo(stroke.points[0].x, stroke.points[0].y);
+    
+    for (let i = 1; i < stroke.points.length - 1; i++) {
+      const midPoint = {
+        x: (stroke.points[i].x + stroke.points[i + 1].x) / 2,
+        y: (stroke.points[i].y + stroke.points[i + 1].y) / 2,
+      };
+      ctx.quadraticCurveTo(stroke.points[i].x, stroke.points[i].y, midPoint.x, midPoint.y);
+    }
+    
+    ctx.lineTo(stroke.points[stroke.points.length - 1].x, stroke.points[stroke.points.length - 1].y);
+    ctx.stroke();
+  });
+  
+  // Draw eraser cursor
   ctx.globalCompositeOperation = 'source-over';
+  ctx.strokeStyle = 'rgba(255, 0, 0, 0.8)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([5, 5]);
+  
+  const size = parseInt(elements.sizeSelect.value, 10);
+  const eraserSize = Math.max(size * 6, 24);
+  
+  ctx.beginPath();
+  ctx.arc(point.x, point.y, eraserSize / 2, 0, 2 * Math.PI);
+  ctx.stroke();
+  ctx.setLineDash([]);
 };
 
 const clearCanvas = () => {
@@ -88,18 +185,24 @@ const clearCanvas = () => {
 export const renderPage = () => {
   clearCanvas();
 
+  // Always draw white background first
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Then draw background image if it exists
   if (state.backgroundImage) {
     const dpr = window.devicePixelRatio || 1;
     ctx.drawImage(state.backgroundImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
-  } else {
-    ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
+  // Draw all non-erased strokes
   const pageIndex = state.currentPage - 1;
   if (state.pages[pageIndex]) {
-    // Each stroke will set its own composite operation when drawn.
-    state.pages[pageIndex].forEach(drawStroke);
+    state.pages[pageIndex].forEach(stroke => {
+      if (!stroke.isErased) {
+        drawStroke(stroke);
+      }
+    });
   }
 };
 
@@ -108,52 +211,117 @@ export const startDrawing = (e) => {
   lastPoint = getRawCoordinates(e);
   const point = lastPoint;
 
-  const size = parseInt(elements.sizeSelect.value, 10);
+  if (state.isEraser) {
+    // For eraser, start marking strokes for deletion
+    state.erasedStrokes.clear();
+    eraseAtPoint(point);
+  } else {
+    // For pencil, create new stroke
+    const size = parseInt(elements.sizeSelect.value, 10);
+    state.currentStroke = {
+      id: Date.now() + Math.random(), // Unique ID for each stroke
+      points: [point],
+      color: elements.colorSelect.value,
+      width: size,
+      isErased: false,
+    };
+  }
+};
+
+const eraseAtPoint = (point) => {
+  const pageIndex = state.currentPage - 1;
+  if (!state.pages[pageIndex]) return;
   
-  // === MODIFIED: The stroke object now knows if it's an eraser ===
-  state.currentStroke = {
-    points: [point],
-    color: elements.colorSelect.value, // Color is stored but ignored by eraser
-    width: state.isEraser ? Math.max(size * 6, 24) : size,
-    isEraser: state.isEraser, // Crucial new property
-  };
+  let hasChanges = false;
+  
+  // Find and mark strokes for erasure
+  state.pages[pageIndex].forEach(stroke => {
+    if (!stroke.isErased && isPointOnStroke(point, stroke)) {
+      stroke.isErased = true;
+      state.erasedStrokes.add(stroke.id);
+      hasChanges = true;
+    }
+  });
+  
+  if (hasChanges) {
+    renderPage();
+  }
 };
 
 export const draw = (e) => {
   if (!state.isDrawing) return;
-  const point = getSmoothedCoordinates(e);
-  state.currentStroke.points.push(point);
   
+  const point = getSmoothedCoordinates(e);
+  
+  if (state.isEraser) {
+    eraseAtPoint(point);
+  } else {
+    // Add point to current stroke and draw
+    state.currentStroke.points.push(point);
+    renderPage();
+    drawStroke(state.currentStroke);
+  }
+};
+
+export const drawHover = (e) => {
+  if (state.isDrawing || !state.isEraser) return;
+  
+  const point = getRawCoordinates(e);
   renderPage();
-  drawStroke(state.currentStroke);
+  drawEraserPreview(point);
 };
 
 export const stopDrawing = () => {
-  if (state.isDrawing && state.currentStroke && state.currentStroke.points.length > 1) {
-    const pageIndex = state.currentPage - 1;
-    if (!state.pages[pageIndex]) state.pages[pageIndex] = [];
-    state.pages[pageIndex].push(state.currentStroke);
-    
-    if (!state.undoStack[pageIndex]) state.undoStack[pageIndex] = [];
-    state.undoStack[pageIndex].push([...state.pages[pageIndex]]);
-    state.redoStack[pageIndex] = [];
+  if (!state.isDrawing) return;
+  
+  const pageIndex = state.currentPage - 1;
+  
+  if (state.isEraser) {
+    // Save undo state if strokes were erased
+    if (state.erasedStrokes.size > 0) {
+      if (!state.undoStack[pageIndex]) state.undoStack[pageIndex] = [];
+      state.undoStack[pageIndex].push(JSON.parse(JSON.stringify(state.pages[pageIndex])));
+      state.redoStack[pageIndex] = [];
+      state.erasedStrokes.clear();
+    }
+  } else {
+    // Add completed stroke to page
+    if (state.currentStroke && state.currentStroke.points.length > 1) {
+      if (!state.pages[pageIndex]) state.pages[pageIndex] = [];
+      state.pages[pageIndex].push(state.currentStroke);
+      
+      if (!state.undoStack[pageIndex]) state.undoStack[pageIndex] = [];
+      state.undoStack[pageIndex].push(JSON.parse(JSON.stringify(state.pages[pageIndex])));
+      state.redoStack[pageIndex] = [];
+    }
   }
+  
   state.isDrawing = false;
   state.currentStroke = null;
+  renderPage();
 };
 
-export const setTool = (tool) => { state.isEraser = tool === 'eraser'; };
+export const setTool = (tool) => { 
+  state.isEraser = tool === 'eraser';
+  if (!state.isEraser) {
+    renderPage(); // Clear any eraser preview
+  }
+};
+
 export const setRightMouseDown = (isDown) => { state.isRightMouseDown = isDown; };
 export const getRightMouseDown = () => state.isRightMouseDown;
 
 export const undo = () => {
   const pageIndex = state.currentPage - 1;
   if (state.undoStack[pageIndex] && state.undoStack[pageIndex].length > 1) {
-    state.redoStack[pageIndex].push(state.pages[pageIndex]);
-    state.pages[pageIndex] = [...state.undoStack[pageIndex].pop()];
+    if (!state.redoStack[pageIndex]) state.redoStack[pageIndex] = [];
+    state.redoStack[pageIndex].push(JSON.parse(JSON.stringify(state.pages[pageIndex])));
+    state.undoStack[pageIndex].pop(); // Remove current state
+    state.pages[pageIndex] = JSON.parse(JSON.stringify(state.undoStack[pageIndex][state.undoStack[pageIndex].length - 1]));
     renderPage();
   } else if (state.undoStack[pageIndex] && state.undoStack[pageIndex].length === 1) {
-    state.redoStack[pageIndex].push(state.pages[pageIndex]);
+    if (!state.redoStack[pageIndex]) state.redoStack[pageIndex] = [];
+    state.redoStack[pageIndex].push(JSON.parse(JSON.stringify(state.pages[pageIndex])));
     state.pages[pageIndex] = [];
     renderPage();
   }
@@ -163,7 +331,8 @@ export const redo = () => {
   const pageIndex = state.currentPage - 1;
   if (state.redoStack[pageIndex] && state.redoStack[pageIndex].length > 0) {
     const nextState = state.redoStack[pageIndex].pop();
-    state.undoStack[pageIndex].push(state.pages[pageIndex]);
+    if (!state.undoStack[pageIndex]) state.undoStack[pageIndex] = [];
+    state.undoStack[pageIndex].push(JSON.parse(JSON.stringify(state.pages[pageIndex])));
     state.pages[pageIndex] = nextState;
     renderPage();
   }
@@ -172,7 +341,8 @@ export const redo = () => {
 export const clearPage = () => {
   const pageIndex = state.currentPage - 1;
   if (state.pages[pageIndex] && state.pages[pageIndex].length > 0) {
-    state.undoStack[pageIndex].push([...state.pages[pageIndex]]);
+    if (!state.undoStack[pageIndex]) state.undoStack[pageIndex] = [];
+    state.undoStack[pageIndex].push(JSON.parse(JSON.stringify(state.pages[pageIndex])));
     state.pages[pageIndex] = [];
     state.redoStack[pageIndex] = [];
     renderPage();
@@ -251,27 +421,39 @@ export const resetState = () => {
   state.pages = [[]];
   state.undoStack = [[]];
   state.redoStack = [[]];
-  // Don't reset the background on size change, keep it persistent
+  state.erasedStrokes.clear();
 };
 
 export const getState = () => state;
 export const getCanvasContext = () => ({ canvas, ctx });
 
 export const initCanvas = () => {
-  adjustCanvasToWindowSize(true);
+  // Set default size to 1280x720
+  canvas.style.width = '1280px';
+  canvas.style.height = '720px';
+  resetState();
+  updateCanvasSizeAndScaling();
 };
 
 export const renderPageForExport = (pageIndex) => {
   clearCanvas();
+  
+  // Always draw white background first
+  ctx.fillStyle = "white";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Then draw background image if it exists
   if (state.backgroundImage) {
       const dpr = window.devicePixelRatio || 1;
       ctx.drawImage(state.backgroundImage, 0, 0, canvas.width / dpr, canvas.height / dpr);
-  } else {
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
+  // Draw all non-erased strokes
   if (state.pages[pageIndex]) {
-    state.pages[pageIndex].forEach(drawStroke);
+    state.pages[pageIndex].forEach(stroke => {
+      if (!stroke.isErased) {
+        drawStroke(stroke);
+      }
+    });
   }
 };
